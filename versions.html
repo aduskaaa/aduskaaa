@@ -35,6 +35,13 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
 .version-item { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 12px; display: grid; gap: 6px; }
 .version-meta { color: var(--muted); font-size: 14px; }
 .version-actions { display:flex; gap:10px; flex-wrap:wrap; }
+.button { appearance: none; border: 0; padding: 12px 16px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: transform .05s ease, box-shadow .2s ease, background .2s ease; }
+.button:active { transform: translateY(1px); }
+.button-primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #042016; box-shadow: 0 10px 20px rgba(16,185,129,.25); text-decoration: none; display: inline-block; }
+.button-secondary { background: #0e201a; color: var(--text); border: 1px solid var(--border); text-decoration: none; display: inline-block; }
+.footer a { color: var(--muted); text-decoration: none; }
+.footer a:visited { color: var(--muted); }
+.footer a:hover { color: var(--text); }
 .footer { border-top: 1px solid var(--border); color: var(--muted); padding: 24px 0 48px; font-size: 14px; }
 </style>
 </head>
