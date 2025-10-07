@@ -26,7 +26,7 @@ window.RELEASES = {
     chukotka: [
       {
         version: "v1",
-        date: "2025-10-01",
+        date: "2025-10-07",
         requires: ["FER Alpha 26", "ETS2 1.56", "Chukotka current"],
         notes: "firts release of  FER–Chukotka connector.",
         links: { primary: "https://sharemods.com/ccicwzilxntg/FER_-_CHUCHOTKA_RC.zip.html", changelog: "#" }
