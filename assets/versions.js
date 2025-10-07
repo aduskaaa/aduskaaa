@@ -16,11 +16,11 @@ window.RELEASES = {
   rcs: {
     otgr: [
       {
-        version: "v2",
-        date: "2025-10-01",
+        version: "v1.2",
+        date: "2025-10-07",
         requires: ["FER Alpha 26", "ETS2 1.56", "OTGR current"],
         notes: "updated version of FER–OTGR connector.",
-        links: { primary: "#", changelog: "#" }
+        links: { primary: "https://sharemods.com/g4fxrvtccpcz/FER_-_OTGR_RC.zip.html", changelog: "#" }
       }
     ],
     chukotka: [
@@ -29,7 +29,7 @@ window.RELEASES = {
         date: "2025-10-01",
         requires: ["FER Alpha 26", "ETS2 1.56", "Chukotka current"],
         notes: "firts release of  FER–Chukotka connector.",
-        links: { primary: "#", changelog: "#" }
+        links: { primary: "https://sharemods.com/ccicwzilxntg/FER_-_CHUCHOTKA_RC.zip.html", changelog: "#" }
       }
     ],
     tst: [
