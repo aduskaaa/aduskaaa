@@ -4,7 +4,7 @@ window.RELEASES = {
     {
       version: "Alpha 26",
       date: "2025-10-20",
-      size: "101MB",
+      size: "104MB",
       game: "ETS2 1.56",
       notes: "Rebuilded 98K-006, Added Nalimsk, Andryushkino, Argakhtakh, Sasyr, Pobeda. Rebuilded Chersky, Srednekolymsk, Zyryanka and Ugolnye. Removed Batagay, Sangar, Segyan-Kyuyol",
       links: {
