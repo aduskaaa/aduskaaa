@@ -3,12 +3,12 @@ window.RELEASES = {
   fer: [
     {
       version: "Alpha 26",
-      date: "2025-10-20",
+      date: "2025-10-7",
       size: "104MB",
       game: "ETS2 1.56",
       notes: "Rebuilded 98K-006, Added Nalimsk, Andryushkino, Argakhtakh, Sasyr, Pobeda. Rebuilded Chersky, Srednekolymsk, Zyryanka and Ugolnye. Removed Batagay, Sangar, Segyan-Kyuyol",
       links: {
-        primary: "",
+        primary: "https://sharemods.com/ki9ea53j2b5r/Far_East_Russia_Alpha_26.scs.html",
         changelog: ""
       }
     },
