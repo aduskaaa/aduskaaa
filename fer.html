@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FER – Far East Russia • Download & Info</title>
+<meta name="description" content="Download Far East Russia (FER) for ETS2. Load order, installation guide, and map coverage.">
+<link rel="icon" href="favicon.ico">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+@font-face {
+  font-family: 'LDFComicSans';
+  src: url('assets/fonts/ldfcomicsans.woff2') format('woff2'),
+       url('assets/fonts/ldfcomicsans.woff') format('woff');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+:root { --bg:#07110d; --panel:#0c1a15; --muted:#a6c5b9; --text:#ecf5f1; --accent:#34d399; --accent-2:#10b981; --border:#163126; --shadow:0 10px 30px rgba(0,0,0,.35); }
+body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial; background: radial-gradient(1200px 600px at 80% -10%, rgba(24,67,53,.5), transparent 60%), radial-gradient(1000px 500px at -10% 10%, rgba(16,44,35,.5), transparent 60%), var(--bg); color: var(--text); line-height: 1.6; font-weight: 700; }
+.container { width: min(1100px, 92%); margin: 0 auto; }
+.header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(1.2) blur(10px); background: rgba(7,17,13,.6); border-bottom: 1px solid var(--border); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .3px; color: var(--text); text-decoration: none; }
+.brand img { width: 32px; height: 32px; border-radius: 6px; box-shadow: var(--shadow); display: block; }
+.nav { display: flex; gap: 18px; }
+.nav a { color: var(--muted); text-decoration: none; font-weight: 600; padding: 8px 10px; border-radius: 8px; }
+.nav a:hover { color: var(--text); background: rgba(16,185,129,.12); }
+.section { padding: 36px 0; }
+.section h1, .section h2 { margin: 0 0 14px; }
+.lead { color: var(--muted); }
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.map-frame { border-radius: 14px; overflow: hidden; border: 1px solid var(--border); background: #0a1512; min-height: 300px; }
+.map-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.button { appearance: none; border: 0; padding: 12px 16px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: transform .05s ease, box-shadow .2s ease, background .2s ease; }
+.button:active { transform: translateY(1px); }
+.button-primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #042016; box-shadow: 0 10px 20px rgba(16,185,129,.25); }
+.button-secondary { background: #0e201a; color: var(--text); border: 1px solid var(--border); }
+.kv { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 14px; color: var(--muted); }
+.kv div { background: rgba(255,255,255,.03); padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border); }
+.footer { border-top: 1px solid var(--border); color: var(--muted); padding: 24px 0 48px; font-size: 14px; }
+@media (max-width: 960px) { .grid { grid-template-columns: 1fr; } }
+@media (max-width: 720px) { .nav { display:none; } }
+.versions-list { display: grid; gap: 10px; }
+.version-item { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 12px; display: grid; gap: 6px; }
+.version-meta { color: var(--muted); font-size: 14px; }
+.version-actions { display:flex; gap:10px; flex-wrap:wrap; }
+</style>
+</head>
+<body>
+<header class="header" aria-label="Top Navigation">
+  <div class="container header-inner">
+    <a href="index.html" class="brand">
+      <img src="imgs/FER-ICON.png" alt="FER logo">
+      <span>Far East Russia</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html#rcs">RCs</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="versions.html">Versions</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="section">
+    <div class="container">
+      <h1>Far East Russia (FER)</h1>
+      <p class="lead">The core ETS2 map expansion focusing on Russia's Far East. Download, install, and hit the road.</p>
+    </div>
+  </section>
+
+  <section id="download" class="section">
+    <div class="container grid">
+      <div class="card">
+        <h2>Latest Release</h2>
+        <div id="fer-latest" class="version-item"></div>
+        <div class="version-actions" id="fer-actions"></div>
+      </div>
+      <div class="card">
+        <h2>Description</h2>
+        <p>FER brings authentic roads, cities, and logistics across the Far East. Optimized for stability in convoy and single player.</p>
+        <ul>
+          <li>Hand-crafted cities and rural settlements</li>
+          <li>Balanced economy and depots</li>
+          <li>Carefully tuned traffic and signage</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="coverage" class="section">
+    <div class="container grid">
+      <div class="map-frame">
+        <img class="map-img" src="imgs/FER-COVERAGE.png" alt="Map coverage preview">
+      </div>
+      <div class="card">
+        <h2>Map Coverage</h2>
+        <ul>
+          <li>3000+ km of driveable roads, with more being rebuilt</li>
+          <li>20+ detailed cities and settlements and more being rebuilt</li>
+          <li>Green - Rebulded areas</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="loadorder" class="section">
+    <div class="container card">
+      <h2>Load Order</h2>
+      <ol>
+        <li>Background (if used)</li>
+        <li>FER - Chukotka RC</li>
+        <li>Chukotsky autonomny okrug addon</li>
+        <li>FER - OTGR RC</li>
+        <li>Far East Russia</li>
+        <li>Trans-siberian truckway</li>
+        <li>Off The Grid Russia</li>
+      </ol>
+    </div>
+  </section>
+  
+  <section id="releases" class="section">
+    <div class="container card">
+      <h2>All Releases</h2>
+      <div id="fer-versions" class="versions-list" aria-label="FER releases list"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+    <div>&copy; <span id="year"></span> Far East Russia</div>
+    <div style="display:flex; gap:12px;">
+      <a href="index.html">Home</a>
+      <a href="index.html#rcs">RCs</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="versions.html">Versions</a>
+    </div>
+  </div>
+</footer>
+<script src="assets/versions.js"></script>
+<script src="assets/counter.js"></script>
+<script>
+(function(){
+  var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
+  var releases=(window.RELEASES&&window.RELEASES.fer)||[];
+  function makeVersionItem(v){
+    var div=document.createElement('div');
+    div.className='version-item';
+    var title=document.createElement('div');
+    title.innerHTML='<strong>FER '+v.version+'</strong>';
+    var meta=document.createElement('div');
+    meta.className='version-meta';
+    meta.textContent = v.date + ' • ' + (v.game||'ETS2') + ' • ' + (v.size||'');
+    var notes=document.createElement('div');
+    notes.textContent=v.notes||'';
+    var actions=document.createElement('div');
+    actions.className='version-actions';
+    var dl=document.createElement('a'); dl.className='button button-primary'; dl.href=(v.links&&v.links.primary)||'#'; dl.textContent='Download';
+    var cl=document.createElement('a'); cl.className='button button-secondary'; cl.href=(v.links&&v.links.changelog)||'#'; cl.textContent='Changelog';
+    actions.appendChild(dl); actions.appendChild(cl);
+    div.appendChild(title); div.appendChild(meta); div.appendChild(notes); div.appendChild(actions);
+    return div;
+  }
+  var latest=document.getElementById('fer-latest');
+  var actionsDock=document.getElementById('fer-actions');
+  if(releases.length && latest){ latest.replaceWith(makeVersionItem(releases[0])); }
+  var list=document.getElementById('fer-versions');
+  if(list){ releases.forEach(function(v){ list.appendChild(makeVersionItem(v)); }); }
+  // Initialize global download counter for FER main map
+  if (window.initDownloadCounter) { window.initDownloadCounter('fer-main-downloads'); }
+})();
+</script>
+</body>
+</html>

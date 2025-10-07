@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FER – TST • Road Connection (Soon)</title>
+<meta name="description" content="FER to TST road connection for ETS2 – coming soon.">
+<link rel="icon" href="favicon.ico">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+@font-face {
+  font-family: 'LDFComicSans';
+  src: url('assets/fonts/ldfcomicsans.woff2') format('woff2'),
+       url('assets/fonts/ldfcomicsans.woff') format('woff');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+:root { --bg:#07110d; --panel:#0c1a15; --muted:#a6c5b9; --text:#ecf5f1; --accent:#34d399; --accent-2:#10b981; --border:#163126; --shadow:0 10px 30px rgba(0,0,0,.35); }
+body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial; background: radial-gradient(1200px 600px at 80% -10%, rgba(24,67,53,.5), transparent 60%), radial-gradient(1000px 500px at -10% 10%, rgba(16,44,35,.5), transparent 60%), var(--bg); color: var(--text); line-height: 1.6; font-weight: 700; }
+.container { width: min(1100px, 92%); margin: 0 auto; }
+.header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(1.2) blur(10px); background: rgba(7,17,13,.6); border-bottom: 1px solid var(--border); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .3px; color: var(--text); text-decoration: none; }
+.brand img { width: 32px; height: 32px; border-radius: 6px; box-shadow: var(--shadow); display: block; }
+.nav { display: flex; gap: 18px; }
+.nav a { color: var(--muted); text-decoration: none; font-weight: 600; padding: 8px 10px; border-radius: 8px; }
+.nav a:hover { color: var(--text); background: rgba(16,185,129,.12); }
+.section { padding: 36px 0; }
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); }
+.lead { color: var(--muted); }
+.footer { border-top: 1px solid var(--border); color: var(--muted); padding: 24px 0 48px; font-size: 14px; }
+.versions-list { display: grid; gap: 10px; }
+.version-item { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 12px; display: grid; gap: 6px; }
+.version-meta { color: var(--muted); font-size: 14px; }
+@media (max-width: 720px) { .nav { display:none; } }
+</style>
+</head>
+<body>
+<header class="header" aria-label="Top Navigation">
+  <div class="container header-inner">
+    <a href="index.html" class="brand">
+      <img src="imgs/FER-ICON.png" alt="FER logo">
+      <span>Far East Russia</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html#rcs">RCs</a>
+      <a href="fer.html">FER</a>
+      <a href="versions.html">Versions</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="section">
+    <div class="container">
+      <h1>FER – TST</h1>
+      <p class="lead">This road connection is coming soon. Check back after the next release.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container card">
+      <h2>Status</h2>
+      <p>In development. Load order and download links will be published here upon release.</p>
+    </div>
+  </section>
+
+  <section id="releases" class="section">
+    <div class="container card">
+      <h2>Planned Releases</h2>
+      <div id="rc-versions" class="versions-list"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+    <div>&copy; <span id="year"></span> Far East Russia</div>
+    <div style="display:flex; gap:12px;">
+      <a href="index.html">Home</a>
+      <a href="fer.html">FER</a>
+      <a href="index.html#rcs">Back to RCs</a>
+      <a href="versions.html">Versions</a>
+    </div>
+  </div>
+</footer>
+<script src="assets/versions.js"></script>
+<script>
+(function(){
+  var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
+  var data=(window.RELEASES&&window.RELEASES.rcs&&window.RELEASES.rcs.tst)||[];
+  var list=document.getElementById('rc-versions');
+  function make(v){ var d=document.createElement('div'); d.className='version-item';
+    var t=document.createElement('div'); t.innerHTML='<strong>FER – TST '+(v.version||'')+'</strong>';
+    var m=document.createElement('div'); m.className='version-meta'; m.textContent=(v.date||'TBD');
+    var n=document.createElement('div'); n.textContent=v.notes||''; d.appendChild(t); d.appendChild(m); d.appendChild(n); return d; }
+  if(list){ data.forEach(function(v){ list.appendChild(make(v)); }); }
+})();
+</script>
+</body>
+</html>
