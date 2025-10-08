@@ -50,6 +50,8 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
 .nav { display: flex; gap: 18px; }
 .nav a { color: var(--muted); text-decoration: none; font-weight: 600; padding: 8px 10px; border-radius: 8px; }
 .nav a:hover { color: var(--text); background: rgba(16,185,129,.12); }
+.discord-btn { background: #5865f2; color: white !important; }
+.discord-btn:hover { background: #4752c4; color: white !important; }
 
 /* Hero */
 .hero { position: relative; overflow: hidden; }
@@ -57,10 +59,11 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
 .hero h1 { font-size: clamp(28px, 5vw, 46px); line-height: 1.1; margin: 0 0 14px; letter-spacing: .2px; }
 .hero p { margin: 0 0 20px; color: var(--muted); font-size: clamp(16px, 2.2vw, 18px); }
 .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
-.button { appearance: none; border: 0; padding: 12px 16px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: transform .05s ease, box-shadow .2s ease, background .2s ease; }
+.button { appearance: none; border: 0; padding: 12px 16px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: transform .05s ease, box-shadow .2s ease, background .2s ease; text-decoration: none; display: inline-block; min-width: 120px; text-align: center; }
+.button:visited { text-decoration: none; }
 .button:active { transform: translateY(1px); }
 .button-primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #042016; box-shadow: 0 10px 20px rgba(16,185,129,.25); }
-.button-secondary { background: #0e201a; color: var(--text); border: 1px solid var(--border); }
+.button-secondary { background: #0e201a; color: var(--text); border: 1px solid var(--border); text-decoration: none; }
 .badges { display: flex; gap: 12px; align-items: center; margin-top: 12px; color: var(--muted); font-size: 14px; }
 .badge { padding: 6px 10px; border-radius: 999px; border: 1px solid var(--border); background: rgba(255,255,255,.03); }
 .hero-art { position: relative; height: 320px; border-radius: 18px; background: linear-gradient(180deg, rgba(16,185,129,.18), rgba(16,185,129,.08)), url('https://images.unsplash.com/photo-1532996122721-7095e0d2b01f?q=80&w=1600&auto=format&fit=crop') center/cover; box-shadow: var(--shadow); border: 1px solid var(--border); }
@@ -86,7 +89,29 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
 .info .stat strong { color: var(--text); }
 
 /* RCs */
-.rc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.rc-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between; /* rozprostře to pěkně i doprava */
+  align-items: stretch;
+  margin-top: 20px;
+}
+
+
+.rc-card {
+  flex: 1 1 320px; /* stejné rozměry, ale pružné */
+  max-width: 355px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
 .rc-card { display: grid; gap: 10px; }
 .rc-card .meta { color: var(--muted); font-size: 14px; }
 
@@ -127,10 +152,12 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
       <span>Far East Russia</span>
     </a>
     <nav class="nav" aria-label="Primary">
+      <a href="index.html">HOME</a>
       <a href="fer.html">FER</a>
-      <a href="#rcs">RCs</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="versions.html">Versions</a>
+      <a href="#rcs">RCS</a>
+      <a href="gallery.html">GALLERY</a>
+      <a href="versions.html">VERSIONS</a>
+      <a href="https://discord.gg/SSWDJMauxz" target="_blank" class="discord-btn">DISCORD</a>
     </nav>
   </div>
 </header>
@@ -149,6 +176,9 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
           <span class="badge" title="Actively maintained">Maintained</span>
           <span class="badge" title="Optimized for performance">Optimized</span>
           <span class="badge" title="Compatible with latest ETS2 version">1.56 Ready</span>
+        </div>
+        <div style="margin-top: 20px;">
+          <a href="https://discord.gg/SSWDJMauxz" target="_blank" class="button button-secondary">Join Discord Community</a>
         </div>
       </div>
     </div>
@@ -183,7 +213,7 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
         <article class="card rc-card">
           <div>
             <h3>FER – OTGR</h3>
-            <div class="meta">Connects Far East Russia with OTGR.</div>
+            <div class="meta">Connects FER with OTGR.</div>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
             <a class="button button-primary" href="fer-otgr.html">Open Page</a>
@@ -193,7 +223,7 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
         <article class="card rc-card">
           <div>
             <h3>FER – Chukotka</h3>
-            <div class="meta">Connects Far East Russia with Chukotka region.</div>
+            <div class="meta">Connects FER with Chukotka region.</div>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
             <a class="button button-primary" href="fer-chukotka.html">Open Page</a>

@@ -28,6 +28,8 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
 .nav { display: flex; gap: 18px; }
 .nav a { color: var(--muted); text-decoration: none; font-weight: 600; padding: 8px 10px; border-radius: 8px; }
 .nav a:hover { color: var(--text); background: rgba(16,185,129,.12); }
+.discord-btn { background: #5865f2; color: white !important; }
+.discord-btn:hover { background: #4752c4; color: white !important; }
 .section { padding: 36px 0; }
 .section h1, .section h2 { margin: 0 0 14px; }
 .lead { color: var(--muted); }
@@ -35,7 +37,7 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .map-frame { border-radius: 14px; overflow: hidden; border: 1px solid var(--border); background: #0a1512; min-height: 300px; }
 .map-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.button { appearance: none; border: 0; padding: 12px 16px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: transform .05s ease, box-shadow .2s ease, background .2s ease; }
+.button { appearance: none; border: 0; padding: 12px 16px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: transform .05s ease, box-shadow .2s ease, background .2s ease; text-decoration: none; display: inline-block; min-width: 120px; text-align: center; }
 .button:active { transform: translateY(1px); }
 .button-primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #042016; box-shadow: 0 10px 20px rgba(16,185,129,.25); }
 .button-secondary { background: #0e201a; color: var(--text); border: 1px solid var(--border); }
@@ -61,9 +63,12 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
       <span>Far East Russia</span>
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="index.html#rcs">RCs</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="versions.html">Versions</a>
+      <a href="index.html">HOME</a>
+      <a href="fer.html">FER</a>
+      <a href="index.html#rcs">RCS</a>
+      <a href="gallery.html">GALLERY</a>
+      <a href="versions.html">VERSIONS</a>
+      <a href="https://discord.gg/SSWDJMauxz" target="_blank" class="discord-btn">DISCORD</a>
     </nav>
   </div>
 </header>
@@ -91,6 +96,9 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
           <li>Balanced economy and depots</li>
           <li>Carefully tuned traffic and signage</li>
         </ul>
+        <div style="margin-top: 16px;">
+          <a href="https://discord.gg/SSWDJMauxz" target="_blank" class="button button-secondary">Join Discord for Support</a>
+        </div>
       </div>
     </div>
   </section>
@@ -158,8 +166,7 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
     var actions=document.createElement('div');
     actions.className='version-actions';
     var dl=document.createElement('a'); dl.className='button button-primary'; dl.href=(v.links&&v.links.primary)||'#'; dl.textContent='Download';
-    var cl=document.createElement('a'); cl.className='button button-secondary'; cl.href=(v.links&&v.links.changelog)||'#'; cl.textContent='Changelog';
-    actions.appendChild(dl); actions.appendChild(cl);
+    actions.appendChild(dl);
     div.appendChild(title); div.appendChild(meta); div.appendChild(notes); div.appendChild(actions);
     return div;
   }

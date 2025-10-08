@@ -27,12 +27,17 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
 .nav { display: flex; gap: 18px; }
 .nav a { color: var(--muted); text-decoration: none; font-weight: 600; padding: 8px 10px; border-radius: 8px; }
 .nav a:hover { color: var(--text); background: rgba(16,185,129,.12); }
+.discord-btn { background: #5865f2; color: white !important; }
+.discord-btn:hover { background: #4752c4; color: white !important; }
 .section { padding: 36px 0; }
 .lead { color: var(--muted); }
 .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
 .item { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--panel); box-shadow: var(--shadow); }
 .item img { width: 100%; height: 180px; object-fit: cover; display: block; }
 .caption { padding: 10px; color: var(--muted); font-size: 14px; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 1000; }
+.lightbox[hidden] { display: none; }
+.lightbox img { max-width: 95vw; max-height: 90vh; border-radius: 12px; box-shadow: var(--shadow); display: block; }
 .footer { border-top: 1px solid var(--border); color: var(--muted); padding: 24px 0 48px; font-size: 14px; }
 .footer a { color: var(--muted); text-decoration: none; }
 .footer a:visited { color: var(--muted); }
@@ -49,9 +54,12 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
       <span>Far East Russia</span>
     </a>
     <nav class="nav" aria-label="Primary">
+      <a href="index.html">HOME</a>
       <a href="fer.html">FER</a>
-      <a href="index.html#rcs">RCs</a>
-      <a href="versions.html">Versions</a>
+      <a href="index.html#rcs">RCS</a>
+      <a href="gallery.html">GALLERY</a>
+      <a href="versions.html">VERSIONS</a>
+      <a href="https://discord.gg/SSWDJMauxz" target="_blank" class="discord-btn">DISCORD</a>
     </nav>
   </div>
 </header>
@@ -62,13 +70,35 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
       <h1>Gallery</h1>
       <p class="lead">Screenshots from testers and community drivers.</p>
       <div class="grid" aria-label="Screenshot grid">
-        <p>
-      </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
-        </p>
+        <div class="item"><img src="imgs/gallery/Photo1.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo2.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo3.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo4.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo5.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo6.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo7.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo8.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo9.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo10.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo11.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo12.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo13.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo14.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo15.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo16.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo17.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo18.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo19.jpg" alt=""></div>
+        <div class="item"><img src="imgs/gallery/Photo20.jpg" alt=""></div>
       </div>
     </div>
   </section>
 </main>
+
+<div id="lightbox" class="lightbox" hidden>
+  <img id="lightbox-img" alt="">
+  
+</div>
 
 <footer class="footer">
   <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
@@ -80,6 +110,20 @@ body { font-family: 'LDFComicSans', "Comic Sans MS", "Comic Sans", cursive, syst
     </div>
   </div>
 </footer>
-<script>(function(){var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();})();</script>
+<script>(function(){
+  var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
+  var overlay=document.getElementById('lightbox');
+  var img=document.getElementById('lightbox-img');
+  var thumbs=document.querySelectorAll('.grid img');
+  thumbs.forEach(function(t){
+    t.addEventListener('click', function(){
+      img.src=t.getAttribute('src');
+      overlay.removeAttribute('hidden');
+    });
+  });
+  function close(){ overlay.setAttribute('hidden',''); img.removeAttribute('src'); }
+  overlay.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ close(); } });
+})();</script>
 </body>
 </html>
