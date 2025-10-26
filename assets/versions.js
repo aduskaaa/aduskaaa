@@ -12,13 +12,24 @@ window.RELEASES = {
         changelog: ""
       }
     },
+    {
+      version: "Alpha 27",
+      date: "2025-10-26",
+      size: "112.3MB",
+      game: "ETS2 1.56",
+      notes: "Rebuilded part of P-504, Added Teply Klyuch, Rebuilded Khandyga",
+      links: {
+        primary: "https://sharemods.com/yv7l5hyjgunv/Far_East_Russia_Alpha_27.scs.html",
+        changelog: ""
+      }
+    },
   ],
   rcs: {
     otgr: [
       {
         version: "v1.2",
         date: "2025-10-07",
-        requires: ["FER Alpha 26", "ETS2 1.56", "OTGR current"],
+        requires: ["FER Alpha 26/27", "ETS2 1.56", "OTGR current"],
         notes: "updated version of FER–OTGR connector.",
         links: { primary: "https://sharemods.com/g4fxrvtccpcz/FER_-_OTGR_RC.zip.html", changelog: "#" }
       }
@@ -27,7 +38,7 @@ window.RELEASES = {
       {
         version: "v1",
         date: "2025-10-07",
-        requires: ["FER Alpha 26", "ETS2 1.56", "Chukotka current"],
+        requires: ["FER Alpha 26/27", "ETS2 1.56", "Chukotka current"],
         notes: "firts release of  FER–Chukotka connector.",
         links: { primary: "https://sharemods.com/ccicwzilxntg/FER_-_CHUCHOTKA_RC.zip.html", changelog: "#" }
       }
