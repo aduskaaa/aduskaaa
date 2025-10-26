@@ -1,6 +1,17 @@
 /* Global releases registry for FER and RCs. Add new entries by appending to arrays below. */
 window.RELEASES = {
   fer: [
+      {
+      version: "Alpha 27",
+      date: "2025-10-26",
+      size: "112.3MB",
+      game: "ETS2 1.56",
+      notes: "Rebuilded part of P-504, Added Teply Klyuch, Rebuilded Khandyga",
+      links: {
+        primary: "https://sharemods.com/yv7l5hyjgunv/Far_East_Russia_Alpha_27.scs.html",
+        changelog: ""
+      }
+    },
     {
       version: "Alpha 26",
       date: "2025-10-7",
@@ -9,17 +20,6 @@ window.RELEASES = {
       notes: "Rebuilded 98K-006, Added Nalimsk, Andryushkino, Argakhtakh, Sasyr, Pobeda. Rebuilded Chersky, Srednekolymsk, Zyryanka and Ugolnye. Removed Batagay, Sangar, Segyan-Kyuyol",
       links: {
         primary: "https://sharemods.com/ki9ea53j2b5r/Far_East_Russia_Alpha_26.scs.html",
-        changelog: ""
-      }
-    },
-    {
-      version: "Alpha 27",
-      date: "2025-10-26",
-      size: "112.3MB",
-      game: "ETS2 1.56",
-      notes: "Rebuilded part of P-504, Added Teply Klyuch, Rebuilded Khandyga",
-      links: {
-        primary: "https://sharemods.com/yv7l5hyjgunv/Far_East_Russia_Alpha_27.scs.html",
         changelog: ""
       }
     },
