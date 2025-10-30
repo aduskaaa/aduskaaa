@@ -1,19 +1,17 @@
 .glow-text {
   display: inline-block;
   font-size: 22px;
-  font-weight: bold;
+  font-weight: 900;
   background: linear-gradient(90deg, #0d5c4d, #0b708f, #00a2ff);
   background-size: 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   width: max-content;
-  -webkit-text-stroke: 1px #004a3b;
+  -webkit-text-stroke: 0.5px #00392e;
   text-shadow:
-    0 0 10px #007b6e,
-    0 0 20px #0091a8,
-    0 0 30px #00b2ff,
-    0 0 40px #33d1ff,
-    0 0 60px #66f0ff;
+    0 0 3px #007b6e,
+    0 0 6px #0091a8,
+    0 0 10px #00b2ff;
   animation: gradientFlow 5s infinite linear, pulse 2.5s infinite alternate ease-in-out;
   transform-origin: center center;
   will-change: transform;
@@ -37,19 +35,15 @@
   0% {
     transform: scale(1);
     text-shadow:
-      0 0 10px #007b6e,
-      0 0 20px #0091a8,
-      0 0 30px #00b2ff,
-      0 0 40px #33d1ff,
-      0 0 60px #66f0ff;
+      0 0 3px #007b6e,
+      0 0 6px #0091a8,
+      0 0 10px #00b2ff;
   }
   100% {
     transform: scale(1.07);
     text-shadow:
-      0 0 20px #00a2a0,
-      0 0 40px #00c1ff,
-      0 0 60px #33e0ff,
-      0 0 80px #66f0ff,
-      0 0 100px #99ffff;
+      0 0 4px #00a2a0,
+      0 0 8px #00c1ff,
+      0 0 14px #33e0ff;
   }
 }
