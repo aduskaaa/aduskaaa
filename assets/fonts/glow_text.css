@@ -1,41 +1,55 @@
 .glow-text {
-    display: inline-block;
-    font-size: 22px;
-    font-weight: bold;
-    color: #ffea00;
-    width: max-content;
-    -webkit-text-stroke: 1px #ff8800;
-    text-shadow:
-      0 0 10px #ff8800,
-      0 0 20px #ffaa00,
-      0 0 30px #ffcc00,
-      0 0 40px #ffdd33,
-      0 0 60px #ffee55;
-    animation: pulse 2.5s infinite alternate ease-in-out;
-    transform-origin: center center;
-    will-change: transform;
-    /* fix proti pohybu */
-    position: relative;
-    left: 0;
-  }
+  display: inline-block;
+  font-size: 22px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #0d5c4d, #0b708f, #00a2ff);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: max-content;
+  -webkit-text-stroke: 1px #004a3b;
+  text-shadow:
+    0 0 10px #007b6e,
+    0 0 20px #0091a8,
+    0 0 30px #00b2ff,
+    0 0 40px #33d1ff,
+    0 0 60px #66f0ff;
+  animation: gradientFlow 5s infinite linear, pulse 2.5s infinite alternate ease-in-out;
+  transform-origin: center center;
+  will-change: transform;
+  position: relative;
+  left: 0;
+}
 
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-      text-shadow:
-        0 0 10px #ff8800,
-        0 0 20px #ffaa00,
-        0 0 30px #ffcc00,
-        0 0 40px #ffdd33,
-        0 0 60px #ffee55;
-    }
-    100% {
-      transform: scale(1.07);
-      text-shadow:
-        0 0 20px #ffaa00,
-        0 0 40px #ffbb00,
-        0 0 60px #ffdd33,
-        0 0 80px #ffee66,
-        0 0 100px #fff699;
-    }
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
   }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    text-shadow:
+      0 0 10px #007b6e,
+      0 0 20px #0091a8,
+      0 0 30px #00b2ff,
+      0 0 40px #33d1ff,
+      0 0 60px #66f0ff;
+  }
+  100% {
+    transform: scale(1.07);
+    text-shadow:
+      0 0 20px #00a2a0,
+      0 0 40px #00c1ff,
+      0 0 60px #33e0ff,
+      0 0 80px #66f0ff,
+      0 0 100px #99ffff;
+  }
+}
