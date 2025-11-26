@@ -47,7 +47,7 @@ window.RELEASES = {
       {
         version: "v1.2",
         date: "2025-10-07",
-        requires: ["FER Alpha 26/27", "ETS2 1.56", "OTGR current"],
+        requires: ["FER Alpha 26/27", "ETS2 1.56/1.57", "OTGR current"],
         notes: "Updated version of FER–OTGR connector.",
         links: { 
           primary: "https://sharemods.com/g4fxrvtccpcz/FER_-_OTGR_RC.zip.html", 
@@ -59,7 +59,7 @@ window.RELEASES = {
       {
         version: "v1",
         date: "2025-10-07",
-        requires: ["FER Alpha 26/27", "ETS2 1.56", "Chukotka current"],
+        requires: ["FER Alpha 26/27", "ETS2 1.56/1.57", "Chukotka current"],
         notes: "First release of FER–Chukotka connector.",
         links: { 
           primary: "https://sharemods.com/ccicwzilxntg/FER_-_CHUCHOTKA_RC.zip.html", 
@@ -71,7 +71,7 @@ window.RELEASES = {
       {
         version: "Soon",
         date: "TBD",
-        requires: ["ETS2 1.56"],
+        requires: ["ETS2 1.5#"],
         notes: "Planned release.",
         links: { primary: "#", changelog: "#" }
       }
