@@ -9,12 +9,12 @@ window.RELEASES = {
   fer: [
    {
       version: "Alpha 28",
-      date: "Soon", // ISO format YYYY-MM-DD
-      size: "XXX.XMB",
+      date: "2025-11-26", // ISO format YYYY-MM-DD
+      size: "161.1MB",
       game: "ETS2 1.57",
-      notes: "Added roads: 98K-020, Added villages: Khair, Vlasovom Kular, Severny and Nayba, Added cities: Tiksi. for now accesible by ferry from Yakutsk to Tiksi",
+      notes: "Added roads: 98K-020, Added villages: Khair, Vlasovom Kular, Severny and Nayba, Added cities: Tiksi. for now accesible by ferry from Yakutsk to Tiksi, fixed reported bugs.",
       links: {
-        primary: "#",
+        primary: "https://sharemods.com/zb0rlc60hkhu/Far_East_Russia_Alpha_28.scs.html",
         changelog: ""
       }
     },
