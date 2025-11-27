@@ -10,7 +10,7 @@ window.RELEASES = {
    {
       version: "Alpha 28",
       date: "2025-11-26", // ISO format YYYY-MM-DD
-      size: "161.1MB",
+      size: "153.7MB",
       game: "ETS2 1.57",
       notes: "Added roads: 98K-020 and 98K-025, Added villages: Khair, Vlasovom Kular, Severny, Nayba and Dzhebariki-Khaya, Added cities: Tiksi. for now accesible by ferry from Yakutsk to Tiksi, fixed reported bugs. ",
       links: {
