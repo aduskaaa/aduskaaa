@@ -1,7 +1,7 @@
 /* ==========================================================
    Far East Russia (FER) – Versions Registry
    ----------------------------------------------------------
-   This file defines all FER and RC releases globally.
+   This file defines all FER, RC, and Addon releases globally.
    Add new entries by appending to arrays below.
    ========================================================== */
 
@@ -69,11 +69,26 @@ window.RELEASES = {
     ],
     tst: [
       {
-        version: "Soon",
-        date: "TBD",
-        requires: ["ETS2 1.5#"],
-        notes: "Planned release.",
-        links: { primary: "#", changelog: "#" }
+        version: "v1",
+        date: "2025-12-01",
+        requires: ["FER Alpha 28", "ETS2 1.57", "TST current"],
+        notes: "First release of FER–TST connector. Connects Far East Russia and Trans-Siberian Truckway.",
+        links: { primary: "https://sharemods.com/vpuxnq84bvr3/FER_-_TST_RC.scs.html", changelog: "#" }
+      }
+    ]
+  },
+
+  addons: {
+    chukotka: [
+      {
+        version: "v1",
+        date: "2026-01-01",
+        requires: ["FER Alpha 29", "ETS2 1.57", "FER - Chukotka RC"],
+        notes: "Addon for Chukotka region. Contains new cities, roads, and other content.",
+        links: { 
+          primary: "#", 
+          changelog: "#" 
+        }
       }
     ]
   }
