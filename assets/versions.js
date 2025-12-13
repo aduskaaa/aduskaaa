@@ -59,10 +59,10 @@ window.RELEASES = {
        {
         version: "v2",
         date: "2025-12-13",
-        requires: ["FER Alpha 26/27/28", "ETS2 1.56/1.57", "Chukotka current"],
-        notes: "First release of FER–Chukotka connector.",
+        requires: ["FER Alpha 28", "ETS2 1.56/1.57", "Chukotka current"],
+        notes: "Seccond release of FER–Chukotka connector.",
         links: {
-          primary: "https://modsfire.com/W7wV8Ygqfd1xaU9",
+          primary: "https://modsfire.com/N57658b0RbX9ak6",
           mirror1: "#",
           changelog: "#"
         }
@@ -83,7 +83,7 @@ window.RELEASES = {
         version: "v2",
         date: "2025-12-13",
         requires: ["FER Alpha 28", "ETS2 1.57", "TST current"],
-        notes: "First release of FER–TST connector. Connects Far East Russia and Trans-Siberian Truckway.",
+        notes: "Seccond of FER–TST connector. Connects Far East Russia and Trans-Siberian Truckway.",
         links: {
           primary: "https://modsfire.com/W7wV8Ygqfd1xaU9",
           mirror1: "#",
