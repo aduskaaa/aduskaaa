@@ -56,6 +56,17 @@ window.RELEASES = {
       }
     ],
     chukotka: [
+       {
+        version: "v2",
+        date: "2025-12-13",
+        requires: ["FER Alpha 26/27/28", "ETS2 1.56/1.57", "Chukotka current"],
+        notes: "First release of FER–Chukotka connector.",
+        links: {
+          primary: "https://modsfire.com/W7wV8Ygqfd1xaU9",
+          mirror1: "#",
+          changelog: "#"
+        }
+      },
       {
         version: "v1",
         date: "2025-10-07",
@@ -68,12 +79,27 @@ window.RELEASES = {
       }
     ],
     tst: [
+            {
+        version: "v2",
+        date: "2025-12-13",
+        requires: ["FER Alpha 28", "ETS2 1.57", "TST current"],
+        notes: "First release of FER–TST connector. Connects Far East Russia and Trans-Siberian Truckway.",
+        links: {
+          primary: "https://modsfire.com/W7wV8Ygqfd1xaU9",
+          mirror1: "#",
+          changelog: "#"
+        }
+      },
       {
         version: "v1",
         date: "2025-12-01",
         requires: ["FER Alpha 28", "ETS2 1.57", "TST current"],
         notes: "First release of FER–TST connector. Connects Far East Russia and Trans-Siberian Truckway.",
-        links: { primary: "https://sharemods.com/vpuxnq84bvr3/FER_-_TST_RC.scs.html", changelog: "#" }
+        links: {
+          primary: "https://modsfire.com/fq1cs35OetM2JHA",
+          mirror1: "https://sharemods.com/vpuxnq84bvr3/FER_-_TST_RC.scs.html",
+          changelog: "#"
+        }
       }
     ]
   },
@@ -82,12 +108,13 @@ window.RELEASES = {
     chukotka: [
       {
         version: "v1",
-        date: "2026-01-01",
-        requires: ["FER Alpha 29", "ETS2 1.57", "FER - Chukotka RC"],
+        date: "2025-12-13",
+        requires: ["FER Alpha 28/29", "ETS2 1.57", "FER - Chukotka RC"],
         notes: "Addon for Chukotka region. Contains new cities, roads, and other content.",
-        links: { 
-          primary: "#", 
-          changelog: "#" 
+        links: {
+          primary: "https://modsfire.com/5ECKRz17FV1122W",
+          mirror1: "#",
+          changelog: "#"
         }
       }
     ]
