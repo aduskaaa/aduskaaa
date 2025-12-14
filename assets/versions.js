@@ -83,7 +83,7 @@ window.RELEASES = {
         version: "v2",
         date: "2025-12-13",
         requires: ["FER Alpha 28", "ETS2 1.57", "TST current"],
-        notes: "Seccond of FER–TST connector. Connects Far East Russia and Trans-Siberian Truckway.",
+        notes: "dont worry about that road break near yakutsk..... it will not be thee in next FER version (Alpha 29)",
         links: {
           primary: "https://modsfire.com/W7wV8Ygqfd1xaU9",
           mirror1: "#",
@@ -112,7 +112,7 @@ window.RELEASES = {
         requires: ["FER Alpha 28/29", "ETS2 1.57", "FER - Chukotka RC"],
         notes: "Addon for Chukotka region. Contains new cities, roads, and other content.",
         links: {
-          primary: "https://modsfire.com/5ECKRz17FV1122W",
+          primary: "https://modsfire.com/QBJLwa7DpEC6NCN",
           mirror1: "#",
           changelog: "#"
         }
