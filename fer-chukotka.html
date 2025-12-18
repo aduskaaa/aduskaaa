@@ -103,14 +103,20 @@
     meta.textContent=(v.date||'') + (req? ' • '+req:'');
     var notes=document.createElement('div'); notes.textContent=v.notes||'';
     var actions=document.createElement('div'); actions.className='version-actions';
-    var dl=document.createElement('a'); dl.className='button button-primary'; dl.href=(v.links&&v.links.primary)||'#'; dl.textContent='Download';
-    actions.appendChild(dl);
+    if(v.links && v.links.primary) {
+      var dl=document.createElement('a'); dl.className='button button-primary'; dl.href=v.links.primary; dl.textContent='Download'; actions.appendChild(dl); 
+    }
+    if(v.links && v.links.mirror1) {
+      var m1=document.createElement('a'); m1.className='button button-secondary'; m1.href=v.links.mirror1; m1.textContent='Mirror'; actions.appendChild(m1);
+    }
     div.appendChild(title); div.appendChild(meta); div.appendChild(notes); div.appendChild(actions);
     return div;
   }
   var data=(window.RELEASES&&window.RELEASES.rcs&&window.RELEASES.rcs.chukotka)||[];
-  var latest=document.getElementById('rc-latest'); if(data.length && latest){ latest.replaceWith(makeItem(data[0], 'FER – Chukotka')); }
-  var list=document.getElementById('rc-versions'); if(list){ data.forEach(function(v){ list.appendChild(makeItem(v, 'FER – Chukotka')); }); }
+  var latest=document.getElementById('rc-latest');
+  if(data.length && latest){ latest.replaceWith(makeItem(data[0], 'FER – Chukotka')); }
+  var list=document.getElementById('rc-versions');
+  if(list){ data.forEach(function(v){ list.appendChild(makeItem(v, 'FER – Chukotka')); }); }
   if (window.initDownloadCounter) { window.initDownloadCounter('fer-chukotka-downloads'); }
 })();
 </script>

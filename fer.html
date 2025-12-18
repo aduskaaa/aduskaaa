@@ -113,7 +113,6 @@
 <script>
 (function(){
   var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
-  var releases=(window.RELEASES&&window.RELEASES.fer)||[];
   function makeVersionItem(v){
     var div=document.createElement('div');
     div.className='version-item';
@@ -126,14 +125,25 @@
     notes.textContent=v.notes||'';
     var actions=document.createElement('div');
     actions.className='version-actions';
-    var dl=document.createElement('a'); dl.className='button button-primary'; dl.href=(v.links&&v.links.primary)||'#'; dl.textContent='Download';
-    actions.appendChild(dl);
+    if (v.links && v.links.primary) {
+      var dl=document.createElement('a'); dl.className='button button-primary'; dl.href=(v.links.primary)||'#'; dl.textContent='Download'; actions.appendChild(dl);
+    }
+    if (v.links && v.links.mirror1) {
+      var m1=document.createElement('a'); m1.className='button button-secondary'; m1.href=v.links.mirror1; m1.textContent='Mirror'; actions.appendChild(m1);
+    }
     div.appendChild(title); div.appendChild(meta); div.appendChild(notes); div.appendChild(actions);
     return div;
   }
   var latest=document.getElementById('fer-latest');
   var actionsDock=document.getElementById('fer-actions');
-  if(releases.length && latest){ latest.replaceWith(makeVersionItem(releases[0])); }
+  var releases=(window.RELEASES&&window.RELEASES.fer)||[];
+  if(releases.length && latest){
+    var latestItem = makeVersionItem(releases[0]);
+    latest.replaceWith(latestItem);
+    if(actionsDock && latestItem.querySelector('.version-actions')){
+      actionsDock.appendChild(latestItem.querySelector('.version-actions'));
+    }
+  }
   var list=document.getElementById('fer-versions');
   if(list){ releases.forEach(function(v){ list.appendChild(makeVersionItem(v)); }); }
   // Initialize global download counter for FER main map

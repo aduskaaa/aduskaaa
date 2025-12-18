@@ -53,6 +53,10 @@
         <h2>RCs – TST</h2>
         <div id="versions-tst" class="versions-list"></div>
       </div>
+      <div class="card">
+        <h2>Addons</h2>
+        <div id="versions-addons" class="versions-list"></div>
+      </div>
     </div>
   </section>
 </main>
@@ -81,8 +85,11 @@
     m.textContent=(v.date||'') + game + size + req;
     var n=document.createElement('div'); n.textContent=v.notes||'';
     var actions=document.createElement('div'); actions.className='version-actions';
-    var dl=document.createElement('a'); dl.className='button button-primary'; dl.href=(v.links&&v.links.primary)||'#'; dl.textContent='Download';
-    actions.appendChild(dl);
+    // --- DOWNLOAD BUTTONS: ---
+    if (v.links) {
+      if (v.links.primary) { var dl=document.createElement('a'); dl.className='button button-primary'; dl.href=v.links.primary; dl.textContent='Download'; actions.appendChild(dl); }
+      if (v.links.mirror1) { var m1=document.createElement('a'); m1.className='button button-secondary'; m1.href=v.links.mirror1; m1.textContent='Mirror'; actions.appendChild(m1); }
+    }
     d.appendChild(t); d.appendChild(m); d.appendChild(n); d.appendChild(actions);
     return d;
   }
@@ -93,6 +100,9 @@
   render('versions-otgr','FER – OTGR', rcs.otgr||[]);
   render('versions-chukotka','FER – Chukotka', rcs.chukotka||[]);
   render('versions-tst','FER – TST', rcs.tst||[]);
+  // --- RENDER ADDONS ---
+  var addons=(rel.addons||{});
+  Object.keys(addons).forEach(function(key){ render('versions-addons', key.charAt(0).toUpperCase()+key.slice(1)+' Addon', addons[key]||[]); });
 })();
 </script>
 </body>

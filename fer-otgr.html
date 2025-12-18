@@ -96,23 +96,27 @@
 (function(){
   var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
   function makeItem(v, label){
-    var div=document.createElement('div');
-    div.className='version-item';
-    var title=document.createElement('div');
-    title.innerHTML='<strong>'+label+' '+(v.version||'')+'</strong>';
+    var div=document.createElement('div'); div.className='version-item';
+    var title=document.createElement('div'); title.innerHTML='<strong>'+label+' '+(v.version||'')+'</strong>';
     var meta=document.createElement('div'); meta.className='version-meta';
     var req=(v.requires||[]).join(', ');
     meta.textContent=(v.date||'') + (req? ' • '+req:'');
     var notes=document.createElement('div'); notes.textContent=v.notes||'';
     var actions=document.createElement('div'); actions.className='version-actions';
-    var dl=document.createElement('a'); dl.className='button button-primary'; dl.href=(v.links&&v.links.primary)||'#'; dl.textContent='Download';
-    actions.appendChild(dl);
+    if(v.links && v.links.primary) {
+      var dl=document.createElement('a'); dl.className='button button-primary'; dl.href=v.links.primary; dl.textContent='Download'; actions.appendChild(dl); 
+    }
+    if(v.links && v.links.mirror1) {
+      var m1=document.createElement('a'); m1.className='button button-secondary'; m1.href=v.links.mirror1; m1.textContent='Mirror'; actions.appendChild(m1);
+    }
     div.appendChild(title); div.appendChild(meta); div.appendChild(notes); div.appendChild(actions);
     return div;
   }
   var data=(window.RELEASES&&window.RELEASES.rcs&&window.RELEASES.rcs.otgr)||[];
-  var latest=document.getElementById('rc-latest'); if(data.length && latest){ latest.replaceWith(makeItem(data[0], 'FER – OTGR')); }
-  var list=document.getElementById('rc-versions'); if(list){ data.forEach(function(v){ list.appendChild(makeItem(v, 'FER – OTGR')); }); }
+  var latest=document.getElementById('rc-latest');
+  if(data.length && latest){ latest.replaceWith(makeItem(data[0], 'FER – OTGR')); }
+  var list=document.getElementById('rc-versions');
+  if(list){ data.forEach(function(v){ list.appendChild(makeItem(v, 'FER – OTGR')); }); }
   if (window.initDownloadCounter) { window.initDownloadCounter('fer-otgr-downloads'); }
 })();
 </script>

@@ -65,7 +65,7 @@
     <div class="container card">
       <h2>Notes</h2>
       <ul>
-        <li>Requires Far East Russia Alpha 28 and ETS2 1.57</li>
+        <li>Requires Far East Russia Alpha 29 and ETS2 1.57</li>
         <li>Place RC above both main maps</li>
         <li>Report issues via Discord</li>
       </ul>
@@ -88,7 +88,6 @@
 <script>
 (function(){
   var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
-  // Releases Data
   function makeItem(v, label){
     var div=document.createElement('div'); div.className='version-item';
     var title=document.createElement('div'); title.innerHTML='<strong>'+label+' '+(v.version||'')+'</strong>';
@@ -97,17 +96,19 @@
     meta.textContent=(v.date||'') + (req? ' • '+req:'');
     var notes=document.createElement('div'); notes.textContent=v.notes||'';
     var actions=document.createElement('div'); actions.className='version-actions';
-    if (v.links && v.links.primary && v.links.primary !== "#") {
-      var dl=document.createElement('a'); dl.className='button button-primary'; dl.href=v.links.primary; dl.textContent='Download';
-      actions.appendChild(dl);
+    if(v.links && v.links.primary) {
+      var dl=document.createElement('a'); dl.className='button button-primary'; dl.href=v.links.primary; dl.textContent='Download'; actions.appendChild(dl); 
+    }
+    if(v.links && v.links.mirror1) {
+      var m1=document.createElement('a'); m1.className='button button-secondary'; m1.href=v.links.mirror1; m1.textContent='Mirror'; actions.appendChild(m1);
     }
     div.appendChild(title); div.appendChild(meta); div.appendChild(notes); div.appendChild(actions);
     return div;
   }
   var data=(window.RELEASES&&window.RELEASES.rcs&&window.RELEASES.rcs.tst)||[];
-  var latest=document.getElementById('rc-latest'); 
+  var latest=document.getElementById('rc-latest');
   if(data.length && latest){ latest.replaceWith(makeItem(data[0], 'FER – TST')); }
-  var list=document.getElementById('rc-versions'); 
+  var list=document.getElementById('rc-versions');
   if(list){ data.forEach(function(v){ list.appendChild(makeItem(v, 'FER – TST')); }); }
 })();
 </script>

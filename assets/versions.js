@@ -14,7 +14,8 @@ window.RELEASES = {
       game: "ETS2 1.57",
       notes: "Added roads: 98K-020 and 98K-025, Added villages: Khair, Vlasovom Kular, Severny, Nayba and Dzhebariki-Khaya, Added cities: Tiksi. for now accesible by ferry from Yakutsk to Tiksi, fixed reported bugs. ",
       links: {
-        primary: "https://sharemods.com/zb0rlc60hkhu/Far_East_Russia_Alpha_28.scs.html",
+        primary: "https://modsfire.com/YNIRmTvZJD0gz7i",
+        mirror1: "https://sharemods.com/zb0rlc60hkhu/Far_East_Russia_Alpha_28.scs.html",
         changelog: ""
       }
     },
@@ -26,6 +27,7 @@ window.RELEASES = {
       notes: "Rebuilded part of P-504, Added Teply Klyuch, Rebuilded Khandyga",
       links: {
         primary: "https://sharemods.com/yv7l5hyjgunv/Far_East_Russia_Alpha_27.scs.html",
+        mirror1: "#",
         changelog: ""
       }
     },
@@ -37,6 +39,7 @@ window.RELEASES = {
       notes: "Rebuilded 98K-006, Added Nalimsk, Andryushkino, Argakhtakh, Sasyr, Pobeda. Rebuilded Chersky, Srednekolymsk, Zyryanka and Ugolnye. Removed Batagay, Sangar, Segyan-Kyuyol",
       links: {
         primary: "https://sharemods.com/ki9ea53j2b5r/Far_East_Russia_Alpha_26.scs.html",
+        mirror1: "#",
         changelog: ""
       }
     },
@@ -47,22 +50,23 @@ window.RELEASES = {
       {
         version: "v1.2",
         date: "2025-10-07",
-        requires: ["FER Alpha 26/27", "ETS2 1.56/1.57", "OTGR current"],
+        requires: ["FER Alpha 26/27/28", "ETS2 1.56/1.57", "OTGR current"],
         notes: "Updated version of FER–OTGR connector.",
-        links: { 
-          primary: "https://sharemods.com/g4fxrvtccpcz/FER_-_OTGR_RC.zip.html", 
-          changelog: "#" 
+        links: {
+          primary: "https://modsfire.com/88V9BM7EFz0aS9Z",
+          mirror1: "https://sharemods.com/g4fxrvtccpcz/FER_-_OTGR_RC.zip.html",
+          changelog: "#"
         }
       }
     ],
     chukotka: [
-       {
+      {
         version: "v2",
         date: "2025-12-13",
-        requires: ["FER Alpha 28", "ETS2 1.56/1.57", "Chukotka current"],
-        notes: "Seccond release of FER–Chukotka connector.",
+        requires: ["FER Alpha 26/27/28", "ETS2 1.56/1.57", "Chukotka current"],
+        notes: "First release of FER–Chukotka connector.",
         links: {
-          primary: "https://modsfire.com/N57658b0RbX9ak6",
+          primary: "https://modsfire.com/W7wV8Ygqfd1xaU9",
           mirror1: "#",
           changelog: "#"
         }
@@ -70,20 +74,21 @@ window.RELEASES = {
       {
         version: "v1",
         date: "2025-10-07",
-        requires: ["FER Alpha 26/27", "ETS2 1.56/1.57", "Chukotka current"],
+        requires: ["FER Alpha 26/27/28", "ETS2 1.56/1.57", "Chukotka current"],
         notes: "First release of FER–Chukotka connector.",
-        links: { 
-          primary: "https://sharemods.com/ccicwzilxntg/FER_-_CHUCHOTKA_RC.zip.html", 
-          changelog: "#" 
+        links: {
+          primary: "https://modsfire.com/OzQDsG22UV1G9Fx",
+          mirror1: "https://sharemods.com/ccicwzilxntg/FER_-_CHUCHOTKA_RC.zip.html",
+          changelog: "#"
         }
       }
     ],
     tst: [
-            {
+      {
         version: "v2",
         date: "2025-12-13",
         requires: ["FER Alpha 28", "ETS2 1.57", "TST current"],
-        notes: "dont worry about that road break near yakutsk..... it will not be thee in next FER version (Alpha 29)",
+        notes: "Seccond release of FER–TST connector. Connects Far East Russia and Trans-Siberian Truckway.",
         links: {
           primary: "https://modsfire.com/W7wV8Ygqfd1xaU9",
           mirror1: "#",
