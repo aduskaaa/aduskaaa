@@ -66,7 +66,7 @@ window.RELEASES = {
         requires: ["FER Alpha 26/27/28", "ETS2 1.56/1.57", "Chukotka current"],
         notes: "First release of FER–Chukotka connector.",
         links: {
-          primary: "https://modsfire.com/W7wV8Ygqfd1xaU9",
+          primary: "https://modsfire.com/N57658b0RbX9ak6",
           mirror1: "#",
           changelog: "#"
         }
