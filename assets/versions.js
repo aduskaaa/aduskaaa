@@ -7,6 +7,18 @@
 
 window.RELEASES = {
   fer: [
+      {
+      version: "Alpha 29",
+      date: "2026-01-01", // ISO format YYYY-MM-DD
+      size: "155.3MB",
+      game: "ETS2 1.57",
+      notes: "Added roads: part of 98K-023, Added villages: Ust-Kyuga, Added cities: Markha. Fixed bugs. ",
+      links: {
+        primary: "https://modsfire.com/5q6zb7q0E3M7cLW",
+        mirror1: "",
+        changelog: ""
+      }
+    },
    {
       version: "Alpha 28",
       date: "2025-11-26", // ISO format YYYY-MM-DD
