@@ -10,108 +10,145 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            touch-action: none;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-            color: #fff;
+            background: #121212;
+            color: #ffffff;
             height: 100vh;
             overflow: hidden;
+            user-select: none;
         }
 
-        .app-container {
+        .app {
             display: flex;
             flex-direction: column;
             height: 100vh;
         }
 
+        /* Header */
         .header {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 10px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
             border-bottom: 2px solid #3949ab;
             flex-shrink: 0;
         }
 
-        .header h1 {
-            font-size: 1.5rem;
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-title h1 {
+            font-size: 1.4rem;
             font-weight: 600;
         }
 
-        .zoom-controls {
+        .header-controls {
             display: flex;
-            gap: 10px;
             align-items: center;
-        }
-
-        .zoom-btn {
-            background: #3949ab;
-            border: none;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-        }
-
-        .zoom-btn:hover {
-            background: #5c6bc0;
-            transform: scale(1.05);
+            gap: 15px;
         }
 
         .zoom-display {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 8px;
             font-weight: bold;
             min-width: 100px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 8px 12px;
-            border-radius: 8px;
         }
 
-        .main-content {
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #3949ab;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: #5c6bc0;
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: #616161;
+        }
+
+        .btn-secondary:hover {
+            background: #757575;
+        }
+
+        .btn-danger {
+            background: #d32f2f;
+        }
+
+        .btn-danger:hover {
+            background: #f44336;
+        }
+
+        .btn-success {
+            background: #388e3c;
+        }
+
+        .btn-success:hover {
+            background: #4caf50;
+        }
+
+        /* Main Layout */
+        .main-layout {
             display: flex;
             flex: 1;
             overflow: hidden;
         }
 
-        /* Mobile sidebar (hidden by default on desktop) */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
         /* Sidebar */
         .sidebar {
             width: 280px;
-            background: rgba(0, 0, 0, 0.85);
-            border-right: 2px solid #3949ab;
-            overflow-y: auto;
-            padding: 15px;
-            transition: transform 0.3s ease;
+            background: #1e1e1e;
+            border-right: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
             flex-shrink: 0;
         }
 
-        .sidebar-section {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .sidebar-header {
+            padding: 15px;
+            border-bottom: 1px solid #333;
         }
 
-        .sidebar-title {
-            font-size: 1.1rem;
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .tool-section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 12px;
             color: #bb86fc;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -124,46 +161,44 @@
         }
 
         .tool-btn {
-            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 8px;
             border: 2px solid transparent;
             border-radius: 8px;
-            padding: 12px 8px;
+            background: #2c2c2c;
             color: white;
             cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
+            transition: all 0.2s;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 5px;
+            font-size: 0.9rem;
+        }
+
+        .tool-btn:hover {
+            background: #3c3c3c;
+        }
+
+        .tool-btn.active {
+            background: #3949ab;
+            border-color: #bb86fc;
+            box-shadow: 0 2px 8px rgba(187, 134, 252, 0.3);
         }
 
         .tool-btn i {
             font-size: 1.2rem;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
-        .tool-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .tool-btn.active {
-            background: rgba(57, 73, 171, 0.8);
-            border-color: #bb86fc;
-            box-shadow: 0 4px 12px rgba(187, 134, 252, 0.3);
-        }
-
-        /* Road color indicators */
         .road-color {
             width: 100%;
-            height: 4px;
+            height: 3px;
             border-radius: 2px;
-            margin-top: 5px;
+            margin-top: 4px;
         }
 
-        /* Canvas container */
-        .canvas-container {
+        /* Canvas Area */
+        .canvas-area {
             flex: 1;
             position: relative;
             overflow: hidden;
@@ -174,61 +209,54 @@
             position: absolute;
             top: 0;
             left: 0;
-            background: #1e1e1e;
+            background: #0a0a0a;
             cursor: crosshair;
         }
 
-        /* Grid overlay */
         .grid-overlay {
             position: absolute;
             top: 0;
             left: 0;
             pointer-events: none;
-            opacity: 0.1;
         }
 
-        /* Properties panel */
+        /* Properties Panel */
         .properties-panel {
-            width: 300px;
-            background: rgba(0, 0, 0, 0.85);
-            border-left: 2px solid #3949ab;
-            padding: 15px;
-            overflow-y: auto;
+            width: 320px;
+            background: #1e1e1e;
+            border-left: 1px solid #333;
+            display: flex;
+            flex-direction: column;
             flex-shrink: 0;
-            display: none;
         }
 
-        .properties-panel.active {
-            display: block;
+        .properties-header {
+            padding: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .properties-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
         }
 
         .property-group {
             margin-bottom: 20px;
         }
 
-        .property-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #bb86fc;
-        }
-
-        .property-item {
-            margin-bottom: 12px;
-        }
-
         .property-label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            color: #bbb;
             font-size: 0.9rem;
-            color: #ccc;
         }
 
         .property-input {
             width: 100%;
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 12px;
+            background: #2c2c2c;
+            border: 1px solid #444;
             border-radius: 6px;
             color: white;
             font-size: 0.9rem;
@@ -239,66 +267,96 @@
             border-color: #bb86fc;
         }
 
-        /* Status bar */
+        .property-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        /* Status Bar */
         .status-bar {
-            background: rgba(0, 0, 0, 0.9);
-            padding: 8px 15px;
-            border-top: 2px solid #3949ab;
-            font-size: 0.9rem;
             display: flex;
             justify-content: space-between;
+            padding: 8px 15px;
+            background: #1a1a1a;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+            color: #bbb;
             flex-shrink: 0;
         }
 
-        /* Bottom toolbar for mobile */
-        .mobile-toolbar {
-            display: none;
+        /* Modal */
+        .modal-overlay {
             position: fixed;
-            bottom: 0;
+            top: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.95);
-            padding: 10px;
-            border-top: 2px solid #3949ab;
-            z-index: 1000;
-        }
-
-        .mobile-toolbar-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 5px;
-        }
-
-        .mobile-tool-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            border-radius: 6px;
-            color: white;
-            padding: 10px 5px;
-            font-size: 0.8rem;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 3px;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
         }
 
-        .mobile-tool-btn i {
-            font-size: 1.2rem;
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
 
-        /* Toast notifications */
+        .modal {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 25px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 2px solid #3949ab;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #bb86fc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-body {
+            margin-bottom: 25px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* Toast */
         .toast {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.9);
+            background: #2c2c2c;
             border-left: 4px solid #4caf50;
             padding: 15px 20px;
             border-radius: 6px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             transform: translateX(100%);
-            transition: transform 0.3s ease;
-            z-index: 10000;
+            transition: transform 0.3s;
+            z-index: 1001;
+            max-width: 300px;
         }
 
         .toast.show {
@@ -313,8 +371,8 @@
             border-left-color: #ff9800;
         }
 
-        /* Modal dialogs */
-        .modal {
+        /* Loading */
+        .loading {
             display: none;
             position: fixed;
             top: 0;
@@ -322,160 +380,13 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.8);
-            z-index: 10000;
             align-items: center;
             justify-content: center;
+            z-index: 1002;
         }
 
-        .modal.active {
+        .loading.active {
             display: flex;
-        }
-
-        .modal-content {
-            background: #1e1e1e;
-            border-radius: 12px;
-            padding: 25px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            border: 2px solid #3949ab;
-        }
-
-        .modal-title {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            color: #bb86fc;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-            justify-content: flex-end;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border-radius: 6px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-primary {
-            background: #3949ab;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #5c6bc0;
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* File list */
-        .file-list {
-            max-height: 300px;
-            overflow-y: auto;
-            margin: 15px 0;
-        }
-
-        .file-item {
-            padding: 10px 15px;
-            background: rgba(255, 255, 255, 0.05);
-            margin-bottom: 8px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .file-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Responsive design */
-        @media (max-width: 1024px) {
-            .sidebar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                height: 100vh;
-                z-index: 1000;
-                transform: translateX(-100%);
-            }
-            
-            .sidebar.active {
-                transform: translateX(0);
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .properties-panel {
-                position: fixed;
-                top: 0;
-                right: 0;
-                height: 100vh;
-                z-index: 1000;
-                transform: translateX(100%);
-            }
-            
-            .properties-panel.active {
-                transform: translateX(0);
-            }
-            
-            .mobile-toolbar {
-                display: block;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.2rem;
-            }
-            
-            .tool-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .mobile-toolbar-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Animation for touch feedback */
-        @keyframes tapFeedback {
-            0% { transform: scale(1); }
-            50% { transform: scale(0.95); }
-            100% { transform: scale(1); }
-        }
-
-        .tap-animation {
-            animation: tapFeedback 0.2s ease;
-        }
-
-        /* Loading overlay */
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
         }
 
         .spinner {
@@ -490,248 +401,354 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        /* Mobile Optimizations */
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                z-index: 100;
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .properties-panel {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                z-index: 100;
+                transform: translateX(100%);
+                transition: transform 0.3s;
+            }
+            
+            .properties-panel.active {
+                transform: translateX(0);
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .btn {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-title h1 {
+                font-size: 1.2rem;
+            }
+            
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal {
+                width: 95%;
+                padding: 20px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #555;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #777;
+        }
+
+        /* Context Menu */
+        .context-menu {
+            position: fixed;
+            background: #2c2c2c;
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 8px 0;
+            z-index: 1000;
+            min-width: 150px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .context-menu-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .context-menu-item:hover {
+            background: #3949ab;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: #2c2c2c;
+            border: 1px solid #444;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            pointer-events: none;
+            z-index: 1000;
+            max-width: 200px;
+        }
+
+        /* Color Picker */
+        .color-picker {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.2s;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .color-option.active {
+            border-color: white;
+            box-shadow: 0 0 0 2px #bb86fc;
+        }
     </style>
 </head>
 <body>
-    <div class="app-container">
+    <div class="app">
         <!-- Header -->
         <div class="header">
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <h1>ETS2 Vector Map Editor</h1>
-            <div class="zoom-controls">
-                <button class="zoom-btn" id="zoomOutBtn" title="Zoom Out">
-                    <i class="fas fa-search-minus"></i>
+            <div class="header-title">
+                <button class="btn btn-secondary mobile-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
                 </button>
-                <div class="zoom-display" id="zoomDisplay">Zoom: 100%</div>
-                <button class="zoom-btn" id="zoomInBtn" title="Zoom In">
+                <h1><i class="fas fa-map"></i> ETS2 Vector Map Editor</h1>
+            </div>
+            
+            <div class="header-controls">
+                <div class="zoom-display">
+                    <span id="zoomLevel">Zoom: 100%</span>
+                </div>
+                <button class="btn" id="zoomInBtn">
                     <i class="fas fa-search-plus"></i>
                 </button>
-                <button class="zoom-btn" id="resetViewBtn" title="Reset View">
+                <button class="btn" id="zoomOutBtn">
+                    <i class="fas fa-search-minus"></i>
+                </button>
+                <button class="btn btn-secondary" id="resetViewBtn">
                     <i class="fas fa-expand-arrows-alt"></i>
+                </button>
+                <button class="btn btn-success" id="saveBtn">
+                    <i class="fas fa-save"></i> Save
                 </button>
             </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
+        <!-- Main Layout -->
+        <div class="main-layout">
             <!-- Sidebar -->
             <div class="sidebar" id="sidebar">
-                <!-- Zoom Levels -->
-                <div class="sidebar-section">
-                    <div class="sidebar-title">
-                        <i class="fas fa-layer-group"></i>
-                        Zoom Levels
-                    </div>
-                    <div class="tool-grid">
-                        <button class="tool-btn zoom-level-btn active" data-level="0">
-                            <i class="fas fa-search-plus"></i>
-                            Most Detailed
-                        </button>
-                        <button class="tool-btn zoom-level-btn" data-level="1">
-                            <i class="fas fa-search"></i>
-                            Detailed
-                        </button>
-                        <button class="tool-btn zoom-level-btn" data-level="2">
-                            <i class="fas fa-search-minus"></i>
-                            Overview
-                        </button>
-                        <button class="tool-btn zoom-level-btn" data-level="3">
-                            <i class="fas fa-globe"></i>
-                            Minimal
-                        </button>
-                    </div>
+                <div class="sidebar-header">
+                    <h3><i class="fas fa-tools"></i> Tools</h3>
                 </div>
+                
+                <div class="sidebar-content">
+                    <!-- Navigation Tools -->
+                    <div class="tool-section">
+                        <div class="section-title">
+                            <i class="fas fa-compass"></i> Navigation
+                        </div>
+                        <div class="tool-grid">
+                            <button class="tool-btn active" id="panTool">
+                                <i class="fas fa-arrows-alt"></i>
+                                Pan
+                            </button>
+                            <button class="tool-btn" id="selectTool">
+                                <i class="fas fa-mouse-pointer"></i>
+                                Select
+                            </button>
+                        </div>
+                    </div>
 
-                <!-- Road Tools -->
-                <div class="sidebar-section">
-                    <div class="sidebar-title">
-                        <i class="fas fa-road"></i>
-                        Road Tools (OSM Style)
+                    <!-- Zoom Levels -->
+                    <div class="tool-section">
+                        <div class="section-title">
+                            <i class="fas fa-layer-group"></i> Zoom Levels
+                        </div>
+                        <div class="tool-grid">
+                            <button class="tool-btn zoom-level-btn active" data-level="0">
+                                <i class="fas fa-search-plus"></i>
+                                Detail 1
+                            </button>
+                            <button class="tool-btn zoom-level-btn" data-level="1">
+                                <i class="fas fa-search"></i>
+                                Detail 2
+                            </button>
+                            <button class="tool-btn zoom-level-btn" data-level="2">
+                                <i class="fas fa-search-minus"></i>
+                                Detail 3
+                            </button>
+                            <button class="tool-btn zoom-level-btn" data-level="3">
+                                <i class="fas fa-globe"></i>
+                                Overview
+                            </button>
+                        </div>
                     </div>
-                    <div class="tool-grid">
-                        <button class="tool-btn road-tool-btn" data-type="motorway">
-                            <i class="fas fa-highway"></i>
-                            Motorway
-                            <div class="road-color" style="background: #FF6B35;"></div>
-                        </button>
-                        <button class="tool-btn road-tool-btn" data-type="trunk">
-                            <i class="fas fa-road"></i>
-                            Trunk
-                            <div class="road-color" style="background: #FFA500;"></div>
-                        </button>
-                        <button class="tool-btn road-tool-btn" data-type="primary">
-                            <i class="fas fa-street-view"></i>
-                            Primary
-                            <div class="road-color" style="background: #FFD700;"></div>
-                        </button>
-                        <button class="tool-btn road-tool-btn" data-type="secondary">
-                            <i class="fas fa-road"></i>
-                            Secondary
-                            <div class="road-color" style="background: #FFFFFF;"></div>
-                        </button>
-                        <button class="tool-btn road-tool-btn" data-type="tertiary">
-                            <i class="fas fa-route"></i>
-                            Tertiary
-                            <div class="road-color" style="background: #AAAAAA;"></div>
-                        </button>
-                        <button class="tool-btn road-tool-btn" data-type="residential">
-                            <i class="fas fa-home"></i>
-                            Residential
-                            <div class="road-color" style="background: #DDDDDD;"></div>
-                        </button>
-                    </div>
-                </div>
 
-                <!-- Area Tools -->
-                <div class="sidebar-section">
-                    <div class="sidebar-title">
-                        <i class="fas fa-mountain"></i>
-                        Area Tools
+                    <!-- Road Tools -->
+                    <div class="tool-section">
+                        <div class="section-title">
+                            <i class="fas fa-road"></i> Roads
+                        </div>
+                        <div class="tool-grid">
+                            <button class="tool-btn road-tool" data-type="motorway">
+                                <i class="fas fa-highway"></i>
+                                Motorway
+                                <div class="road-color" style="background: #E53935;"></div>
+                            </button>
+                            <button class="tool-btn road-tool" data-type="trunk">
+                                <i class="fas fa-road"></i>
+                                Trunk
+                                <div class="road-color" style="background: #FB8C00;"></div>
+                            </button>
+                            <button class="tool-btn road-tool" data-type="primary">
+                                <i class="fas fa-route"></i>
+                                Primary
+                                <div class="road-color" style="background: #FFD600;"></div>
+                            </button>
+                            <button class="tool-btn road-tool" data-type="secondary">
+                                <i class="fas fa-road"></i>
+                                Secondary
+                                <div class="road-color" style="background: #43A047;"></div>
+                            </button>
+                            <button class="tool-btn road-tool" data-type="tertiary">
+                                <i class="fas fa-street-view"></i>
+                                Tertiary
+                                <div class="road-color" style="background: #1E88E5;"></div>
+                            </button>
+                            <button class="tool-btn road-tool" data-type="residential">
+                                <i class="fas fa-home"></i>
+                                Residential
+                                <div class="road-color" style="background: #9C27B0;"></div>
+                            </button>
+                        </div>
                     </div>
-                    <div class="tool-grid">
-                        <button class="tool-btn area-tool-btn" data-type="forest">
-                            <i class="fas fa-tree"></i>
-                            Forest
-                        </button>
-                        <button class="tool-btn area-tool-btn" data-type="farmland">
-                            <i class="fas fa-tractor"></i>
-                            Farmland
-                        </button>
-                        <button class="tool-btn area-tool-btn" data-type="industrial">
-                            <i class="fas fa-industry"></i>
-                            Industrial
-                        </button>
-                        <button class="tool-btn area-tool-btn" data-type="residential_area">
-                            <i class="fas fa-city"></i>
-                            Residential
-                        </button>
-                        <button class="tool-btn area-tool-btn" data-type="park">
-                            <i class="fas fa-park"></i>
-                            Park
-                        </button>
-                        <button class="tool-btn area-tool-btn" data-type="water">
-                            <i class="fas fa-water"></i>
-                            Water
-                        </button>
-                    </div>
-                </div>
 
-                <!-- City Tools -->
-                <div class="sidebar-section">
-                    <div class="sidebar-title">
-                        <i class="fas fa-city"></i>
-                        City Tools
+                    <!-- Area Tools -->
+                    <div class="tool-section">
+                        <div class="section-title">
+                            <i class="fas fa-mountain"></i> Areas
+                        </div>
+                        <div class="tool-grid">
+                            <button class="tool-btn area-tool" data-type="forest">
+                                <i class="fas fa-tree"></i>
+                                Forest
+                            </button>
+                            <button class="tool-btn area-tool" data-type="farmland">
+                                <i class="fas fa-tractor"></i>
+                                Farmland
+                            </button>
+                            <button class="tool-btn area-tool" data-type="industrial">
+                                <i class="fas fa-industry"></i>
+                                Industrial
+                            </button>
+                            <button class="tool-btn area-tool" data-type="residential_area">
+                                <i class="fas fa-city"></i>
+                                Residential
+                            </button>
+                        </div>
                     </div>
-                    <div class="tool-grid">
-                        <button class="tool-btn city-tool-btn" data-size="major">
-                            <i class="fas fa-building"></i>
-                            Major City
-                        </button>
-                        <button class="tool-btn city-tool-btn" data-size="medium">
-                            <i class="fas fa-building"></i>
-                            Medium City
-                        </button>
-                        <button class="tool-btn city-tool-btn" data-size="small">
-                            <i class="fas fa-home"></i>
-                            Small Town
-                        </button>
-                        <button class="tool-btn city-tool-btn" data-size="village">
-                            <i class="fas fa-house"></i>
-                            Village
-                        </button>
-                    </div>
-                </div>
 
-                <!-- File Operations -->
-                <div class="sidebar-section">
-                    <div class="sidebar-title">
-                        <i class="fas fa-folder"></i>
-                        File Operations
+                    <!-- City Tools -->
+                    <div class="tool-section">
+                        <div class="section-title">
+                            <i class="fas fa-city"></i> Cities
+                        </div>
+                        <div class="tool-grid">
+                            <button class="tool-btn city-tool" data-size="major">
+                                <i class="fas fa-building"></i>
+                                Major City
+                            </button>
+                            <button class="tool-btn city-tool" data-size="medium">
+                                <i class="fas fa-city"></i>
+                                City
+                            </button>
+                            <button class="tool-btn city-tool" data-size="small">
+                                <i class="fas fa-home"></i>
+                                Town
+                            </button>
+                            <button class="tool-btn city-tool" data-size="village">
+                                <i class="fas fa-house"></i>
+                                Village
+                            </button>
+                        </div>
                     </div>
-                    <div class="tool-grid">
-                        <button class="tool-btn" id="saveMapBtn">
-                            <i class="fas fa-save"></i>
-                            Save Map
-                        </button>
-                        <button class="tool-btn" id="loadMapBtn">
-                            <i class="fas fa-folder-open"></i>
-                            Load Map
-                        </button>
-                        <button class="tool-btn" id="exportSvgBtn">
-                            <i class="fas fa-download"></i>
-                            Export SVG
-                        </button>
-                        <button class="tool-btn" id="exportAllSvgBtn">
-                            <i class="fas fa-file-archive"></i>
-                            Export All
-                        </button>
-                        <button class="tool-btn" id="newMapBtn">
-                            <i class="fas fa-plus"></i>
-                            New Map
-                        </button>
-                        <button class="tool-btn" id="clearMapBtn">
-                            <i class="fas fa-trash"></i>
-                            Clear Map
-                        </button>
-                    </div>
-                </div>
 
-                <!-- Utility Tools -->
-                <div class="sidebar-section">
-                    <div class="sidebar-title">
-                        <i class="fas fa-tools"></i>
-                        Utility Tools
-                    </div>
-                    <div class="tool-grid">
-                        <button class="tool-btn" id="selectToolBtn">
-                            <i class="fas fa-mouse-pointer"></i>
-                            Select
-                        </button>
-                        <button class="tool-btn" id="editToolBtn">
-                            <i class="fas fa-edit"></i>
-                            Edit
-                        </button>
-                        <button class="tool-btn" id="panToolBtn" class="active">
-                            <i class="fas fa-arrows-alt"></i>
-                            Pan
-                        </button>
-                        <button class="tool-btn" id="deleteToolBtn">
-                            <i class="fas fa-trash"></i>
-                            Delete
-                        </button>
-                        <button class="tool-btn" id="gridToggleBtn">
-                            <i class="fas fa-th"></i>
-                            Grid
-                        </button>
-                        <button class="tool-btn" id="showAllZoomBtn">
-                            <i class="fas fa-eye"></i>
-                            Show All
-                        </button>
+                    <!-- Actions -->
+                    <div class="tool-section">
+                        <div class="section-title">
+                            <i class="fas fa-cogs"></i> Actions
+                        </div>
+                        <div class="tool-grid">
+                            <button class="tool-btn" id="editTool">
+                                <i class="fas fa-edit"></i>
+                                Edit Mode
+                            </button>
+                            <button class="tool-btn" id="deleteTool">
+                                <i class="fas fa-trash"></i>
+                                Delete
+                            </button>
+                            <button class="tool-btn" id="gridToggle">
+                                <i class="fas fa-th"></i>
+                                Grid: On
+                            </button>
+                            <button class="tool-btn" id="clearBtn">
+                                <i class="fas fa-broom"></i>
+                                Clear
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Canvas Container -->
-            <div class="canvas-container" id="canvasContainer">
+            <!-- Canvas Area -->
+            <div class="canvas-area" id="canvasArea">
                 <canvas id="mainCanvas"></canvas>
-                <canvas class="grid-overlay" id="gridCanvas"></canvas>
+                <canvas id="gridCanvas" class="grid-overlay"></canvas>
             </div>
 
             <!-- Properties Panel -->
             <div class="properties-panel" id="propertiesPanel">
-                <div class="property-group">
-                    <div class="property-title">
-                        <i class="fas fa-cog"></i>
-                        Properties
-                    </div>
-                    <div id="propertiesContent">
-                        <!-- Dynamic content based on selected element -->
-                        <div style="text-align: center; padding: 40px 20px; color: #ccc;">
-                            <i class="fas fa-mouse-pointer" style="font-size: 2rem; margin-bottom: 15px;"></i>
-                            <p>Select an element to edit its properties</p>
-                        </div>
+                <div class="properties-header">
+                    <h3><i class="fas fa-cog"></i> Properties</h3>
+                </div>
+                <div class="properties-content" id="propertiesContent">
+                    <div style="text-align: center; padding: 40px 20px; color: #777;">
+                        <i class="fas fa-mouse-pointer" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                        <p>Select an element to edit its properties</p>
                     </div>
                 </div>
             </div>
@@ -739,98 +756,147 @@
 
         <!-- Status Bar -->
         <div class="status-bar">
-            <div id="statusText">Ready | Tool: Pan | Zoom Level: Most Detailed</div>
+            <div id="statusText">Ready | Tool: Pan | Zoom Level: Detail 1</div>
             <div id="coordinates">X: 0, Y: 0</div>
         </div>
+    </div>
 
-        <!-- Mobile Toolbar -->
-        <div class="mobile-toolbar">
-            <div class="mobile-toolbar-grid">
-                <button class="mobile-tool-btn" id="mobilePanBtn">
-                    <i class="fas fa-arrows-alt"></i>
-                    Pan
-                </button>
-                <button class="mobile-tool-btn" id="mobileSelectBtn">
-                    <i class="fas fa-mouse-pointer"></i>
-                    Select
-                </button>
-                <button class="mobile-tool-btn" id="mobileRoadBtn">
-                    <i class="fas fa-road"></i>
-                    Road
-                </button>
-                <button class="mobile-tool-btn" id="mobileAreaBtn">
-                    <i class="fas fa-mountain"></i>
-                    Area
-                </button>
-                <button class="mobile-tool-btn" id="mobileCityBtn">
-                    <i class="fas fa-city"></i>
-                    City
-                </button>
+    <!-- Modals -->
+    <div class="modal-overlay" id="saveModal">
+        <div class="modal">
+            <div class="modal-title">
+                <i class="fas fa-save"></i> Save Map
             </div>
-        </div>
-
-        <!-- Toast Notifications -->
-        <div class="toast" id="toast"></div>
-
-        <!-- Loading Overlay -->
-        <div class="loading" id="loadingOverlay" style="display: none;">
-            <div class="spinner"></div>
-        </div>
-
-        <!-- Modals -->
-        <div class="modal" id="saveModal">
-            <div class="modal-content">
-                <h2 class="modal-title"><i class="fas fa-save"></i> Save Map</h2>
-                <div class="property-item">
+            <div class="modal-body">
+                <div class="property-group">
                     <label class="property-label">Map Name</label>
-                    <input type="text" class="property-input" id="mapNameInput" placeholder="Enter map name" value="my_ets2_map">
+                    <input type="text" class="property-input" id="mapName" value="my_ets2_map" placeholder="Enter map name">
                 </div>
-                <div class="modal-buttons">
-                    <button class="btn btn-secondary" id="cancelSaveBtn">Cancel</button>
-                    <button class="btn btn-primary" id="confirmSaveBtn">Save Map</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal" id="loadModal">
-            <div class="modal-content">
-                <h2 class="modal-title"><i class="fas fa-folder-open"></i> Load Map</h2>
-                <div id="fileListContainer">
-                    <p style="color: #ccc;">Loading saved maps...</p>
-                </div>
-                <div class="modal-buttons">
-                    <button class="btn btn-secondary" id="cancelLoadBtn">Cancel</button>
+                <div class="property-group">
+                    <label class="property-label">Description</label>
+                    <textarea class="property-input" id="mapDescription" rows="3" placeholder="Optional description"></textarea>
                 </div>
             </div>
-        </div>
-
-        <div class="modal" id="cityModal">
-            <div class="modal-content">
-                <h2 class="modal-title"><i class="fas fa-city"></i> Add City</h2>
-                <div class="property-item">
-                    <label class="property-label">City Name</label>
-                    <input type="text" class="property-input" id="cityNameInput" placeholder="Enter city name">
-                </div>
-                <div class="modal-buttons">
-                    <button class="btn btn-secondary" id="cancelCityBtn">Cancel</button>
-                    <button class="btn btn-primary" id="confirmCityBtn">Add City</button>
-                </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="cancelSave">Cancel</button>
+                <button class="btn btn-success" id="confirmSave">Save Map</button>
             </div>
         </div>
     </div>
 
+    <div class="modal-overlay" id="loadModal">
+        <div class="modal">
+            <div class="modal-title">
+                <i class="fas fa-folder-open"></i> Load Map
+            </div>
+            <div class="modal-body">
+                <div id="savedMapsList">
+                    <p style="color: #777; text-align: center;">Loading saved maps...</p>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="cancelLoad">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="cityModal">
+        <div class="modal">
+            <div class="modal-title">
+                <i class="fas fa-city"></i> Add City
+            </div>
+            <div class="modal-body">
+                <div class="property-group">
+                    <label class="property-label">City Name</label>
+                    <input type="text" class="property-input" id="cityName" placeholder="Enter city name">
+                </div>
+                <div class="property-group">
+                    <label class="property-label">Population (optional)</label>
+                    <input type="number" class="property-input" id="cityPopulation" placeholder="e.g., 100000">
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="cancelCity">Cancel</button>
+                <button class="btn btn-success" id="confirmCity">Add City</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="exportModal">
+        <div class="modal">
+            <div class="modal-title">
+                <i class="fas fa-download"></i> Export Options
+            </div>
+            <div class="modal-body">
+                <div class="property-group">
+                    <label class="property-label">Format</label>
+                    <select class="property-input" id="exportFormat">
+                        <option value="svg">SVG (Vector)</option>
+                        <option value="png">PNG (Image)</option>
+                        <option value="json">JSON (Data)</option>
+                    </select>
+                </div>
+                <div class="property-group">
+                    <label class="property-label">Zoom Level</label>
+                    <select class="property-input" id="exportZoomLevel">
+                        <option value="current">Current Only</option>
+                        <option value="all">All Levels</option>
+                        <option value="0">Detail 1</option>
+                        <option value="1">Detail 2</option>
+                        <option value="2">Detail 3</option>
+                        <option value="3">Overview</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="cancelExport">Cancel</button>
+                <button class="btn btn-success" id="confirmExport">Export</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Loading Overlay -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Context Menu -->
+    <div class="context-menu" id="contextMenu" style="display: none;">
+        <div class="context-menu-item" data-action="edit">Edit Element</div>
+        <div class="context-menu-item" data-action="duplicate">Duplicate</div>
+        <div class="context-menu-item" data-action="delete">Delete</div>
+        <div class="context-menu-item" data-action="properties">Properties</div>
+    </div>
+
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip" style="display: none;"></div>
+
     <script>
-        // Main ETS2 Map Editor Application
+        // Main Editor Class
         class ETS2MapEditor {
             constructor() {
-                // Canvas setup
+                this.initializeElements();
+                this.initializeState();
+                this.setupEventListeners();
+                this.setupCanvas();
+                this.initializeData();
+                this.updateUI();
+                this.animate();
+            }
+
+            initializeElements() {
                 this.canvas = document.getElementById('mainCanvas');
                 this.gridCanvas = document.getElementById('gridCanvas');
                 this.ctx = this.canvas.getContext('2d');
                 this.gridCtx = this.gridCanvas.getContext('2d');
-                this.container = document.getElementById('canvasContainer');
-                
-                // View settings
+                this.container = document.getElementById('canvasArea');
+            }
+
+            initializeState() {
+                // View state
                 this.view = {
                     x: 0,
                     y: 0,
@@ -838,255 +904,226 @@
                     width: 0,
                     height: 0
                 };
-                
-                // Drawing settings
+
+                // Drawing state
                 this.currentTool = 'pan';
                 this.currentRoadType = 'motorway';
                 this.currentAreaType = 'forest';
                 this.currentCitySize = 'major';
-                
-                // Zoom levels data (0 = most detailed, 3 = minimal)
-                this.zoomLevels = [
-                    { name: 'Most Detailed', elements: [] },
-                    { name: 'Detailed', elements: [] },
-                    { name: 'Overview', elements: [] },
-                    { name: 'Minimal', elements: [] }
-                ];
-                this.currentZoomLevel = 0;
-                
-                // Drawing state
-                this.drawing = false;
-                this.tempPoints = [];
-                this.tempElement = null;
-                
-                // Selection
+                this.isDrawing = false;
+                this.drawingPoints = [];
+
+                // Selection state
                 this.selectedElement = null;
                 this.hoverElement = null;
                 this.editMode = false;
-                this.selectedHandle = null;
-                
-                // Grid
+                this.draggingHandle = null;
+
+                // Zoom levels
+                this.zoomLevels = [
+                    { name: 'Detail 1', scale: 1.0, elements: [] },
+                    { name: 'Detail 2', scale: 0.5, elements: [] },
+                    { name: 'Detail 3', scale: 0.25, elements: [] },
+                    { name: 'Overview', scale: 0.125, elements: [] }
+                ];
+                this.currentZoom = 0;
+
+                // UI state
                 this.gridVisible = true;
                 this.gridSize = 50;
-                
-                // Touch handling
+
+                // Touch state
                 this.touchStart = null;
-                this.touchStartTime = null;
                 this.lastTouch = null;
                 this.isPinching = false;
                 this.pinchStartDistance = 0;
                 this.pinchStartScale = 1;
-                
-                // Colors and styles
+
+                // Styles
                 this.roadStyles = {
-                    motorway: { color: '#FF6B35', width: 10, dash: null },
-                    trunk: { color: '#FFA500', width: 8, dash: null },
-                    primary: { color: '#FFD700', width: 6, dash: null },
-                    secondary: { color: '#FFFFFF', width: 5, dash: null },
-                    tertiary: { color: '#AAAAAA', width: 4, dash: null },
-                    residential: { color: '#DDDDDD', width: 3, dash: null }
+                    motorway: { color: '#E53935', width: 10, dash: null },
+                    trunk: { color: '#FB8C00', width: 8, dash: null },
+                    primary: { color: '#FFD600', width: 6, dash: null },
+                    secondary: { color: '#43A047', width: 5, dash: null },
+                    tertiary: { color: '#1E88E5', width: 4, dash: null },
+                    residential: { color: '#9C27B0', width: 3, dash: null }
                 };
-                
+
                 this.areaStyles = {
-                    forest: { fill: 'rgba(144, 238, 144, 0.5)', outline: '#228B22' },
-                    farmland: { fill: 'rgba(240, 230, 140, 0.5)', outline: '#BDB76B' },
-                    industrial: { fill: 'rgba(211, 211, 211, 0.5)', outline: '#696969' },
-                    residential_area: { fill: 'rgba(255, 228, 225, 0.5)', outline: '#CD5C5C' },
-                    park: { fill: 'rgba(152, 251, 152, 0.5)', outline: '#2E8B57' },
-                    water: { fill: 'rgba(135, 206, 235, 0.5)', outline: '#1E90FF' }
+                    forest: { fill: 'rgba(76, 175, 80, 0.3)', stroke: '#388E3C' },
+                    farmland: { fill: 'rgba(255, 193, 7, 0.3)', stroke: '#F57C00' },
+                    industrial: { fill: 'rgba(158, 158, 158, 0.3)', stroke: '#616161' },
+                    residential_area: { fill: 'rgba(233, 30, 99, 0.3)', stroke: '#C2185B' }
                 };
-                
+
                 this.cityStyles = {
-                    major: { color: '#C41E3A', radius: 15, fontSize: 14 },
-                    medium: { color: '#1E88E5', radius: 12, fontSize: 11 },
-                    small: { color: '#43A047', radius: 10, fontSize: 9 },
-                    village: { color: '#FF9800', radius: 8, fontSize: 8 }
+                    major: { color: '#D32F2F', radius: 16, fontSize: 14 },
+                    medium: { color: '#1976D2', radius: 12, fontSize: 12 },
+                    small: { color: '#388E3C', radius: 10, fontSize: 10 },
+                    village: { color: '#F57C00', radius: 8, fontSize: 8 }
                 };
-                
-                // Initialize
-                this.init();
             }
-            
-            init() {
-                // Setup canvas size
-                this.resizeCanvas();
-                window.addEventListener('resize', () => this.resizeCanvas());
-                
-                // Setup event listeners
-                this.setupEventListeners();
-                
-                // Draw initial grid
-                this.drawGrid();
-                
-                // Initialize with sample data for testing
-                this.createSampleMap();
-                
-                // Update UI
-                this.updateUI();
-                
-                // Start animation loop
-                this.animate();
-            }
-            
-            createSampleMap() {
-                // Add some sample roads
-                this.addElement(0, {
-                    type: 'road',
-                    roadType: 'motorway',
-                    points: [[100, 100], [300, 150], [500, 100], [700, 200]],
-                    width: 10,
-                    color: '#FF6B35'
-                });
-                
-                this.addElement(0, {
-                    type: 'road',
-                    roadType: 'primary',
-                    points: [[200, 300], [400, 350], [600, 300], [800, 400]],
-                    width: 6,
-                    color: '#FFD700'
-                });
-                
-                // Add sample areas
-                this.addElement(0, {
-                    type: 'area',
-                    areaType: 'forest',
-                    points: [[800, 50], [1000, 100], [1100, 300], [900, 350], [750, 200]],
-                    fill: 'rgba(144, 238, 144, 0.5)',
-                    outline: '#228B22'
-                });
-                
-                // Add sample cities
-                this.addElement(0, {
-                    type: 'city',
-                    name: 'Berlin',
-                    size: 'major',
-                    x: 400,
-                    y: 250,
-                    color: '#C41E3A'
-                });
-                
-                this.addElement(0, {
-                    type: 'city',
-                    name: 'Hamburg',
-                    size: 'medium',
-                    x: 600,
-                    y: 450,
-                    color: '#1E88E5'
-                });
-            }
-            
-            resizeCanvas() {
-                const rect = this.container.getBoundingClientRect();
-                this.view.width = rect.width;
-                this.view.height = rect.height;
-                
-                this.canvas.width = this.view.width;
-                this.canvas.height = this.view.height;
-                this.gridCanvas.width = this.view.width;
-                this.gridCanvas.height = this.view.height;
-                
-                // Center view
-                this.view.x = (this.canvas.width / 2) - (this.view.width / 2);
-                this.view.y = (this.canvas.height / 2) - (this.view.height / 2);
-                
-                this.drawGrid();
-                this.draw();
-            }
-            
+
             setupEventListeners() {
-                // Mouse events
-                this.canvas.addEventListener('mousedown', (e) => this.onMouseDown(e));
-                this.canvas.addEventListener('mousemove', (e) => this.onMouseMove(e));
-                this.canvas.addEventListener('mouseup', (e) => this.onMouseUp(e));
-                this.canvas.addEventListener('wheel', (e) => this.onMouseWheel(e));
-                
+                // Window events
+                window.addEventListener('resize', () => this.handleResize());
+                window.addEventListener('keydown', (e) => this.handleKeyDown(e));
+                window.addEventListener('keyup', (e) => this.handleKeyUp(e));
+
+                // Canvas events
+                this.canvas.addEventListener('mousedown', (e) => this.handleMouseDown(e));
+                this.canvas.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+                this.canvas.addEventListener('mouseup', (e) => this.handleMouseUp(e));
+                this.canvas.addEventListener('mouseleave', () => this.handleMouseLeave());
+                this.canvas.addEventListener('wheel', (e) => this.handleWheel(e), { passive: false });
+                this.canvas.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    this.handleContextMenu(e);
+                });
+
                 // Touch events
-                this.canvas.addEventListener('touchstart', (e) => this.onTouchStart(e), { passive: false });
-                this.canvas.addEventListener('touchmove', (e) => this.onTouchMove(e), { passive: false });
-                this.canvas.addEventListener('touchend', (e) => this.onTouchEnd(e));
-                
+                this.canvas.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: false });
+                this.canvas.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: false });
+                this.canvas.addEventListener('touchend', (e) => this.handleTouchEnd(e));
+
                 // Tool buttons
-                document.querySelectorAll('.road-tool-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        this.setTool('road');
-                        this.currentRoadType = btn.dataset.type;
-                        this.updateActiveToolButtons();
-                    });
-                });
-                
-                document.querySelectorAll('.area-tool-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        this.setTool('area');
-                        this.currentAreaType = btn.dataset.type;
-                        this.updateActiveToolButtons();
-                    });
-                });
-                
-                document.querySelectorAll('.city-tool-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        this.setTool('city');
-                        this.currentCitySize = btn.dataset.size;
-                        this.showCityModal();
-                    });
-                });
-                
+                document.getElementById('panTool').addEventListener('click', () => this.setTool('pan'));
+                document.getElementById('selectTool').addEventListener('click', () => this.setTool('select'));
+                document.getElementById('editTool').addEventListener('click', () => this.toggleEditMode());
+                document.getElementById('deleteTool').addEventListener('click', () => this.deleteSelected());
+                document.getElementById('gridToggle').addEventListener('click', () => this.toggleGrid());
+                document.getElementById('clearBtn').addEventListener('click', () => this.clearCurrentLevel());
+
+                // Zoom level buttons
                 document.querySelectorAll('.zoom-level-btn').forEach(btn => {
                     btn.addEventListener('click', () => {
                         const level = parseInt(btn.dataset.level);
                         this.setZoomLevel(level);
                     });
                 });
-                
-                // Tool buttons
-                document.getElementById('selectToolBtn').addEventListener('click', () => this.setTool('select'));
-                document.getElementById('editToolBtn').addEventListener('click', () => this.toggleEditMode());
-                document.getElementById('panToolBtn').addEventListener('click', () => this.setTool('pan'));
-                document.getElementById('deleteToolBtn').addEventListener('click', () => this.deleteSelectedElement());
-                document.getElementById('gridToggleBtn').addEventListener('click', () => this.toggleGrid());
-                document.getElementById('showAllZoomBtn').addEventListener('click', () => this.toggleShowAllZoom());
-                
-                // Mobile toolbar
-                document.getElementById('mobilePanBtn').addEventListener('click', () => this.setTool('pan'));
-                document.getElementById('mobileSelectBtn').addEventListener('click', () => this.setTool('select'));
-                document.getElementById('mobileRoadBtn').addEventListener('click', () => this.setTool('road'));
-                document.getElementById('mobileAreaBtn').addEventListener('click', () => this.setTool('area'));
-                document.getElementById('mobileCityBtn').addEventListener('click', () => this.setTool('city'));
-                
-                // Zoom controls
+
+                // Road tools
+                document.querySelectorAll('.road-tool').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        this.setTool('road');
+                        this.currentRoadType = btn.dataset.type;
+                        this.updateActiveButtons();
+                    });
+                });
+
+                // Area tools
+                document.querySelectorAll('.area-tool').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        this.setTool('area');
+                        this.currentAreaType = btn.dataset.type;
+                        this.updateActiveButtons();
+                    });
+                });
+
+                // City tools
+                document.querySelectorAll('.city-tool').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        this.setTool('city');
+                        this.currentCitySize = btn.dataset.size;
+                        this.showCityModal();
+                    });
+                });
+
+                // Header controls
                 document.getElementById('zoomInBtn').addEventListener('click', () => this.zoomIn());
                 document.getElementById('zoomOutBtn').addEventListener('click', () => this.zoomOut());
                 document.getElementById('resetViewBtn').addEventListener('click', () => this.resetView());
-                
-                // File operations
-                document.getElementById('saveMapBtn').addEventListener('click', () => this.showSaveModal());
-                document.getElementById('loadMapBtn').addEventListener('click', () => this.showLoadModal());
-                document.getElementById('exportSvgBtn').addEventListener('click', () => this.exportSVG());
-                document.getElementById('exportAllSvgBtn').addEventListener('click', () => this.exportAllSVG());
-                document.getElementById('newMapBtn').addEventListener('click', () => this.newMap());
-                document.getElementById('clearMapBtn').addEventListener('click', () => this.clearMap());
-                
+                document.getElementById('saveBtn').addEventListener('click', () => this.showSaveModal());
+                document.getElementById('menuToggle').addEventListener('click', () => this.toggleSidebar());
+
                 // Modal buttons
-                document.getElementById('confirmSaveBtn').addEventListener('click', () => this.saveMap());
-                document.getElementById('cancelSaveBtn').addEventListener('click', () => this.hideModal('saveModal'));
-                document.getElementById('cancelLoadBtn').addEventListener('click', () => this.hideModal('loadModal'));
-                document.getElementById('confirmCityBtn').addEventListener('click', () => this.addCity());
-                document.getElementById('cancelCityBtn').addEventListener('click', () => this.hideModal('cityModal'));
-                
-                // Mobile menu
-                document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-                    document.getElementById('sidebar').classList.toggle('active');
-                });
-                
+                document.getElementById('cancelSave').addEventListener('click', () => this.hideModal('saveModal'));
+                document.getElementById('confirmSave').addEventListener('click', () => this.saveMap());
+                document.getElementById('cancelLoad').addEventListener('click', () => this.hideModal('loadModal'));
+                document.getElementById('cancelCity').addEventListener('click', () => this.hideModal('cityModal'));
+                document.getElementById('confirmCity').addEventListener('click', () => this.addCity());
+                document.getElementById('cancelExport').addEventListener('click', () => this.hideModal('exportModal'));
+                document.getElementById('confirmExport').addEventListener('click', () => this.exportMap());
+
                 // Close modals when clicking outside
-                document.querySelectorAll('.modal').forEach(modal => {
+                document.querySelectorAll('.modal-overlay').forEach(modal => {
                     modal.addEventListener('click', (e) => {
                         if (e.target === modal) {
-                            modal.classList.remove('active');
+                            this.hideModal(modal.id);
                         }
                     });
                 });
+
+                // Context menu
+                document.addEventListener('click', () => {
+                    this.hideContextMenu();
+                });
+
+                // Prevent default touch behaviors
+                document.addEventListener('touchstart', (e) => {
+                    if (e.target === this.canvas) {
+                        e.preventDefault();
+                    }
+                }, { passive: false });
             }
-            
+
+            setupCanvas() {
+                this.handleResize();
+                this.drawGrid();
+            }
+
+            initializeData() {
+                // Load from localStorage if available
+                const savedData = localStorage.getItem('ets2_editor_data');
+                if (savedData) {
+                    try {
+                        const data = JSON.parse(savedData);
+                        if (data.zoomLevels) {
+                            this.zoomLevels = data.zoomLevels;
+                        }
+                    } catch (e) {
+                        console.log('Could not load saved data');
+                    }
+                }
+
+                // Create sample data for demonstration
+                this.createSampleData();
+            }
+
+            createSampleData() {
+                // Add sample roads
+                this.addRoad(0, [
+                    [100, 100], [300, 150], [500, 100], [700, 200]
+                ], 'motorway');
+
+                this.addRoad(0, [
+                    [200, 300], [400, 350], [600, 300], [800, 400]
+                ], 'primary');
+
+                // Add sample areas
+                this.addArea(0, [
+                    [800, 50], [1000, 100], [1100, 300], [900, 350], [750, 200]
+                ], 'forest');
+
+                // Add sample cities
+                this.addCity(0, 400, 250, 'Berlin', 'major');
+                this.addCity(0, 600, 450, 'Hamburg', 'medium');
+            }
+
+            // Canvas handling
+            handleResize() {
+                const rect = this.container.getBoundingClientRect();
+                this.view.width = rect.width;
+                this.view.height = rect.height;
+
+                this.canvas.width = this.view.width;
+                this.canvas.height = this.view.height;
+                this.gridCanvas.width = this.view.width;
+                this.gridCanvas.height = this.view.height;
+
+                this.drawGrid();
+            }
+
             // Coordinate conversion
             screenToWorld(x, y) {
                 return {
@@ -1094,85 +1131,69 @@
                     y: (y - this.view.y) / this.view.scale
                 };
             }
-            
+
             worldToScreen(x, y) {
                 return {
                     x: x * this.view.scale + this.view.x,
                     y: y * this.view.scale + this.view.y
                 };
             }
-            
-            // Mouse events
-            onMouseDown(e) {
+
+            // Mouse handlers
+            handleMouseDown(e) {
                 e.preventDefault();
                 const rect = this.canvas.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
                 const worldPos = this.screenToWorld(x, y);
-                
-                // Add tap animation for mobile feel
-                this.canvas.classList.add('tap-animation');
-                setTimeout(() => this.canvas.classList.remove('tap-animation'), 200);
-                
+
+                this.hideContextMenu();
+
                 if (this.editMode && this.selectedElement) {
                     // Check for handle clicks
-                    const handles = this.getElementHandles(this.selectedElement);
-                    for (const handle of handles) {
-                        const screenHandle = this.worldToScreen(handle.x, handle.y);
-                        const dist = Math.sqrt(
-                            Math.pow(screenHandle.x - x, 2) + 
-                            Math.pow(screenHandle.y - y, 2)
-                        );
-                        if (dist < 15) {
-                            this.selectedHandle = handle;
-                            return;
-                        }
+                    const handle = this.getHandleAt(worldPos.x, worldPos.y);
+                    if (handle) {
+                        this.draggingHandle = handle;
+                        return;
                     }
                 }
-                
+
                 switch (this.currentTool) {
                     case 'pan':
-                        this.lastMouse = { x, y };
                         this.isPanning = true;
+                        this.lastMouse = { x, y };
                         this.canvas.style.cursor = 'grabbing';
                         break;
-                        
+
                     case 'select':
                         this.selectElementAt(worldPos.x, worldPos.y);
                         break;
-                        
+
                     case 'road':
-                        if (!this.drawing) {
-                            this.startDrawing(worldPos.x, worldPos.y);
-                        } else {
-                            this.addDrawingPoint(worldPos.x, worldPos.y);
-                        }
-                        break;
-                        
                     case 'area':
-                        if (!this.drawing) {
+                        if (!this.isDrawing) {
                             this.startDrawing(worldPos.x, worldPos.y);
                         } else {
                             this.addDrawingPoint(worldPos.x, worldPos.y);
                         }
                         break;
-                        
+
                     case 'city':
                         // City placement handled by modal
                         break;
                 }
             }
-            
-            onMouseMove(e) {
+
+            handleMouseMove(e) {
                 const rect = this.canvas.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
                 const worldPos = this.screenToWorld(x, y);
-                
+
                 // Update coordinates display
                 document.getElementById('coordinates').textContent = 
                     `X: ${Math.round(worldPos.x)}, Y: ${Math.round(worldPos.y)}`;
-                
+
                 if (this.isPanning && this.lastMouse) {
                     const dx = x - this.lastMouse.x;
                     const dy = y - this.lastMouse.y;
@@ -1180,271 +1201,251 @@
                     this.view.y += dy;
                     this.lastMouse = { x, y };
                     this.drawGrid();
-                    this.draw();
-                } else if (this.selectedHandle) {
-                    // Move handle
-                    this.selectedHandle.x = worldPos.x;
-                    this.selectedHandle.y = worldPos.y;
-                    this.updateElementFromHandles(this.selectedElement);
-                    this.draw();
-                } else if (this.drawing && this.tempElement) {
-                    // Update preview
-                    const lastPoint = this.tempPoints[this.tempPoints.length - 1];
-                    this.tempElement.points = [...this.tempPoints, [worldPos.x, worldPos.y]];
-                    this.draw();
+                } else if (this.draggingHandle) {
+                    // Drag handle
+                    this.draggingHandle.x = worldPos.x;
+                    this.draggingHandle.y = worldPos.y;
+                    this.updateElementFromHandles();
+                } else if (this.isDrawing) {
+                    // Update drawing preview
+                    this.drawingPreview = [worldPos.x, worldPos.y];
                 } else {
                     // Check for hover
                     this.hoverElement = this.getElementAt(worldPos.x, worldPos.y);
                     this.canvas.style.cursor = this.hoverElement ? 'pointer' : 'crosshair';
-                    this.draw();
                 }
             }
-            
-            onMouseUp(e) {
+
+            handleMouseUp(e) {
+                if (this.isPanning) {
+                    this.isPanning = false;
+                    this.canvas.style.cursor = 'crosshair';
+                }
+                
+                if (this.draggingHandle) {
+                    this.draggingHandle = null;
+                }
+
+                // Right click to finish drawing
+                if (e.button === 2 && this.isDrawing) {
+                    this.finishDrawing();
+                }
+            }
+
+            handleMouseLeave() {
                 this.isPanning = false;
-                this.selectedHandle = null;
-                this.canvas.style.cursor = 'crosshair';
-                
-                if (this.currentTool === 'pan') {
-                    return;
-                }
-                
-                const rect = this.canvas.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const worldPos = this.screenToWorld(x, y);
-                
-                if (this.currentTool === 'road' && this.drawing) {
-                    // Right click to finish road
-                    if (e.button === 2) {
-                        this.finishDrawing();
-                    }
-                }
+                this.hoverElement = null;
             }
-            
-            onMouseWheel(e) {
+
+            handleWheel(e) {
                 e.preventDefault();
                 const rect = this.canvas.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
                 const worldPos = this.screenToWorld(x, y);
-                
+
                 const delta = e.deltaY > 0 ? 0.9 : 1.1;
-                const newScale = this.view.scale * delta;
-                
-                // Limit zoom
-                if (newScale < 0.1 || newScale > 5) return;
-                
+                const newScale = Math.max(0.1, Math.min(5, this.view.scale * delta));
+
                 // Zoom towards mouse position
                 this.view.x = x - (worldPos.x * newScale);
                 this.view.y = y - (worldPos.y * newScale);
                 this.view.scale = newScale;
-                
+
                 this.drawGrid();
-                this.draw();
                 this.updateZoomDisplay();
             }
-            
-            // Touch events for mobile
-            onTouchStart(e) {
+
+            // Touch handlers
+            handleTouchStart(e) {
                 e.preventDefault();
                 if (e.touches.length === 1) {
                     const touch = e.touches[0];
                     const rect = this.canvas.getBoundingClientRect();
-                    const x = touch.clientX - rect.left;
-                    const y = touch.clientY - rect.top;
-                    this.touchStart = { x, y, time: Date.now() };
-                    this.lastTouch = { x, y };
-                    
-                    // Check if it's a tap for selection/drawing
-                    const worldPos = this.screenToWorld(x, y);
-                    
-                    if (this.currentTool === 'select') {
-                        this.selectElementAt(worldPos.x, worldPos.y);
-                    } else if (this.currentTool === 'road' || this.currentTool === 'area') {
-                        if (!this.drawing) {
-                            this.startDrawing(worldPos.x, worldPos.y);
-                        } else {
-                            this.addDrawingPoint(worldPos.x, worldPos.y);
-                        }
-                    }
+                    this.touchStart = {
+                        x: touch.clientX - rect.left,
+                        y: touch.clientY - rect.left,
+                        time: Date.now()
+                    };
+                    this.lastTouch = this.touchStart;
                 } else if (e.touches.length === 2) {
-                    // Start pinch to zoom
                     this.isPinching = true;
                     const t1 = e.touches[0];
                     const t2 = e.touches[1];
-                    this.pinchStartDistance = Math.sqrt(
-                        Math.pow(t2.clientX - t1.clientX, 2) + 
-                        Math.pow(t2.clientY - t1.clientY, 2)
+                    this.pinchStartDistance = Math.hypot(
+                        t2.clientX - t1.clientX,
+                        t2.clientY - t1.clientY
                     );
                     this.pinchStartScale = this.view.scale;
                 }
             }
-            
-            onTouchMove(e) {
+
+            handleTouchMove(e) {
                 e.preventDefault();
                 if (this.isPinching && e.touches.length === 2) {
-                    // Pinch zoom
                     const t1 = e.touches[0];
                     const t2 = e.touches[1];
-                    const distance = Math.sqrt(
-                        Math.pow(t2.clientX - t1.clientX, 2) + 
-                        Math.pow(t2.clientY - t1.clientY, 2)
+                    const distance = Math.hypot(
+                        t2.clientX - t1.clientX,
+                        t2.clientY - t1.clientY
                     );
-                    const scale = this.pinchStartScale * (distance / this.pinchStartDistance);
-                    this.view.scale = Math.max(0.1, Math.min(5, scale));
+                    this.view.scale = Math.max(0.1, Math.min(5, 
+                        this.pinchStartScale * (distance / this.pinchStartDistance)
+                    ));
                     this.drawGrid();
-                    this.draw();
                     this.updateZoomDisplay();
-                } else if (e.touches.length === 1 && this.touchStart) {
-                    // Pan
+                } else if (e.touches.length === 1 && this.lastTouch) {
                     const touch = e.touches[0];
                     const rect = this.canvas.getBoundingClientRect();
                     const x = touch.clientX - rect.left;
-                    const y = touch.clientY - rect.top;
+                    const y = touch.clientY - rect.left;
                     
-                    if (this.lastTouch) {
-                        const dx = x - this.lastTouch.x;
-                        const dy = y - this.lastTouch.y;
-                        this.view.x += dx;
-                        this.view.y += dy;
-                        this.drawGrid();
-                        this.draw();
-                    }
+                    const dx = x - this.lastTouch.x;
+                    const dy = y - this.lastTouch.y;
+                    this.view.x += dx;
+                    this.view.y += dy;
+                    
                     this.lastTouch = { x, y };
+                    this.drawGrid();
                 }
             }
-            
-            onTouchEnd(e) {
-                if (e.touches.length === 0) {
-                    this.isPinching = false;
-                    this.touchStart = null;
-                    this.lastTouch = null;
-                    
-                    // Check for double tap
-                    if (this.touchStartTime && Date.now() - this.touchStartTime < 300) {
-                        this.zoomIn();
-                    }
+
+            handleTouchEnd(e) {
+                this.isPinching = false;
+                this.touchStart = null;
+                this.lastTouch = null;
+                
+                // Check for double tap
+                if (this.touchStart && Date.now() - this.touchStart.time < 300) {
+                    this.zoomIn();
                 }
             }
-            
+
             // Drawing methods
             startDrawing(x, y) {
-                this.drawing = true;
-                this.tempPoints = [[x, y]];
-                
-                if (this.currentTool === 'road') {
-                    this.tempElement = {
-                        type: 'road',
-                        roadType: this.currentRoadType,
-                        points: [[x, y]],
-                        width: this.roadStyles[this.currentRoadType].width,
-                        color: this.roadStyles[this.currentRoadType].color
-                    };
-                } else if (this.currentTool === 'area') {
-                    this.tempElement = {
-                        type: 'area',
-                        areaType: this.currentAreaType,
-                        points: [[x, y]],
-                        fill: this.areaStyles[this.currentAreaType].fill,
-                        outline: this.areaStyles[this.currentAreaType].outline
-                    };
-                }
+                this.isDrawing = true;
+                this.drawingPoints = [[x, y]];
             }
-            
+
             addDrawingPoint(x, y) {
-                if (!this.drawing) return;
-                
-                this.tempPoints.push([x, y]);
-                
-                if (this.currentTool === 'road') {
-                    // For roads, update temp element
-                    this.tempElement.points = [...this.tempPoints];
-                } else if (this.currentTool === 'area') {
-                    this.tempElement.points = [...this.tempPoints];
-                }
-                
-                this.draw();
+                if (!this.isDrawing) return;
+                this.drawingPoints.push([x, y]);
             }
-            
+
             finishDrawing() {
-                if (!this.drawing || this.tempPoints.length < 2) return;
-                
-                if (this.currentTool === 'road' && this.tempElement) {
-                    this.addElement(this.currentZoomLevel, { ...this.tempElement });
-                    this.showToast('Road added successfully!');
-                } else if (this.currentTool === 'area' && this.tempElement) {
-                    // Close the polygon
-                    if (this.tempPoints.length > 2) {
-                        this.tempElement.points = [...this.tempPoints, this.tempPoints[0]];
-                        this.addElement(this.currentZoomLevel, { ...this.tempElement });
-                        this.showToast('Area added successfully!');
+                if (!this.isDrawing || this.drawingPoints.length < 2) {
+                    this.isDrawing = false;
+                    this.drawingPoints = [];
+                    return;
+                }
+
+                if (this.currentTool === 'road') {
+                    this.addRoad(this.currentZoom, this.drawingPoints, this.currentRoadType);
+                    this.showToast('Road added');
+                } else if (this.currentTool === 'area') {
+                    if (this.drawingPoints.length >= 3) {
+                        // Close the polygon
+                        this.drawingPoints.push(this.drawingPoints[0]);
+                        this.addArea(this.currentZoom, this.drawingPoints, this.currentAreaType);
+                        this.showToast('Area added');
                     }
                 }
-                
-                this.drawing = false;
-                this.tempPoints = [];
-                this.tempElement = null;
-                this.draw();
+
+                this.isDrawing = false;
+                this.drawingPoints = [];
             }
-            
+
             // Element management
-            addElement(zoomLevel, element) {
-                element.id = Date.now() + Math.random();
+            addRoad(zoomLevel, points, type) {
+                const element = {
+                    type: 'road',
+                    id: Date.now(),
+                    points: points,
+                    roadType: type,
+                    color: this.roadStyles[type].color,
+                    width: this.roadStyles[type].width,
+                    dash: this.roadStyles[type].dash
+                };
                 this.zoomLevels[zoomLevel].elements.push(element);
             }
-            
+
+            addArea(zoomLevel, points, type) {
+                const element = {
+                    type: 'area',
+                    id: Date.now(),
+                    points: points,
+                    areaType: type,
+                    fill: this.areaStyles[type].fill,
+                    stroke: this.areaStyles[type].stroke
+                };
+                this.zoomLevels[zoomLevel].elements.push(element);
+            }
+
+            addCity(zoomLevel, x, y, name, size) {
+                const element = {
+                    type: 'city',
+                    id: Date.now(),
+                    x: x,
+                    y: y,
+                    name: name,
+                    size: size,
+                    color: this.cityStyles[size].color,
+                    radius: this.cityStyles[size].radius,
+                    fontSize: this.cityStyles[size].fontSize
+                };
+                this.zoomLevels[zoomLevel].elements.push(element);
+            }
+
             getElementAt(x, y) {
-                const elements = this.zoomLevels[this.currentZoomLevel].elements;
+                const elements = this.zoomLevels[this.currentZoom].elements;
                 // Check in reverse order (topmost first)
                 for (let i = elements.length - 1; i >= 0; i--) {
-                    const element = elements[i];
-                    if (this.isPointInElement(x, y, element)) {
-                        return element;
+                    if (this.isPointInElement(x, y, elements[i])) {
+                        return elements[i];
                     }
                 }
                 return null;
             }
-            
+
             isPointInElement(x, y, element) {
                 switch (element.type) {
                     case 'road':
-                        // Check distance to road segments
-                        for (let i = 0; i < element.points.length - 1; i++) {
-                            const p1 = element.points[i];
-                            const p2 = element.points[i + 1];
-                            const distance = this.pointToLineDistance(x, y, p1[0], p1[1], p2[0], p2[1]);
-                            if (distance < 10) return true;
-                        }
-                        break;
-                        
+                        return this.isPointNearPolyline(x, y, element.points, element.width * 2);
                     case 'area':
-                        // Check if point is inside polygon
                         return this.isPointInPolygon(x, y, element.points);
-                        
                     case 'city':
-                        // Check distance to city center
-                        const style = this.cityStyles[element.size] || this.cityStyles.medium;
-                        const distance = Math.sqrt(Math.pow(x - element.x, 2) + Math.pow(y - element.y, 2));
-                        return distance < style.radius;
+                        const dist = Math.hypot(x - element.x, y - element.y);
+                        return dist <= element.radius;
                 }
                 return false;
             }
-            
+
+            isPointNearPolyline(x, y, points, tolerance) {
+                for (let i = 0; i < points.length - 1; i++) {
+                    const p1 = points[i];
+                    const p2 = points[i + 1];
+                    const distance = this.pointToLineDistance(x, y, p1[0], p1[1], p2[0], p2[1]);
+                    if (distance <= tolerance) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
             pointToLineDistance(px, py, x1, y1, x2, y2) {
                 const A = px - x1;
                 const B = py - y1;
                 const C = x2 - x1;
                 const D = y2 - y1;
-                
+
                 const dot = A * C + B * D;
                 const lenSq = C * C + D * D;
                 let param = -1;
-                
+
                 if (lenSq !== 0) param = dot / lenSq;
-                
+
                 let xx, yy;
-                
+
                 if (param < 0) {
                     xx = x1;
                     yy = y1;
@@ -1455,36 +1456,48 @@
                     xx = x1 + param * C;
                     yy = y1 + param * D;
                 }
-                
+
                 const dx = px - xx;
                 const dy = py - yy;
                 return Math.sqrt(dx * dx + dy * dy);
             }
-            
+
             isPointInPolygon(x, y, polygon) {
                 let inside = false;
                 for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
                     const xi = polygon[i][0], yi = polygon[i][1];
                     const xj = polygon[j][0], yj = polygon[j][1];
-                    
-                    const intersect = ((yi > y) !== (yj > y)) &&
-                        (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+
+                    const intersect = ((yi > y) !== (yj > y))
+                        && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
                     if (intersect) inside = !inside;
                 }
                 return inside;
             }
-            
+
             selectElementAt(x, y) {
                 this.selectedElement = this.getElementAt(x, y);
                 if (this.selectedElement) {
                     this.showProperties(this.selectedElement);
-                    this.showToast(`Selected ${this.selectedElement.type}`);
+                    this.showToast(`${this.selectedElement.type} selected`);
                 } else {
                     this.hideProperties();
                 }
-                this.draw();
             }
-            
+
+            getHandleAt(x, y) {
+                if (!this.selectedElement || !this.editMode) return null;
+
+                const handles = this.getElementHandles(this.selectedElement);
+                for (const handle of handles) {
+                    const dist = Math.hypot(x - handle.x, y - handle.y);
+                    if (dist <= 10) {
+                        return handle;
+                    }
+                }
+                return null;
+            }
+
             getElementHandles(element) {
                 const handles = [];
                 switch (element.type) {
@@ -1494,167 +1507,218 @@
                                 x: point[0],
                                 y: point[1],
                                 index: i,
-                                type: 'point'
+                                element: element,
+                                type: 'vertex'
                             });
                         });
                         break;
-                        
                     case 'area':
                         element.points.forEach((point, i) => {
                             handles.push({
                                 x: point[0],
                                 y: point[1],
                                 index: i,
+                                element: element,
                                 type: 'vertex'
                             });
                         });
                         break;
-                        
                     case 'city':
                         handles.push({
                             x: element.x,
                             y: element.y,
+                            element: element,
                             type: 'center'
                         });
                         break;
                 }
                 return handles;
             }
-            
-            updateElementFromHandles(element) {
-                // Update element based on handle positions
-                // This would update the element in the data structure
-                this.draw();
-            }
-            
-            deleteSelectedElement() {
-                if (!this.selectedElement) return;
-                
-                const elements = this.zoomLevels[this.currentZoomLevel].elements;
-                const index = elements.indexOf(this.selectedElement);
-                if (index > -1) {
-                    elements.splice(index, 1);
-                    this.selectedElement = null;
-                    this.hideProperties();
-                    this.draw();
-                    this.showToast('Element deleted');
+
+            updateElementFromHandles() {
+                if (!this.draggingHandle || !this.selectedElement) return;
+
+                const handle = this.draggingHandle;
+                const element = handle.element;
+
+                switch (element.type) {
+                    case 'road':
+                    case 'area':
+                        element.points[handle.index] = [handle.x, handle.y];
+                        break;
+                    case 'city':
+                        element.x = handle.x;
+                        element.y = handle.y;
+                        break;
                 }
             }
-            
+
+            deleteSelected() {
+                if (!this.selectedElement) {
+                    this.showToast('No element selected', 'warning');
+                    return;
+                }
+
+                if (confirm('Delete selected element?')) {
+                    const elements = this.zoomLevels[this.currentZoom].elements;
+                    const index = elements.indexOf(this.selectedElement);
+                    if (index > -1) {
+                        elements.splice(index, 1);
+                        this.selectedElement = null;
+                        this.hideProperties();
+                        this.showToast('Element deleted');
+                    }
+                }
+            }
+
             // Drawing methods
             draw() {
-                // Clear canvas
                 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                
-                // Draw background
-                this.ctx.fillStyle = '#1e1e1e';
-                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-                
-                // Save context for transformations
+
+                // Save context state
                 this.ctx.save();
                 this.ctx.translate(this.view.x, this.view.y);
                 this.ctx.scale(this.view.scale, this.view.scale);
-                
+
                 // Draw elements
-                const elements = this.zoomLevels[this.currentZoomLevel].elements;
+                const elements = this.zoomLevels[this.currentZoom].elements;
                 elements.forEach(element => {
                     this.drawElement(element);
                 });
-                
-                // Draw temp element (preview)
-                if (this.tempElement) {
-                    this.drawElement(this.tempElement, true);
+
+                // Draw drawing preview
+                if (this.isDrawing && this.drawingPoints.length > 0) {
+                    this.drawDrawingPreview();
                 }
-                
+
                 // Draw selection highlight
                 if (this.selectedElement) {
-                    this.drawElementHighlight(this.selectedElement);
+                    this.drawElementHighlight(this.selectedElement, 'rgba(255, 255, 0, 0.3)');
                 }
-                
+
                 // Draw hover highlight
                 if (this.hoverElement && this.hoverElement !== this.selectedElement) {
-                    this.drawElementHighlight(this.hoverElement, 'rgba(255, 255, 0, 0.3)');
+                    this.drawElementHighlight(this.hoverElement, 'rgba(0, 150, 255, 0.2)');
                 }
-                
+
                 // Draw edit handles
                 if (this.editMode && this.selectedElement) {
                     this.drawElementHandles(this.selectedElement);
                 }
-                
+
                 this.ctx.restore();
             }
-            
-            drawElement(element, isPreview = false) {
-                const alpha = isPreview ? 0.7 : 1;
-                
+
+            drawElement(element) {
+                this.ctx.save();
+
                 switch (element.type) {
                     case 'road':
-                        this.ctx.beginPath();
-                        this.ctx.moveTo(element.points[0][0], element.points[0][1]);
-                        for (let i = 1; i < element.points.length; i++) {
-                            this.ctx.lineTo(element.points[i][0], element.points[i][1]);
-                        }
-                        this.ctx.lineWidth = element.width || 5;
-                        this.ctx.strokeStyle = element.color || '#FFFFFF';
-                        this.ctx.lineCap = 'round';
-                        this.ctx.lineJoin = 'round';
-                        if (isPreview) {
-                            this.ctx.setLineDash([5, 5]);
-                        }
-                        this.ctx.stroke();
-                        this.ctx.setLineDash([]);
+                        this.drawRoad(element);
                         break;
-                        
                     case 'area':
-                        this.ctx.beginPath();
-                        this.ctx.moveTo(element.points[0][0], element.points[0][1]);
-                        for (let i = 1; i < element.points.length; i++) {
-                            this.ctx.lineTo(element.points[i][0], element.points[i][1]);
-                        }
-                        this.ctx.closePath();
-                        this.ctx.fillStyle = element.fill || 'rgba(144, 238, 144, 0.5)';
-                        this.ctx.fill();
-                        this.ctx.lineWidth = 2;
-                        this.ctx.strokeStyle = element.outline || '#228B22';
-                        if (isPreview) {
-                            this.ctx.setLineDash([5, 5]);
-                        }
-                        this.ctx.stroke();
-                        this.ctx.setLineDash([]);
+                        this.drawArea(element);
                         break;
-                        
                     case 'city':
-                        const style = this.cityStyles[element.size] || this.cityStyles.medium;
-                        this.ctx.beginPath();
-                        this.ctx.arc(element.x, element.y, style.radius, 0, Math.PI * 2);
-                        this.ctx.fillStyle = element.color || style.color;
-                        this.ctx.fill();
-                        this.ctx.lineWidth = 2;
-                        this.ctx.strokeStyle = '#000000';
-                        this.ctx.stroke();
-                        
-                        // Draw city name
-                        this.ctx.save();
-                        this.ctx.scale(1 / this.view.scale, 1 / this.view.scale);
-                        this.ctx.font = `bold ${style.fontSize}px Arial`;
-                        this.ctx.fillStyle = '#FFFFFF';
-                        this.ctx.textAlign = 'center';
-                        this.ctx.fillText(
-                            element.name, 
-                            element.x * this.view.scale, 
-                            (element.y + style.radius + 15) * this.view.scale
-                        );
-                        this.ctx.restore();
+                        this.drawCity(element);
                         break;
                 }
+
+                this.ctx.restore();
             }
-            
-            drawElementHighlight(element, color = 'rgba(255, 255, 0, 0.5)') {
+
+            drawRoad(road) {
+                this.ctx.beginPath();
+                this.ctx.moveTo(road.points[0][0], road.points[0][1]);
+                for (let i = 1; i < road.points.length; i++) {
+                    this.ctx.lineTo(road.points[i][0], road.points[i][1]);
+                }
+
+                this.ctx.lineWidth = road.width;
+                this.ctx.strokeStyle = road.color;
+                this.ctx.lineCap = 'round';
+                this.ctx.lineJoin = 'round';
+                if (road.dash) {
+                    this.ctx.setLineDash(road.dash);
+                }
+                this.ctx.stroke();
+                this.ctx.setLineDash([]);
+            }
+
+            drawArea(area) {
+                this.ctx.beginPath();
+                this.ctx.moveTo(area.points[0][0], area.points[0][1]);
+                for (let i = 1; i < area.points.length; i++) {
+                    this.ctx.lineTo(area.points[i][0], area.points[i][1]);
+                }
+                this.ctx.closePath();
+
+                this.ctx.fillStyle = area.fill;
+                this.ctx.fill();
+                this.ctx.strokeStyle = area.stroke;
+                this.ctx.lineWidth = 2;
+                this.ctx.stroke();
+            }
+
+            drawCity(city) {
+                // Draw city circle
+                this.ctx.beginPath();
+                this.ctx.arc(city.x, city.y, city.radius, 0, Math.PI * 2);
+                this.ctx.fillStyle = city.color;
+                this.ctx.fill();
+                this.ctx.strokeStyle = '#000';
+                this.ctx.lineWidth = 2;
+                this.ctx.stroke();
+
+                // Draw city name
+                this.ctx.save();
+                // Scale back for text to remain readable
+                this.ctx.scale(1 / this.view.scale, 1 / this.view.scale);
+                this.ctx.font = `bold ${city.fontSize}px Arial`;
+                this.ctx.fillStyle = '#fff';
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                
+                // Add text background for readability
+                this.ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+                const textX = city.x * this.view.scale;
+                const textY = (city.y + city.radius + 15) * this.view.scale;
+                const textWidth = this.ctx.measureText(city.name).width;
+                this.ctx.fillRect(
+                    textX - textWidth / 2 - 5,
+                    textY - 10,
+                    textWidth + 10,
+                    20
+                );
+                
+                this.ctx.fillStyle = '#fff';
+                this.ctx.fillText(city.name, textX, textY);
+                this.ctx.restore();
+            }
+
+            drawDrawingPreview() {
+                if (this.currentTool === 'road') {
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(this.drawingPoints[0][0], this.drawingPoints[0][1]);
+                    for (let i = 1; i < this.drawingPoints.length; i++) {
+                        this.ctx.lineTo(this.drawingPoints[i][0], this.drawingPoints[i][1]);
+                    }
+                    
+                    const style = this.roadStyles[this.currentRoadType];
+                    this.ctx.lineWidth = style.width;
+                    this.ctx.strokeStyle = style.color;
+                    this.ctx.setLineDash([5, 5]);
+                    this.ctx.stroke();
+                    this.ctx.setLineDash([]);
+                }
+            }
+
+            drawElementHighlight(element, color) {
                 this.ctx.save();
                 this.ctx.strokeStyle = color;
                 this.ctx.lineWidth = 4;
-                this.ctx.setLineDash([5, 5]);
-                
+                this.ctx.setLineDash([3, 3]);
+
                 switch (element.type) {
                     case 'road':
                         this.ctx.beginPath();
@@ -1664,7 +1728,6 @@
                         }
                         this.ctx.stroke();
                         break;
-                        
                     case 'area':
                         this.ctx.beginPath();
                         this.ctx.moveTo(element.points[0][0], element.points[0][1]);
@@ -1674,18 +1737,16 @@
                         this.ctx.closePath();
                         this.ctx.stroke();
                         break;
-                        
                     case 'city':
-                        const style = this.cityStyles[element.size] || this.cityStyles.medium;
                         this.ctx.beginPath();
-                        this.ctx.arc(element.x, element.y, style.radius + 5, 0, Math.PI * 2);
+                        this.ctx.arc(element.x, element.y, element.radius + 4, 0, Math.PI * 2);
                         this.ctx.stroke();
                         break;
                 }
-                
+
                 this.ctx.restore();
             }
-            
+
             drawElementHandles(element) {
                 const handles = this.getElementHandles(element);
                 handles.forEach(handle => {
@@ -1693,7 +1754,7 @@
                     this.ctx.save();
                     this.ctx.translate(screenPos.x, screenPos.y);
                     this.ctx.scale(1 / this.view.scale, 1 / this.view.scale);
-                    
+
                     this.ctx.beginPath();
                     this.ctx.arc(0, 0, 6, 0, Math.PI * 2);
                     this.ctx.fillStyle = '#FF0000';
@@ -1701,23 +1762,23 @@
                     this.ctx.strokeStyle = '#FFFFFF';
                     this.ctx.lineWidth = 2;
                     this.ctx.stroke();
-                    
+
                     this.ctx.restore();
                 });
             }
-            
+
             drawGrid() {
                 this.gridCtx.clearRect(0, 0, this.gridCanvas.width, this.gridCanvas.height);
                 
                 if (!this.gridVisible) return;
-                
+
                 this.gridCtx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
                 this.gridCtx.lineWidth = 1;
-                
+
                 const spacing = this.gridSize * this.view.scale;
                 const startX = -this.view.x % spacing;
                 const startY = -this.view.y % spacing;
-                
+
                 // Draw vertical lines
                 for (let x = startX; x < this.gridCanvas.width; x += spacing) {
                     this.gridCtx.beginPath();
@@ -1725,7 +1786,7 @@
                     this.gridCtx.lineTo(x, this.gridCanvas.height);
                     this.gridCtx.stroke();
                 }
-                
+
                 // Draw horizontal lines
                 for (let y = startY; y < this.gridCanvas.height; y += spacing) {
                     this.gridCtx.beginPath();
@@ -1734,96 +1795,99 @@
                     this.gridCtx.stroke();
                 }
             }
-            
+
             // Tool methods
             setTool(tool) {
                 this.currentTool = tool;
-                this.drawing = false;
-                this.tempPoints = [];
-                this.tempElement = null;
-                this.updateActiveToolButtons();
+                this.isDrawing = false;
+                this.drawingPoints = [];
+                this.updateActiveButtons();
                 this.updateStatus();
             }
-            
+
             toggleEditMode() {
                 this.editMode = !this.editMode;
-                document.getElementById('editToolBtn').classList.toggle('active', this.editMode);
+                const btn = document.getElementById('editTool');
+                btn.classList.toggle('active', this.editMode);
+                btn.innerHTML = this.editMode ? 
+                    '<i class="fas fa-edit"></i> Edit Mode: ON' : 
+                    '<i class="fas fa-edit"></i> Edit Mode';
                 this.showToast(`Edit mode ${this.editMode ? 'enabled' : 'disabled'}`);
-                this.draw();
             }
-            
+
             setZoomLevel(level) {
-                this.currentZoomLevel = level;
+                this.currentZoom = level;
                 document.querySelectorAll('.zoom-level-btn').forEach(btn => {
                     btn.classList.toggle('active', parseInt(btn.dataset.level) === level);
                 });
                 this.updateStatus();
-                this.draw();
             }
-            
+
             zoomIn() {
                 this.view.scale = Math.min(5, this.view.scale * 1.2);
                 this.drawGrid();
-                this.draw();
                 this.updateZoomDisplay();
             }
-            
+
             zoomOut() {
                 this.view.scale = Math.max(0.1, this.view.scale / 1.2);
                 this.drawGrid();
-                this.draw();
                 this.updateZoomDisplay();
             }
-            
+
             resetView() {
                 this.view.x = 0;
                 this.view.y = 0;
                 this.view.scale = 1;
                 this.drawGrid();
-                this.draw();
                 this.updateZoomDisplay();
             }
-            
+
             toggleGrid() {
                 this.gridVisible = !this.gridVisible;
-                document.getElementById('gridToggleBtn').classList.toggle('active', this.gridVisible);
+                const btn = document.getElementById('gridToggle');
+                btn.innerHTML = this.gridVisible ? 
+                    '<i class="fas fa-th"></i> Grid: ON' : 
+                    '<i class="fas fa-th"></i> Grid: OFF';
                 this.drawGrid();
             }
-            
-            toggleShowAllZoom() {
-                // This would show elements from all zoom levels
-                this.showToast('Show all zoom levels feature coming soon!');
-            }
-            
-            // UI methods
-            updateUI() {
-                this.updateActiveToolButtons();
-                this.updateStatus();
-                this.updateZoomDisplay();
-            }
-            
-            updateActiveToolButtons() {
-                // Update tool buttons
-                document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
-                
-                // Highlight current tool
-                if (this.currentTool === 'pan') {
-                    document.getElementById('panToolBtn').classList.add('active');
-                    document.getElementById('mobilePanBtn').classList.add('active');
-                } else if (this.currentTool === 'select') {
-                    document.getElementById('selectToolBtn').classList.add('active');
-                    document.getElementById('mobileSelectBtn').classList.add('active');
-                } else if (this.currentTool === 'road') {
-                    document.querySelector(`.road-tool-btn[data-type="${this.currentRoadType}"]`).classList.add('active');
-                    document.getElementById('mobileRoadBtn').classList.add('active');
-                } else if (this.currentTool === 'area') {
-                    document.querySelector(`.area-tool-btn[data-type="${this.currentAreaType}"]`).classList.add('active');
-                    document.getElementById('mobileAreaBtn').classList.add('active');
-                } else if (this.currentTool === 'city') {
-                    document.getElementById('mobileCityBtn').classList.add('active');
+
+            clearCurrentLevel() {
+                if (confirm('Clear all elements on current zoom level?')) {
+                    this.zoomLevels[this.currentZoom].elements = [];
+                    this.selectedElement = null;
+                    this.hideProperties();
+                    this.showToast('Current level cleared');
                 }
             }
-            
+
+            // UI methods
+            updateActiveButtons() {
+                // Clear all active states
+                document.querySelectorAll('.tool-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Set active tool
+                switch (this.currentTool) {
+                    case 'pan':
+                        document.getElementById('panTool').classList.add('active');
+                        break;
+                    case 'select':
+                        document.getElementById('selectTool').classList.add('active');
+                        break;
+                    case 'road':
+                        document.querySelector(`.road-tool[data-type="${this.currentRoadType}"]`).classList.add('active');
+                        break;
+                    case 'area':
+                        document.querySelector(`.area-tool[data-type="${this.currentAreaType}"]`).classList.add('active');
+                        break;
+                    case 'city':
+                        // City tool doesn't have persistent active state
+                        break;
+                }
+            }
+
             updateStatus() {
                 const toolNames = {
                     pan: 'Pan',
@@ -1833,486 +1897,370 @@
                     city: 'City'
                 };
                 
-                const status = `Ready | Tool: ${toolNames[this.currentTool]} | Zoom Level: ${this.zoomLevels[this.currentZoomLevel].name}`;
+                const status = `Ready | Tool: ${toolNames[this.currentTool]} | Zoom Level: ${this.zoomLevels[this.currentZoom].name}`;
                 document.getElementById('statusText').textContent = status;
             }
-            
+
             updateZoomDisplay() {
-                document.getElementById('zoomDisplay').textContent = 
+                document.getElementById('zoomLevel').textContent = 
                     `Zoom: ${Math.round(this.view.scale * 100)}%`;
             }
-            
+
             showProperties(element) {
-                const panel = document.getElementById('propertiesPanel');
                 const content = document.getElementById('propertiesContent');
-                
-                panel.classList.add('active');
-                
-                let html = `
-                    <div class="property-group">
-                        <div class="property-title">
-                            <i class="fas fa-${element.type === 'road' ? 'road' : element.type === 'area' ? 'mountain' : 'city'}"></i>
-                            ${element.type.charAt(0).toUpperCase() + element.type.slice(1)} Properties
-                        </div>
-                `;
-                
+                let html = '';
+
                 switch (element.type) {
                     case 'road':
-                        html += `
-                            <div class="property-item">
+                        html = `
+                            <div class="property-group">
+                                <h4><i class="fas fa-road"></i> Road Properties</h4>
+                            </div>
+                            <div class="property-group">
                                 <label class="property-label">Type</label>
-                                <select class="property-input" id="roadTypeSelect">
-                                    <option value="motorway" ${element.roadType === 'motorway' ? 'selected' : ''}>Motorway</option>
-                                    <option value="trunk" ${element.roadType === 'trunk' ? 'selected' : ''}>Trunk</option>
-                                    <option value="primary" ${element.roadType === 'primary' ? 'selected' : ''}>Primary</option>
-                                    <option value="secondary" ${element.roadType === 'secondary' ? 'selected' : ''}>Secondary</option>
-                                    <option value="tertiary" ${element.roadType === 'tertiary' ? 'selected' : ''}>Tertiary</option>
-                                    <option value="residential" ${element.roadType === 'residential' ? 'selected' : ''}>Residential</option>
+                                <select class="property-input" id="propRoadType">
+                                    ${Object.keys(this.roadStyles).map(type => `
+                                        <option value="${type}" ${element.roadType === type ? 'selected' : ''}>
+                                            ${type.charAt(0).toUpperCase() + type.slice(1)}
+                                        </option>
+                                    `).join('')}
                                 </select>
                             </div>
-                            <div class="property-item">
+                            <div class="property-group">
                                 <label class="property-label">Width</label>
-                                <input type="range" class="property-input" id="roadWidthSlider" min="1" max="20" value="${element.width || 5}">
+                                <input type="range" class="property-input" id="propRoadWidth" 
+                                       min="1" max="20" value="${element.width}">
                             </div>
-                            <div class="property-item">
+                            <div class="property-group">
                                 <label class="property-label">Color</label>
-                                <input type="color" class="property-input" id="roadColorPicker" value="${element.color || '#FFFFFF'}">
+                                <input type="color" class="property-input" id="propRoadColor" value="${element.color}">
+                            </div>
+                            <div class="property-actions">
+                                <button class="btn btn-danger" id="propDelete">Delete</button>
+                                <button class="btn" id="propSave">Save Changes</button>
                             </div>
                         `;
                         break;
-                        
+
                     case 'area':
-                        html += `
-                            <div class="property-item">
+                        html = `
+                            <div class="property-group">
+                                <h4><i class="fas fa-mountain"></i> Area Properties</h4>
+                            </div>
+                            <div class="property-group">
                                 <label class="property-label">Type</label>
-                                <select class="property-input" id="areaTypeSelect">
-                                    <option value="forest" ${element.areaType === 'forest' ? 'selected' : ''}>Forest</option>
-                                    <option value="farmland" ${element.areaType === 'farmland' ? 'selected' : ''}>Farmland</option>
-                                    <option value="industrial" ${element.areaType === 'industrial' ? 'selected' : ''}>Industrial</option>
-                                    <option value="residential_area" ${element.areaType === 'residential_area' ? 'selected' : ''}>Residential Area</option>
-                                    <option value="park" ${element.areaType === 'park' ? 'selected' : ''}>Park</option>
-                                    <option value="water" ${element.areaType === 'water' ? 'selected' : ''}>Water</option>
+                                <select class="property-input" id="propAreaType">
+                                    ${Object.keys(this.areaStyles).map(type => `
+                                        <option value="${type}" ${element.areaType === type ? 'selected' : ''}>
+                                            ${type.replace('_', ' ').charAt(0).toUpperCase() + type.replace('_', ' ').slice(1)}
+                                        </option>
+                                    `).join('')}
                                 </select>
                             </div>
-                            <div class="property-item">
+                            <div class="property-group">
                                 <label class="property-label">Fill Color</label>
-                                <input type="color" class="property-input" id="areaFillColorPicker" value="${element.fill || '#90EE90'}">
+                                <input type="color" class="property-input" id="propAreaFill" 
+                                       value="${this.hexColor(element.fill)}">
                             </div>
-                            <div class="property-item">
-                                <label class="property-label">Outline Color</label>
-                                <input type="color" class="property-input" id="areaOutlineColorPicker" value="${element.outline || '#228B22'}">
+                            <div class="property-group">
+                                <label class="property-label">Border Color</label>
+                                <input type="color" class="property-input" id="propAreaStroke" 
+                                       value="${element.stroke}">
+                            </div>
+                            <div class="property-actions">
+                                <button class="btn btn-danger" id="propDelete">Delete</button>
+                                <button class="btn" id="propSave">Save Changes</button>
                             </div>
                         `;
                         break;
-                        
+
                     case 'city':
-                        html += `
-                            <div class="property-item">
-                                <label class="property-label">Name</label>
-                                <input type="text" class="property-input" id="cityNameProperty" value="${element.name}">
+                        html = `
+                            <div class="property-group">
+                                <h4><i class="fas fa-city"></i> City Properties</h4>
                             </div>
-                            <div class="property-item">
+                            <div class="property-group">
+                                <label class="property-label">Name</label>
+                                <input type="text" class="property-input" id="propCityName" value="${element.name}">
+                            </div>
+                            <div class="property-group">
                                 <label class="property-label">Size</label>
-                                <select class="property-input" id="citySizeSelect">
-                                    <option value="major" ${element.size === 'major' ? 'selected' : ''}>Major City</option>
-                                    <option value="medium" ${element.size === 'medium' ? 'selected' : ''}>Medium City</option>
-                                    <option value="small" ${element.size === 'small' ? 'selected' : ''}>Small Town</option>
-                                    <option value="village" ${element.size === 'village' ? 'selected' : ''}>Village</option>
+                                <select class="property-input" id="propCitySize">
+                                    ${Object.keys(this.cityStyles).map(size => `
+                                        <option value="${size}" ${element.size === size ? 'selected' : ''}>
+                                            ${size.charAt(0).toUpperCase() + size.slice(1)} City
+                                        </option>
+                                    `).join('')}
                                 </select>
                             </div>
-                            <div class="property-item">
+                            <div class="property-group">
                                 <label class="property-label">Color</label>
-                                <input type="color" class="property-input" id="cityColorPicker" value="${element.color || '#C41E3A'}">
+                                <input type="color" class="property-input" id="propCityColor" value="${element.color}">
+                            </div>
+                            <div class="property-actions">
+                                <button class="btn btn-danger" id="propDelete">Delete</button>
+                                <button class="btn" id="propSave">Save Changes</button>
                             </div>
                         `;
                         break;
                 }
-                
-                html += `
-                    <div class="modal-buttons">
-                        <button class="btn btn-secondary" id="deletePropertyBtn">Delete</button>
-                        <button class="btn btn-primary" id="savePropertyBtn">Save Changes</button>
-                    </div>
-                    </div>
-                `;
-                
+
                 content.innerHTML = html;
-                
-                // Add event listeners for property changes
-                document.getElementById('deletePropertyBtn').addEventListener('click', () => {
-                    this.deleteSelectedElement();
-                    this.hideProperties();
+                document.getElementById('propertiesPanel').classList.add('active');
+
+                // Add event listeners
+                document.getElementById('propDelete').addEventListener('click', () => {
+                    this.deleteSelected();
                 });
-                
-                document.getElementById('savePropertyBtn').addEventListener('click', () => {
+
+                document.getElementById('propSave').addEventListener('click', () => {
                     this.saveElementProperties(element);
                 });
-                
-                // Add input listeners for real-time updates
-                if (element.type === 'road') {
-                    document.getElementById('roadTypeSelect').addEventListener('change', (e) => {
-                        element.roadType = e.target.value;
-                        element.color = this.roadStyles[element.roadType].color;
-                        element.width = this.roadStyles[element.roadType].width;
-                        this.draw();
-                    });
-                    
-                    document.getElementById('roadWidthSlider').addEventListener('input', (e) => {
-                        element.width = parseInt(e.target.value);
-                        this.draw();
-                    });
-                    
-                    document.getElementById('roadColorPicker').addEventListener('input', (e) => {
-                        element.color = e.target.value;
-                        this.draw();
-                    });
-                } else if (element.type === 'area') {
-                    document.getElementById('areaTypeSelect').addEventListener('change', (e) => {
-                        element.areaType = e.target.value;
-                        element.fill = this.areaStyles[element.areaType].fill;
-                        element.outline = this.areaStyles[element.areaType].outline;
-                        this.draw();
-                    });
-                    
-                    document.getElementById('areaFillColorPicker').addEventListener('input', (e) => {
-                        element.fill = e.target.value + '80'; // Add transparency
-                        this.draw();
-                    });
-                    
-                    document.getElementById('areaOutlineColorPicker').addEventListener('input', (e) => {
-                        element.outline = e.target.value;
-                        this.draw();
-                    });
-                } else if (element.type === 'city') {
-                    document.getElementById('cityNameProperty').addEventListener('input', (e) => {
-                        element.name = e.target.value;
-                        this.draw();
-                    });
-                    
-                    document.getElementById('citySizeSelect').addEventListener('change', (e) => {
-                        element.size = e.target.value;
-                        this.draw();
-                    });
-                    
-                    document.getElementById('cityColorPicker').addEventListener('input', (e) => {
-                        element.color = e.target.value;
-                        this.draw();
-                    });
+            }
+
+            hexColor(rgba) {
+                // Convert rgba to hex
+                if (rgba.startsWith('#')) return rgba;
+                const match = rgba.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+                if (match) {
+                    const r = parseInt(match[1]).toString(16).padStart(2, '0');
+                    const g = parseInt(match[2]).toString(16).padStart(2, '0');
+                    const b = parseInt(match[3]).toString(16).padStart(2, '0');
+                    return `#${r}${g}${b}`;
                 }
+                return '#000000';
             }
-            
-            saveElementProperties(element) {
-                // Properties are already updated via real-time listeners
-                this.showToast('Properties saved');
-                this.draw();
-            }
-            
+
             hideProperties() {
                 document.getElementById('propertiesPanel').classList.remove('active');
             }
-            
-            // File operations
+
+            saveElementProperties(element) {
+                // This would update the element properties based on the form
+                // For now, just show a toast
+                this.showToast('Properties saved');
+            }
+
+            // Modal methods
+            showModal(id) {
+                document.getElementById(id).classList.add('active');
+            }
+
+            hideModal(id) {
+                document.getElementById(id).classList.remove('active');
+            }
+
             showSaveModal() {
-                document.getElementById('saveModal').classList.add('active');
+                this.showModal('saveModal');
             }
-            
-            showLoadModal() {
-                const modal = document.getElementById('loadModal');
-                const container = document.getElementById('fileListContainer');
-                
-                modal.classList.add('active');
-                container.innerHTML = '<p style="color: #ccc;">Loading saved maps...</p>';
-                
-                // Load maps from localStorage
-                setTimeout(() => {
-                    const maps = this.getSavedMaps();
-                    if (maps.length === 0) {
-                        container.innerHTML = '<p style="color: #ccc; text-align: center;">No saved maps found</p>';
-                    } else {
-                        let html = '<div class="file-list">';
-                        maps.forEach(map => {
-                            html += `
-                                <div class="file-item" data-id="${map.id}">
-                                    <div style="font-weight: bold;">${map.name}</div>
-                                    <div style="font-size: 0.8rem; color: #999;">${new Date(map.date).toLocaleDateString()}</div>
-                                </div>
-                            `;
-                        });
-                        html += '</div>';
-                        container.innerHTML = html;
-                        
-                        // Add click listeners
-                        document.querySelectorAll('.file-item').forEach(item => {
-                            item.addEventListener('click', () => {
-                                const mapId = item.dataset.id;
-                                this.loadMap(mapId);
-                                modal.classList.remove('active');
-                            });
-                        });
-                    }
-                }, 500);
-            }
-            
+
             showCityModal() {
-                document.getElementById('cityModal').classList.add('active');
+                document.getElementById('cityName').value = '';
+                document.getElementById('cityPopulation').value = '';
+                this.showModal('cityModal');
             }
-            
-            hideModal(modalId) {
-                document.getElementById(modalId).classList.remove('active');
-            }
-            
-            saveMap() {
-                const mapName = document.getElementById('mapNameInput').value || 'my_ets2_map';
-                const mapData = {
-                    name: mapName,
-                    date: new Date().toISOString(),
-                    zoomLevels: this.zoomLevels,
-                    view: this.view
-                };
-                
-                const mapId = `ets2_map_${Date.now()}`;
-                localStorage.setItem(mapId, JSON.stringify(mapData));
-                
-                this.hideModal('saveModal');
-                this.showToast(`Map "${mapName}" saved successfully!`);
-            }
-            
-            getSavedMaps() {
-                const maps = [];
-                for (let i = 0; i < localStorage.length; i++) {
-                    const key = localStorage.key(i);
-                    if (key.startsWith('ets2_map_')) {
-                        try {
-                            const mapData = JSON.parse(localStorage.getItem(key));
-                            maps.push({
-                                id: key,
-                                name: mapData.name || 'Unnamed Map',
-                                date: mapData.date
-                            });
-                        } catch (e) {
-                            console.error('Error parsing map data:', e);
-                        }
-                    }
-                }
-                return maps.sort((a, b) => new Date(b.date) - new Date(a.date));
-            }
-            
-            loadMap(mapId) {
-                try {
-                    const mapData = JSON.parse(localStorage.getItem(mapId));
-                    if (mapData) {
-                        this.zoomLevels = mapData.zoomLevels || this.zoomLevels;
-                        this.view = mapData.view || this.view;
-                        this.drawGrid();
-                        this.draw();
-                        this.showToast(`Map "${mapData.name}" loaded successfully!`);
-                    }
-                } catch (e) {
-                    this.showToast('Error loading map', 'error');
-                    console.error('Error loading map:', e);
-                }
-            }
-            
-            newMap() {
-                if (confirm('Create new map? Current unsaved changes will be lost.')) {
-                    this.zoomLevels = [
-                        { name: 'Most Detailed', elements: [] },
-                        { name: 'Detailed', elements: [] },
-                        { name: 'Overview', elements: [] },
-                        { name: 'Minimal', elements: [] }
-                    ];
-                    this.selectedElement = null;
-                    this.hideProperties();
-                    this.draw();
-                    this.showToast('New map created');
-                }
-            }
-            
-            clearMap() {
-                if (confirm('Clear current zoom level? This action cannot be undone.')) {
-                    this.zoomLevels[this.currentZoomLevel].elements = [];
-                    this.selectedElement = null;
-                    this.hideProperties();
-                    this.draw();
-                    this.showToast('Map cleared');
-                }
-            }
-            
+
             addCity() {
-                const name = document.getElementById('cityNameInput').value.trim();
+                const name = document.getElementById('cityName').value.trim();
                 if (!name) {
                     this.showToast('Please enter a city name', 'warning');
                     return;
                 }
-                
-                // Get the last click position or use center
-                const x = 400, y = 300; // Default position
-                
-                this.addElement(this.currentZoomLevel, {
-                    type: 'city',
-                    name: name,
-                    size: this.currentCitySize,
-                    x: x,
-                    y: y,
-                    color: this.cityStyles[this.currentCitySize].color
-                });
-                
+
+                // Use center of view for city placement
+                const centerX = this.canvas.width / 2;
+                const centerY = this.canvas.height / 2;
+                const worldPos = this.screenToWorld(centerX, centerY);
+
+                this.addCity(this.currentZoom, worldPos.x, worldPos.y, name, this.currentCitySize);
                 this.hideModal('cityModal');
-                document.getElementById('cityNameInput').value = '';
-                this.draw();
                 this.showToast(`City "${name}" added`);
             }
-            
-            exportSVG() {
-                this.showLoading(true);
+
+            saveMap() {
+                const name = document.getElementById('mapName').value.trim() || 'my_ets2_map';
+                const description = document.getElementById('mapDescription').value.trim();
+
+                const mapData = {
+                    name: name,
+                    description: description,
+                    zoomLevels: this.zoomLevels,
+                    date: new Date().toISOString()
+                };
+
+                // Save to localStorage
+                localStorage.setItem('ets2_editor_data', JSON.stringify(mapData));
                 
-                setTimeout(() => {
-                    try {
-                        const svgContent = this.generateSVG(this.currentZoomLevel);
-                        this.downloadFile(`ets2_map_zoom_${this.currentZoomLevel}.svg`, svgContent, 'image/svg+xml');
-                        this.showToast('SVG exported successfully!');
-                    } catch (error) {
-                        console.error('Error exporting SVG:', error);
-                        this.showToast('Error exporting SVG', 'error');
-                    } finally {
-                        this.showLoading(false);
-                    }
-                }, 500);
+                // Save to IndexedDB for larger storage
+                this.saveToIndexedDB(name, mapData);
+
+                this.hideModal('saveModal');
+                this.showToast(`Map "${name}" saved successfully!`);
             }
-            
-            exportAllSVG() {
-                this.showLoading(true);
-                
-                setTimeout(() => {
-                    try {
-                        // Create a ZIP file with all zoom levels
-                        const zip = new JSZip();
-                        
-                        for (let i = 0; i < 4; i++) {
-                            const svgContent = this.generateSVG(i);
-                            zip.file(`ets2_map_zoom_${i}.svg`, svgContent);
+
+            async saveToIndexedDB(name, data) {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open('ETS2Maps', 1);
+                    
+                    request.onupgradeneeded = (e) => {
+                        const db = e.target.result;
+                        if (!db.objectStoreNames.contains('maps')) {
+                            db.createObjectStore('maps', { keyPath: 'id' });
                         }
+                    };
+
+                    request.onsuccess = (e) => {
+                        const db = e.target.result;
+                        const tx = db.transaction('maps', 'readwrite');
+                        const store = tx.objectStore('maps');
                         
-                        zip.generateAsync({ type: 'blob' }).then(content => {
-                            this.downloadFile('ets2_map_all_zoom_levels.zip', content, 'application/zip');
-                            this.showToast('All zoom levels exported successfully!');
-                        });
-                    } catch (error) {
-                        console.error('Error exporting all SVG:', error);
-                        this.showToast('Error exporting files', 'error');
-                    } finally {
-                        this.showLoading(false);
-                    }
-                }, 1000);
+                        const mapRecord = {
+                            id: Date.now(),
+                            name: name,
+                            data: data,
+                            created: new Date().toISOString()
+                        };
+                        
+                        store.put(mapRecord);
+                        resolve();
+                    };
+
+                    request.onerror = (e) => {
+                        console.error('IndexedDB error:', e.target.error);
+                        reject(e.target.error);
+                    };
+                });
             }
-            
-            generateSVG(zoomLevel) {
-                const elements = this.zoomLevels[zoomLevel].elements;
-                const width = 1000;
-                const height = 800;
-                
-                let svg = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
-    <title>ETS2 Map - Zoom Level ${zoomLevel}</title>
-    <desc>Generated by ETS2 Vector Map Editor</desc>
-    
-    <!-- Background -->
-    <rect width="100%" height="100%" fill="#1e1e1e"/>
-    
-    <!-- Grid -->
-    <g id="grid" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1">
-`;
-                
-                // Add grid lines
-                const gridSize = 50;
-                for (let x = 0; x <= width; x += gridSize) {
-                    svg += `        <line x1="${x}" y1="0" x2="${x}" y2="${height}"/>\n`;
+
+            exportMap() {
+                this.showModal('exportModal');
+            }
+
+            // Context menu
+            handleContextMenu(e) {
+                e.preventDefault();
+                const rect = this.canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const worldPos = this.screenToWorld(x, y);
+
+                // Select element at click position
+                this.selectElementAt(worldPos.x, worldPos.y);
+
+                if (this.selectedElement) {
+                    const menu = document.getElementById('contextMenu');
+                    menu.style.left = `${e.clientX}px`;
+                    menu.style.top = `${e.clientY}px`;
+                    menu.style.display = 'block';
+
+                    // Add click handlers
+                    menu.querySelectorAll('.context-menu-item').forEach(item => {
+                        item.onclick = () => {
+                            const action = item.dataset.action;
+                            this.handleContextAction(action);
+                            this.hideContextMenu();
+                        };
+                    });
                 }
-                for (let y = 0; y <= height; y += gridSize) {
-                    svg += `        <line x1="0" y1="${y}" x2="${width}" y2="${y}"/>\n`;
+            }
+
+            handleContextAction(action) {
+                if (!this.selectedElement) return;
+
+                switch (action) {
+                    case 'edit':
+                        this.toggleEditMode();
+                        break;
+                    case 'duplicate':
+                        this.duplicateElement();
+                        break;
+                    case 'delete':
+                        this.deleteSelected();
+                        break;
+                    case 'properties':
+                        this.showProperties(this.selectedElement);
+                        break;
                 }
-                
-                svg += '    </g>\n';
-                
-                // Add elements
-                elements.forEach(element => {
-                    switch (element.type) {
-                        case 'road':
-                            svg += this.generateRoadSVG(element);
-                            break;
-                        case 'area':
-                            svg += this.generateAreaSVG(element);
-                            break;
-                        case 'city':
-                            svg += this.generateCitySVG(element);
-                            break;
-                    }
-                });
-                
-                svg += '</svg>';
-                return svg;
             }
-            
-            generateRoadSVG(road) {
-                if (!road.points || road.points.length < 2) return '';
-                
-                let points = '';
-                road.points.forEach(point => {
-                    points += `${point[0]},${point[1]} `;
-                });
-                
-                return `    <polyline points="${points.trim()}" 
-        fill="none" 
-        stroke="${road.color || '#FFFFFF'}" 
-        stroke-width="${road.width || 5}" 
-        stroke-linecap="round" 
-        stroke-linejoin="round"/>\n`;
+
+            hideContextMenu() {
+                document.getElementById('contextMenu').style.display = 'none';
             }
-            
-            generateAreaSVG(area) {
-                if (!area.points || area.points.length < 3) return '';
+
+            duplicateElement() {
+                if (!this.selectedElement) return;
+
+                const original = this.selectedElement;
+                const duplicate = JSON.parse(JSON.stringify(original));
+                duplicate.id = Date.now();
                 
-                let points = '';
-                area.points.forEach(point => {
-                    points += `${point[0]},${point[1]} `;
-                });
-                
-                return `    <polygon points="${points.trim()}" 
-        fill="${area.fill || 'rgba(144, 238, 144, 0.5)'}" 
-        stroke="${area.outline || '#228B22'}" 
-        stroke-width="2"/>\n`;
+                // Offset the duplicate
+                if (duplicate.type === 'road' || duplicate.type === 'area') {
+                    duplicate.points = duplicate.points.map(point => [
+                        point[0] + 50,
+                        point[1] + 50
+                    ]);
+                } else if (duplicate.type === 'city') {
+                    duplicate.x += 50;
+                    duplicate.y += 50;
+                }
+
+                this.zoomLevels[this.currentZoom].elements.push(duplicate);
+                this.selectedElement = duplicate;
+                this.showToast('Element duplicated');
             }
-            
-            generateCitySVG(city) {
-                const style = this.cityStyles[city.size] || this.cityStyles.medium;
-                
-                return `    <g>
-        <circle cx="${city.x}" cy="${city.y}" r="${style.radius}" 
-            fill="${city.color || style.color}" 
-            stroke="#000000" 
-            stroke-width="2"/>
-        <text x="${city.x}" y="${city.y + style.radius + 15}" 
-            text-anchor="middle" 
-            font-family="Arial" 
-            font-size="${style.fontSize}" 
-            font-weight="bold" 
-            fill="#FFFFFF">${city.name || 'City'}</text>
-    </g>\n`;
+
+            toggleSidebar() {
+                document.getElementById('sidebar').classList.toggle('active');
             }
-            
-            downloadFile(filename, content, mimeType) {
-                const blob = content instanceof Blob ? content : new Blob([content], { type: mimeType });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = filename;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
+
+            // Keyboard shortcuts
+            handleKeyDown(e) {
+                switch (e.key) {
+                    case 'Delete':
+                        this.deleteSelected();
+                        break;
+                    case 'Escape':
+                        this.isDrawing = false;
+                        this.drawingPoints = [];
+                        this.selectedElement = null;
+                        this.hideProperties();
+                        break;
+                    case '+':
+                    case '=':
+                        if (e.ctrlKey) this.zoomIn();
+                        break;
+                    case '-':
+                        if (e.ctrlKey) this.zoomOut();
+                        break;
+                    case '0':
+                        if (e.ctrlKey) this.resetView();
+                        break;
+                    case 's':
+                        if (e.ctrlKey) {
+                            e.preventDefault();
+                            this.showSaveModal();
+                        }
+                        break;
+                    case 'e':
+                        if (e.ctrlKey) {
+                            e.preventDefault();
+                            this.toggleEditMode();
+                        }
+                        break;
+                }
             }
-            
+
+            handleKeyUp(e) {
+                // Handle key up if needed
+            }
+
+            // Animation loop
+            animate() {
+                this.draw();
+                requestAnimationFrame(() => this.animate());
+            }
+
             // Utility methods
             showToast(message, type = 'success') {
                 const toast = document.getElementById('toast');
@@ -2331,14 +2279,9 @@
                     toast.classList.remove('show');
                 }, 3000);
             }
-            
+
             showLoading(show) {
-                document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
-            }
-            
-            animate() {
-                this.draw();
-                requestAnimationFrame(() => this.animate());
+                document.getElementById('loading').classList.toggle('active', show);
             }
         }
 
@@ -2347,20 +2290,12 @@
             window.editor = new ETS2MapEditor();
         });
 
-        // Prevent context menu on canvas
-        document.addEventListener('contextmenu', (e) => {
-            if (e.target.id === 'mainCanvas') {
+        // Prevent unwanted touch behaviors
+        document.addEventListener('touchmove', (e) => {
+            if (e.target === window.editor?.canvas) {
                 e.preventDefault();
-                if (window.editor && window.editor.drawing) {
-                    window.editor.finishDrawing();
-                }
             }
-        });
-
-        // Load JSZip for ZIP export
-        const script = document.createElement('script');
-        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
-        document.head.appendChild(script);
+        }, { passive: false });
     </script>
 </body>
 </html>
