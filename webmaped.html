@@ -1,0 +1,2366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETS2 Vector Map Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            touch-action: none;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #3949ab;
+            flex-shrink: 0;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .zoom-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .zoom-btn {
+            background: #3949ab;
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .zoom-btn:hover {
+            background: #5c6bc0;
+            transform: scale(1.05);
+        }
+
+        .zoom-display {
+            font-weight: bold;
+            min-width: 100px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Mobile sidebar (hidden by default on desktop) */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: rgba(0, 0, 0, 0.85);
+            border-right: 2px solid #3949ab;
+            overflow-y: auto;
+            padding: 15px;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .sidebar-section {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #bb86fc;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .tool-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 12px 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tool-btn i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .tool-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tool-btn.active {
+            background: rgba(57, 73, 171, 0.8);
+            border-color: #bb86fc;
+            box-shadow: 0 4px 12px rgba(187, 134, 252, 0.3);
+        }
+
+        /* Road color indicators */
+        .road-color {
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 5px;
+        }
+
+        /* Canvas container */
+        .canvas-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            background: #121212;
+        }
+
+        #mainCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #1e1e1e;
+            cursor: crosshair;
+        }
+
+        /* Grid overlay */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+
+        /* Properties panel */
+        .properties-panel {
+            width: 300px;
+            background: rgba(0, 0, 0, 0.85);
+            border-left: 2px solid #3949ab;
+            padding: 15px;
+            overflow-y: auto;
+            flex-shrink: 0;
+            display: none;
+        }
+
+        .properties-panel.active {
+            display: block;
+        }
+
+        .property-group {
+            margin-bottom: 20px;
+        }
+
+        .property-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #bb86fc;
+        }
+
+        .property-item {
+            margin-bottom: 12px;
+        }
+
+        .property-label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .property-input {
+            width: 100%;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .property-input:focus {
+            outline: none;
+            border-color: #bb86fc;
+        }
+
+        /* Status bar */
+        .status-bar {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 8px 15px;
+            border-top: 2px solid #3949ab;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        /* Bottom toolbar for mobile */
+        .mobile-toolbar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 10px;
+            border-top: 2px solid #3949ab;
+            z-index: 1000;
+        }
+
+        .mobile-toolbar-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+        }
+
+        .mobile-tool-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            padding: 10px 5px;
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .mobile-tool-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Toast notifications */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border-left: 4px solid #4caf50;
+            padding: 15px 20px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 10000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.error {
+            border-left-color: #f44336;
+        }
+
+        .toast.warning {
+            border-left-color: #ff9800;
+        }
+
+        /* Modal dialogs */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 25px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 2px solid #3949ab;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #bb86fc;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #3949ab;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5c6bc0;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* File list */
+        .file-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 15px 0;
+        }
+
+        .file-item {
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                z-index: 1000;
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .properties-panel {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                z-index: 1000;
+                transform: translateX(100%);
+            }
+            
+            .properties-panel.active {
+                transform: translateX(0);
+            }
+            
+            .mobile-toolbar {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.2rem;
+            }
+            
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mobile-toolbar-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Animation for touch feedback */
+        @keyframes tapFeedback {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+
+        .tap-animation {
+            animation: tapFeedback 0.2s ease;
+        }
+
+        /* Loading overlay */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: #bb86fc;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1>ETS2 Vector Map Editor</h1>
+            <div class="zoom-controls">
+                <button class="zoom-btn" id="zoomOutBtn" title="Zoom Out">
+                    <i class="fas fa-search-minus"></i>
+                </button>
+                <div class="zoom-display" id="zoomDisplay">Zoom: 100%</div>
+                <button class="zoom-btn" id="zoomInBtn" title="Zoom In">
+                    <i class="fas fa-search-plus"></i>
+                </button>
+                <button class="zoom-btn" id="resetViewBtn" title="Reset View">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar" id="sidebar">
+                <!-- Zoom Levels -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">
+                        <i class="fas fa-layer-group"></i>
+                        Zoom Levels
+                    </div>
+                    <div class="tool-grid">
+                        <button class="tool-btn zoom-level-btn active" data-level="0">
+                            <i class="fas fa-search-plus"></i>
+                            Most Detailed
+                        </button>
+                        <button class="tool-btn zoom-level-btn" data-level="1">
+                            <i class="fas fa-search"></i>
+                            Detailed
+                        </button>
+                        <button class="tool-btn zoom-level-btn" data-level="2">
+                            <i class="fas fa-search-minus"></i>
+                            Overview
+                        </button>
+                        <button class="tool-btn zoom-level-btn" data-level="3">
+                            <i class="fas fa-globe"></i>
+                            Minimal
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Road Tools -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">
+                        <i class="fas fa-road"></i>
+                        Road Tools (OSM Style)
+                    </div>
+                    <div class="tool-grid">
+                        <button class="tool-btn road-tool-btn" data-type="motorway">
+                            <i class="fas fa-highway"></i>
+                            Motorway
+                            <div class="road-color" style="background: #FF6B35;"></div>
+                        </button>
+                        <button class="tool-btn road-tool-btn" data-type="trunk">
+                            <i class="fas fa-road"></i>
+                            Trunk
+                            <div class="road-color" style="background: #FFA500;"></div>
+                        </button>
+                        <button class="tool-btn road-tool-btn" data-type="primary">
+                            <i class="fas fa-street-view"></i>
+                            Primary
+                            <div class="road-color" style="background: #FFD700;"></div>
+                        </button>
+                        <button class="tool-btn road-tool-btn" data-type="secondary">
+                            <i class="fas fa-road"></i>
+                            Secondary
+                            <div class="road-color" style="background: #FFFFFF;"></div>
+                        </button>
+                        <button class="tool-btn road-tool-btn" data-type="tertiary">
+                            <i class="fas fa-route"></i>
+                            Tertiary
+                            <div class="road-color" style="background: #AAAAAA;"></div>
+                        </button>
+                        <button class="tool-btn road-tool-btn" data-type="residential">
+                            <i class="fas fa-home"></i>
+                            Residential
+                            <div class="road-color" style="background: #DDDDDD;"></div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Area Tools -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">
+                        <i class="fas fa-mountain"></i>
+                        Area Tools
+                    </div>
+                    <div class="tool-grid">
+                        <button class="tool-btn area-tool-btn" data-type="forest">
+                            <i class="fas fa-tree"></i>
+                            Forest
+                        </button>
+                        <button class="tool-btn area-tool-btn" data-type="farmland">
+                            <i class="fas fa-tractor"></i>
+                            Farmland
+                        </button>
+                        <button class="tool-btn area-tool-btn" data-type="industrial">
+                            <i class="fas fa-industry"></i>
+                            Industrial
+                        </button>
+                        <button class="tool-btn area-tool-btn" data-type="residential_area">
+                            <i class="fas fa-city"></i>
+                            Residential
+                        </button>
+                        <button class="tool-btn area-tool-btn" data-type="park">
+                            <i class="fas fa-park"></i>
+                            Park
+                        </button>
+                        <button class="tool-btn area-tool-btn" data-type="water">
+                            <i class="fas fa-water"></i>
+                            Water
+                        </button>
+                    </div>
+                </div>
+
+                <!-- City Tools -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">
+                        <i class="fas fa-city"></i>
+                        City Tools
+                    </div>
+                    <div class="tool-grid">
+                        <button class="tool-btn city-tool-btn" data-size="major">
+                            <i class="fas fa-building"></i>
+                            Major City
+                        </button>
+                        <button class="tool-btn city-tool-btn" data-size="medium">
+                            <i class="fas fa-building"></i>
+                            Medium City
+                        </button>
+                        <button class="tool-btn city-tool-btn" data-size="small">
+                            <i class="fas fa-home"></i>
+                            Small Town
+                        </button>
+                        <button class="tool-btn city-tool-btn" data-size="village">
+                            <i class="fas fa-house"></i>
+                            Village
+                        </button>
+                    </div>
+                </div>
+
+                <!-- File Operations -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">
+                        <i class="fas fa-folder"></i>
+                        File Operations
+                    </div>
+                    <div class="tool-grid">
+                        <button class="tool-btn" id="saveMapBtn">
+                            <i class="fas fa-save"></i>
+                            Save Map
+                        </button>
+                        <button class="tool-btn" id="loadMapBtn">
+                            <i class="fas fa-folder-open"></i>
+                            Load Map
+                        </button>
+                        <button class="tool-btn" id="exportSvgBtn">
+                            <i class="fas fa-download"></i>
+                            Export SVG
+                        </button>
+                        <button class="tool-btn" id="exportAllSvgBtn">
+                            <i class="fas fa-file-archive"></i>
+                            Export All
+                        </button>
+                        <button class="tool-btn" id="newMapBtn">
+                            <i class="fas fa-plus"></i>
+                            New Map
+                        </button>
+                        <button class="tool-btn" id="clearMapBtn">
+                            <i class="fas fa-trash"></i>
+                            Clear Map
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Utility Tools -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">
+                        <i class="fas fa-tools"></i>
+                        Utility Tools
+                    </div>
+                    <div class="tool-grid">
+                        <button class="tool-btn" id="selectToolBtn">
+                            <i class="fas fa-mouse-pointer"></i>
+                            Select
+                        </button>
+                        <button class="tool-btn" id="editToolBtn">
+                            <i class="fas fa-edit"></i>
+                            Edit
+                        </button>
+                        <button class="tool-btn" id="panToolBtn" class="active">
+                            <i class="fas fa-arrows-alt"></i>
+                            Pan
+                        </button>
+                        <button class="tool-btn" id="deleteToolBtn">
+                            <i class="fas fa-trash"></i>
+                            Delete
+                        </button>
+                        <button class="tool-btn" id="gridToggleBtn">
+                            <i class="fas fa-th"></i>
+                            Grid
+                        </button>
+                        <button class="tool-btn" id="showAllZoomBtn">
+                            <i class="fas fa-eye"></i>
+                            Show All
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canvas Container -->
+            <div class="canvas-container" id="canvasContainer">
+                <canvas id="mainCanvas"></canvas>
+                <canvas class="grid-overlay" id="gridCanvas"></canvas>
+            </div>
+
+            <!-- Properties Panel -->
+            <div class="properties-panel" id="propertiesPanel">
+                <div class="property-group">
+                    <div class="property-title">
+                        <i class="fas fa-cog"></i>
+                        Properties
+                    </div>
+                    <div id="propertiesContent">
+                        <!-- Dynamic content based on selected element -->
+                        <div style="text-align: center; padding: 40px 20px; color: #ccc;">
+                            <i class="fas fa-mouse-pointer" style="font-size: 2rem; margin-bottom: 15px;"></i>
+                            <p>Select an element to edit its properties</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div id="statusText">Ready | Tool: Pan | Zoom Level: Most Detailed</div>
+            <div id="coordinates">X: 0, Y: 0</div>
+        </div>
+
+        <!-- Mobile Toolbar -->
+        <div class="mobile-toolbar">
+            <div class="mobile-toolbar-grid">
+                <button class="mobile-tool-btn" id="mobilePanBtn">
+                    <i class="fas fa-arrows-alt"></i>
+                    Pan
+                </button>
+                <button class="mobile-tool-btn" id="mobileSelectBtn">
+                    <i class="fas fa-mouse-pointer"></i>
+                    Select
+                </button>
+                <button class="mobile-tool-btn" id="mobileRoadBtn">
+                    <i class="fas fa-road"></i>
+                    Road
+                </button>
+                <button class="mobile-tool-btn" id="mobileAreaBtn">
+                    <i class="fas fa-mountain"></i>
+                    Area
+                </button>
+                <button class="mobile-tool-btn" id="mobileCityBtn">
+                    <i class="fas fa-city"></i>
+                    City
+                </button>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div class="toast" id="toast"></div>
+
+        <!-- Loading Overlay -->
+        <div class="loading" id="loadingOverlay" style="display: none;">
+            <div class="spinner"></div>
+        </div>
+
+        <!-- Modals -->
+        <div class="modal" id="saveModal">
+            <div class="modal-content">
+                <h2 class="modal-title"><i class="fas fa-save"></i> Save Map</h2>
+                <div class="property-item">
+                    <label class="property-label">Map Name</label>
+                    <input type="text" class="property-input" id="mapNameInput" placeholder="Enter map name" value="my_ets2_map">
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" id="cancelSaveBtn">Cancel</button>
+                    <button class="btn btn-primary" id="confirmSaveBtn">Save Map</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="loadModal">
+            <div class="modal-content">
+                <h2 class="modal-title"><i class="fas fa-folder-open"></i> Load Map</h2>
+                <div id="fileListContainer">
+                    <p style="color: #ccc;">Loading saved maps...</p>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" id="cancelLoadBtn">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="cityModal">
+            <div class="modal-content">
+                <h2 class="modal-title"><i class="fas fa-city"></i> Add City</h2>
+                <div class="property-item">
+                    <label class="property-label">City Name</label>
+                    <input type="text" class="property-input" id="cityNameInput" placeholder="Enter city name">
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" id="cancelCityBtn">Cancel</button>
+                    <button class="btn btn-primary" id="confirmCityBtn">Add City</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Main ETS2 Map Editor Application
+        class ETS2MapEditor {
+            constructor() {
+                // Canvas setup
+                this.canvas = document.getElementById('mainCanvas');
+                this.gridCanvas = document.getElementById('gridCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.gridCtx = this.gridCanvas.getContext('2d');
+                this.container = document.getElementById('canvasContainer');
+                
+                // View settings
+                this.view = {
+                    x: 0,
+                    y: 0,
+                    scale: 1,
+                    width: 0,
+                    height: 0
+                };
+                
+                // Drawing settings
+                this.currentTool = 'pan';
+                this.currentRoadType = 'motorway';
+                this.currentAreaType = 'forest';
+                this.currentCitySize = 'major';
+                
+                // Zoom levels data (0 = most detailed, 3 = minimal)
+                this.zoomLevels = [
+                    { name: 'Most Detailed', elements: [] },
+                    { name: 'Detailed', elements: [] },
+                    { name: 'Overview', elements: [] },
+                    { name: 'Minimal', elements: [] }
+                ];
+                this.currentZoomLevel = 0;
+                
+                // Drawing state
+                this.drawing = false;
+                this.tempPoints = [];
+                this.tempElement = null;
+                
+                // Selection
+                this.selectedElement = null;
+                this.hoverElement = null;
+                this.editMode = false;
+                this.selectedHandle = null;
+                
+                // Grid
+                this.gridVisible = true;
+                this.gridSize = 50;
+                
+                // Touch handling
+                this.touchStart = null;
+                this.touchStartTime = null;
+                this.lastTouch = null;
+                this.isPinching = false;
+                this.pinchStartDistance = 0;
+                this.pinchStartScale = 1;
+                
+                // Colors and styles
+                this.roadStyles = {
+                    motorway: { color: '#FF6B35', width: 10, dash: null },
+                    trunk: { color: '#FFA500', width: 8, dash: null },
+                    primary: { color: '#FFD700', width: 6, dash: null },
+                    secondary: { color: '#FFFFFF', width: 5, dash: null },
+                    tertiary: { color: '#AAAAAA', width: 4, dash: null },
+                    residential: { color: '#DDDDDD', width: 3, dash: null }
+                };
+                
+                this.areaStyles = {
+                    forest: { fill: 'rgba(144, 238, 144, 0.5)', outline: '#228B22' },
+                    farmland: { fill: 'rgba(240, 230, 140, 0.5)', outline: '#BDB76B' },
+                    industrial: { fill: 'rgba(211, 211, 211, 0.5)', outline: '#696969' },
+                    residential_area: { fill: 'rgba(255, 228, 225, 0.5)', outline: '#CD5C5C' },
+                    park: { fill: 'rgba(152, 251, 152, 0.5)', outline: '#2E8B57' },
+                    water: { fill: 'rgba(135, 206, 235, 0.5)', outline: '#1E90FF' }
+                };
+                
+                this.cityStyles = {
+                    major: { color: '#C41E3A', radius: 15, fontSize: 14 },
+                    medium: { color: '#1E88E5', radius: 12, fontSize: 11 },
+                    small: { color: '#43A047', radius: 10, fontSize: 9 },
+                    village: { color: '#FF9800', radius: 8, fontSize: 8 }
+                };
+                
+                // Initialize
+                this.init();
+            }
+            
+            init() {
+                // Setup canvas size
+                this.resizeCanvas();
+                window.addEventListener('resize', () => this.resizeCanvas());
+                
+                // Setup event listeners
+                this.setupEventListeners();
+                
+                // Draw initial grid
+                this.drawGrid();
+                
+                // Initialize with sample data for testing
+                this.createSampleMap();
+                
+                // Update UI
+                this.updateUI();
+                
+                // Start animation loop
+                this.animate();
+            }
+            
+            createSampleMap() {
+                // Add some sample roads
+                this.addElement(0, {
+                    type: 'road',
+                    roadType: 'motorway',
+                    points: [[100, 100], [300, 150], [500, 100], [700, 200]],
+                    width: 10,
+                    color: '#FF6B35'
+                });
+                
+                this.addElement(0, {
+                    type: 'road',
+                    roadType: 'primary',
+                    points: [[200, 300], [400, 350], [600, 300], [800, 400]],
+                    width: 6,
+                    color: '#FFD700'
+                });
+                
+                // Add sample areas
+                this.addElement(0, {
+                    type: 'area',
+                    areaType: 'forest',
+                    points: [[800, 50], [1000, 100], [1100, 300], [900, 350], [750, 200]],
+                    fill: 'rgba(144, 238, 144, 0.5)',
+                    outline: '#228B22'
+                });
+                
+                // Add sample cities
+                this.addElement(0, {
+                    type: 'city',
+                    name: 'Berlin',
+                    size: 'major',
+                    x: 400,
+                    y: 250,
+                    color: '#C41E3A'
+                });
+                
+                this.addElement(0, {
+                    type: 'city',
+                    name: 'Hamburg',
+                    size: 'medium',
+                    x: 600,
+                    y: 450,
+                    color: '#1E88E5'
+                });
+            }
+            
+            resizeCanvas() {
+                const rect = this.container.getBoundingClientRect();
+                this.view.width = rect.width;
+                this.view.height = rect.height;
+                
+                this.canvas.width = this.view.width;
+                this.canvas.height = this.view.height;
+                this.gridCanvas.width = this.view.width;
+                this.gridCanvas.height = this.view.height;
+                
+                // Center view
+                this.view.x = (this.canvas.width / 2) - (this.view.width / 2);
+                this.view.y = (this.canvas.height / 2) - (this.view.height / 2);
+                
+                this.drawGrid();
+                this.draw();
+            }
+            
+            setupEventListeners() {
+                // Mouse events
+                this.canvas.addEventListener('mousedown', (e) => this.onMouseDown(e));
+                this.canvas.addEventListener('mousemove', (e) => this.onMouseMove(e));
+                this.canvas.addEventListener('mouseup', (e) => this.onMouseUp(e));
+                this.canvas.addEventListener('wheel', (e) => this.onMouseWheel(e));
+                
+                // Touch events
+                this.canvas.addEventListener('touchstart', (e) => this.onTouchStart(e), { passive: false });
+                this.canvas.addEventListener('touchmove', (e) => this.onTouchMove(e), { passive: false });
+                this.canvas.addEventListener('touchend', (e) => this.onTouchEnd(e));
+                
+                // Tool buttons
+                document.querySelectorAll('.road-tool-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        this.setTool('road');
+                        this.currentRoadType = btn.dataset.type;
+                        this.updateActiveToolButtons();
+                    });
+                });
+                
+                document.querySelectorAll('.area-tool-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        this.setTool('area');
+                        this.currentAreaType = btn.dataset.type;
+                        this.updateActiveToolButtons();
+                    });
+                });
+                
+                document.querySelectorAll('.city-tool-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        this.setTool('city');
+                        this.currentCitySize = btn.dataset.size;
+                        this.showCityModal();
+                    });
+                });
+                
+                document.querySelectorAll('.zoom-level-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const level = parseInt(btn.dataset.level);
+                        this.setZoomLevel(level);
+                    });
+                });
+                
+                // Tool buttons
+                document.getElementById('selectToolBtn').addEventListener('click', () => this.setTool('select'));
+                document.getElementById('editToolBtn').addEventListener('click', () => this.toggleEditMode());
+                document.getElementById('panToolBtn').addEventListener('click', () => this.setTool('pan'));
+                document.getElementById('deleteToolBtn').addEventListener('click', () => this.deleteSelectedElement());
+                document.getElementById('gridToggleBtn').addEventListener('click', () => this.toggleGrid());
+                document.getElementById('showAllZoomBtn').addEventListener('click', () => this.toggleShowAllZoom());
+                
+                // Mobile toolbar
+                document.getElementById('mobilePanBtn').addEventListener('click', () => this.setTool('pan'));
+                document.getElementById('mobileSelectBtn').addEventListener('click', () => this.setTool('select'));
+                document.getElementById('mobileRoadBtn').addEventListener('click', () => this.setTool('road'));
+                document.getElementById('mobileAreaBtn').addEventListener('click', () => this.setTool('area'));
+                document.getElementById('mobileCityBtn').addEventListener('click', () => this.setTool('city'));
+                
+                // Zoom controls
+                document.getElementById('zoomInBtn').addEventListener('click', () => this.zoomIn());
+                document.getElementById('zoomOutBtn').addEventListener('click', () => this.zoomOut());
+                document.getElementById('resetViewBtn').addEventListener('click', () => this.resetView());
+                
+                // File operations
+                document.getElementById('saveMapBtn').addEventListener('click', () => this.showSaveModal());
+                document.getElementById('loadMapBtn').addEventListener('click', () => this.showLoadModal());
+                document.getElementById('exportSvgBtn').addEventListener('click', () => this.exportSVG());
+                document.getElementById('exportAllSvgBtn').addEventListener('click', () => this.exportAllSVG());
+                document.getElementById('newMapBtn').addEventListener('click', () => this.newMap());
+                document.getElementById('clearMapBtn').addEventListener('click', () => this.clearMap());
+                
+                // Modal buttons
+                document.getElementById('confirmSaveBtn').addEventListener('click', () => this.saveMap());
+                document.getElementById('cancelSaveBtn').addEventListener('click', () => this.hideModal('saveModal'));
+                document.getElementById('cancelLoadBtn').addEventListener('click', () => this.hideModal('loadModal'));
+                document.getElementById('confirmCityBtn').addEventListener('click', () => this.addCity());
+                document.getElementById('cancelCityBtn').addEventListener('click', () => this.hideModal('cityModal'));
+                
+                // Mobile menu
+                document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                    document.getElementById('sidebar').classList.toggle('active');
+                });
+                
+                // Close modals when clicking outside
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal) {
+                            modal.classList.remove('active');
+                        }
+                    });
+                });
+            }
+            
+            // Coordinate conversion
+            screenToWorld(x, y) {
+                return {
+                    x: (x - this.view.x) / this.view.scale,
+                    y: (y - this.view.y) / this.view.scale
+                };
+            }
+            
+            worldToScreen(x, y) {
+                return {
+                    x: x * this.view.scale + this.view.x,
+                    y: y * this.view.scale + this.view.y
+                };
+            }
+            
+            // Mouse events
+            onMouseDown(e) {
+                e.preventDefault();
+                const rect = this.canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const worldPos = this.screenToWorld(x, y);
+                
+                // Add tap animation for mobile feel
+                this.canvas.classList.add('tap-animation');
+                setTimeout(() => this.canvas.classList.remove('tap-animation'), 200);
+                
+                if (this.editMode && this.selectedElement) {
+                    // Check for handle clicks
+                    const handles = this.getElementHandles(this.selectedElement);
+                    for (const handle of handles) {
+                        const screenHandle = this.worldToScreen(handle.x, handle.y);
+                        const dist = Math.sqrt(
+                            Math.pow(screenHandle.x - x, 2) + 
+                            Math.pow(screenHandle.y - y, 2)
+                        );
+                        if (dist < 15) {
+                            this.selectedHandle = handle;
+                            return;
+                        }
+                    }
+                }
+                
+                switch (this.currentTool) {
+                    case 'pan':
+                        this.lastMouse = { x, y };
+                        this.isPanning = true;
+                        this.canvas.style.cursor = 'grabbing';
+                        break;
+                        
+                    case 'select':
+                        this.selectElementAt(worldPos.x, worldPos.y);
+                        break;
+                        
+                    case 'road':
+                        if (!this.drawing) {
+                            this.startDrawing(worldPos.x, worldPos.y);
+                        } else {
+                            this.addDrawingPoint(worldPos.x, worldPos.y);
+                        }
+                        break;
+                        
+                    case 'area':
+                        if (!this.drawing) {
+                            this.startDrawing(worldPos.x, worldPos.y);
+                        } else {
+                            this.addDrawingPoint(worldPos.x, worldPos.y);
+                        }
+                        break;
+                        
+                    case 'city':
+                        // City placement handled by modal
+                        break;
+                }
+            }
+            
+            onMouseMove(e) {
+                const rect = this.canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const worldPos = this.screenToWorld(x, y);
+                
+                // Update coordinates display
+                document.getElementById('coordinates').textContent = 
+                    `X: ${Math.round(worldPos.x)}, Y: ${Math.round(worldPos.y)}`;
+                
+                if (this.isPanning && this.lastMouse) {
+                    const dx = x - this.lastMouse.x;
+                    const dy = y - this.lastMouse.y;
+                    this.view.x += dx;
+                    this.view.y += dy;
+                    this.lastMouse = { x, y };
+                    this.drawGrid();
+                    this.draw();
+                } else if (this.selectedHandle) {
+                    // Move handle
+                    this.selectedHandle.x = worldPos.x;
+                    this.selectedHandle.y = worldPos.y;
+                    this.updateElementFromHandles(this.selectedElement);
+                    this.draw();
+                } else if (this.drawing && this.tempElement) {
+                    // Update preview
+                    const lastPoint = this.tempPoints[this.tempPoints.length - 1];
+                    this.tempElement.points = [...this.tempPoints, [worldPos.x, worldPos.y]];
+                    this.draw();
+                } else {
+                    // Check for hover
+                    this.hoverElement = this.getElementAt(worldPos.x, worldPos.y);
+                    this.canvas.style.cursor = this.hoverElement ? 'pointer' : 'crosshair';
+                    this.draw();
+                }
+            }
+            
+            onMouseUp(e) {
+                this.isPanning = false;
+                this.selectedHandle = null;
+                this.canvas.style.cursor = 'crosshair';
+                
+                if (this.currentTool === 'pan') {
+                    return;
+                }
+                
+                const rect = this.canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const worldPos = this.screenToWorld(x, y);
+                
+                if (this.currentTool === 'road' && this.drawing) {
+                    // Right click to finish road
+                    if (e.button === 2) {
+                        this.finishDrawing();
+                    }
+                }
+            }
+            
+            onMouseWheel(e) {
+                e.preventDefault();
+                const rect = this.canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const worldPos = this.screenToWorld(x, y);
+                
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                const newScale = this.view.scale * delta;
+                
+                // Limit zoom
+                if (newScale < 0.1 || newScale > 5) return;
+                
+                // Zoom towards mouse position
+                this.view.x = x - (worldPos.x * newScale);
+                this.view.y = y - (worldPos.y * newScale);
+                this.view.scale = newScale;
+                
+                this.drawGrid();
+                this.draw();
+                this.updateZoomDisplay();
+            }
+            
+            // Touch events for mobile
+            onTouchStart(e) {
+                e.preventDefault();
+                if (e.touches.length === 1) {
+                    const touch = e.touches[0];
+                    const rect = this.canvas.getBoundingClientRect();
+                    const x = touch.clientX - rect.left;
+                    const y = touch.clientY - rect.top;
+                    this.touchStart = { x, y, time: Date.now() };
+                    this.lastTouch = { x, y };
+                    
+                    // Check if it's a tap for selection/drawing
+                    const worldPos = this.screenToWorld(x, y);
+                    
+                    if (this.currentTool === 'select') {
+                        this.selectElementAt(worldPos.x, worldPos.y);
+                    } else if (this.currentTool === 'road' || this.currentTool === 'area') {
+                        if (!this.drawing) {
+                            this.startDrawing(worldPos.x, worldPos.y);
+                        } else {
+                            this.addDrawingPoint(worldPos.x, worldPos.y);
+                        }
+                    }
+                } else if (e.touches.length === 2) {
+                    // Start pinch to zoom
+                    this.isPinching = true;
+                    const t1 = e.touches[0];
+                    const t2 = e.touches[1];
+                    this.pinchStartDistance = Math.sqrt(
+                        Math.pow(t2.clientX - t1.clientX, 2) + 
+                        Math.pow(t2.clientY - t1.clientY, 2)
+                    );
+                    this.pinchStartScale = this.view.scale;
+                }
+            }
+            
+            onTouchMove(e) {
+                e.preventDefault();
+                if (this.isPinching && e.touches.length === 2) {
+                    // Pinch zoom
+                    const t1 = e.touches[0];
+                    const t2 = e.touches[1];
+                    const distance = Math.sqrt(
+                        Math.pow(t2.clientX - t1.clientX, 2) + 
+                        Math.pow(t2.clientY - t1.clientY, 2)
+                    );
+                    const scale = this.pinchStartScale * (distance / this.pinchStartDistance);
+                    this.view.scale = Math.max(0.1, Math.min(5, scale));
+                    this.drawGrid();
+                    this.draw();
+                    this.updateZoomDisplay();
+                } else if (e.touches.length === 1 && this.touchStart) {
+                    // Pan
+                    const touch = e.touches[0];
+                    const rect = this.canvas.getBoundingClientRect();
+                    const x = touch.clientX - rect.left;
+                    const y = touch.clientY - rect.top;
+                    
+                    if (this.lastTouch) {
+                        const dx = x - this.lastTouch.x;
+                        const dy = y - this.lastTouch.y;
+                        this.view.x += dx;
+                        this.view.y += dy;
+                        this.drawGrid();
+                        this.draw();
+                    }
+                    this.lastTouch = { x, y };
+                }
+            }
+            
+            onTouchEnd(e) {
+                if (e.touches.length === 0) {
+                    this.isPinching = false;
+                    this.touchStart = null;
+                    this.lastTouch = null;
+                    
+                    // Check for double tap
+                    if (this.touchStartTime && Date.now() - this.touchStartTime < 300) {
+                        this.zoomIn();
+                    }
+                }
+            }
+            
+            // Drawing methods
+            startDrawing(x, y) {
+                this.drawing = true;
+                this.tempPoints = [[x, y]];
+                
+                if (this.currentTool === 'road') {
+                    this.tempElement = {
+                        type: 'road',
+                        roadType: this.currentRoadType,
+                        points: [[x, y]],
+                        width: this.roadStyles[this.currentRoadType].width,
+                        color: this.roadStyles[this.currentRoadType].color
+                    };
+                } else if (this.currentTool === 'area') {
+                    this.tempElement = {
+                        type: 'area',
+                        areaType: this.currentAreaType,
+                        points: [[x, y]],
+                        fill: this.areaStyles[this.currentAreaType].fill,
+                        outline: this.areaStyles[this.currentAreaType].outline
+                    };
+                }
+            }
+            
+            addDrawingPoint(x, y) {
+                if (!this.drawing) return;
+                
+                this.tempPoints.push([x, y]);
+                
+                if (this.currentTool === 'road') {
+                    // For roads, update temp element
+                    this.tempElement.points = [...this.tempPoints];
+                } else if (this.currentTool === 'area') {
+                    this.tempElement.points = [...this.tempPoints];
+                }
+                
+                this.draw();
+            }
+            
+            finishDrawing() {
+                if (!this.drawing || this.tempPoints.length < 2) return;
+                
+                if (this.currentTool === 'road' && this.tempElement) {
+                    this.addElement(this.currentZoomLevel, { ...this.tempElement });
+                    this.showToast('Road added successfully!');
+                } else if (this.currentTool === 'area' && this.tempElement) {
+                    // Close the polygon
+                    if (this.tempPoints.length > 2) {
+                        this.tempElement.points = [...this.tempPoints, this.tempPoints[0]];
+                        this.addElement(this.currentZoomLevel, { ...this.tempElement });
+                        this.showToast('Area added successfully!');
+                    }
+                }
+                
+                this.drawing = false;
+                this.tempPoints = [];
+                this.tempElement = null;
+                this.draw();
+            }
+            
+            // Element management
+            addElement(zoomLevel, element) {
+                element.id = Date.now() + Math.random();
+                this.zoomLevels[zoomLevel].elements.push(element);
+            }
+            
+            getElementAt(x, y) {
+                const elements = this.zoomLevels[this.currentZoomLevel].elements;
+                // Check in reverse order (topmost first)
+                for (let i = elements.length - 1; i >= 0; i--) {
+                    const element = elements[i];
+                    if (this.isPointInElement(x, y, element)) {
+                        return element;
+                    }
+                }
+                return null;
+            }
+            
+            isPointInElement(x, y, element) {
+                switch (element.type) {
+                    case 'road':
+                        // Check distance to road segments
+                        for (let i = 0; i < element.points.length - 1; i++) {
+                            const p1 = element.points[i];
+                            const p2 = element.points[i + 1];
+                            const distance = this.pointToLineDistance(x, y, p1[0], p1[1], p2[0], p2[1]);
+                            if (distance < 10) return true;
+                        }
+                        break;
+                        
+                    case 'area':
+                        // Check if point is inside polygon
+                        return this.isPointInPolygon(x, y, element.points);
+                        
+                    case 'city':
+                        // Check distance to city center
+                        const style = this.cityStyles[element.size] || this.cityStyles.medium;
+                        const distance = Math.sqrt(Math.pow(x - element.x, 2) + Math.pow(y - element.y, 2));
+                        return distance < style.radius;
+                }
+                return false;
+            }
+            
+            pointToLineDistance(px, py, x1, y1, x2, y2) {
+                const A = px - x1;
+                const B = py - y1;
+                const C = x2 - x1;
+                const D = y2 - y1;
+                
+                const dot = A * C + B * D;
+                const lenSq = C * C + D * D;
+                let param = -1;
+                
+                if (lenSq !== 0) param = dot / lenSq;
+                
+                let xx, yy;
+                
+                if (param < 0) {
+                    xx = x1;
+                    yy = y1;
+                } else if (param > 1) {
+                    xx = x2;
+                    yy = y2;
+                } else {
+                    xx = x1 + param * C;
+                    yy = y1 + param * D;
+                }
+                
+                const dx = px - xx;
+                const dy = py - yy;
+                return Math.sqrt(dx * dx + dy * dy);
+            }
+            
+            isPointInPolygon(x, y, polygon) {
+                let inside = false;
+                for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+                    const xi = polygon[i][0], yi = polygon[i][1];
+                    const xj = polygon[j][0], yj = polygon[j][1];
+                    
+                    const intersect = ((yi > y) !== (yj > y)) &&
+                        (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+                    if (intersect) inside = !inside;
+                }
+                return inside;
+            }
+            
+            selectElementAt(x, y) {
+                this.selectedElement = this.getElementAt(x, y);
+                if (this.selectedElement) {
+                    this.showProperties(this.selectedElement);
+                    this.showToast(`Selected ${this.selectedElement.type}`);
+                } else {
+                    this.hideProperties();
+                }
+                this.draw();
+            }
+            
+            getElementHandles(element) {
+                const handles = [];
+                switch (element.type) {
+                    case 'road':
+                        element.points.forEach((point, i) => {
+                            handles.push({
+                                x: point[0],
+                                y: point[1],
+                                index: i,
+                                type: 'point'
+                            });
+                        });
+                        break;
+                        
+                    case 'area':
+                        element.points.forEach((point, i) => {
+                            handles.push({
+                                x: point[0],
+                                y: point[1],
+                                index: i,
+                                type: 'vertex'
+                            });
+                        });
+                        break;
+                        
+                    case 'city':
+                        handles.push({
+                            x: element.x,
+                            y: element.y,
+                            type: 'center'
+                        });
+                        break;
+                }
+                return handles;
+            }
+            
+            updateElementFromHandles(element) {
+                // Update element based on handle positions
+                // This would update the element in the data structure
+                this.draw();
+            }
+            
+            deleteSelectedElement() {
+                if (!this.selectedElement) return;
+                
+                const elements = this.zoomLevels[this.currentZoomLevel].elements;
+                const index = elements.indexOf(this.selectedElement);
+                if (index > -1) {
+                    elements.splice(index, 1);
+                    this.selectedElement = null;
+                    this.hideProperties();
+                    this.draw();
+                    this.showToast('Element deleted');
+                }
+            }
+            
+            // Drawing methods
+            draw() {
+                // Clear canvas
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // Draw background
+                this.ctx.fillStyle = '#1e1e1e';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // Save context for transformations
+                this.ctx.save();
+                this.ctx.translate(this.view.x, this.view.y);
+                this.ctx.scale(this.view.scale, this.view.scale);
+                
+                // Draw elements
+                const elements = this.zoomLevels[this.currentZoomLevel].elements;
+                elements.forEach(element => {
+                    this.drawElement(element);
+                });
+                
+                // Draw temp element (preview)
+                if (this.tempElement) {
+                    this.drawElement(this.tempElement, true);
+                }
+                
+                // Draw selection highlight
+                if (this.selectedElement) {
+                    this.drawElementHighlight(this.selectedElement);
+                }
+                
+                // Draw hover highlight
+                if (this.hoverElement && this.hoverElement !== this.selectedElement) {
+                    this.drawElementHighlight(this.hoverElement, 'rgba(255, 255, 0, 0.3)');
+                }
+                
+                // Draw edit handles
+                if (this.editMode && this.selectedElement) {
+                    this.drawElementHandles(this.selectedElement);
+                }
+                
+                this.ctx.restore();
+            }
+            
+            drawElement(element, isPreview = false) {
+                const alpha = isPreview ? 0.7 : 1;
+                
+                switch (element.type) {
+                    case 'road':
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(element.points[0][0], element.points[0][1]);
+                        for (let i = 1; i < element.points.length; i++) {
+                            this.ctx.lineTo(element.points[i][0], element.points[i][1]);
+                        }
+                        this.ctx.lineWidth = element.width || 5;
+                        this.ctx.strokeStyle = element.color || '#FFFFFF';
+                        this.ctx.lineCap = 'round';
+                        this.ctx.lineJoin = 'round';
+                        if (isPreview) {
+                            this.ctx.setLineDash([5, 5]);
+                        }
+                        this.ctx.stroke();
+                        this.ctx.setLineDash([]);
+                        break;
+                        
+                    case 'area':
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(element.points[0][0], element.points[0][1]);
+                        for (let i = 1; i < element.points.length; i++) {
+                            this.ctx.lineTo(element.points[i][0], element.points[i][1]);
+                        }
+                        this.ctx.closePath();
+                        this.ctx.fillStyle = element.fill || 'rgba(144, 238, 144, 0.5)';
+                        this.ctx.fill();
+                        this.ctx.lineWidth = 2;
+                        this.ctx.strokeStyle = element.outline || '#228B22';
+                        if (isPreview) {
+                            this.ctx.setLineDash([5, 5]);
+                        }
+                        this.ctx.stroke();
+                        this.ctx.setLineDash([]);
+                        break;
+                        
+                    case 'city':
+                        const style = this.cityStyles[element.size] || this.cityStyles.medium;
+                        this.ctx.beginPath();
+                        this.ctx.arc(element.x, element.y, style.radius, 0, Math.PI * 2);
+                        this.ctx.fillStyle = element.color || style.color;
+                        this.ctx.fill();
+                        this.ctx.lineWidth = 2;
+                        this.ctx.strokeStyle = '#000000';
+                        this.ctx.stroke();
+                        
+                        // Draw city name
+                        this.ctx.save();
+                        this.ctx.scale(1 / this.view.scale, 1 / this.view.scale);
+                        this.ctx.font = `bold ${style.fontSize}px Arial`;
+                        this.ctx.fillStyle = '#FFFFFF';
+                        this.ctx.textAlign = 'center';
+                        this.ctx.fillText(
+                            element.name, 
+                            element.x * this.view.scale, 
+                            (element.y + style.radius + 15) * this.view.scale
+                        );
+                        this.ctx.restore();
+                        break;
+                }
+            }
+            
+            drawElementHighlight(element, color = 'rgba(255, 255, 0, 0.5)') {
+                this.ctx.save();
+                this.ctx.strokeStyle = color;
+                this.ctx.lineWidth = 4;
+                this.ctx.setLineDash([5, 5]);
+                
+                switch (element.type) {
+                    case 'road':
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(element.points[0][0], element.points[0][1]);
+                        for (let i = 1; i < element.points.length; i++) {
+                            this.ctx.lineTo(element.points[i][0], element.points[i][1]);
+                        }
+                        this.ctx.stroke();
+                        break;
+                        
+                    case 'area':
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(element.points[0][0], element.points[0][1]);
+                        for (let i = 1; i < element.points.length; i++) {
+                            this.ctx.lineTo(element.points[i][0], element.points[i][1]);
+                        }
+                        this.ctx.closePath();
+                        this.ctx.stroke();
+                        break;
+                        
+                    case 'city':
+                        const style = this.cityStyles[element.size] || this.cityStyles.medium;
+                        this.ctx.beginPath();
+                        this.ctx.arc(element.x, element.y, style.radius + 5, 0, Math.PI * 2);
+                        this.ctx.stroke();
+                        break;
+                }
+                
+                this.ctx.restore();
+            }
+            
+            drawElementHandles(element) {
+                const handles = this.getElementHandles(element);
+                handles.forEach(handle => {
+                    const screenPos = this.worldToScreen(handle.x, handle.y);
+                    this.ctx.save();
+                    this.ctx.translate(screenPos.x, screenPos.y);
+                    this.ctx.scale(1 / this.view.scale, 1 / this.view.scale);
+                    
+                    this.ctx.beginPath();
+                    this.ctx.arc(0, 0, 6, 0, Math.PI * 2);
+                    this.ctx.fillStyle = '#FF0000';
+                    this.ctx.fill();
+                    this.ctx.strokeStyle = '#FFFFFF';
+                    this.ctx.lineWidth = 2;
+                    this.ctx.stroke();
+                    
+                    this.ctx.restore();
+                });
+            }
+            
+            drawGrid() {
+                this.gridCtx.clearRect(0, 0, this.gridCanvas.width, this.gridCanvas.height);
+                
+                if (!this.gridVisible) return;
+                
+                this.gridCtx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+                this.gridCtx.lineWidth = 1;
+                
+                const spacing = this.gridSize * this.view.scale;
+                const startX = -this.view.x % spacing;
+                const startY = -this.view.y % spacing;
+                
+                // Draw vertical lines
+                for (let x = startX; x < this.gridCanvas.width; x += spacing) {
+                    this.gridCtx.beginPath();
+                    this.gridCtx.moveTo(x, 0);
+                    this.gridCtx.lineTo(x, this.gridCanvas.height);
+                    this.gridCtx.stroke();
+                }
+                
+                // Draw horizontal lines
+                for (let y = startY; y < this.gridCanvas.height; y += spacing) {
+                    this.gridCtx.beginPath();
+                    this.gridCtx.moveTo(0, y);
+                    this.gridCtx.lineTo(this.gridCanvas.width, y);
+                    this.gridCtx.stroke();
+                }
+            }
+            
+            // Tool methods
+            setTool(tool) {
+                this.currentTool = tool;
+                this.drawing = false;
+                this.tempPoints = [];
+                this.tempElement = null;
+                this.updateActiveToolButtons();
+                this.updateStatus();
+            }
+            
+            toggleEditMode() {
+                this.editMode = !this.editMode;
+                document.getElementById('editToolBtn').classList.toggle('active', this.editMode);
+                this.showToast(`Edit mode ${this.editMode ? 'enabled' : 'disabled'}`);
+                this.draw();
+            }
+            
+            setZoomLevel(level) {
+                this.currentZoomLevel = level;
+                document.querySelectorAll('.zoom-level-btn').forEach(btn => {
+                    btn.classList.toggle('active', parseInt(btn.dataset.level) === level);
+                });
+                this.updateStatus();
+                this.draw();
+            }
+            
+            zoomIn() {
+                this.view.scale = Math.min(5, this.view.scale * 1.2);
+                this.drawGrid();
+                this.draw();
+                this.updateZoomDisplay();
+            }
+            
+            zoomOut() {
+                this.view.scale = Math.max(0.1, this.view.scale / 1.2);
+                this.drawGrid();
+                this.draw();
+                this.updateZoomDisplay();
+            }
+            
+            resetView() {
+                this.view.x = 0;
+                this.view.y = 0;
+                this.view.scale = 1;
+                this.drawGrid();
+                this.draw();
+                this.updateZoomDisplay();
+            }
+            
+            toggleGrid() {
+                this.gridVisible = !this.gridVisible;
+                document.getElementById('gridToggleBtn').classList.toggle('active', this.gridVisible);
+                this.drawGrid();
+            }
+            
+            toggleShowAllZoom() {
+                // This would show elements from all zoom levels
+                this.showToast('Show all zoom levels feature coming soon!');
+            }
+            
+            // UI methods
+            updateUI() {
+                this.updateActiveToolButtons();
+                this.updateStatus();
+                this.updateZoomDisplay();
+            }
+            
+            updateActiveToolButtons() {
+                // Update tool buttons
+                document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+                
+                // Highlight current tool
+                if (this.currentTool === 'pan') {
+                    document.getElementById('panToolBtn').classList.add('active');
+                    document.getElementById('mobilePanBtn').classList.add('active');
+                } else if (this.currentTool === 'select') {
+                    document.getElementById('selectToolBtn').classList.add('active');
+                    document.getElementById('mobileSelectBtn').classList.add('active');
+                } else if (this.currentTool === 'road') {
+                    document.querySelector(`.road-tool-btn[data-type="${this.currentRoadType}"]`).classList.add('active');
+                    document.getElementById('mobileRoadBtn').classList.add('active');
+                } else if (this.currentTool === 'area') {
+                    document.querySelector(`.area-tool-btn[data-type="${this.currentAreaType}"]`).classList.add('active');
+                    document.getElementById('mobileAreaBtn').classList.add('active');
+                } else if (this.currentTool === 'city') {
+                    document.getElementById('mobileCityBtn').classList.add('active');
+                }
+            }
+            
+            updateStatus() {
+                const toolNames = {
+                    pan: 'Pan',
+                    select: 'Select',
+                    road: 'Road',
+                    area: 'Area',
+                    city: 'City'
+                };
+                
+                const status = `Ready | Tool: ${toolNames[this.currentTool]} | Zoom Level: ${this.zoomLevels[this.currentZoomLevel].name}`;
+                document.getElementById('statusText').textContent = status;
+            }
+            
+            updateZoomDisplay() {
+                document.getElementById('zoomDisplay').textContent = 
+                    `Zoom: ${Math.round(this.view.scale * 100)}%`;
+            }
+            
+            showProperties(element) {
+                const panel = document.getElementById('propertiesPanel');
+                const content = document.getElementById('propertiesContent');
+                
+                panel.classList.add('active');
+                
+                let html = `
+                    <div class="property-group">
+                        <div class="property-title">
+                            <i class="fas fa-${element.type === 'road' ? 'road' : element.type === 'area' ? 'mountain' : 'city'}"></i>
+                            ${element.type.charAt(0).toUpperCase() + element.type.slice(1)} Properties
+                        </div>
+                `;
+                
+                switch (element.type) {
+                    case 'road':
+                        html += `
+                            <div class="property-item">
+                                <label class="property-label">Type</label>
+                                <select class="property-input" id="roadTypeSelect">
+                                    <option value="motorway" ${element.roadType === 'motorway' ? 'selected' : ''}>Motorway</option>
+                                    <option value="trunk" ${element.roadType === 'trunk' ? 'selected' : ''}>Trunk</option>
+                                    <option value="primary" ${element.roadType === 'primary' ? 'selected' : ''}>Primary</option>
+                                    <option value="secondary" ${element.roadType === 'secondary' ? 'selected' : ''}>Secondary</option>
+                                    <option value="tertiary" ${element.roadType === 'tertiary' ? 'selected' : ''}>Tertiary</option>
+                                    <option value="residential" ${element.roadType === 'residential' ? 'selected' : ''}>Residential</option>
+                                </select>
+                            </div>
+                            <div class="property-item">
+                                <label class="property-label">Width</label>
+                                <input type="range" class="property-input" id="roadWidthSlider" min="1" max="20" value="${element.width || 5}">
+                            </div>
+                            <div class="property-item">
+                                <label class="property-label">Color</label>
+                                <input type="color" class="property-input" id="roadColorPicker" value="${element.color || '#FFFFFF'}">
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'area':
+                        html += `
+                            <div class="property-item">
+                                <label class="property-label">Type</label>
+                                <select class="property-input" id="areaTypeSelect">
+                                    <option value="forest" ${element.areaType === 'forest' ? 'selected' : ''}>Forest</option>
+                                    <option value="farmland" ${element.areaType === 'farmland' ? 'selected' : ''}>Farmland</option>
+                                    <option value="industrial" ${element.areaType === 'industrial' ? 'selected' : ''}>Industrial</option>
+                                    <option value="residential_area" ${element.areaType === 'residential_area' ? 'selected' : ''}>Residential Area</option>
+                                    <option value="park" ${element.areaType === 'park' ? 'selected' : ''}>Park</option>
+                                    <option value="water" ${element.areaType === 'water' ? 'selected' : ''}>Water</option>
+                                </select>
+                            </div>
+                            <div class="property-item">
+                                <label class="property-label">Fill Color</label>
+                                <input type="color" class="property-input" id="areaFillColorPicker" value="${element.fill || '#90EE90'}">
+                            </div>
+                            <div class="property-item">
+                                <label class="property-label">Outline Color</label>
+                                <input type="color" class="property-input" id="areaOutlineColorPicker" value="${element.outline || '#228B22'}">
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'city':
+                        html += `
+                            <div class="property-item">
+                                <label class="property-label">Name</label>
+                                <input type="text" class="property-input" id="cityNameProperty" value="${element.name}">
+                            </div>
+                            <div class="property-item">
+                                <label class="property-label">Size</label>
+                                <select class="property-input" id="citySizeSelect">
+                                    <option value="major" ${element.size === 'major' ? 'selected' : ''}>Major City</option>
+                                    <option value="medium" ${element.size === 'medium' ? 'selected' : ''}>Medium City</option>
+                                    <option value="small" ${element.size === 'small' ? 'selected' : ''}>Small Town</option>
+                                    <option value="village" ${element.size === 'village' ? 'selected' : ''}>Village</option>
+                                </select>
+                            </div>
+                            <div class="property-item">
+                                <label class="property-label">Color</label>
+                                <input type="color" class="property-input" id="cityColorPicker" value="${element.color || '#C41E3A'}">
+                            </div>
+                        `;
+                        break;
+                }
+                
+                html += `
+                    <div class="modal-buttons">
+                        <button class="btn btn-secondary" id="deletePropertyBtn">Delete</button>
+                        <button class="btn btn-primary" id="savePropertyBtn">Save Changes</button>
+                    </div>
+                    </div>
+                `;
+                
+                content.innerHTML = html;
+                
+                // Add event listeners for property changes
+                document.getElementById('deletePropertyBtn').addEventListener('click', () => {
+                    this.deleteSelectedElement();
+                    this.hideProperties();
+                });
+                
+                document.getElementById('savePropertyBtn').addEventListener('click', () => {
+                    this.saveElementProperties(element);
+                });
+                
+                // Add input listeners for real-time updates
+                if (element.type === 'road') {
+                    document.getElementById('roadTypeSelect').addEventListener('change', (e) => {
+                        element.roadType = e.target.value;
+                        element.color = this.roadStyles[element.roadType].color;
+                        element.width = this.roadStyles[element.roadType].width;
+                        this.draw();
+                    });
+                    
+                    document.getElementById('roadWidthSlider').addEventListener('input', (e) => {
+                        element.width = parseInt(e.target.value);
+                        this.draw();
+                    });
+                    
+                    document.getElementById('roadColorPicker').addEventListener('input', (e) => {
+                        element.color = e.target.value;
+                        this.draw();
+                    });
+                } else if (element.type === 'area') {
+                    document.getElementById('areaTypeSelect').addEventListener('change', (e) => {
+                        element.areaType = e.target.value;
+                        element.fill = this.areaStyles[element.areaType].fill;
+                        element.outline = this.areaStyles[element.areaType].outline;
+                        this.draw();
+                    });
+                    
+                    document.getElementById('areaFillColorPicker').addEventListener('input', (e) => {
+                        element.fill = e.target.value + '80'; // Add transparency
+                        this.draw();
+                    });
+                    
+                    document.getElementById('areaOutlineColorPicker').addEventListener('input', (e) => {
+                        element.outline = e.target.value;
+                        this.draw();
+                    });
+                } else if (element.type === 'city') {
+                    document.getElementById('cityNameProperty').addEventListener('input', (e) => {
+                        element.name = e.target.value;
+                        this.draw();
+                    });
+                    
+                    document.getElementById('citySizeSelect').addEventListener('change', (e) => {
+                        element.size = e.target.value;
+                        this.draw();
+                    });
+                    
+                    document.getElementById('cityColorPicker').addEventListener('input', (e) => {
+                        element.color = e.target.value;
+                        this.draw();
+                    });
+                }
+            }
+            
+            saveElementProperties(element) {
+                // Properties are already updated via real-time listeners
+                this.showToast('Properties saved');
+                this.draw();
+            }
+            
+            hideProperties() {
+                document.getElementById('propertiesPanel').classList.remove('active');
+            }
+            
+            // File operations
+            showSaveModal() {
+                document.getElementById('saveModal').classList.add('active');
+            }
+            
+            showLoadModal() {
+                const modal = document.getElementById('loadModal');
+                const container = document.getElementById('fileListContainer');
+                
+                modal.classList.add('active');
+                container.innerHTML = '<p style="color: #ccc;">Loading saved maps...</p>';
+                
+                // Load maps from localStorage
+                setTimeout(() => {
+                    const maps = this.getSavedMaps();
+                    if (maps.length === 0) {
+                        container.innerHTML = '<p style="color: #ccc; text-align: center;">No saved maps found</p>';
+                    } else {
+                        let html = '<div class="file-list">';
+                        maps.forEach(map => {
+                            html += `
+                                <div class="file-item" data-id="${map.id}">
+                                    <div style="font-weight: bold;">${map.name}</div>
+                                    <div style="font-size: 0.8rem; color: #999;">${new Date(map.date).toLocaleDateString()}</div>
+                                </div>
+                            `;
+                        });
+                        html += '</div>';
+                        container.innerHTML = html;
+                        
+                        // Add click listeners
+                        document.querySelectorAll('.file-item').forEach(item => {
+                            item.addEventListener('click', () => {
+                                const mapId = item.dataset.id;
+                                this.loadMap(mapId);
+                                modal.classList.remove('active');
+                            });
+                        });
+                    }
+                }, 500);
+            }
+            
+            showCityModal() {
+                document.getElementById('cityModal').classList.add('active');
+            }
+            
+            hideModal(modalId) {
+                document.getElementById(modalId).classList.remove('active');
+            }
+            
+            saveMap() {
+                const mapName = document.getElementById('mapNameInput').value || 'my_ets2_map';
+                const mapData = {
+                    name: mapName,
+                    date: new Date().toISOString(),
+                    zoomLevels: this.zoomLevels,
+                    view: this.view
+                };
+                
+                const mapId = `ets2_map_${Date.now()}`;
+                localStorage.setItem(mapId, JSON.stringify(mapData));
+                
+                this.hideModal('saveModal');
+                this.showToast(`Map "${mapName}" saved successfully!`);
+            }
+            
+            getSavedMaps() {
+                const maps = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key.startsWith('ets2_map_')) {
+                        try {
+                            const mapData = JSON.parse(localStorage.getItem(key));
+                            maps.push({
+                                id: key,
+                                name: mapData.name || 'Unnamed Map',
+                                date: mapData.date
+                            });
+                        } catch (e) {
+                            console.error('Error parsing map data:', e);
+                        }
+                    }
+                }
+                return maps.sort((a, b) => new Date(b.date) - new Date(a.date));
+            }
+            
+            loadMap(mapId) {
+                try {
+                    const mapData = JSON.parse(localStorage.getItem(mapId));
+                    if (mapData) {
+                        this.zoomLevels = mapData.zoomLevels || this.zoomLevels;
+                        this.view = mapData.view || this.view;
+                        this.drawGrid();
+                        this.draw();
+                        this.showToast(`Map "${mapData.name}" loaded successfully!`);
+                    }
+                } catch (e) {
+                    this.showToast('Error loading map', 'error');
+                    console.error('Error loading map:', e);
+                }
+            }
+            
+            newMap() {
+                if (confirm('Create new map? Current unsaved changes will be lost.')) {
+                    this.zoomLevels = [
+                        { name: 'Most Detailed', elements: [] },
+                        { name: 'Detailed', elements: [] },
+                        { name: 'Overview', elements: [] },
+                        { name: 'Minimal', elements: [] }
+                    ];
+                    this.selectedElement = null;
+                    this.hideProperties();
+                    this.draw();
+                    this.showToast('New map created');
+                }
+            }
+            
+            clearMap() {
+                if (confirm('Clear current zoom level? This action cannot be undone.')) {
+                    this.zoomLevels[this.currentZoomLevel].elements = [];
+                    this.selectedElement = null;
+                    this.hideProperties();
+                    this.draw();
+                    this.showToast('Map cleared');
+                }
+            }
+            
+            addCity() {
+                const name = document.getElementById('cityNameInput').value.trim();
+                if (!name) {
+                    this.showToast('Please enter a city name', 'warning');
+                    return;
+                }
+                
+                // Get the last click position or use center
+                const x = 400, y = 300; // Default position
+                
+                this.addElement(this.currentZoomLevel, {
+                    type: 'city',
+                    name: name,
+                    size: this.currentCitySize,
+                    x: x,
+                    y: y,
+                    color: this.cityStyles[this.currentCitySize].color
+                });
+                
+                this.hideModal('cityModal');
+                document.getElementById('cityNameInput').value = '';
+                this.draw();
+                this.showToast(`City "${name}" added`);
+            }
+            
+            exportSVG() {
+                this.showLoading(true);
+                
+                setTimeout(() => {
+                    try {
+                        const svgContent = this.generateSVG(this.currentZoomLevel);
+                        this.downloadFile(`ets2_map_zoom_${this.currentZoomLevel}.svg`, svgContent, 'image/svg+xml');
+                        this.showToast('SVG exported successfully!');
+                    } catch (error) {
+                        console.error('Error exporting SVG:', error);
+                        this.showToast('Error exporting SVG', 'error');
+                    } finally {
+                        this.showLoading(false);
+                    }
+                }, 500);
+            }
+            
+            exportAllSVG() {
+                this.showLoading(true);
+                
+                setTimeout(() => {
+                    try {
+                        // Create a ZIP file with all zoom levels
+                        const zip = new JSZip();
+                        
+                        for (let i = 0; i < 4; i++) {
+                            const svgContent = this.generateSVG(i);
+                            zip.file(`ets2_map_zoom_${i}.svg`, svgContent);
+                        }
+                        
+                        zip.generateAsync({ type: 'blob' }).then(content => {
+                            this.downloadFile('ets2_map_all_zoom_levels.zip', content, 'application/zip');
+                            this.showToast('All zoom levels exported successfully!');
+                        });
+                    } catch (error) {
+                        console.error('Error exporting all SVG:', error);
+                        this.showToast('Error exporting files', 'error');
+                    } finally {
+                        this.showLoading(false);
+                    }
+                }, 1000);
+            }
+            
+            generateSVG(zoomLevel) {
+                const elements = this.zoomLevels[zoomLevel].elements;
+                const width = 1000;
+                const height = 800;
+                
+                let svg = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
+    <title>ETS2 Map - Zoom Level ${zoomLevel}</title>
+    <desc>Generated by ETS2 Vector Map Editor</desc>
+    
+    <!-- Background -->
+    <rect width="100%" height="100%" fill="#1e1e1e"/>
+    
+    <!-- Grid -->
+    <g id="grid" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1">
+`;
+                
+                // Add grid lines
+                const gridSize = 50;
+                for (let x = 0; x <= width; x += gridSize) {
+                    svg += `        <line x1="${x}" y1="0" x2="${x}" y2="${height}"/>\n`;
+                }
+                for (let y = 0; y <= height; y += gridSize) {
+                    svg += `        <line x1="0" y1="${y}" x2="${width}" y2="${y}"/>\n`;
+                }
+                
+                svg += '    </g>\n';
+                
+                // Add elements
+                elements.forEach(element => {
+                    switch (element.type) {
+                        case 'road':
+                            svg += this.generateRoadSVG(element);
+                            break;
+                        case 'area':
+                            svg += this.generateAreaSVG(element);
+                            break;
+                        case 'city':
+                            svg += this.generateCitySVG(element);
+                            break;
+                    }
+                });
+                
+                svg += '</svg>';
+                return svg;
+            }
+            
+            generateRoadSVG(road) {
+                if (!road.points || road.points.length < 2) return '';
+                
+                let points = '';
+                road.points.forEach(point => {
+                    points += `${point[0]},${point[1]} `;
+                });
+                
+                return `    <polyline points="${points.trim()}" 
+        fill="none" 
+        stroke="${road.color || '#FFFFFF'}" 
+        stroke-width="${road.width || 5}" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>\n`;
+            }
+            
+            generateAreaSVG(area) {
+                if (!area.points || area.points.length < 3) return '';
+                
+                let points = '';
+                area.points.forEach(point => {
+                    points += `${point[0]},${point[1]} `;
+                });
+                
+                return `    <polygon points="${points.trim()}" 
+        fill="${area.fill || 'rgba(144, 238, 144, 0.5)'}" 
+        stroke="${area.outline || '#228B22'}" 
+        stroke-width="2"/>\n`;
+            }
+            
+            generateCitySVG(city) {
+                const style = this.cityStyles[city.size] || this.cityStyles.medium;
+                
+                return `    <g>
+        <circle cx="${city.x}" cy="${city.y}" r="${style.radius}" 
+            fill="${city.color || style.color}" 
+            stroke="#000000" 
+            stroke-width="2"/>
+        <text x="${city.x}" y="${city.y + style.radius + 15}" 
+            text-anchor="middle" 
+            font-family="Arial" 
+            font-size="${style.fontSize}" 
+            font-weight="bold" 
+            fill="#FFFFFF">${city.name || 'City'}</text>
+    </g>\n`;
+            }
+            
+            downloadFile(filename, content, mimeType) {
+                const blob = content instanceof Blob ? content : new Blob([content], { type: mimeType });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+            
+            // Utility methods
+            showToast(message, type = 'success') {
+                const toast = document.getElementById('toast');
+                toast.textContent = message;
+                toast.className = 'toast';
+                
+                if (type === 'error') {
+                    toast.classList.add('error');
+                } else if (type === 'warning') {
+                    toast.classList.add('warning');
+                }
+                
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+            
+            showLoading(show) {
+                document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
+            }
+            
+            animate() {
+                this.draw();
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+
+        // Initialize the editor when page loads
+        window.addEventListener('load', () => {
+            window.editor = new ETS2MapEditor();
+        });
+
+        // Prevent context menu on canvas
+        document.addEventListener('contextmenu', (e) => {
+            if (e.target.id === 'mainCanvas') {
+                e.preventDefault();
+                if (window.editor && window.editor.drawing) {
+                    window.editor.finishDrawing();
+                }
+            }
+        });
+
+        // Load JSZip for ZIP export
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>
