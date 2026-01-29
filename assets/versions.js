@@ -81,7 +81,7 @@ window.RELEASES = {
           mirror1: "https://sharemods.com/g4fxrvtccpcz/FER_-_OTGR_RC.zip.html",
           changelog: "#"
         }
-      }
+      },
        {
         version: "v2",
         date: "2026-01-29",
