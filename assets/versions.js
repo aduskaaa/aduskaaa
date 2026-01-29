@@ -66,7 +66,7 @@ window.RELEASES = {
         mirror1: "#",
         changelog: ""
       }
-    },
+    }
   ],
 
   rcs: {
