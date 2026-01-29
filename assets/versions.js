@@ -82,7 +82,7 @@ window.RELEASES = {
           changelog: "#"
         }
       },
-       {
+      {
         version: "v2",
         date: "2026-01-29",
         requires: ["FER Alpha 30", "ETS2 1.57/58", "OTGR current"],
