@@ -11,7 +11,7 @@ window.RELEASES = {
       version: "Alpha 30",
       date: "2026-01-29", // ISO format YYYY-MM-DD
       size: "91.8MB",
-      game: "ETS2 1.57",
+      game: "ETS2 1.57/58",
       notes: "Added roads: part of 98K-023 and some unnamed roads, Added villages: Megino-Aldan and Bedemyo, expanded Markha. Fixed a lot of bugs.",
       links: {
         primary: "https://modsfire.com/J2wzR3sp32f060d",
@@ -66,7 +66,7 @@ window.RELEASES = {
         mirror1: "#",
         changelog: ""
       }
-    }
+    },
   ],
 
   rcs: {
@@ -88,7 +88,7 @@ window.RELEASES = {
         requires: ["FER Alpha 30", "ETS2 1.57/58", "OTGR current"],
         notes: "Updated version of FER–OTGR connector.",
         links: {
-          primary: "https://modsfire.com/E42cSp741p4kt8V",
+          primary: "https://modsfire.com/n4CW056z12Y8Pn4",
           mirror1: "",
           changelog: "#"
         }
@@ -99,7 +99,7 @@ window.RELEASES = {
         version: "v2",
         date: "2025-12-13",
         requires: ["FER Alpha 26/27/28", "ETS2 1.56/1.57", "Chukotka current"],
-        notes: "First release of FER–Chukotka connector.",
+        notes: "Seccond release of FER–Chukotka connector.",
         links: {
           primary: "https://modsfire.com/N57658b0RbX9ak6",
           mirror1: "#",
@@ -125,7 +125,7 @@ window.RELEASES = {
         requires: ["FER Alpha 28", "ETS2 1.57", "TST current"],
         notes: "Connects Far East Russia and Trans-Siberian Truckway.",
         links: {
-          primary: "https://modsfire.com/g6Q8uu6C58k6Bew",
+          primary: "https://modsfire.com/vHSZ68e6IWJyGVq",
           mirror1: "#",
           changelog: "#"
         }
