@@ -83,7 +83,7 @@ window.RELEASES = {
         }
       },
       {
-        version: "v1.2",
+        version: "v1",
         date: "2025-10-07",
         requires: ["FER Alpha 26/27/28", "ETS2 1.56/1.57", "OTGR current"],
         notes: "Updated version of FER–OTGR connector.",
@@ -99,7 +99,7 @@ window.RELEASES = {
       {
         version: "v2",
         date: "2025-12-13",
-        requires: ["FER Alpha 26/27/28/29/30", "ETS2 1.56/1.57", "Chukotka current"],
+        requires: ["FER Alpha 29/30", "ETS2 1.56/1.57", "Chukotka current"],
         notes: "Second release of FER–Chukotka connector.",
         links: {
           primary: "https://modsfire.com/N57658b0RbX9ak6",
