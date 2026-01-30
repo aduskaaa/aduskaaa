@@ -7,9 +7,9 @@
 
 window.RELEASES = {
   fer: [
-      {
+    {
       version: "Alpha 30",
-      date: "2026-01-29", // ISO format YYYY-MM-DD
+      date: "2026-01-29",
       size: "91.8MB",
       game: "ETS2 1.57/58",
       notes: "Added roads: part of 98K-023 and some unnamed roads, Added villages: Megino-Aldan and Bedemyo, expanded Markha. Fixed a lot of bugs.",
@@ -19,24 +19,24 @@ window.RELEASES = {
         changelog: ""
       }
     },
-      {
+    {
       version: "Alpha 29",
-      date: "2026-01-01", // ISO format YYYY-MM-DD
+      date: "2026-01-01",
       size: "155.3MB",
       game: "ETS2 1.57",
-      notes: "Added roads: part of 98K-023, Added villages: Ust-Kyuga, Added cities: Markha. Fixed bugs. ",
+      notes: "Added roads: part of 98K-023, Added villages: Ust-Kyuga, Added cities: Markha. Fixed bugs.",
       links: {
         primary: "https://modsfire.com/5q6zb7q0E3M7cLW",
         mirror1: "",
         changelog: ""
       }
     },
-   {
+    {
       version: "Alpha 28",
-      date: "2025-11-26", // ISO format YYYY-MM-DD
+      date: "2025-11-26",
       size: "153.7MB",
       game: "ETS2 1.57",
-      notes: "Added roads: 98K-020 and 98K-025, Added villages: Khair, Vlasovom Kular, Severny, Nayba and Dzhebariki-Khaya, Added cities: Tiksi. for now accesible by ferry from Yakutsk to Tiksi, fixed reported bugs. ",
+      notes: "Added roads: 98K-020 and 98K-025, Added villages: Khair, Vlasovom Kular, Severny, Nayba and Dzhebariki-Khaya, Added cities: Tiksi. For now accessible by ferry from Yakutsk to Tiksi. Fixed reported bugs.",
       links: {
         primary: "https://modsfire.com/YNIRmTvZJD0gz7i",
         mirror1: "https://sharemods.com/zb0rlc60hkhu/Far_East_Russia_Alpha_28.scs.html",
@@ -45,7 +45,7 @@ window.RELEASES = {
     },
     {
       version: "Alpha 27",
-      date: "2025-10-26", // ISO format YYYY-MM-DD
+      date: "2025-10-26",
       size: "112.3MB",
       game: "ETS2 1.56",
       notes: "Rebuilded part of P-504, Added Teply Klyuch, Rebuilded Khandyga",
@@ -66,22 +66,11 @@ window.RELEASES = {
         mirror1: "#",
         changelog: ""
       }
-    },
+    }
   ],
 
   rcs: {
     otgr: [
-      {
-        version: "v1.2",
-        date: "2025-10-07",
-        requires: ["FER Alpha 26/27/28", "ETS2 1.56/1.57", "OTGR current"],
-        notes: "Updated version of FER–OTGR connector.",
-        links: {
-          primary: "https://modsfire.com/88V9BM7EFz0aS9Z",
-          mirror1: "https://sharemods.com/g4fxrvtccpcz/FER_-_OTGR_RC.zip.html",
-          changelog: "#"
-        }
-      },
       {
         version: "v2",
         date: "2026-01-29",
@@ -92,14 +81,26 @@ window.RELEASES = {
           mirror1: "",
           changelog: "#"
         }
+      },
+      {
+        version: "v1.2",
+        date: "2025-10-07",
+        requires: ["FER Alpha 26/27/28", "ETS2 1.56/1.57", "OTGR current"],
+        notes: "Updated version of FER–OTGR connector.",
+        links: {
+          primary: "https://modsfire.com/88V9BM7EFz0aS9Z",
+          mirror1: "https://sharemods.com/g4fxrvtccpcz/FER_-_OTGR_RC.zip.html",
+          changelog: "#"
+        }
       }
     ],
+
     chukotka: [
       {
         version: "v2",
         date: "2025-12-13",
         requires: ["FER Alpha 26/27/28/29/30", "ETS2 1.56/1.57", "Chukotka current"],
-        notes: "Seccond release of FER–Chukotka connector.",
+        notes: "Second release of FER–Chukotka connector.",
         links: {
           primary: "https://modsfire.com/N57658b0RbX9ak6",
           mirror1: "#",
@@ -118,8 +119,9 @@ window.RELEASES = {
         }
       }
     ],
+
     tst: [
-             {
+      {
         version: "v3",
         date: "2026-01-29",
         requires: ["FER Alpha 30", "ETS2 1.57", "TST current"],
@@ -134,7 +136,7 @@ window.RELEASES = {
         version: "v2",
         date: "2025-12-13",
         requires: ["FER Alpha 28", "ETS2 1.57", "TST current"],
-        notes: "Seccond release of FER–TST connector. Connects Far East Russia and Trans-Siberian Truckway.",
+        notes: "Second release of FER–TST connector.",
         links: {
           primary: "https://modsfire.com/W7wV8Ygqfd1xaU9",
           mirror1: "#",
@@ -145,7 +147,7 @@ window.RELEASES = {
         version: "v1",
         date: "2025-12-01",
         requires: ["FER Alpha 28", "ETS2 1.57", "TST current"],
-        notes: "First release of FER–TST connector. Connects Far East Russia and Trans-Siberian Truckway.",
+        notes: "First release of FER–TST connector.",
         links: {
           primary: "https://modsfire.com/fq1cs35OetM2JHA",
           mirror1: "https://sharemods.com/vpuxnq84bvr3/FER_-_TST_RC.scs.html",
@@ -173,11 +175,33 @@ window.RELEASES = {
 };
 
 /* ==========================================================
-   Sort releases automatically by date (latest first)
+   Force EVERYTHING to be string (prevents "/" being treated
+   as division anywhere later)
    ========================================================== */
-if (window.RELEASES.fer && Array.isArray(window.RELEASES.fer)) {
-  window.RELEASES.fer.sort(function(a, b) {
-    // invalid or TBD dates -> send to the end
+function forceStrings(obj) {
+  if (Array.isArray(obj)) {
+    obj.forEach(forceStrings);
+    return;
+  }
+
+  if (typeof obj === "object" && obj !== null) {
+    for (const key in obj) {
+      if (typeof obj[key] === "object" && obj[key] !== null) {
+        forceStrings(obj[key]);
+      } else {
+        obj[key] = String(obj[key]);
+      }
+    }
+  }
+}
+
+forceStrings(window.RELEASES);
+
+/* ==========================================================
+   Sort FER releases automatically by date (latest first)
+   ========================================================== */
+if (Array.isArray(window.RELEASES.fer)) {
+  window.RELEASES.fer.sort((a, b) => {
     if (a.date === "TBD") return 1;
     if (b.date === "TBD") return -1;
     return new Date(b.date) - new Date(a.date);
