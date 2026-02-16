@@ -7,6 +7,18 @@
 
 window.RELEASES = {
   fer: [
+     {
+      version: "Alpha 30 Fix 1",
+      date: "2026-02-16",
+      size: "89.96MB",
+      game: "ETS2 1.57/58",
+      notes: "Fixed ghost sector in germany",
+      links: {
+        primary: "https://modsfire.com/J2wzR3sp32f060d",
+        mirror1: "",
+        changelog: ""
+      }
+    },
     {
       version: "Alpha 30",
       date: "2026-01-29",
