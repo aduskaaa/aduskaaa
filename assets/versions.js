@@ -14,7 +14,7 @@ window.RELEASES = {
       game: "ETS2 1.57/58",
       notes: "Fixed ghost sector in germany",
       links: {
-        primary: "https://modsfire.com/J2wzR3sp32f060d",
+        primary: "https://modsfire.com/apCPL49RgCsztQk",
         mirror1: "",
         changelog: ""
       }
