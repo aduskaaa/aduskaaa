@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FER – OTGR • Road Connection</title>
+  <meta name="description" content="FER to OTGR road connection for ETS2: download, load order, and details.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="assets/css/global.css">
+</head>
+
+<body>
+  <header class="header" id="site-header" aria-label="Top Navigation"></header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1 id="page-title"></h1>
+        <p class="lead" id="page-tagline"></p>
+      </div>
+    </section>
+
+    <section id="download" class="section">
+      <div class="container card">
+        <h2>Latest Release</h2>
+        <div id="rc-latest" class="version-item"></div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container card">
+        <h2>About This Road Connection</h2>
+        <p class="description-text" id="page-description"></p>
+        <h3>Requirements</h3>
+        <div class="requirements" id="page-requirements"></div>
+      </div>
+    </section>
+
+    <section id="loadorder" class="section">
+      <div class="container card">
+        <h2>Load Order</h2>
+        <p style="color:var(--muted); font-size:14px; margin:0 0 8px;">Place mods in this priority (top = highest):</p>
+        <div id="load-order"></div>
+      </div>
+    </section>
+
+    <section id="releases" class="section">
+      <div class="container card">
+        <h2>All Releases</h2>
+        <div id="rc-versions" class="versions-list" aria-label="RC releases list"></div>
+      </div>
+    </section>
+
+    <section id="notes" class="section">
+      <div class="container card">
+        <h2>Notes</h2>
+        <ul>
+          <li>Place the RC above both main maps in the Mod Manager</li>
+          <li>Only install if you use both FER and OTGR</li>
+          <li>Updated in sync with major FER releases</li>
+          <li>Report issues via <a href="https://discord.gg/SSWDJMauxz" target="_blank"
+              style="color:var(--text-bright)">Discord</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="site-footer"></footer>
+
+  <script src="assets/site-data.js"></script>
+  <script src="assets/versions.js"></script>
+  <script src="assets/site-renderer.js"></script>
+  <script>
+    (function () {
+      var S = window.SITE;
+      var P = S && S.pages && S.pages.ferOtgr;
+      if (!P) return;
+
+      var t = document.getElementById('page-title');
+      var tl = document.getElementById('page-tagline');
+      if (t) t.textContent = P.title;
+      if (tl) tl.textContent = P.tagline;
+
+      var desc = document.getElementById('page-description');
+      if (desc) desc.textContent = P.description;
+
+      var reqEl = document.getElementById('page-requirements');
+      if (reqEl && P.requirements) {
+        P.requirements.forEach(function (r) {
+          var span = document.createElement('span');
+          span.className = 'req-tag';
+          span.textContent = r;
+          reqEl.appendChild(span);
+        });
+      }
+
+      var data = (window.RELEASES && window.RELEASES.rcs && window.RELEASES.rcs.otgr) || [];
+      var latest = document.getElementById('rc-latest');
+      if (data.length && latest && window.makeVersionItem) {
+        latest.replaceWith(window.makeVersionItem(data[0], 'FER – OTGR'));
+      }
+      var list = document.getElementById('rc-versions');
+      if (list && window.makeVersionItem) {
+        data.forEach(function (v) { list.appendChild(window.makeVersionItem(v, 'FER – OTGR')); });
+      }
+    })();
+  </script>
+</body>
+
+</html>

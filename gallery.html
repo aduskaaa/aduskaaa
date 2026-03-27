@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gallery • Far East Russia</title>
+  <meta name="description" content="Gallery of screenshots from the Far East Russia ETS2 map mod.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="assets/css/global.css">
+</head>
+
+<body>
+  <header class="header" id="site-header" aria-label="Top Navigation"></header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1>Gallery</h1>
+        <p class="lead">Screenshots from testers and community drivers exploring the Far East. Click any image to view
+          it full-size.</p>
+        <div class="gallery-grid" id="gallery-grid" aria-label="Screenshot gallery">
+          <div class="gallery-item"><img src="imgs/gallery/Photo1.jpg" alt="FER Screenshot 1"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo2.jpg" alt="FER Screenshot 2"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo3.jpg" alt="FER Screenshot 3"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo4.jpg" alt="FER Screenshot 4"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo5.jpg" alt="FER Screenshot 5"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo6.jpg" alt="FER Screenshot 6"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo7.jpg" alt="FER Screenshot 7"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo8.jpg" alt="FER Screenshot 8"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo9.jpg" alt="FER Screenshot 9"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo10.jpg" alt="FER Screenshot 10"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo11.jpg" alt="FER Screenshot 11"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo12.jpg" alt="FER Screenshot 12"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo13.jpg" alt="FER Screenshot 13"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo14.jpg" alt="FER Screenshot 14"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo15.jpg" alt="FER Screenshot 15"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo16.jpg" alt="FER Screenshot 16"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo17.jpg" alt="FER Screenshot 17"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo18.jpg" alt="FER Screenshot 18"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo19.jpg" alt="FER Screenshot 19"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo20.jpg" alt="FER Screenshot 20"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo21.png" alt="FER Screenshot 21"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo22.png" alt="FER Screenshot 22"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo23.png" alt="FER Screenshot 23"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo24.png" alt="FER Screenshot 24"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo25.png" alt="FER Screenshot 25"></div>
+          <div class="gallery-item"><img src="imgs/gallery/Photo26.png" alt="FER Screenshot 26"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="lightbox" class="lightbox" hidden>
+    <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous image">&#8249;</button>
+    <img id="lightbox-img" alt="">
+    <button class="lightbox-nav lightbox-next" aria-label="Next image">&#8250;</button>
+  </div>
+
+  <footer class="footer" id="site-footer"></footer>
+
+  <script src="assets/site-data.js"></script>
+  <script src="assets/site-renderer.js"></script>
+  <script>
+    (function () {
+      var overlay = document.getElementById('lightbox');
+      var img = document.getElementById('lightbox-img');
+      var thumbs = document.querySelectorAll('.gallery-grid img');
+      var sources = [];
+      var currentIdx = 0;
+
+      thumbs.forEach(function (t, i) {
+        sources.push(t.getAttribute('src'));
+        t.addEventListener('click', function () {
+          currentIdx = i;
+          showImage(i);
+        });
+      });
+
+      function showImage(idx) {
+        img.src = sources[idx];
+        overlay.removeAttribute('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function close() {
+        overlay.setAttribute('hidden', '');
+        img.removeAttribute('src');
+        document.body.style.overflow = '';
+      }
+
+      function prev() {
+        currentIdx = (currentIdx - 1 + sources.length) % sources.length;
+        showImage(currentIdx);
+      }
+
+      function next() {
+        currentIdx = (currentIdx + 1) % sources.length;
+        showImage(currentIdx);
+      }
+
+      document.querySelector('.lightbox-close').addEventListener('click', close);
+      document.querySelector('.lightbox-prev').addEventListener('click', prev);
+      document.querySelector('.lightbox-next').addEventListener('click', next);
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) close();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (overlay.hasAttribute('hidden')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
+      });
+    })();
+  </script>
+</body>
+
+</html>

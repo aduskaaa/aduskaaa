@@ -1,0 +1,49 @@
+.glow-text {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 900;
+  background: linear-gradient(90deg, #00ffb0, #00d9ff, #0075ff);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: max-content;
+  -webkit-text-stroke: 0.7px #002d2a;
+  text-shadow:
+    0 0 2px #00ffe0,
+    0 0 4px #00e0ff,
+    0 0 6px #0090ff;
+  animation: gradientFlow 4s infinite linear, pulse 2.3s infinite alternate ease-in-out;
+  transform-origin: center center;
+  will-change: transform;
+  position: relative;
+  left: 0;
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    text-shadow:
+      0 0 2px #00ffe0,
+      0 0 4px #00d0ff,
+      0 0 6px #0090ff;
+  }
+  100% {
+    transform: scale(1.07);
+    text-shadow:
+      0 0 3px #00fff0,
+      0 0 6px #00eaff,
+      0 0 10px #00aaff;
+  }
+}

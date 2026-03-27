@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FER – Far East Russia • Download & Info</title>
+  <meta name="description"
+    content="Download Far East Russia (FER) for ETS2. Installation guide, load order, coverage info, and all releases.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="assets/css/global.css">
+</head>
+
+<body>
+  <header class="header" id="site-header" aria-label="Top Navigation"></header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1 id="page-title"></h1>
+        <p class="lead" id="page-tagline"></p>
+      </div>
+    </section>
+
+    <section id="download" class="section">
+      <div class="container grid">
+        <div class="card">
+          <h2>Latest Release</h2>
+          <div id="fer-latest" class="version-item"></div>
+        </div>
+        <div class="card">
+          <h2>Quick Stats</h2>
+          <div id="fer-stats" class="stats-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container card">
+        <h2>About the Map</h2>
+        <p class="description-text" id="page-description"></p>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="container">
+        <h2>What's Included</h2>
+        <div class="features" id="fer-features"></div>
+      </div>
+    </section>
+
+    <section id="coverage" class="section">
+      <div class="container grid">
+        <div class="map-frame">
+          <img class="map-img" src="imgs/FER_AREA.png" alt="Map coverage preview">
+        </div>
+        <div class="card">
+          <h2>Map Coverage</h2>
+          <ul>
+            <li>7,000+ km of driveable roads across the Far Eastern Federal District</li>
+            <li>40+ detailed cities, towns, and remote settlements</li>
+            <li>River ferry crossings connecting isolated regions</li>
+            <li>Federal highways, regional roads, and unnamed dirt tracks</li>
+            <li>Continuous expansion with every release</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="install" class="section">
+      <div class="container card">
+        <h2>Installation Guide</h2>
+        <ol class="install-steps" id="fer-install"></ol>
+      </div>
+    </section>
+
+    <section id="loadorder" class="section">
+      <div class="container card">
+        <h2>Load Order</h2>
+        <p style="color:var(--muted); font-size:14px; margin:0 0 8px;">Place mods in your ETS2 Mod Manager in this
+          priority (top = highest priority):</p>
+        <div id="load-order"></div>
+      </div>
+    </section>
+
+    <section id="releases" class="section">
+      <div class="container card">
+        <h2>All Releases</h2>
+        <div id="fer-versions" class="versions-list" aria-label="FER releases list"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="site-footer"></footer>
+
+  <script src="assets/site-data.js"></script>
+  <script src="assets/versions.js"></script>
+  <script src="assets/site-renderer.js"></script>
+  <script>
+    (function () {
+      var S = window.SITE;
+      var P = S && S.pages && S.pages.fer;
+      if (!P) return;
+
+      /* Title & tagline */
+      var t = document.getElementById('page-title');
+      var tl = document.getElementById('page-tagline');
+      if (t) t.textContent = P.title;
+      if (tl) tl.textContent = P.tagline;
+
+      /* Description */
+      var desc = document.getElementById('page-description');
+      if (desc) desc.textContent = P.description;
+
+      /* Stats */
+      var statsEl = document.getElementById('fer-stats');
+      if (statsEl && P.stats) {
+        P.stats.forEach(function (s) {
+          var card = document.createElement('div');
+          card.className = 'stat-card';
+          card.innerHTML = '<div class="stat-value">' + s.value + '</div><div class="stat-label">' + s.label + '</div>';
+          statsEl.appendChild(card);
+        });
+      }
+
+      /* Features */
+      var featEl = document.getElementById('fer-features');
+      if (featEl && P.features) {
+        P.features.forEach(function (f) {
+          var card = document.createElement('article');
+          card.className = 'feature-card';
+          card.innerHTML = '<span class="feature-icon">' + f.icon + '</span><h3>' + f.title + '</h3><p>' + f.text + '</p>';
+          featEl.appendChild(card);
+        });
+      }
+
+      /* Install steps */
+      var instEl = document.getElementById('fer-install');
+      if (instEl && P.installSteps) {
+        P.installSteps.forEach(function (step) {
+          var li = document.createElement('li');
+          li.innerHTML = step;
+          instEl.appendChild(li);
+        });
+      }
+
+      /* Versions */
+      var releases = (window.RELEASES && window.RELEASES.fer) || [];
+      var latest = document.getElementById('fer-latest');
+      if (releases.length && latest && window.makeVersionItem) {
+        latest.replaceWith(window.makeVersionItem(releases[0], 'FER'));
+      }
+      var list = document.getElementById('fer-versions');
+      if (list && window.makeVersionItem) {
+        releases.forEach(function (v) { list.appendChild(window.makeVersionItem(v, 'FER')); });
+      }
+    })();
+  </script>
+</body>
+
+</html>

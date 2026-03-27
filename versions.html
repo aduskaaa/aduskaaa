@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Versions • Far East Russia</title>
+  <meta name="description" content="Browse all releases of Far East Russia, Road Connections, and Addons for ETS2.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="assets/css/global.css">
+</head>
+
+<body>
+  <header class="header" id="site-header" aria-label="Top Navigation"></header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1>Versions</h1>
+        <p class="lead">Complete release history for FER, all Road Connections, and Addons. Every version ever published
+          is listed here.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container group">
+        <div class="card">
+          <h2>FER Releases</h2>
+          <div id="versions-fer" class="versions-list"></div>
+        </div>
+        <div class="card">
+          <h2>RC – OTGR</h2>
+          <div id="versions-otgr" class="versions-list"></div>
+        </div>
+        <div class="card">
+          <h2>RC – Chukotka</h2>
+          <div id="versions-chukotka" class="versions-list"></div>
+        </div>
+        <div class="card">
+          <h2>RC – TST</h2>
+          <div id="versions-tst" class="versions-list"></div>
+        </div>
+        <div class="card">
+          <h2>Addons</h2>
+          <div id="versions-addons" class="versions-list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="site-footer"></footer>
+
+  <script src="assets/site-data.js"></script>
+  <script src="assets/versions.js"></script>
+  <script src="assets/site-renderer.js"></script>
+  <script>
+    (function () {
+      function render(id, label, arr) {
+        var c = document.getElementById(id);
+        if (!c || !window.makeVersionItem) return;
+        arr.forEach(function (v) { c.appendChild(window.makeVersionItem(v, label)); });
+      }
+      var rel = window.RELEASES || {};
+      render('versions-fer', 'FER', rel.fer || []);
+      var rcs = rel.rcs || {};
+      render('versions-otgr', 'FER – OTGR', rcs.otgr || []);
+      render('versions-chukotka', 'FER – Chukotka', rcs.chukotka || []);
+      render('versions-tst', 'FER – TST', rcs.tst || []);
+      var addons = rel.addons || {};
+      Object.keys(addons).forEach(function (key) {
+        render('versions-addons', key.charAt(0).toUpperCase() + key.slice(1) + ' Addon', addons[key] || []);
+      });
+    })();
+  </script>
+</body>
+
+</html>
