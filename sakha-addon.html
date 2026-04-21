@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>West Yacutia Addon • Far East Russia</title>
+  <meta name="description" content="West Yacutia Addon for Far East Russia ETS2 map: download and details.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="assets/css/global.css">
+</head>
+
+<body>
+  <header class="header" id="site-header" aria-label="Top Navigation"></header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1 id="page-title"></h1>
+        <p class="lead" id="page-tagline"></p>
+      </div>
+    </section>
+
+    <section id="download" class="section">
+      <div class="container card">
+        <h2>Latest Release</h2>
+        <div id="addon-latest" class="version-item"></div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container card">
+        <h2>About This Addon</h2>
+        <p class="description-text" id="page-description"></p>
+        <h3>Requirements</h3>
+        <div class="requirements" id="page-requirements"></div>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="container">
+        <h2>What's Included</h2>
+        <div class="features" id="addon-features"></div>
+      </div>
+    </section>
+
+    <section id="loadorder" class="section">
+      <div class="container card">
+        <h2>Load Order</h2>
+        <p style="color:var(--muted); font-size:14px; margin:0 0 8px;">Place mods in this priority (top = highest):</p>
+        <div id="load-order"></div>
+      </div>
+    </section>
+
+    <section id="releases" class="section">
+      <div class="container card">
+        <h2>All Releases</h2>
+        <div id="addon-versions" class="versions-list" aria-label="Addon releases list"></div>
+      </div>
+    </section>
+
+    <section id="notes" class="section">
+      <div class="container card">
+        <h2>Notes</h2>
+        <ul>
+          <li>Requires Far East Russia to function</li>
+          <li>Place the addon above Far East Russia in the Mod Manager</li>
+          <li>Report issues via <a href="https://discord.gg/SSWDJMauxz" target="_blank"
+              style="color:var(--text-bright)">Discord</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="site-footer"></footer>
+
+  <script src="assets/site-data.js"></script>
+  <script src="assets/versions.js"></script>
+  <script src="assets/site-renderer.js"></script>
+  <script>
+    (function () {
+      var S = window.SITE;
+      var P = S && S.pages && S.pages.sakhaAddon;
+      if (!P) return;
+
+      var t = document.getElementById('page-title');
+      var tl = document.getElementById('page-tagline');
+      if (t) t.textContent = P.title;
+      if (tl) tl.textContent = P.tagline;
+
+      var desc = document.getElementById('page-description');
+      if (desc) desc.textContent = P.description;
+
+      var reqEl = document.getElementById('page-requirements');
+      if (reqEl && P.requirements) {
+        P.requirements.forEach(function (r) {
+          var span = document.createElement('span');
+          span.className = 'req-tag';
+          span.textContent = r;
+          reqEl.appendChild(span);
+        });
+      }
+
+      /* Features */
+      var featEl = document.getElementById('addon-features');
+      if (featEl && P.features) {
+        P.features.forEach(function (f) {
+          var card = document.createElement('article');
+          card.className = 'feature-card';
+          card.innerHTML = '<span class="feature-icon">' + f.icon + '</span><h3>' + f.title + '</h3><p>' + f.text + '</p>';
+          featEl.appendChild(card);
+        });
+      }
+
+      var data = (window.RELEASES && window.RELEASES.addons && window.RELEASES.addons.sakhaAddon) || [];
+      var latest = document.getElementById('addon-latest');
+      if (data.length && latest && window.makeVersionItem) {
+        latest.replaceWith(window.makeVersionItem(data[0], 'Sakha Addon'));
+      }
+      var list = document.getElementById('addon-versions');
+      if (list && window.makeVersionItem) {
+        data.forEach(function (v) { list.appendChild(window.makeVersionItem(v, 'Sakha Addon')); });
+      }
+    })();
+  </script>
+</body>
+
+</html>

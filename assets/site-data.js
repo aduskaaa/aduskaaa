@@ -40,6 +40,8 @@ window.SITE = {
     "FER – Chukotka RC",
     "FER – OTGR RC",
     "FER – TST RC",
+    "Sakha Addon",
+    "West Yacutia Addon",
     "Chukotka Addon Legacy Areas",
     "Far East Russia",
     "Trans-Siberian Truckway",
@@ -64,8 +66,7 @@ window.SITE = {
       stats: [
         { value: "7,000+", label: "km of driveable roads" },
         { value: "40+", label: "cities & settlements" },
-        { value: "V1", label: "SOON" },
-        { value: "1.58", label: "ETS2 version supported" }
+        { value: "1.58/59", label: "ETS2 version supported" }
       ],
       installSteps: [
         "Download the latest FER release from the download section below.",
@@ -123,6 +124,36 @@ window.SITE = {
         "Trans-Siberian Truckway (latest version)",
         "FER – Chukotka RC (for road connection)",
         "ETS2 1.57 or newer"
+      ]
+    },
+
+    westYacutiaAddon: {
+      title: "West Yacutia Addon",
+      tagline: "Explore Western Yakutia — Journey beyond the Lena River into the heart of the taiga.",
+      description: "The West Yacutia Addon expands the Far East Russia map westward, crossing the mighty Lena River into the rugged interior of Western Yakutia. This region is defined by the A-331 'Vilyuy' Federal Highway, a vital lifeline cutting through dense taiga and vast marshlands. Experience meticulously crafted settlements and industrial hubs that reflect the reality of Siberian life. From technical muddy tracks to scenic river crossings, this addon adds a new layer of challenge and immersion, built with high-fidelity reference materials to ensure every kilometer feels authentic to the Siberian wilderness.",
+      features: [
+        { icon: "🏘️", title: "Detailed Settlements", text: "High-quality recreations of remote towns and industrial hubs." },
+        { icon: "🛣️", title: "A-331 Highway", text: "Drive the iconic Vilyuy highway with realistic geometry and terrain." },
+        { icon: "🔗", title: "Seamless Integration", text: "Full compatibility with FER and the West Yacutia RC." }
+      ],
+      requirements: [
+        "Far East Russia (latest version)",
+        "ETS2 1.59 or newer"
+      ]
+    },
+
+    sakhaAddon: {
+      title: "Sakha Addon",
+      tagline: "Venture to Oymyakon — Experience the 'Pole of Cold' in the depths of Siberia.",
+      description: "The Sakha Addon brings the legendary Oymyakon region to Euro Truck Simulator 2, allowing drivers to venture into the coldest inhabited place on Earth. This expansion focuses on the extreme isolation of the Oymyakonsky District, featuring the treacherous roads that branch off the main Kolyma Highway. Navigate through permafrost valleys and remote outposts where the environment is as challenging as the cargo. With hand-placed vegetation, unique architectural assets, and terrain modeled after real-world satellite data, the Sakha Addon offers an unparalleled journey into one of the most hostile yet beautiful environments in Russia.",
+      features: [
+        { icon: "❄️", title: "Pole of Cold", text: "Explore the world-famous Oymyakon area and its surrounding wilderness." },
+        { icon: "🏔️", title: "Extreme Isolation", text: "Tackle remote routes far from the main federal highways." },
+        { icon: "🔗", title: "Map Compatibility", text: "Designed to work perfectly with the core Far East Russia map." }
+      ],
+      requirements: [
+        "Far East Russia (latest version)",
+        "ETS2 1.58 or newer"
       ]
     }
   },

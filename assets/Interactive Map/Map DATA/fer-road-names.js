@@ -132,8 +132,8 @@ window.ROAD_NAMES = [
     "image": "imgs/Road-Icons/road_f98k06.png"
   },
   {
-    "lon": 156.43216,
-    "lat": 68.66919,
+    "lon": 156.58032,
+    "lat": 68.81373,
     "name": "98K-006",
     "image": "imgs/Road-Icons/road_f98k06.png"
   },
@@ -214,17 +214,5 @@ window.ROAD_NAMES = [
     "lat": 61.81233,
     "name": "98K-005",
     "image": "imgs/Road-Icons/road_f98k05.png"
-  },
-  {
-    "lon": 164.37139,
-    "lat": 68.20569,
-    "name": "77K-003",
-    "image": "imgs/Road-Icons/road_f77k03.png"
-  },
-  {
-    "lon": 165.69977,
-    "lat": 68.09551,
-    "name": "77K-004",
-    "image": "imgs/Road-Icons/road_f77k04.png"
   }
 ];

@@ -20,7 +20,6 @@ window.USER_PHOTOS = [
     { name: "End of village Nalimsk.", lon: 153.39240, lat: 67.44037, photo: "imgs/gallery/Photo25.png", user: "BlueScorpion", desc: "End of village Nalimsk." },
     { name: "Start of village Nalimsk.", lon: 153.37182, lat: 67.38587, photo: "imgs/gallery/Photo17.jpg", user: "_sab.ier_", desc: "Start of village Nalimsk." },
     { name: "Bridge over river Azalea in Argaktakh.", lon: 153.64557, lat: 67.87290, photo: "imgs/gallery/Photo18.jpg", user: "_sab.ier_", desc: "Bridge over river Azalea in Argaktakh." },
-    { name: "In the Kolyma river wildernes.", lon: 157.21827, lat: 68.43946, photo: "imgs/gallery/Photo19.jpg", user: "_sab.ier_", desc: "In the Kolyma river wildernes." },
     { name: "River port in Chersky.", lon: 160.94648, lat: 68.81818, photo: "imgs/gallery/Photo20.jpg", user: "_sab.ier_", desc: "River port in Chersky." },
     { name: "Abandoned settlement of Kular in the background.", lon: 133.72645, lat: 70.26662, photo: "imgs/gallery/Photo21.png", user: "NordGeez", desc: "Abandoned settlement of Kular in the background." },
     { name: "Port of Markha on River Lena (Yakutsk).", lon: 129.46469, lat: 61.73217, photo: "imgs/gallery/Photo22.png", user: "NordGeez", desc: "Port of Markha on River Lena (Yakutsk)." },
@@ -28,7 +27,7 @@ window.USER_PHOTOS = [
     { name: "Railway near Nizhniy Bestiakh.", lon: 129.39463, lat: 61.23510, photo: "imgs/gallery/Photo24.png", user: "NordGeez", desc: "Railway near Nizhniy Bestiakh." },
     { name: "Port on river aldan near Khandyga.", lon: 133.73554, lat: 62.48752, photo: "imgs/gallery/Photo26.png", user: "Mr_Jp_", desc: "Port on river aldan near Khandyga." },
 
-// --------------------------- OWNER PHOTOS ---------------------------
+    // --------------------------- OWNER PHOTOS ---------------------------
 
     { name: "Khonuu 1", lon: 143.06181, lat: 65.92423, photo: "imgs/ownerphoto/img1.png", user: "Aduskaaa", desc: "Enterance to khonuu." },
     { name: "Khonuu 2", lon: 143.03228, lat: 65.93474, photo: "imgs/ownerphoto/img2.png", user: "Aduskaaa", desc: "Khonuu gas station." },
@@ -60,7 +59,7 @@ window.USER_PHOTOS = [
     { name: "Dzhebariki-Khaya", lon: 135.56419, lat: 62.14557, photo: "imgs/ownerphoto/img20.png", user: "Aduskaaa", desc: "Start of Dzhebariki-Khaya." },
     { name: "Solondo", lon: 135.45482, lat: 62.19627, photo: "imgs/ownerphoto/img21.png", user: "Aduskaaa", desc: "The settlement of Solondo." },
 
-    
+
     { name: "Tiksi 1", lon: 128.41586, lat: 71.57539, photo: "imgs/ownerphoto/img22.png", user: "Aduskaaa", desc: "Tiksi in the background." },
     { name: "Tiksi 2", lon: 128.54393, lat: 71.46496, photo: "imgs/ownerphoto/img23.png", user: "Aduskaaa", desc: "Tiksi ferry." },
     { name: "Tiksi 3", lon: 128.37344, lat: 71.49884, photo: "imgs/ownerphoto/img24.png", user: "Aduskaaa", desc: "Tiksi panel intersection." },
@@ -69,16 +68,6 @@ window.USER_PHOTOS = [
 
 
     { name: "Nayba", lon: 130.34136, lat: 70.73151, photo: "imgs/ownerphoto/img27.png", user: "Aduskaaa", desc: "panoramatic view of Nayba." },
-
-    { name: "Sacha -> Chukotka Border", lon: 163.99504, lat: 68.29215, photo: "imgs/ownerphoto/img28.png", user: "Aduskaaa", desc: "Sacha -> Chukotka Border." },
-    { name: "77K-003 1", lon: 164.14670, lat: 68.26994, photo: "imgs/ownerphoto/img29.png", user: "Aduskaaa", desc: "Bridge over some river." },
-    { name: "77K-003 2", lon: 164.31957, lat: 68.20697, photo: "imgs/ownerphoto/img32.png", user: "Aduskaaa", desc: "Some stream of water is going thru here." },
-    { name: "77K-003 3", lon: 164.17925, lat: 68.27052, photo: "imgs/ownerphoto/img30.png", user: "Aduskaaa", desc: "Road bend." },
-    { name: "77K-003 4", lon: 164.25554, lat: 68.22442, photo: "imgs/ownerphoto/img31.png", user: "Aduskaaa", desc: "Road bend." },
-    { name: "77K-003 5", lon: 164.96785, lat: 68.09990, photo: "imgs/ownerphoto/img33.png", user: "Aduskaaa", desc: "Sharp road bend after bridge." },
-    { name: "77K-003 6", lon: 165.42634, lat: 68.09484, photo: "imgs/ownerphoto/img34.png", user: "Aduskaaa", desc: "Exit from Bilibino." },
-    { name: "77K-003 7", lon: 165.36497, lat: 68.11629, photo: "imgs/ownerphoto/img35.png", user: "Aduskaaa", desc: "Serpentines near Bilibino." },
-    { name: "77K-003 8", lon: 165.26279, lat: 68.11297, photo: "imgs/ownerphoto/img36.png", user: "Aduskaaa", desc: "View from serpentines near Bilibino." },
 
     { name: "Markha - Yakutsk 1", lon: 129.57956, lat: 61.78680, photo: "imgs/ownerphoto/img37.png", user: "Aduskaaa", desc: "Markha Port." },
     { name: "Markha - Yakutsk 2", lon: 129.52458, lat: 61.81008, photo: "imgs/ownerphoto/img38.png", user: "Aduskaaa", desc: "Markha road bend." },

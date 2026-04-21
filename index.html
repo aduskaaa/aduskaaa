@@ -13,6 +13,101 @@
 </head>
 
 <body>
+
+
+
+  <!-- <div id="popup" style="
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+">
+
+    <div style="
+    text-align: center;
+    padding: 30px;
+    border-radius: 16px;
+    background: #111;
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    max-width: 400px;
+    width: 90%;
+  ">
+      <h1 style="margin-bottom: 10px;">V1 release in:</h1>
+
+      <div id="countdown" style="
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    "></div>
+
+      <p style="opacity: 0.8; margin-bottom: 20px;">
+        Join Discord for updates
+      </p>
+
+      <a href="https://discord.gg/SSWDJMauxz" target="_blank" style="
+      display: inline-block;
+      padding: 10px 18px;
+      background: #5865F2;
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 10px;
+    ">
+        Join Discord
+      </a>
+
+      <br>
+
+      <button onclick="closePopup()" style="
+      margin-top: 10px;
+      background: transparent;
+      border: none;
+      color: #aaa;
+      cursor: pointer;
+    ">
+        close
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const targetDate = new Date("2026-05-01T20:00:00+02:00"); // CEST
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerText = "LIVE";
+        return;
+      }
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("countdown").innerText =
+        `${d}d ${h}h ${m}m ${s}s`;
+    }
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+
+  -->
+
   <header class="header" id="site-header" aria-label="Top Navigation"></header>
 
   <main>
@@ -31,7 +126,7 @@
           <div class="badges">
             <span class="badge">Actively Maintained</span>
             <span class="badge">Optimized</span>
-            <span class="badge">1.58 Ready</span>
+            <span class="badge">1.59 Ready</span>
           </div>
         </div>
       </div>
@@ -98,6 +193,27 @@
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
               <a class="button button-primary" href="chukotka-addon.html">Open Page</a>
               <a class="button button-secondary" href="chukotka-addon.html#download">Download</a>
+            </div>
+          </article>
+          <article class="rc-card">
+            <div>
+              <h3>West Yacutia Addon</h3>
+              <div class="meta">Explore the Western Yacutia — Go to explore interesting area behind Lena river.</div>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="button button-primary" href="west-yacutia-addon.html">Open Page</a>
+              <a class="button button-secondary" href="west-yacutia-addon.html#download">Download</a>
+            </div>
+          </article>
+          <article class="rc-card">
+            <div>
+              <h3>Sakha Addon</h3>
+              <div class="meta">Explore the Oymyakon area - The coldest place on Earth.</div>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="button button-primary" href="sakha-addon.html">Open Page</a>
+              <a class="button button-secondary"
+                href="https://truckymods.io/euro-truck-simulator-2/maps/sakha-add-on-337044">Download (TruckyMods)</a>
             </div>
           </article>
         </div>

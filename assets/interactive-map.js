@@ -84,7 +84,7 @@
             // Calculate dimensions to match original image size (1:1 pixel scale at zoom 1.0)
             // This prevents stretching/squishing by respecting the map's projection calibration
             if (state.calibration.sx !== 0 && state.calibration.sy !== 0) {
-                const scaleFactor = 4.3; // User requested 250% size
+                const scaleFactor = 4.4; // User requested 250% size
                 state.background.widthInMapUnits = (bgImg.width / state.calibration.sx) * scaleFactor;
                 state.background.heightInMapUnits = (bgImg.height / Math.abs(state.calibration.sy)) * scaleFactor;
             }
