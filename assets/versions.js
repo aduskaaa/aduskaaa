@@ -281,7 +281,7 @@ window.RELEASES = {
         requires: ["FER V1", "ETS2 1.58/1.59", "FER - CHKTLA RC"],
         notes: "Addon for Chukotka region. Contains Legacy areas.",
         links: {
-          primary: "https://modsfire.com/QBJLwa7DpEC6NCN",
+          primary: "https://modsfire.com/b4tt1s2p3oH25F7",
           mirror1: "",
           changelog: ""
         }
