@@ -191,7 +191,8 @@ window.SITE = {
     donations: [
       { name: "laur1sxd", amount: "40,42 EUR" },
       { name: "Artie", amount: "4,11 EUR" },
-      { name: "Delby", amount: "3,51 EUR" }
+      { name: "Delby", amount: "3,51 EUR" },
+      { name: "Killermix", amount: "0,82 EUR" }
     ],
     showcase: [
       { name: "Bogdac", text: "Created many awesome videos from this map & included it in combos" },
