@@ -312,11 +312,11 @@ window.RELEASES = {
     westYacutia: [
       {
         version: "v1",
-        date: "Estimated release: end of May 2026",
-        requires: ["FER v1", "ETS2 1.59", "FER - West Yacutia RC"],
+        date: "2026-05-02",
+        requires: ["FER v1", "ETS2 1.59", "Transsiberian Truckway", "Off The Grid Russia"],
         notes: "Addon for West Yacutia region. Contains new cities, roads, and other content.",
         links: {
-          primary: "",
+          primary: "https://truckymods.io/euro-truck-simulator-2/maps/western-yakutia-354564#nav-builds",
           mirror1: "",
           changelog: ""
         }
@@ -326,7 +326,7 @@ window.RELEASES = {
       {
         version: "v1",
         date: "2026-04-06",
-        requires: ["FER Alpha 30 FIX 2 / V1", "ETS2 1.58"],
+        requires: ["FER Alpha 30 FIX 2 / V1", "ETS2 1.58/1.59"],
         notes: "Addon for Sakha region. Contains new cities, roads, and other content.",
         links: {
           primary: "https://truckymods.io/euro-truck-simulator-2/maps/sakha-add-on-337044",
