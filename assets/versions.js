@@ -329,7 +329,7 @@ window.RELEASES = {
         requires: ["FER Alpha 30 FIX 2 / V1", "ETS2 1.58/1.59"],
         notes: "Addon for Sakha region. Contains new cities, roads, and other content.",
         links: {
-          primary: "https://truckymods.io/euro-truck-simulator-2/maps/sakha-add-on-337044",
+          primary: "https://modsfire.com/TlKCT9gDJQq5ISb",
           mirror1: "",
           changelog: ""
         }
