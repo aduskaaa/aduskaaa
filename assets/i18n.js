@@ -308,7 +308,7 @@
       "addons.sakha.desc": "Исследуйте район Оймякона — самое холодное место на Земле.",
       "addons.openPage": "Открыть страницу",
       "addons.download": "Скачать",
-      "addons.downloadTrucky": "Скачать (TruckyMods)",
+      "addons.downloadTrucky": "Скачать (nachoriosmods)",
 
       "rcs.h2": "Road Connections (RCs)",
       "rcs.lead":
