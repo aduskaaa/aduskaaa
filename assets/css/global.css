@@ -1054,3 +1054,165 @@ main> :nth-child(7) {
         grid-template-columns: 1fr;
     }
 }
+
+/* ========== LANGUAGE SWITCH (header) ========== */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .4px;
+    user-select: none;
+}
+
+.lang-switch button {
+    background: none;
+    border: none;
+    color: var(--muted);
+    padding: 4px 8px;
+    cursor: pointer;
+    font: inherit;
+    letter-spacing: inherit;
+    border-radius: 6px;
+    transition: color var(--transition), background var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.lang-switch .flag {
+    display: inline-flex;
+    width: 18px;
+    height: 12px;
+}
+
+.lang-switch .flag-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 1px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .12);
+}
+
+.lang-switch button:hover {
+    color: var(--text-bright);
+    background: rgba(255, 255, 255, .06);
+}
+
+.lang-switch button.active {
+    color: var(--text-bright);
+}
+
+.lang-switch .sep {
+    color: var(--muted);
+    opacity: .5;
+    padding: 0 1px;
+}
+
+/* ========== LANGUAGE PICKER (modal) ========== */
+.lang-picker-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+    animation: lang-fade-in .2s ease-out;
+}
+
+@keyframes lang-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.lang-picker-modal {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .6);
+}
+
+.lang-picker-modal h2 {
+    margin: 0 0 14px;
+    font-size: 22px;
+    color: var(--text-bright);
+    line-height: 1.25;
+}
+
+.lang-picker-subhead {
+    display: block;
+    font-size: 16px;
+    color: var(--muted);
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+.lang-picker-modal p {
+    color: var(--muted);
+    margin: 0 0 10px;
+    font-size: 13.5px;
+    line-height: 1.55;
+}
+
+.lang-picker-ru {
+    margin-bottom: 22px !important;
+}
+
+.lang-picker-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.lang-picker-buttons button {
+    flex: 1;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 13px 20px;
+    border-radius: var(--radius);
+    font: inherit;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background var(--transition), border-color var(--transition), color var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.lang-picker-buttons .flag {
+    display: inline-flex;
+    width: 28px;
+    height: 19px;
+}
+
+.lang-picker-buttons .flag-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .15);
+}
+
+.lang-picker-buttons button:hover {
+    background: var(--panel-hover);
+    border-color: var(--border-hover);
+    color: var(--text-bright);
+}
