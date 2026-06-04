@@ -91,7 +91,7 @@
       "addons.sakha.desc": "Explore the Oymyakon area – the coldest place on Earth.",
       "addons.openPage": "Open Page",
       "addons.download": "Download",
-      "addons.downloadTrucky": "Download (TruckyMods)",
+      "addons.downloadTrucky": "Download (nachoriosmods)",
 
       /* rcs */
       "rcs.h2": "Road Connections (RCs)",
