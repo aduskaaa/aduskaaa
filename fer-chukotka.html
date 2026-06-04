@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FER – Chukotka • Road Connection</title>
-  <meta name="description" content="FER to Chukotka road connection for ETS2: download and details.">
+  <meta name="description" content="FER to Chukotka road connection for ETS2: download, load order, and details.">
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="assets/css/global.css">
 </head>
@@ -23,43 +23,43 @@
 
     <section id="download" class="section">
       <div class="container card">
-        <h2>Latest Release</h2>
+        <h2 data-i18n="common.latestRelease">Latest Release</h2>
         <div id="rc-latest" class="version-item"></div>
       </div>
     </section>
 
     <section id="about" class="section">
       <div class="container card">
-        <h2>About This Road Connection</h2>
+        <h2 data-i18n="common.aboutThisRc">About This Road Connection</h2>
         <p class="description-text" id="page-description"></p>
-        <h3>Requirements</h3>
+        <h3 data-i18n="common.requirements">Requirements</h3>
         <div class="requirements" id="page-requirements"></div>
       </div>
     </section>
 
     <section id="loadorder" class="section">
       <div class="container card">
-        <h2>Load Order</h2>
-        <p style="color:var(--muted); font-size:14px; margin:0 0 8px;">Place mods in this priority (top = highest):</p>
+        <h2 data-i18n="common.loadOrder">Load Order</h2>
+        <p style="color:var(--muted); font-size:14px; margin:0 0 8px;" data-i18n="common.loadOrderHintShort">Place mods in this priority (top = highest):</p>
         <div id="load-order"></div>
       </div>
     </section>
 
     <section id="releases" class="section">
       <div class="container card">
-        <h2>All Releases</h2>
+        <h2 data-i18n="common.allReleases">All Releases</h2>
         <div id="rc-versions" class="versions-list" aria-label="RC releases list"></div>
       </div>
     </section>
 
     <section id="notes" class="section">
       <div class="container card">
-        <h2>Notes</h2>
+        <h2 data-i18n="common.notes">Notes</h2>
         <ul>
-          <li>Place the RC above both main maps in the Mod Manager</li>
-          <li>Required for the Chukotka Addon to connect with FER</li>
-          <li>Updated in sync with major FER releases</li>
-          <li>Report issues via <a href="https://discord.gg/SSWDJMauxz" target="_blank"
+          <li data-i18n="rcNotes.placeAbove">Place the RC above both main maps in the Mod Manager</li>
+          <li data-i18n="rcNotes.onlyInstall.chukotka">Only install if you use both FER and the Chukotka Addon</li>
+          <li data-i18n="rcNotes.syncedReleases">Updated in sync with major FER releases</li>
+          <li><span data-i18n="rcNotes.report">Report issues via</span> <a href="https://discord.gg/SSWDJMauxz" target="_blank"
               style="color:var(--text-bright)">Discord</a></li>
         </ul>
       </div>
@@ -70,6 +70,7 @@
 
   <script src="assets/site-data.js"></script>
   <script src="assets/versions.js"></script>
+  <script src="assets/i18n.js"></script>
   <script src="assets/site-renderer.js"></script>
   <script>
     (function () {
@@ -77,23 +78,33 @@
       var P = S && S.pages && S.pages.ferChukotka;
       if (!P) return;
 
-      var t = document.getElementById('page-title');
-      var tl = document.getElementById('page-tagline');
-      if (t) t.textContent = P.title;
-      if (tl) tl.textContent = P.tagline;
-
-      var desc = document.getElementById('page-description');
-      if (desc) desc.textContent = P.description;
-
-      var reqEl = document.getElementById('page-requirements');
-      if (reqEl && P.requirements) {
-        P.requirements.forEach(function (r) {
-          var span = document.createElement('span');
-          span.className = 'req-tag';
-          span.textContent = r;
-          reqEl.appendChild(span);
-        });
+      function loc(field) {
+        return (window.I18N && window.I18N.localize) ? window.I18N.localize(P, field) : P[field];
       }
+
+      function render() {
+        var t = document.getElementById('page-title');
+        var tl = document.getElementById('page-tagline');
+        if (t) t.textContent = loc('title');
+        if (tl) tl.textContent = loc('tagline');
+
+        var desc = document.getElementById('page-description');
+        if (desc) desc.textContent = loc('description');
+
+        var reqEl = document.getElementById('page-requirements');
+        if (reqEl) {
+          reqEl.innerHTML = "";
+          var reqs = loc('requirements') || [];
+          reqs.forEach(function (r) {
+            var span = document.createElement('span');
+            span.className = 'req-tag';
+            span.textContent = r;
+            reqEl.appendChild(span);
+          });
+        }
+      }
+      render();
+      if (window.I18N && window.I18N.onChange) window.I18N.onChange(render);
 
       var data = (window.RELEASES && window.RELEASES.rcs && window.RELEASES.rcs.chukotka) || [];
       var latest = document.getElementById('rc-latest');

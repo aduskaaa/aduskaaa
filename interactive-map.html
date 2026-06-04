@@ -100,13 +100,13 @@
     <main id="map-root">
         <div id="loading-screen" class="loader">
             <div class="spinner"></div>
-            <p style="margin-top:20px; font-weight:800; font-size:12px; letter-spacing:2px; color:#fff;">SYNCHRONIZING
+            <p style="margin-top:20px; font-weight:800; font-size:12px; letter-spacing:2px; color:#fff;" data-i18n="mapPage.loading">SYNCHRONIZING
                 MAP SECTORS...</p>
         </div>
 
         <div class="hud-top-left">
-            <h1>INTERACTIVE MAP</h1>
-            <p>Far East Russia • Map Version 1</p>
+            <h1 data-i18n="mapPage.title">INTERACTIVE MAP</h1>
+            <p data-i18n="mapPage.subtitle">Far East Russia • Map Version 1</p>
         </div>
 
         <canvas id="map-canvas"></canvas>
@@ -115,13 +115,15 @@
         <div id="ctx-menu"
             style="position: absolute; display: none; background: rgba(20,20,20,0.9); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); pointer-events: auto; min-width: 150px;">
             <div
-                style="font-size: 10px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px;">
+                style="font-size: 10px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px;"
+                data-i18n="mapPage.coords">
                 Map Coordinates</div>
             <div id="coords-display"
                 style="font-family: monospace; font-size: 11px; color: #fff; margin-bottom: 10px; background: rgba(0,0,0,0.3); padding: 8px; border-radius: 4px; user-select: all; line-height: 1.4;">
                 0, 0</div>
-            <button onclick="copyCoords()"
-                style="width: 100%; background: var(--accent); border: none; color: #fff; padding: 8px; border-radius: 4px; font-size: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase;">Copy
+            <button id="copy-coords-btn" onclick="copyCoords()"
+                style="width: 100%; background: var(--accent); border: none; color: #fff; padding: 8px; border-radius: 4px; font-size: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase;"
+                data-i18n="mapPage.copy">Copy
                 to Clipboard</button>
         </div>
 
@@ -131,32 +133,37 @@
             <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                 <input type="checkbox" id="toggle-photos" checked style="accent-color: var(--accent);">
                 <span
-                    style="font-size: 11px; font-weight: 800; color: #eee; text-transform: uppercase; letter-spacing: 1px;">User
+                    style="font-size: 11px; font-weight: 800; color: #eee; text-transform: uppercase; letter-spacing: 1px;"
+                    data-i18n="mapPage.userPhotos">User
                     Photos</span>
             </label>
             <div style="width: 1px; height: 15px; background: rgba(255,255,255,0.1);"></div>
             <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                 <input type="checkbox" id="toggle-road-names" checked style="accent-color: var(--accent);">
                 <span
-                    style="font-size: 11px; font-weight: 800; color: #eee; text-transform: uppercase; letter-spacing: 1px;">Road
+                    style="font-size: 11px; font-weight: 800; color: #eee; text-transform: uppercase; letter-spacing: 1px;"
+                    data-i18n="mapPage.roadNames">Road
                     Names</span>
             </label>
             <div style="width: 1px; height: 15px; background: rgba(255,255,255,0.1);"></div>
             <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                 <input type="checkbox" id="toggle-background" checked style="accent-color: var(--accent);">
                 <span
-                    style="font-size: 11px; font-weight: 800; color: #eee; text-transform: uppercase; letter-spacing: 1px;">Background
+                    style="font-size: 11px; font-weight: 800; color: #eee; text-transform: uppercase; letter-spacing: 1px;"
+                    data-i18n="mapPage.background">Background
                     Image</span>
             </label>
             <div style="width: 1px; height: 15px; background: rgba(255,255,255,0.1);"></div>
             <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                 <input type="checkbox" id="toggle-streetview" checked style="accent-color: var(--accent);">
                 <span
-                    style="font-size: 11px; font-weight: 800; color: #eee; text-transform: uppercase; letter-spacing: 1px;">Street
+                    style="font-size: 11px; font-weight: 800; color: #eee; text-transform: uppercase; letter-spacing: 1px;"
+                    data-i18n="mapPage.streetView">Street
                     View</span>
             </label>
             <div style="width: 1px; height: 15px; background: rgba(255,255,255,0.1);"></div>
-            <div style="font-size: 9px; color: var(--muted); font-weight: 700; text-transform: uppercase;">Right-click
+            <div style="font-size: 9px; color: var(--muted); font-weight: 700; text-transform: uppercase;"
+                data-i18n="mapPage.rightClickHint">Right-click
                 to get coordinates</div>
         </div>
 
@@ -209,7 +216,7 @@
                     <div>
                         <h2
                             style="margin: 0; font-size: 18px; font-weight: 700; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; font-family: sans-serif;">
-                            Far East Russia Street View <span
+                            <span data-i18n="mapPage.svTitle">Far East Russia Street View</span> <span
                                 style="font-size: 10px; background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 6px; letter-spacing: 1px; vertical-align: middle;">BETA</span>
                         </h2>
                         <p id="sv-hud-subtitle"
@@ -243,6 +250,7 @@
     </main>
 
     <script src="assets/site-data.js"></script>
+    <script src="assets/i18n.js"></script>
     <script src="assets/site-renderer.js"></script>
     <script src="assets/custom-companies.js"></script>
     <script src="assets/user-photos.js"></script>
@@ -262,10 +270,18 @@
             navigator.clipboard.writeText(text).then(() => {
                 const btn = event.target;
                 const originalText = btn.innerText;
-                btn.innerText = 'COPIED!';
+                const copiedLabel = (window.I18N && window.I18N.t)
+                    ? window.I18N.t('mapPage.copied')
+                    : 'COPIED!';
+                btn.innerText = copiedLabel;
                 btn.style.background = '#2ecc71';
                 setTimeout(() => {
-                    btn.innerText = originalText;
+                    /* restore via i18n so the label matches the active language */
+                    if (window.I18N && window.I18N.t) {
+                        btn.innerText = window.I18N.t('mapPage.copy');
+                    } else {
+                        btn.innerText = originalText;
+                    }
                     btn.style.background = '';
                 }, 1500);
             });

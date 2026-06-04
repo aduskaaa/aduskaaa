@@ -25,11 +25,11 @@
     <section id="download" class="section">
       <div class="container grid">
         <div class="card">
-          <h2>Latest Release</h2>
+          <h2 data-i18n="common.latestRelease">Latest Release</h2>
           <div id="fer-latest" class="version-item"></div>
         </div>
         <div class="card">
-          <h2>Quick Stats</h2>
+          <h2 data-i18n="common.quickStats">Quick Stats</h2>
           <div id="fer-stats" class="stats-grid"></div>
         </div>
       </div>
@@ -37,14 +37,14 @@
 
     <section id="about" class="section">
       <div class="container card">
-        <h2>About the Map</h2>
+        <h2 data-i18n="common.aboutTheMap">About the Map</h2>
         <p class="description-text" id="page-description"></p>
       </div>
     </section>
 
     <section id="features" class="section">
       <div class="container">
-        <h2>What's Included</h2>
+        <h2 data-i18n="common.whatsIncluded">What's Included</h2>
         <div class="features" id="fer-features"></div>
       </div>
     </section>
@@ -52,16 +52,16 @@
     <section id="coverage" class="section">
       <div class="container grid">
         <div class="map-frame">
-          <img class="map-img" src="imgs/FER_AREA.png" alt="Map coverage preview">
+          <img class="map-img" src="imgs/FER_AREA.png" data-i18n-attr="alt:common.mapCoveragePreviewAlt" alt="Map coverage preview">
         </div>
         <div class="card">
-          <h2>Map Coverage</h2>
+          <h2 data-i18n="common.mapCoverage">Map Coverage</h2>
           <ul>
-            <li>7,000+ km of driveable roads across the Far Eastern Federal District</li>
-            <li>40+ detailed cities, towns, and remote settlements</li>
-            <li>River ferry crossings connecting isolated regions</li>
-            <li>Federal highways, regional roads, and unnamed dirt tracks</li>
-            <li>Continuous expansion with every release</li>
+            <li data-i18n="fer.coverage1">7,000+ km of driveable roads across the Far Eastern Federal District</li>
+            <li data-i18n="fer.coverage2">40+ detailed cities, towns, and remote settlements</li>
+            <li data-i18n="fer.coverage3">River ferry crossings connecting isolated regions</li>
+            <li data-i18n="fer.coverage4">Federal highways, regional roads, and unnamed dirt tracks</li>
+            <li data-i18n="fer.coverage5">Continuous expansion with every release</li>
           </ul>
         </div>
       </div>
@@ -69,15 +69,15 @@
 
     <section id="install" class="section">
       <div class="container card">
-        <h2>Installation Guide</h2>
+        <h2 data-i18n="common.installationGuide">Installation Guide</h2>
         <ol class="install-steps" id="fer-install"></ol>
       </div>
     </section>
 
     <section id="loadorder" class="section">
       <div class="container card">
-        <h2>Load Order</h2>
-        <p style="color:var(--muted); font-size:14px; margin:0 0 8px;">Place mods in your ETS2 Mod Manager in this
+        <h2 data-i18n="common.loadOrder">Load Order</h2>
+        <p style="color:var(--muted); font-size:14px; margin:0 0 8px;" data-i18n="common.loadOrderHint">Place mods in your ETS2 Mod Manager in this
           priority (top = highest priority):</p>
         <div id="load-order"></div>
       </div>
@@ -85,7 +85,7 @@
 
     <section id="releases" class="section">
       <div class="container card">
-        <h2>All Releases</h2>
+        <h2 data-i18n="common.allReleases">All Releases</h2>
         <div id="fer-versions" class="versions-list" aria-label="FER releases list"></div>
       </div>
     </section>
@@ -95,6 +95,7 @@
 
   <script src="assets/site-data.js"></script>
   <script src="assets/versions.js"></script>
+  <script src="assets/i18n.js"></script>
   <script src="assets/site-renderer.js"></script>
   <script>
     (function () {
@@ -102,49 +103,58 @@
       var P = S && S.pages && S.pages.fer;
       if (!P) return;
 
-      /* Title & tagline */
-      var t = document.getElementById('page-title');
-      var tl = document.getElementById('page-tagline');
-      if (t) t.textContent = P.title;
-      if (tl) tl.textContent = P.tagline;
-
-      /* Description */
-      var desc = document.getElementById('page-description');
-      if (desc) desc.textContent = P.description;
-
-      /* Stats */
-      var statsEl = document.getElementById('fer-stats');
-      if (statsEl && P.stats) {
-        P.stats.forEach(function (s) {
-          var card = document.createElement('div');
-          card.className = 'stat-card';
-          card.innerHTML = '<div class="stat-value">' + s.value + '</div><div class="stat-label">' + s.label + '</div>';
-          statsEl.appendChild(card);
-        });
+      function loc(field) {
+        return (window.I18N && window.I18N.localize) ? window.I18N.localize(P, field) : P[field];
       }
 
-      /* Features */
-      var featEl = document.getElementById('fer-features');
-      if (featEl && P.features) {
-        P.features.forEach(function (f) {
-          var card = document.createElement('article');
-          card.className = 'feature-card';
-          card.innerHTML = '<span class="feature-icon">' + f.icon + '</span><h3>' + f.title + '</h3><p>' + f.text + '</p>';
-          featEl.appendChild(card);
-        });
-      }
+      function render() {
+        var t = document.getElementById('page-title');
+        var tl = document.getElementById('page-tagline');
+        if (t) t.textContent = loc('title');
+        if (tl) tl.textContent = loc('tagline');
 
-      /* Install steps */
-      var instEl = document.getElementById('fer-install');
-      if (instEl && P.installSteps) {
-        P.installSteps.forEach(function (step) {
-          var li = document.createElement('li');
-          li.innerHTML = step;
-          instEl.appendChild(li);
-        });
-      }
+        var desc = document.getElementById('page-description');
+        if (desc) desc.textContent = loc('description');
 
-      /* Versions */
+        var statsEl = document.getElementById('fer-stats');
+        if (statsEl) {
+          statsEl.innerHTML = "";
+          var stats = loc('stats') || [];
+          stats.forEach(function (s) {
+            var card = document.createElement('div');
+            card.className = 'stat-card';
+            card.innerHTML = '<div class="stat-value">' + s.value + '</div><div class="stat-label">' + s.label + '</div>';
+            statsEl.appendChild(card);
+          });
+        }
+
+        var featEl = document.getElementById('fer-features');
+        if (featEl) {
+          featEl.innerHTML = "";
+          var feats = loc('features') || [];
+          feats.forEach(function (f) {
+            var card = document.createElement('article');
+            card.className = 'feature-card';
+            card.innerHTML = '<span class="feature-icon">' + f.icon + '</span><h3>' + f.title + '</h3><p>' + f.text + '</p>';
+            featEl.appendChild(card);
+          });
+        }
+
+        var instEl = document.getElementById('fer-install');
+        if (instEl) {
+          instEl.innerHTML = "";
+          var steps = loc('installSteps') || [];
+          steps.forEach(function (step) {
+            var li = document.createElement('li');
+            li.innerHTML = step;
+            instEl.appendChild(li);
+          });
+        }
+      }
+      render();
+      if (window.I18N && window.I18N.onChange) window.I18N.onChange(render);
+
+      /* Versions are not language-dependent */
       var releases = (window.RELEASES && window.RELEASES.fer) || [];
       var latest = document.getElementById('fer-latest');
       if (releases.length && latest && window.makeVersionItem) {
