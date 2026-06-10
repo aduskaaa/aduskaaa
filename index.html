@@ -310,12 +310,10 @@ const container = document.getElementById("supporters-data");
 
 container.innerHTML = sorted.map((d, i) => `
   <div class="supporter-row">
-    <span class="metal-text ${getTierClass(i)}">
-      ${d.name}
-    </span>
-    <span class="amount">
-      ${d.amount}
-    </span>
+  <div class="supporter-card ${getTierClass(i)}">
+    <span class="name">${d.name}</span>
+    <span class="amount">${d.amount}</span>
+  </div>
   </div>
 `).join("");
   </script>
