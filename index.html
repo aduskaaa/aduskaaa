@@ -290,6 +290,34 @@
   <script src="assets/site-data.js"></script>
   <script src="assets/i18n.js"></script>
   <script src="assets/site-renderer.js"></script>
+  <script>
+    function parseAmount(amountStr) {
+  return parseFloat(amountStr.replace(",", "."));
+}
+
+function getTierClass(index) {
+  if (index === 0) return "gold-text";
+  if (index === 1) return "silver-text";
+  if (index === 2) return "bronze-text";
+  return "white-text";
+}
+
+const sorted = [...SITE.supporters.donations]
+  .sort((a, b) => parseAmount(b.amount) - parseAmount(a.amount));
+
+const container = document.getElementById("supporters-data");
+
+container.innerHTML = sorted.map((d, i) => `
+  <div class="supporter-row">
+    <span class="glow-text ${getTierClass(i)}">
+      ${d.name}
+    </span>
+    <span class="amount">
+      ${d.amount}
+    </span>
+  </div>
+`).join("");
+  </script>
 </body>
 
 </html>
