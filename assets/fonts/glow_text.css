@@ -26,12 +26,3 @@
   text-shadow: 0 0 6px rgba(205,127,50,0.5);
 }
 
-.glow-text {
-  display: inline-block;
-  font-size: 22px;
-  font-weight: 900;
-  background-size: 300%;
-  animation:
-    gradientFlow 4s infinite linear,
-    pulse 2.3s infinite alternate ease-in-out;
-}
