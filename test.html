@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdSense Test Page</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 40px auto;
+            max-width: 800px;
+            padding: 0 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .ad-container {
+            margin: 40px 0;
+            padding: 20px;
+            border: 2px dashed #ccc;
+            background: #fff;
+            border-radius: 8px;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .info {
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>AdSense Test Page</h1>
+    <p>Below is the Google AdSense unit container:</p>
+    
+    <div class="ad-container">
+        <!-- AdSense Code Starts -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8634469444021702"
+             crossorigin="anonymous"></script>
+        <!-- test -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-8634469444021702"
+             data-ad-slot="3133328743"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        <!-- AdSense Code Ends -->
+    </div>
+    
+    <p class="info">Verify via browser network/developer tools if <code>adsbygoogle.js</code> loads and makes calls.</p>
+</body>
+</html>
