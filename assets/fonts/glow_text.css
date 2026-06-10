@@ -1,45 +1,29 @@
 .white-text {
-  background: linear-gradient(90deg, #ffffff, #e8e8e8, #ffffff);
+  background: linear-gradient(90deg, #ffffff, #e6e6e6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 0.7px #666;
-  text-shadow:
-    0 0 2px #ffffff,
-    0 0 4px #f0f0f0,
-    0 0 8px #ffffff;
+  text-shadow: 0 0 2px rgba(255,255,255,0.4);
 }
 
 .silver-text {
   background: linear-gradient(90deg, #f5f5f5, #c0c0c0, #e8e8e8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 0.7px #555;
-  text-shadow:
-    0 0 2px #d8d8d8,
-    0 0 4px #c0c0c0,
-    0 0 8px #a0a0a0;
+  text-shadow: 0 0 4px rgba(192,192,192,0.5);
 }
 
 .gold-text {
   background: linear-gradient(90deg, #fff4b0, #ffd700, #ffb700);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 0.7px #6b5000;
-  text-shadow:
-    0 0 2px #ffe066,
-    0 0 6px #ffd700,
-    0 0 10px #ffb700;
+  text-shadow: 0 0 6px rgba(255,215,0,0.6);
 }
 
 .bronze-text {
   background: linear-gradient(90deg, #e6b17a, #cd7f32, #9c5b21);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 0.7px #4d2a0f;
-  text-shadow:
-    0 0 2px #d89a5b,
-    0 0 6px #cd7f32,
-    0 0 10px #9c5b21;
+  text-shadow: 0 0 6px rgba(205,127,50,0.5);
 }
 
 .glow-text {
