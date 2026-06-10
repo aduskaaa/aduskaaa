@@ -5,13 +5,14 @@
 .metal-text {
   position: relative;
   display: inline-block;
-  overflow: hidden;
 
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background-clip: text;
 
-  background-size: 200% 100%;
-  animation: metal-shimmer 3s linear infinite;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  z-index: 1;
 }
 
 /* moving shine layer */
