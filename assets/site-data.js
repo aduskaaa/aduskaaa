@@ -259,34 +259,6 @@ window.SITE = {
     }
   },
 
-  /* ---------- FAQ ---------- */
-  faq: [
-    {
-      q: "Where do I download the main FER map?",
-      a: "Use the dedicated <a href='fer.html'>FER page</a> for downloads and install guide."
-    },
-    {
-      q: "Are Road Connections (RCs) required?",
-      a: "No. RCs are optional connectors to other maps. Only install the ones for maps you actually use."
-    },
-    {
-      q: "What is the correct load order?",
-      a: "Place RCs above the main maps, with FER below them. Check the Load Order section on any download page for the exact order."
-    },
-    {
-      q: "Is FER compatible with ProMods or other map mods?",
-      a: "FER is designed for standalone use or with its official RCs (OTGR, TST, Chukotka). Compatibility with other major map mods is not guaranteed."
-    },
-    {
-      q: "How often is FER updated?",
-      a: "FER receives regular updates — typically every few weeks — adding new roads, cities, and bug fixes."
-    },
-    {
-      q: "I found a bug or visual glitch. How do I report it?",
-      a: "Join the <a href='https://discord.gg/SSWDJMauxz' target='_blank'>Discord server</a> and report it in the bug reports channel."
-    }
-  ],
-
   /* ---------- Supporters ---------- */
   supporters: {
     donations: [

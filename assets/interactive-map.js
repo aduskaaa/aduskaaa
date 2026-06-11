@@ -30,6 +30,8 @@
         viewX: 0,
         viewY: 0,
         zoom: 1.0,
+        minZoom: 0.01,
+        maxZoom: 2000,
         layers: {
             mapAreas: [],
             prefabs: [],
@@ -105,6 +107,8 @@
         setupToggles();
     }
 
+    let svTypicalSpacing = 0; // typical world-pixel distance between consecutive streetview points
+
     function processStreetView() {
         if (window.streetview_data) {
             window.streetview_data.forEach(sv => {
@@ -119,9 +123,81 @@
                     geometry: { type: "Point", coordinates: [sv.lon, sv.lat] },
                     _bounds: { minX: sv.lon, maxX: sv.lon, minY: sv.lat, maxY: sv.lat }
                 };
+                feature.properties.lodPriority = svLodPriority(sv.id);
+                feature._idx = state.layers.streetview.length; // index for openStreetViewModal
                 state.layers.streetview.push(feature);
             });
+            computeStreetviewSpacing();
+            buildStreetviewPolylines();
         }
+    }
+
+    // Groups of consecutive streetview points forming continuous road lines.
+    // A new group starts when ids are not sequential or the gap is too large.
+    let svPolylines = [];
+
+    function buildStreetviewPolylines() {
+        svPolylines = [];
+        const pts = state.layers.streetview;
+        if (pts.length === 0) return;
+        const maxGap = svTypicalSpacing * 6;
+
+        const makeGroup = (points) => {
+            let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+            points.forEach(f => {
+                const c = f.geometry.coordinates;
+                if (c[0] < minX) minX = c[0]; if (c[0] > maxX) maxX = c[0];
+                if (c[1] < minY) minY = c[1]; if (c[1] > maxY) maxY = c[1];
+            });
+            return { points, _bounds: { minX, minY, maxX, maxY } };
+        };
+
+        let current = [pts[0]];
+        for (let i = 1; i < pts.length; i++) {
+            const prev = pts[i - 1], cur = pts[i];
+            const a = transform(prev.geometry.coordinates[0], prev.geometry.coordinates[1]);
+            const b = transform(cur.geometry.coordinates[0], cur.geometry.coordinates[1]);
+            const isSequential = cur.properties.id - prev.properties.id === 1;
+            if (isSequential && Math.hypot(b.x - a.x, b.y - a.y) < maxGap) {
+                current.push(cur);
+            } else {
+                svPolylines.push(makeGroup(current));
+                current = [cur];
+            }
+        }
+        svPolylines.push(makeGroup(current));
+    }
+
+    function computeStreetviewSpacing() {
+        // Median distance between consecutive-id points (median ignores jumps between roads)
+        const dists = [];
+        const pts = state.layers.streetview;
+        for (let i = 1; i < pts.length; i++) {
+            if (pts[i].properties.id - pts[i - 1].properties.id !== 1) continue;
+            const a = transform(pts[i - 1].geometry.coordinates[0], pts[i - 1].geometry.coordinates[1]);
+            const b = transform(pts[i].geometry.coordinates[0], pts[i].geometry.coordinates[1]);
+            dists.push(Math.hypot(b.x - a.x, b.y - a.y));
+        }
+        if (dists.length === 0) return;
+        dists.sort((a, b) => a - b);
+        svTypicalSpacing = dists[Math.floor(dists.length / 2)];
+    }
+
+    // LOD priority from the bit-reversed id (van der Corput sequence): a dot is
+    // visible when its priority < visible fraction. Subsets are nested (zooming
+    // in only adds dots, never reshuffles) and stay evenly spaced along the road.
+    function svLodPriority(id) {
+        let v = 0, n = id >>> 0;
+        for (let i = 0; i < 16; i++) { v = (v << 1) | (n & 1); n >>>= 1; }
+        return v / 65536; // [0, 1)
+    }
+
+    // Fraction of streetview dots to show at the current zoom, so dots stay
+    // ~minScreenSpacing px apart on screen. Continuous — no discrete jumps.
+    function getStreetviewLodFraction() {
+        if (!svTypicalSpacing) return 1;
+        const minScreenSpacing = 14;
+        return Math.min(1, (svTypicalSpacing * state.zoom) / minScreenSpacing);
     }
 
     function processMarkers() {
@@ -287,8 +363,23 @@
             const zoomY = canvas.height / heightPx;
             state.zoom = Math.min(zoomX, zoomY) * 0.8;
 
+            // Zoom limits: out to slightly past the whole map, in until consecutive
+            // streetview captures are ~120px apart on screen
+            state.minZoom = state.zoom * 0.85;
+            state.maxZoom = svTypicalSpacing
+                ? Math.max(state.zoom * 50, 120 / svTypicalSpacing)
+                : state.zoom * 200;
+
             state.viewX = canvas.width / 2;
             state.viewY = canvas.height / 2;
+
+            // Map extent in world pixels, used to clamp panning
+            const wc1 = transform(totalMinX, totalMinY);
+            const wc2 = transform(totalMaxX, totalMaxY);
+            worldBounds = {
+                minX: Math.min(wc1.x, wc2.x), maxX: Math.max(wc1.x, wc2.x),
+                minY: Math.min(wc1.y, wc2.y), maxY: Math.max(wc1.y, wc2.y)
+            };
         }
 
         loader.style.opacity = '0';
@@ -298,9 +389,46 @@
     }
 
     // --- Interaction ---
+    let worldBounds = null;
+
+    // Keep the viewport inside the background PNG — panning can never reveal
+    // the empty space beyond the image edges. Falls back to the data extent
+    // if the background image is not loaded.
+    function clampView() {
+        let b = worldBounds;
+        const bg = state.background;
+        if (bg.isLoaded) {
+            const p = transform(bg.centerLon, bg.centerLat);
+            const w = bg.widthInMapUnits * state.calibration.sx;
+            const h = bg.heightInMapUnits * Math.abs(state.calibration.sy);
+            b = { minX: p.x - w / 2, maxX: p.x + w / 2, minY: p.y - h / 2, maxY: p.y + h / 2 };
+        }
+        if (!b) return;
+        const z = state.zoom;
+
+        // viewX range where the image still covers the whole viewport width
+        const minViewX = canvas.width - b.maxX * z;
+        const maxViewX = -b.minX * z;
+        if (minViewX > maxViewX) {
+            // image narrower than viewport at this zoom → keep it centered
+            state.viewX = (minViewX + maxViewX) / 2;
+        } else {
+            state.viewX = Math.max(minViewX, Math.min(maxViewX, state.viewX));
+        }
+
+        const minViewY = canvas.height - b.maxY * z;
+        const maxViewY = -b.minY * z;
+        if (minViewY > maxViewY) {
+            state.viewY = (minViewY + maxViewY) / 2;
+        } else {
+            state.viewY = Math.max(minViewY, Math.min(maxViewY, state.viewY));
+        }
+    }
+
     function resize() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight - 62;
+        clampView();
         requestAnimationFrame(render);
     }
     window.addEventListener('resize', resize);
@@ -320,6 +448,7 @@
         state.viewY += e.clientY - lastY;
         lastX = e.clientX;
         lastY = e.clientY;
+        clampView();
         requestAnimationFrame(render);
     };
 
@@ -331,9 +460,10 @@
         const worldX = (mouseX - state.viewX) / state.zoom;
         const worldY = (mouseY - state.viewY) / state.zoom;
         state.zoom *= factor;
-        state.zoom = Math.max(0.01, Math.min(2000, state.zoom));
+        state.zoom = Math.max(state.minZoom, Math.min(state.maxZoom, state.zoom));
         state.viewX = mouseX - worldX * state.zoom;
         state.viewY = mouseY - worldY * state.zoom;
+        clampView();
         requestAnimationFrame(render);
     };
 
@@ -421,16 +551,42 @@
         });
 
         if (state.toggles.streetview) {
-            state.layers.streetview.forEach((f, index) => {
+            // Find the streetview capture nearest to the click, measured against
+            // the coverage line segments (so clicking anywhere on the line works)
+            const clickThreshold = 12;
+            let best = { dist: Infinity, index: -1 };
+
+            const toScreen = (f) => {
                 const p = transform(f.geometry.coordinates[0], f.geometry.coordinates[1]);
-                const sx = p.x * state.zoom + state.viewX;
-                const sy = p.y * state.zoom + state.viewY;
-                const dist = Math.sqrt((mouseX - sx) ** 2 + (mouseY - sy) ** 2);
-                if (dist < 15) {
-                    openStreetViewModal(index);
-                    return; // Prevent further clicks
+                return { x: p.x * state.zoom + state.viewX, y: p.y * state.zoom + state.viewY };
+            };
+
+            svPolylines.forEach(line => {
+                const pts = line.points;
+                if (pts.length === 1) {
+                    const s = toScreen(pts[0]);
+                    const d = Math.hypot(mouseX - s.x, mouseY - s.y);
+                    if (d < best.dist) best = { dist: d, index: pts[0]._idx };
+                    return;
+                }
+                let prev = toScreen(pts[0]);
+                for (let i = 1; i < pts.length; i++) {
+                    const cur = toScreen(pts[i]);
+                    const dx = cur.x - prev.x, dy = cur.y - prev.y;
+                    const len2 = dx * dx + dy * dy;
+                    let t = len2 ? ((mouseX - prev.x) * dx + (mouseY - prev.y) * dy) / len2 : 0;
+                    t = Math.max(0, Math.min(1, t));
+                    const d = Math.hypot(mouseX - (prev.x + t * dx), mouseY - (prev.y + t * dy));
+                    if (d < best.dist) {
+                        best = { dist: d, index: (t < 0.5 ? pts[i - 1] : pts[i])._idx };
+                    }
+                    prev = cur;
                 }
             });
+
+            if (best.dist < clickThreshold && best.index !== -1) {
+                openStreetViewModal(best.index);
+            }
         }
     };
 
@@ -951,17 +1107,35 @@
             });
         }
 
-        // 7. Street View Markers
+        // 7. Street View Coverage Lines
         if (state.toggles.streetview) {
-            state.layers.streetview.forEach(f => {
-                if (!isVisible(f._bounds)) return;
+            const svLod = getStreetviewLodFraction();
+            const lonePoints = [];
+            ctx.beginPath();
+            svPolylines.forEach(line => {
+                if (!isVisible(line._bounds)) return;
+                const pts = line.points;
+                if (pts.length === 1) { lonePoints.push(pts[0]); return; }
+                let started = false;
+                for (let i = 0; i < pts.length; i++) {
+                    const f = pts[i];
+                    // LOD: simplify the line when zoomed out, but keep endpoints
+                    if (i !== 0 && i !== pts.length - 1 && f.properties.lodPriority >= svLod) continue;
+                    const p = transform(f.geometry.coordinates[0], f.geometry.coordinates[1]);
+                    if (!started) { ctx.moveTo(p.x, p.y); started = true; }
+                    else ctx.lineTo(p.x, p.y);
+                }
+            });
+            ctx.strokeStyle = "#FFD700";
+            ctx.lineWidth = 3 / zoom;
+            ctx.lineCap = "round"; ctx.lineJoin = "round";
+            ctx.stroke();
+
+            // Isolated captures with no neighbours still show as dots
+            lonePoints.forEach(f => {
                 const p = transform(f.geometry.coordinates[0], f.geometry.coordinates[1]);
-                const size = 8 / zoom;
-                ctx.fillStyle = "#FFD700"; // Gold color for streetview markers
-                ctx.strokeStyle = "#fff";
-                ctx.lineWidth = 1.5 / zoom;
-                ctx.beginPath(); ctx.arc(p.x, p.y, size / 2, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-                if (zoom > 1.0) { ctx.font = `bold ${9 / zoom}px sans-serif`; ctx.fillStyle = "#FFD700"; ctx.fillText("SV: " + f.properties.id, p.x, p.y + 12 / zoom); }
+                ctx.fillStyle = "#FFD700"; ctx.strokeStyle = "#fff"; ctx.lineWidth = 1 / zoom;
+                ctx.beginPath(); ctx.arc(p.x, p.y, 3 / zoom, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
             });
         }
 
