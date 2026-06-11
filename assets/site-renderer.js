@@ -136,15 +136,25 @@
     var supEl = document.getElementById("supporters-data");
     if (supEl && S.supporters) {
         var html = "";
+        var tierClass = function (i) {
+            return i === 0 ? 'gold-text' : i === 1 ? 'silver-text' : i === 2 ? 'bronze-text' : 'white-text';
+        };
         if (S.supporters.donations && S.supporters.donations.length) {
             html += "<strong" + i18nAttr("supporters.donations") + ">Donations:</strong>";
-            S.supporters.donations.forEach(function (d) {
-                html +=
-                    '<div class="supporter-row">' +
-                    '<div class="glow-text">' + d.name + "</div>" +
-                    "<span>" + d.amount + " &lt;3</span>" +
-                    "</div>";
-            });
+            var donationPill = function (d, i) {
+                return '<span class="supporter-name-wrap ' + tierClass(i) + '">' +
+                    d.name +
+                    '<span class="amount">' + d.amount + ' &lt;3</span>' +
+                    '</span>';
+            };
+            /* three pills per row, left-aligned, natural widths */
+            for (var di = 0; di < S.supporters.donations.length; di += 3) {
+                html += '<div class="supporter-row supporter-row-group">';
+                S.supporters.donations.slice(di, di + 3).forEach(function (d, j) {
+                    html += donationPill(d, di + j);
+                });
+                html += '</div>';
+            }
         }
         if (S.supporters.showcase && S.supporters.showcase.length) {
             html += "<strong" + i18nAttr("supporters.showcase") + ">Showcase:</strong>";
@@ -152,7 +162,7 @@
                 var textAttr = s.i18nKey ? i18nAttr(s.i18nKey) : "";
                 html +=
                     '<div class="supporter-row">' +
-                    '<div class="glow-text">' + s.name + "</div>" +
+                    '<span class="supporter-name-wrap white-text">' + s.name + '</span>' +
                     "<span" + textAttr + ">" + s.text + " &lt;3</span>" +
                     "</div>";
             });
