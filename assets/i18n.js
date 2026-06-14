@@ -38,7 +38,6 @@
       "footer.Map": "Map",
       "footer.Gallery": "Gallery",
       "footer.Versions": "Versions",
-      "footer.StreetView": "StreetView",
       "footer.Support": "Support",
       "footer.copy": "Far East Russia · ETS2 Map Mod",
 
@@ -90,8 +89,10 @@
       "addons.sakha.title": "Sakha Addon",
       "addons.sakha.desc": "Explore the Oymyakon area – the coldest place on Earth.",
       "addons.openPage": "Open Page",
+      "addons.openPage.truckymods": "Open Page - Truckymods.io",
+      "addons.openPage.nachorio": "Open Page - Nachoriosmods.es",
       "addons.download": "Download",
-      "addons.downloadTrucky": "Download (nachoriosmods)",
+      "addons.downloadTrucky": "Download",
 
       /* rcs */
       "rcs.h2": "Road Connections (RCs)",
@@ -153,6 +154,7 @@
       /* shared section headings */
       "common.latestRelease": "Latest Release",
       "common.quickStats": "Quick Stats",
+      "common.downloads": "Downloads",
       "common.aboutTheMap": "About the Map",
       "common.aboutThisAddon": "About This Addon",
       "common.aboutThisRc": "About This Road Connection",
@@ -165,6 +167,19 @@
       "common.loadOrderHintShort":
         "Place mods in this priority (top = highest):",
       "common.allReleases": "All Releases",
+      "common.discussion": "Discussion",
+      "common.signIn": "Sign In",
+      "common.signUp": "Sign Up",
+      "common.signInOrSignUp": "Sign In / Sign Up",
+      "common.signOut": "Log Out",
+      "common.username": "Username",
+      "common.password": "Password",
+      "common.confirmPassword": "Confirm Password",
+      "common.dontHaveAccount": "Don't have an account?",
+      "common.alreadyHaveAccount": "Already have an account?",
+      "common.submit": "Submit",
+      "common.submitting": "Submitting...",
+      "common.signedInAs": "Signed in as ",
       "common.notes": "Notes",
       "common.mapCoverage": "Map Coverage",
       "common.mapCoveragePreviewAlt": "Map coverage preview",
@@ -259,7 +274,6 @@
       "footer.Map": "Карта",
       "footer.Gallery": "Галерея",
       "footer.Versions": "Версии",
-      "footer.StreetView": "StreetView",
       "footer.Support": "Поддержка",
       "footer.copy": "Far East Russia · мод карты для ETS2",
 
@@ -307,8 +321,10 @@
       "addons.sakha.title": "Sakha Addon",
       "addons.sakha.desc": "Исследуйте район Оймякона — самое холодное место на Земле.",
       "addons.openPage": "Открыть страницу",
+      "addons.openPage.truckymods": "Открыть страницу - Truckymods.io",
+      "addons.openPage.nachorio": "Открыть страницу - Nachoriosmods.es",
       "addons.download": "Скачать",
-      "addons.downloadTrucky": "Скачать (nachoriosmods)",
+      "addons.downloadTrucky": "Скачать",
 
       "rcs.h2": "Road Connections (RCs)",
       "rcs.lead":
@@ -365,6 +381,7 @@
 
       "common.latestRelease": "Последний релиз",
       "common.quickStats": "Краткая статистика",
+      "common.downloads": "Загрузки",
       "common.aboutTheMap": "О карте",
       "common.aboutThisAddon": "Об этом дополнении",
       "common.aboutThisRc": "Об этом Road Connection",
@@ -377,6 +394,19 @@
       "common.loadOrderHintShort":
         "Размещайте моды в этом приоритете (верх = высший):",
       "common.allReleases": "Все релизы",
+      "common.discussion": "Обсуждение",
+      "common.signIn": "Войти",
+      "common.signUp": "Регистрация",
+      "common.signInOrSignUp": "Вход / Регистрация",
+      "common.signOut": "Выйти",
+      "common.username": "Имя пользователя",
+      "common.password": "Пароль",
+      "common.confirmPassword": "Подтвердите пароль",
+      "common.dontHaveAccount": "Нет аккаунта?",
+      "common.alreadyHaveAccount": "Уже есть аккаунт?",
+      "common.submit": "Отправить",
+      "common.submitting": "Отправка...",
+      "common.signedInAs": "Вы вошли как ",
       "common.notes": "Примечания",
       "common.mapCoverage": "Охват карты",
       "common.mapCoveragePreviewAlt": "Превью охвата карты",
@@ -629,13 +659,13 @@
     overlay.setAttribute("aria-modal", "true");
     overlay.innerHTML =
       '<div class="lang-picker-modal">' +
-        '<h2>Choose your language<br><span class="lang-picker-subhead">Выберите язык</span></h2>' +
-        '<p>Select your preferred language. You can change it later via the EN | RU switch in the top-right corner.</p>' +
-        '<p class="lang-picker-ru">Выберите язык. Вы сможете изменить его позже с помощью переключателя EN | RU в правом верхнем углу.</p>' +
-        '<div class="lang-picker-buttons">' +
-          '<button data-lang="en"><span class="flag">' + flagSvg("en") + '</span> English</button>' +
-          '<button data-lang="ru"><span class="flag">' + flagSvg("ru") + '</span> Русский</button>' +
-        '</div>' +
+      '<h2>Choose your language<br><span class="lang-picker-subhead">Выберите язык</span></h2>' +
+      '<p>Select your preferred language. You can change it later via the EN | RU switch in the top-right corner.</p>' +
+      '<p class="lang-picker-ru">Выберите язык. Вы сможете изменить его позже с помощью переключателя EN | RU в правом верхнем углу.</p>' +
+      '<div class="lang-picker-buttons">' +
+      '<button data-lang="en"><span class="flag">' + flagSvg("en") + '</span> English</button>' +
+      '<button data-lang="ru"><span class="flag">' + flagSvg("ru") + '</span> Русский</button>' +
+      '</div>' +
       '</div>';
     document.body.appendChild(overlay);
     overlay.querySelectorAll("button[data-lang]").forEach(function (b) {

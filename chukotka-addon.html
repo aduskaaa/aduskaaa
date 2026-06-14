@@ -8,6 +8,7 @@
   <meta name="description" content="Chukotka Addon for Far East Russia ETS2 map: download and details.">
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="assets/css/global.css">
+  <script src="assets/theme-init.js"></script>
 </head>
 
 <body>
@@ -22,9 +23,15 @@
     </section>
 
     <section id="download" class="section">
-      <div class="container card">
-        <h2 data-i18n="common.latestRelease">Latest Release</h2>
-        <div id="addon-latest" class="version-item"></div>
+      <div class="container grid">
+        <div class="card">
+          <h2 data-i18n="common.latestRelease">Latest Release</h2>
+          <div id="addon-latest" class="version-item"></div>
+        </div>
+        <div class="card">
+          <h2 data-i18n="common.quickStats">Quick Stats</h2>
+          <div id="addon-stats" class="stats-grid"></div>
+        </div>
       </div>
     </section>
 
@@ -37,25 +44,26 @@
       </div>
     </section>
 
-    <section id="features" class="section">
-      <div class="container">
-        <h2 data-i18n="common.whatsIncluded">What's Included</h2>
-        <div class="features" id="addon-features"></div>
-      </div>
-    </section>
-
-    <section id="loadorder" class="section">
-      <div class="container card">
-        <h2 data-i18n="common.loadOrder">Load Order</h2>
-        <p style="color:var(--muted); font-size:14px; margin:0 0 8px;" data-i18n="common.loadOrderHintShort">Place mods in this priority (top = highest):</p>
-        <div id="load-order"></div>
-      </div>
-    </section>
-
     <section id="releases" class="section">
       <div class="container card">
-        <h2 data-i18n="common.allReleases">All Releases</h2>
-        <div id="addon-versions" class="versions-list" aria-label="Addon releases list"></div>
+        <div class="tabs-header">
+          <button class="tab-button active" data-tab="comments" data-i18n="common.discussion">Discussion</button>
+          <button class="tab-button" data-tab="loadorder" data-i18n="common.loadOrder">Load Order</button>
+          <button class="tab-button" data-tab="versions" data-i18n="common.allReleases">All Releases</button>
+        </div>
+
+        <div class="tab-content active" id="tab-comments">
+          <div id="comments-section" data-page-id="chukotka-addon"></div>
+        </div>
+
+        <div class="tab-content" id="tab-loadorder">
+          <p style="color:var(--muted); font-size:14px; margin:0 0 16px;" data-i18n="common.loadOrderHintShort">Place mods in this priority (top = highest):</p>
+          <div id="load-order"></div>
+        </div>
+
+        <div class="tab-content" id="tab-versions">
+          <div id="addon-versions" class="versions-list" aria-label="Addon releases list"></div>
+        </div>
       </div>
     </section>
 
@@ -79,6 +87,7 @@
   <script src="assets/versions.js"></script>
   <script src="assets/i18n.js"></script>
   <script src="assets/site-renderer.js"></script>
+  <script src="assets/comments.js"></script>
   <script>
     (function () {
       var S = window.SITE;
@@ -120,6 +129,30 @@
             card.innerHTML = '<span class="feature-icon">' + f.icon + '</span><h3>' + f.title + '</h3><p>' + f.text + '</p>';
             featEl.appendChild(card);
           });
+        }
+
+        var statsEl = document.getElementById('addon-stats');
+        if (statsEl) {
+          statsEl.innerHTML = "";
+          var stats = loc('stats') || [];
+          stats.forEach(function (s) {
+            var card = document.createElement('div');
+            card.className = 'stat-card';
+            card.innerHTML = '<div class="stat-value">' + s.value + '</div><div class="stat-label">' + s.label + '</div>';
+            statsEl.appendChild(card);
+          });
+
+          if (window.FERDownloads && window.RELEASES && window.RELEASES.addons && window.RELEASES.addons.chukotka) {
+            var lang = (window.I18N && window.I18N.getLang && window.I18N.getLang()) || 'en';
+            var dlLabel = lang === 'ru' ? 'всего загрузок' : 'total downloads';
+            var dlCard = document.createElement('div');
+            dlCard.className = 'stat-card stat-card-wide';
+            dlCard.innerHTML = '<div class="stat-value">…</div><div class="stat-label">' + dlLabel + '</div>';
+            statsEl.appendChild(dlCard);
+            window.FERDownloads.sumReleases(window.RELEASES.addons.chukotka).then(function (total) {
+              dlCard.querySelector('.stat-value').textContent = total.toLocaleString();
+            });
+          }
         }
       }
       render();

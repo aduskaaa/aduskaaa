@@ -8,6 +8,7 @@
     <meta name="description" content="High-precision interactive map viewer for the Far East Russia map mod.">
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="assets/css/global.css">
+    <script src="assets/theme-init.js"></script>
     <style>
         :root {
             --header-h: 62px;
@@ -128,7 +129,7 @@
         </div>
 
         <!-- Bottom Layers Bar -->
-        <div
+        <div class="map-layers-bar"
             style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); background: rgba(14,14,14,0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); border-radius: 40px; padding: 10px 30px; display: flex; gap: 30px; align-items: center; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 500;">
             <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                 <input type="checkbox" id="toggle-photos" checked style="accent-color: var(--accent);">

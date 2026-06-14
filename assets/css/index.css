@@ -39,7 +39,7 @@ body {
 }
 
 /* Layout */
-.container { width: min(1100px, 92%); margin: 0 auto; }
+.container { width: min(1440px, 94%); margin: 0 auto; }
 .header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(1.2) blur(10px); background: rgba(7,17,13,.6); border-bottom: 1px solid var(--border); }
 .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .3px; text-decoration: none; color: var(--text); }

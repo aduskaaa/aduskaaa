@@ -34,7 +34,6 @@ window.SITE = {
     { label: "Map", href: "interactive-map.html" },
     { label: "Gallery", href: "gallery.html" },
     { label: "Versions", href: "versions.html" },
-    { label: "StreetView", href: "streetview.html" },
     { label: "Support", href: "support.html" }
   ],
 
@@ -178,16 +177,16 @@ window.SITE = {
       title_ru: "Chukotka Addon Legacy Areas",
       tagline: "Explore the Chukotsky Autonomous Okrug — the easternmost edge of Russia and the entire Eurasian continent.",
       tagline_ru: "Исследуйте Чукотский автономный округ — самую восточную окраину России и всего Евразийского континента.",
-      description: "The Chukotka Addon is a legacy expansion for Far East Russia that adds the Chukotsky Autonomous Okrug region to your ETS2 world. Chukotka is one of the most extreme and isolated places on the planet — a land of permafrost tundra, volcanic mountains, and Arctic coastline where temperatures can plunge below -50°C. This addon brings nothing from this, horrible landscape to ETS2 with horrible cities, remote outposts, and roads that are always the same even the most experienced virtual truckers will feel boredom. The region features unique shit types not found elsewhere in FER, including coastal shitty roads, frozen river crossings, and shitty mountain passes with shitty views. Every settlement is built using i have no fckin idea what reference materials to capture the authentic character of this rarely-depicted corner of Russia.",
-      description_ru: "Chukotka Addon — это устаревшее расширение для Far East Russia, добавляющее регион Чукотского автономного округа в ваш мир ETS2. Чукотка — одно из самых экстремальных и изолированных мест на планете: земля вечной мерзлоты, вулканических гор и арктического побережья, где температура может опускаться ниже -50°C. Это дополнение приносит ничего из этого ужасного ландшафта в ETS2 с ужасными городами, удалёнными аванпостами и дорогами, которые всегда одинаковы — даже самые опытные виртуальные дальнобойщики ощутят скуку. В регионе есть уникальные хреновые виды, не встречающиеся в остальном FER, включая прибрежные хреновые дороги, замёрзшие речные переправы и хреновые горные перевалы с хреновыми видами. Каждое поселение построено с использованием хз каких справочных материалов, чтобы передать аутентичный характер этого редко изображаемого уголка России.",
+      description: "The Chukotka Addon is an expansive legacy map addition for Far East Russia that introduces the Chukotsky Autonomous Okrug region to your Euro Truck Simulator 2 world. Chukotka is one of the most extreme and isolated places on the planet — a land of permafrost tundra, volcanic mountains, and Arctic coastline where temperatures can plunge below -50°C. This addon brings this unique and challenging landscape to ETS2, featuring remote northern settlements, isolated outposts, and treacherous roads that will test even the most experienced virtual truckers. The region features custom environment assets and textures not found elsewhere in FER, including coastal dirt roads, frozen river crossings, and breathtaking mountain passes. Every settlement has been carefully modeled using real-world reference materials to capture the authentic, rugged character of this remote corner of Russia.",
+      description_ru: "Chukotka Addon — это масштабное дополнение для Far East Russia, добавляющее регион Чукотского автономного округа в ваш мир Euro Truck Simulator 2. Чукотка — одно из самых экстремальных и изолированных мест на планете: земля вечной мерзлоты, тундры, вулканических гор и арктического побережья, где температура может опускаться ниже -50°C. Это дополнение переносит этот уникальный и сложный ландшафт в ETS2 с детализированными северными поселениями, удалёнными аванпостами и коварными дорогами, которые проверят мастерство даже самых опытных виртуальных дальнобойщиков. В регионе представлены уникальные объекты окружения и текстуры, включая грунтовые прибрежные дороги, переправы по замёрзшим рекам и узкие горные перевалы. Каждое поселение спроектировано на основе реальных справочных материалов, чтобы передать аутентичный суровый характер этого далёкого уголка России.",
       features: [
-        { icon: "🏘️", title: "Settlements", text: "settlements in horrible quality." },
-        { icon: "🛣️", title: "Same road", text: "tbh, its all the same road." },
+        { icon: "🏘️", title: "Remote Settlements", text: "Drive through authentic northern towns and isolated coastal outposts." },
+        { icon: "🛣️", title: "Challenging Routes", text: "Navigate treacherous dirt roads, ice crossings, and narrow mountain passes." },
         { icon: "🔗", title: "Seamless Integration", text: "Works with FER and the Chukotka RC for a continuous map experience." }
       ],
       features_ru: [
-        { icon: "🏘️", title: "Поселения", text: "поселения ужасного качества." },
-        { icon: "🛣️", title: "Одна и та же дорога", text: "если честно, это всё одна и та же дорога." },
+        { icon: "🏘️", title: "Удалённые поселения", text: "Проезжайте через аутентичные северные посёлки и изолированные прибрежные аванпосты." },
+        { icon: "🛣️", title: "Сложные маршруты", text: "Преодолевайте коварные грунтовые дороги, ледовые переправы и узкие горные перевалы." },
         { icon: "🔗", title: "Бесшовная интеграция", text: "Работает с FER и Chukotka RC для непрерывного опыта карты." }
       ],
       requirements: [
@@ -201,6 +200,16 @@ window.SITE = {
         "Trans-Siberian Truckway (последняя версия)",
         "FER – Chukotka RC (для дорожного соединения)",
         "ETS2 1.57 или новее"
+      ],
+      stats: [
+        { value: "1,100+", label: "km of driveable roads" },
+        { value: "5", label: "cities & settlements" },
+        { value: "1.57+", label: "ETS2 version supported" }
+      ],
+      stats_ru: [
+        { value: "1 100+", label: "км проезжих дорог" },
+        { value: "5", label: "городов и поселений" },
+        { value: "1.57+", label: "поддерживаемая версия ETS2" }
       ]
     },
 
@@ -228,6 +237,16 @@ window.SITE = {
       requirements_ru: [
         "Far East Russia (последняя версия)",
         "ETS2 1.59 или новее"
+      ],
+      stats: [
+        { value: "100+", label: "km of driveable roads" },
+        { value: "2", label: "cities & settlements" },
+        { value: "1.59+", label: "ETS2 version supported" }
+      ],
+      stats_ru: [
+        { value: "100+", label: "км проезжих дорог" },
+        { value: "2", label: "городов и поселений" },
+        { value: "1.59+", label: "поддерживаемая версия ETS2" }
       ]
     },
 
@@ -255,6 +274,16 @@ window.SITE = {
       requirements_ru: [
         "Far East Russia (последняя версия)",
         "ETS2 1.58 или новее"
+      ],
+      stats: [
+        { value: "100+", label: "km of driveable roads" },
+        { value: "5", label: "cities & settlements" },
+        { value: "1.58+", label: "ETS2 version supported" }
+      ],
+      stats_ru: [
+        { value: "100+", label: "км проезжих дорог" },
+        { value: "5", label: "городов и поселений" },
+        { value: "1.58+", label: "поддерживаемая версия ETS2" }
       ]
     }
   },

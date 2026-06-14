@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Far East Russia • Sign In / Sign Up</title>
+  <meta name="description" content="Sign in or sign up to your Far East Russia account.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <script src="assets/theme-init.js"></script>
+</head>
+<body>
+  <header class="header" id="site-header" aria-label="Top Navigation"></header>
+  
+  <main>
+    <section class="section auth-section">
+      <div class="container">
+        <div class="auth-card" id="auth-page-container">
+          <!-- Dynamic form content rendered by script -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="site-footer" aria-label="Footer"></footer>
+
+  <script src="assets/site-data.js"></script>
+  <script src="assets/site-renderer.js"></script>
+  <script src="assets/i18n.js"></script>
+  <script>
+    (function () {
+      var AUTH_API_URL = "https://auth-worker.fareastrussia.workers.dev";
+
+      function getLocale() {
+        if (window.I18N && window.I18N.locale) {
+          return window.I18N.locale === "ru" ? "ru" : "en";
+        }
+        return "en";
+      }
+
+      function translate(key, fallback) {
+        if (window.I18N && typeof window.I18N.translate === "function") {
+          return window.I18N.translate(key);
+        }
+        return fallback;
+      }
+
+      function escapeHTML(str) {
+        if (!str) return "";
+        return str.replace(/[&<>'"]/g, function (tag) {
+          var chars = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "'": "&#39;",
+            '"': "&quot;",
+          };
+          return chars[tag] || tag;
+        });
+      }
+
+      function render() {
+        var container = document.getElementById("auth-page-container");
+        if (!container) return;
+
+        var token = localStorage.getItem("fer_token");
+        var username = localStorage.getItem("fer_username");
+        var lang = getLocale();
+
+        if (token && username) {
+          container.innerHTML = 
+            '<div class="auth-success-card">' +
+            '<h2 class="auth-title">' + translate("common.alreadyHaveAccount", "Signed In") + '</h2>' +
+            '<p class="auth-desc">' + translate("common.signedInAs", "Signed in as ") + '<strong>' + escapeHTML(username) + '</strong></p>' +
+            '<div class="auth-actions-grid">' +
+            '<a href="index.html" class="button button-primary">' + (lang === "ru" ? "На главную" : "Go Home") + '</a>' +
+            '<button type="button" id="auth-page-logout" class="button button-secondary">' + translate("common.signOut", "Log Out") + '</button>' +
+            '</div>' +
+            '</div>';
+
+          document.getElementById("auth-page-logout").addEventListener("click", function () {
+            localStorage.removeItem("fer_token");
+            localStorage.removeItem("fer_username");
+            window.location.reload();
+          });
+          return;
+        }
+
+        var urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get("signup") === "true") {
+          showSignUp(container, lang);
+        } else {
+          showLogin(container, lang);
+        }
+      }
+
+      function showLogin(container, lang, errorMsg) {
+        var errorHtml = errorMsg ? '<div class="auth-error-msg">' + escapeHTML(errorMsg) + '</div>' : '';
+        container.innerHTML = 
+          '<h2 class="auth-title">' + translate("common.signIn", "Sign In") + '</h2>' +
+          '<form id="page-login-form" class="auth-page-form">' +
+          '<div class="form-row">' +
+          '<label class="form-label" for="page-username">' + translate("common.username", "Username") + '</label>' +
+          '<input type="text" id="page-username" required maxlength="20">' +
+          '</div>' +
+          '<div class="form-row">' +
+          '<label class="form-label" for="page-password">' + translate("common.password", "Password") + '</label>' +
+          '<input type="password" id="page-password" required>' +
+          '</div>' +
+          errorHtml +
+          '<div class="form-row form-actions">' +
+          '<button type="submit" class="button button-primary">' + translate("common.signIn", "Sign In") + '</button>' +
+          '<button type="button" id="switch-to-signup" class="button button-text">' + translate("common.dontHaveAccount", "Don't have an account?") + ' ' + translate("common.signUp", "Sign Up") + '</button>' +
+          '</div>' +
+          '</form>';
+
+        document.getElementById("switch-to-signup").addEventListener("click", function () {
+          showSignUp(container, lang);
+        });
+
+        document.getElementById("page-login-form").addEventListener("submit", async function (e) {
+          e.preventDefault();
+          var uInput = document.getElementById("page-username").value;
+          var pInput = document.getElementById("page-password").value;
+          var submitBtn = e.target.querySelector("button[type='submit']");
+          submitBtn.disabled = true;
+
+          try {
+            var res = await fetch(AUTH_API_URL + "/api/login", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ username: uInput, password: pInput }),
+            });
+            var data = await res.json();
+            if (!res.ok) throw new Error(data.error || "Login failed");
+
+            if (data.two_factor_required) {
+              show2FAVerification(container, lang, data.username);
+              return;
+            }
+
+            localStorage.setItem("fer_token", data.token);
+            localStorage.setItem("fer_username", data.username);
+            
+            var urlParams = new URLSearchParams(window.location.search);
+            var redirectUrl = urlParams.get("redirect") || "index.html";
+            window.location.href = redirectUrl;
+          } catch (err) {
+            showLogin(container, lang, err.message);
+          }
+        });
+      }
+
+      function show2FAVerification(container, lang, username, errorMsg) {
+        var errorHtml = errorMsg ? '<div class="auth-error-msg">' + escapeHTML(errorMsg) + '</div>' : '';
+
+        container.innerHTML = 
+          '<h2 class="auth-title">' + (lang === "ru" ? "Двухфакторная аутентификация" : "Two-Factor Verification") + '</h2>' +
+          '<p class="auth-desc" style="margin-bottom: 20px; font-size: 13px; color: var(--muted); text-align: center;">' + 
+            (lang === "ru" ? "Введите 16-значный код подтверждения, отправленный на ваш email." : "Enter the 16-character verification code sent to your email.") + 
+          '</p>' +
+          '<form id="page-2fa-form" class="auth-page-form">' +
+          '<div class="form-row">' +
+          '<label class="form-label" for="page-2fa-code">' + (lang === "ru" ? "Код подтверждения" : "Verification Code") + '</label>' +
+          '<input type="text" id="page-2fa-code" required placeholder="XXXX-XXXX-XXXX-XXXX" style="text-transform: uppercase; font-family: monospace; font-size: 15px; letter-spacing: 1px; text-align: center; box-sizing: border-box; width: 100%; padding: 8px;">' +
+          '</div>' +
+          errorHtml +
+          '<div class="form-row form-actions">' +
+          '<button type="submit" class="button button-primary">' + (lang === "ru" ? "Подтвердить" : "Verify") + '</button>' +
+          '<button type="button" id="cancel-2fa" class="button button-secondary">' + (lang === "ru" ? "Отмена" : "Cancel") + '</button>' +
+          '</div>' +
+          '</form>';
+
+        document.getElementById("cancel-2fa").addEventListener("click", function () {
+          showLogin(container, lang);
+        });
+
+        document.getElementById("page-2fa-form").addEventListener("submit", async function (e) {
+          e.preventDefault();
+          var codeInput = document.getElementById("page-2fa-code").value.trim();
+          var submitBtn = e.target.querySelector("button[type='submit']");
+          submitBtn.disabled = true;
+
+          try {
+            var res = await fetch(AUTH_API_URL + "/api/verify-2fa", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ username: username, code: codeInput }),
+            });
+            var data = await res.json();
+            if (!res.ok) throw new Error(data.error || "Verification failed");
+
+            localStorage.setItem("fer_token", data.token);
+            localStorage.setItem("fer_username", data.username);
+            
+            var urlParams = new URLSearchParams(window.location.search);
+            var redirectUrl = urlParams.get("redirect") || "index.html";
+            window.location.href = redirectUrl;
+          } catch (err) {
+            show2FAVerification(container, lang, username, err.message);
+          }
+        });
+      }
+
+      function showSignUp(container, lang, errorMsg) {
+        var errorHtml = errorMsg ? '<div class="auth-error-msg">' + escapeHTML(errorMsg) + '</div>' : '';
+        container.innerHTML = 
+          '<h2 class="auth-title">' + translate("common.signUp", "Sign Up") + '</h2>' +
+          '<form id="page-signup-form" class="auth-page-form">' +
+          '<div class="form-row">' +
+          '<label class="form-label" for="page-username">' + translate("common.username", "Username") + '</label>' +
+          '<input type="text" id="page-username" required maxlength="20">' +
+          '</div>' +
+          '<div class="form-row">' +
+          '<label class="form-label" for="page-password">' + translate("common.password", "Password") + '</label>' +
+          '<input type="password" id="page-password" required>' +
+          '</div>' +
+          '<div class="form-row">' +
+          '<label class="form-label" for="page-confirm-password">' + translate("common.confirmPassword", "Confirm Password") + '</label>' +
+          '<input type="password" id="page-confirm-password" required>' +
+          '</div>' +
+          errorHtml +
+          '<div class="form-row form-actions">' +
+          '<button type="submit" class="button button-primary">' + translate("common.signUp", "Sign Up") + '</button>' +
+          '<button type="button" id="switch-to-login" class="button button-text">' + translate("common.alreadyHaveAccount", "Already have an account?") + ' ' + translate("common.signIn", "Sign In") + '</button>' +
+          '</div>' +
+          '</form>';
+
+        document.getElementById("switch-to-login").addEventListener("click", function () {
+          showLogin(container, lang);
+        });
+
+        document.getElementById("page-signup-form").addEventListener("submit", async function (e) {
+          e.preventDefault();
+          var uInput = document.getElementById("page-username").value;
+          var pInput = document.getElementById("page-password").value;
+          var cpInput = document.getElementById("page-confirm-password").value;
+          var submitBtn = e.target.querySelector("button[type='submit']");
+
+          if (pInput !== cpInput) {
+            showSignUp(container, lang, lang === "ru" ? "Пароли не совпадают" : "Passwords do not match");
+            return;
+          }
+
+          submitBtn.disabled = true;
+
+          try {
+            var res = await fetch(AUTH_API_URL + "/api/register", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ username: uInput, password: pInput }),
+            });
+            var data = await res.json();
+            if (!res.ok) throw new Error(data.error || "Registration failed");
+
+            localStorage.setItem("fer_token", data.token);
+            localStorage.setItem("fer_username", data.username);
+
+            var urlParams = new URLSearchParams(window.location.search);
+            var redirectUrl = urlParams.get("redirect") || "index.html";
+            window.location.href = redirectUrl;
+          } catch (err) {
+            showSignUp(container, lang, err.message);
+          }
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", render);
+
+      var observer = new MutationObserver(render);
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+    })();
+  </script>
+</body>
+</html>

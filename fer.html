@@ -9,6 +9,7 @@
     content="Download Far East Russia (FER) for ETS2. Installation guide, load order, coverage info, and all releases.">
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="assets/css/global.css">
+  <script src="assets/theme-init.js"></script>
 </head>
 
 <body>
@@ -42,13 +43,6 @@
       </div>
     </section>
 
-    <section id="features" class="section">
-      <div class="container">
-        <h2 data-i18n="common.whatsIncluded">What's Included</h2>
-        <div class="features" id="fer-features"></div>
-      </div>
-    </section>
-
     <section id="coverage" class="section">
       <div class="container grid">
         <div class="map-frame">
@@ -74,19 +68,27 @@
       </div>
     </section>
 
-    <section id="loadorder" class="section">
-      <div class="container card">
-        <h2 data-i18n="common.loadOrder">Load Order</h2>
-        <p style="color:var(--muted); font-size:14px; margin:0 0 8px;" data-i18n="common.loadOrderHint">Place mods in your ETS2 Mod Manager in this
-          priority (top = highest priority):</p>
-        <div id="load-order"></div>
-      </div>
-    </section>
-
     <section id="releases" class="section">
       <div class="container card">
-        <h2 data-i18n="common.allReleases">All Releases</h2>
-        <div id="fer-versions" class="versions-list" aria-label="FER releases list"></div>
+        <div class="tabs-header">
+          <button class="tab-button active" data-tab="comments" data-i18n="common.discussion">Discussion</button>
+          <button class="tab-button" data-tab="loadorder" data-i18n="common.loadOrder">Load Order</button>
+          <button class="tab-button" data-tab="versions" data-i18n="common.allReleases">All Releases</button>
+        </div>
+
+        <div class="tab-content active" id="tab-comments">
+          <div id="comments-section" data-page-id="fer"></div>
+        </div>
+
+        <div class="tab-content" id="tab-loadorder">
+          <p style="color:var(--muted); font-size:14px; margin:0 0 16px;" data-i18n="common.loadOrderHint">Place mods in your ETS2 Mod Manager in this
+            priority (top = highest priority):</p>
+          <div id="load-order"></div>
+        </div>
+
+        <div class="tab-content" id="tab-versions">
+          <div id="fer-versions" class="versions-list" aria-label="FER releases list"></div>
+        </div>
       </div>
     </section>
   </main>
@@ -97,6 +99,7 @@
   <script src="assets/versions.js"></script>
   <script src="assets/i18n.js"></script>
   <script src="assets/site-renderer.js"></script>
+  <script src="assets/comments.js"></script>
   <script>
     (function () {
       var S = window.SITE;
@@ -126,6 +129,23 @@
             card.innerHTML = '<div class="stat-value">' + s.value + '</div><div class="stat-label">' + s.label + '</div>';
             statsEl.appendChild(card);
           });
+
+          if (window.FERDownloads && window.RELEASES && window.RELEASES.fer) {
+            var lang = (window.I18N && window.I18N.getLang && window.I18N.getLang()) || 'en';
+            var dlLabel = lang === 'ru' ? 'всего загрузок' : 'total downloads';
+            var dlNote = lang === 'ru'
+              ? 'Включая загрузки с truckymods и sharemods по состоянию на 14.06.2026'
+              : 'Includes downloads from truckymods & sharemods as of 14.06.2026';
+            var dlCard = document.createElement('div');
+            dlCard.className = 'stat-card stat-card-wide';
+            dlCard.innerHTML = '<div class="stat-value">…</div>' +
+              '<div class="stat-label">' + dlLabel + '</div>' +
+              '<div class="stat-note">' + dlNote + '</div>';
+            statsEl.appendChild(dlCard);
+            window.FERDownloads.sumReleases(window.RELEASES.fer).then(function (total) {
+              dlCard.querySelector('.stat-value').textContent = (total + 41750).toLocaleString();
+            });
+          }
         }
 
         var featEl = document.getElementById('fer-features');
