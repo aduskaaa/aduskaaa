@@ -294,6 +294,7 @@ window.SITE = {
       { name: "laur1sxd", amount: "40,42 EUR" },
       { name: "Mr JP", amount: "13,62 EUR" },
       { name: "Artie", amount: "4,11 EUR" },
+      { name: "weskergood1234", amount: "3,62 EUR [PATREON]"
       { name: "Delby", amount: "3,51 EUR" },
       { name: "Xiguawangzi3399", amount: "3,48 EUR" },
       { name: "Killermix", amount: "0.82 EUR" }
