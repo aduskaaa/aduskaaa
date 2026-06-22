@@ -645,7 +645,7 @@
             modalStreetViewImg.onload = () => {
                 modalStreetViewImg.style.opacity = 1;
             };
-            modalStreetViewImg.src = `imgs/streetview/${currentSV.properties.file}`;
+            modalStreetViewImg.src = `https://raw.githubusercontent.com/aduskaaa/fer-streetview/main/V1/${currentSV.properties.file}`;
             if (modalStreetViewImg.complete) {
                 modalStreetViewImg.onload();
             }

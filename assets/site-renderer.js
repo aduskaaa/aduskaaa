@@ -30,14 +30,24 @@
                 return '<a href="' + l.href + '"' + i18nAttr(key) + '>' + l.label + "</a>";
             })
             .join("");
-        // Mobile-only Discord link in mobile navigation menu dropdown
+        // Mobile-only Discord/VK links in mobile navigation menu dropdown
         navHtml +=
             '<a href="' + S.discordUrl + '" target="_blank" class="discord-btn desktop-hide"' +
             i18nAttr("nav.DISCORD") + '>DISCORD</a>';
+        if (S.vkUrl) {
+            navHtml +=
+                '<a href="' + S.vkUrl + '" target="_blank" class="vk-btn desktop-hide"' +
+                i18nAttr("nav.VK") + '>VK</a>';
+        }
 
-        var discordHtml =
+        var socialHtml =
             '<a href="' + S.discordUrl + '" target="_blank" class="discord-btn mobile-hide"' +
             i18nAttr("nav.DISCORD") + '>DISCORD</a>';
+        if (S.vkUrl) {
+            socialHtml +=
+                '<a href="' + S.vkUrl + '" target="_blank" class="vk-btn mobile-hide"' +
+                i18nAttr("nav.VK") + '>VK</a>';
+        }
 
         var langSwitchHtml = "";
         if (window.I18N) {
@@ -108,7 +118,7 @@
             '</div>' +
             '<div class="header-right">' +
             profileHtml +
-            discordHtml +
+            socialHtml +
             langSwitchHtml +
             themeToggleHtml +
             '<button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">' +

@@ -13,6 +13,7 @@ window.SITE = {
 
   /* ---------- Global links ---------- */
   discordUrl: "https://discord.gg/SSWDJMauxz",
+  vkUrl: "https://vk.ru/far_east_russia",
   paypalUrl: "https://paypal.me/aduskaaaa",
 
   /* ---------- Navigation ---------- */
@@ -20,8 +21,7 @@ window.SITE = {
     { label: "HOME", href: "index.html" },
     { label: "FER", href: "fer.html" },
     { label: "MAP", href: "interactive-map.html" },
-    { label: "ADDONS", href: "index.html#addons" },
-    { label: "RCS", href: "index.html#rcs" },
+    { label: "ADDONS/RCS", href: "addons-rcs.html", i18nKey: "nav.ADDONS_RCS" },
     { label: "GALLERY", href: "gallery.html" },
     { label: "VERSIONS", href: "versions.html" },
     { label: "SUPPORT", href: "support.html" }
@@ -92,12 +92,12 @@ window.SITE = {
       stats: [
         { value: "7,000+", label: "km of driveable roads" },
         { value: "40+", label: "cities & settlements" },
-        { value: "1.58/59", label: "ETS2 version supported" }
+        { value: "1.58/1.59/1.60", label: "version supported" }
       ],
       stats_ru: [
         { value: "7 000+", label: "км проезжих дорог" },
         { value: "40+", label: "городов и поселений" },
-        { value: "1.58/59", label: "поддерживаемая версия ETS2" }
+        { value: "1.58/1.59/1.60", label: "поддерживаемая версия" }
       ],
       installSteps: [
         "Download the latest FER release from the download section below.",
@@ -117,58 +117,58 @@ window.SITE = {
 
     ferOtgr: {
       title: "FER – OTGR Road Connection",
-      title_ru: "FER – OTGR Road Connection",
+      title_ru: "FER – OTGR Дорожное соединение",
       tagline: "Seamlessly connect Far East Russia with Off The Grid Russia and unlock vast new routes across Siberia.",
       tagline_ru: "Бесшовное соединение Far East Russia с Off The Grid Russia, открывающее новые маршруты по Сибири.",
       description: "The FER – OTGR Road Connection is an essential bridge mod that links two of the most ambitious Russian map projects for Euro Truck Simulator 2: Far East Russia (FER) and Off The Grid Russia (OTGR). Without this connector, the two maps exist as separate islands — with it, you gain access to continuous routes stretching thousands of kilometers across Siberia's remote interior. The road connection carefully aligns terrain, road geometry, and map sectors between both mods, ensuring seamless transitions without visual glitches or terrain gaps. Whether you're planning a cross-Siberian convoy or just want to haul freight between Yakutia and the OTGR region, this RC makes it possible. The connector is lightweight, adds minimal file size, and is updated alongside major FER releases to maintain compatibility.",
-      description_ru: "FER – OTGR Road Connection — это важный мост-мод, связывающий два самых амбициозных русских мода карт для Euro Truck Simulator 2: Far East Russia (FER) и Off The Grid Russia (OTGR). Без этого коннектора обе карты существуют как отдельные острова — с ним вы получаете непрерывные маршруты длиной в тысячи километров по удалённой внутренней Сибири. Road Connection аккуратно выравнивает местность, геометрию дорог и секторы карты между обоими модами, обеспечивая плавные переходы без визуальных глюков и разрывов рельефа. Планируете ли вы транссибирский конвой или просто хотите перевозить грузы между Якутией и регионом OTGR — этот RC делает это возможным. Коннектор лёгкий, добавляет минимум объёма и обновляется одновременно с крупными релизами FER для сохранения совместимости.",
+      description_ru: "FER – OTGR Дорожное соединение — это важный мост-мод, связывающий два самых амбициозных русских мода карт для Euro Truck Simulator 2: Far East Russia (FER) и Off The Grid Russia (OTGR). Без этого коннектора обе карты существуют как отдельные острова — с ним вы получаете непрерывные маршруты длиной в тысячи километров по удалённой внутренней Сибири. Дорожное соединение аккуратно выравнивает местность, геометрию дорог и секторы карты между обоими модами, обеспечивая плавные переходы без визуальных глюков и разрывов рельефа. Планируете ли вы транссибирский конвой или просто хотите перевозить грузы между Якутией и регионом OTGR — этот RC делает это возможным. Коннектор лёгкий, добавляет минимум объёма и обновляется одновременно с крупными релизами FER для сохранения совместимости.",
       requirements: [
         "Far East Russia (latest version)",
         "Off The Grid Russia (latest version)",
-        "ETS2 1.57 or newer"
+        "ETS2 1.58/1.59/1.60"
       ],
       requirements_ru: [
         "Far East Russia (последняя версия)",
         "Off The Grid Russia (последняя версия)",
-        "ETS2 1.57 или новее"
+        "ETS2 1.58/1.59/1.60"
       ]
     },
 
     ferChukotka: {
       title: "FER – Chukotka Road Connection",
-      title_ru: "FER – Chukotka Road Connection",
+      title_ru: "FER – Chukotka Дорожное соединение",
       tagline: "Bridge Far East Russia and the Chukotka region for uninterrupted eastern exploration.",
       tagline_ru: "Соедините Far East Russia с регионом Чукотки для непрерывного исследования востока.",
       description: "The FER – Chukotka Road Connection links the Far East Russia core map with the Chukotka addon region, creating a continuous road network that extends deep into Russia's northeastern frontier. The Chukotka peninsula — famous for being the easternmost point of the Eurasian continent — is one of the most remote and least populated areas on Earth. This connector ensures that the transition between FER's Yakutian roads and Chukotka's frozen highways is smooth and geographically accurate. Road alignments, terrain elevation, and vegetation zones all blend naturally across the connection point. Install this RC alongside both FER and the Chukotka Addon to unlock the full eastern expansion.",
-      description_ru: "FER – Chukotka Road Connection связывает основную карту Far East Russia с регионом дополнения Chukotka, создавая непрерывную дорожную сеть, уходящую глубоко в северо-восточные рубежи России. Полуостров Чукотка — известный как самая восточная точка Евразийского континента — один из самых удалённых и малонаселённых районов на Земле. Этот коннектор обеспечивает плавный и географически точный переход между якутскими дорогами FER и замёрзшими шоссе Чукотки. Выравнивание дорог, рельеф и зоны растительности естественно сливаются в точке соединения. Установите этот RC вместе с FER и Chukotka Addon, чтобы открыть полное восточное расширение.",
+      description_ru: "FER – Chukotka Дорожное соединение связывает основную карту Far East Russia с регионом дополнения Chukotka, создавая непрерывную дорожную сеть, уходящую глубоко в северо-восточные рубежи России. Полуостров Чукотка — известный как самая восточная точка Евразийского континента — один из самых удалённых и малонаселённых районов на Земле. Этот коннектор обеспечивает плавный и географически точный переход между якутскими дорогами FER и замёрзшими шоссе Чукотки. Выравнивание дорог, рельеф и зоны растительности естественно сливаются в точке соединения. Установите этот RC вместе с FER и Chukotka Addon, чтобы открыть полное восточное расширение.",
       requirements: [
         "Far East Russia (latest version)",
         "Chukotka Addon (latest version)",
-        "ETS2 1.57 or newer"
+        "ETS2 1.58/1.59/1.60"
       ],
       requirements_ru: [
         "Far East Russia (последняя версия)",
         "Chukotka Addon (последняя версия)",
-        "ETS2 1.57 или новее"
+        "ETS2 1.58/1.59/1.60"
       ]
     },
 
     ferTst: {
       title: "FER – TST Road Connection",
-      title_ru: "FER – TST Road Connection",
+      title_ru: "FER – TST Дорожное соединение",
       tagline: "Connect Far East Russia with the Trans-Siberian Truckway for the ultimate cross-Russia route.",
       tagline_ru: "Соедините Far East Russia с Trans-Siberian Truckway для лучшего трансроссийского маршрута.",
       description: "The FER – TST Road Connection is the gateway to one of the longest continuous trucking routes in ETS2 modding. By linking Far East Russia with the Trans-Siberian Truckway (TST), this connector lets you drive from the heart of Siberia all the way to the Russian Far East without interruption. The Trans-Siberian Truckway covers the legendary federal highway system that spans Russia from west to east, and this RC picks up where TST ends, continuing the journey into FER's Yakutian territory. The connection is carefully calibrated to match road widths, terrain textures, and elevation data at the boundary, providing a seamless driving experience across both maps. This is a must-have for players who want the ultimate long-haul experience across Russia.",
-      description_ru: "FER – TST Road Connection — это путь к одному из самых длинных непрерывных дальнобойных маршрутов в моддинге ETS2. Связывая Far East Russia с Trans-Siberian Truckway (TST), этот коннектор позволяет ехать из самого сердца Сибири до Дальнего Востока России без перерывов. Trans-Siberian Truckway охватывает легендарную систему федеральных трасс, простирающуюся через Россию с запада на восток, и этот RC подхватывает там, где заканчивается TST, продолжая путь в якутские территории FER. Соединение тщательно откалибровано для совпадения ширины дорог, текстур местности и данных высот на границе, обеспечивая плавный опыт вождения по обеим картам. Обязательно для игроков, желающих испытать максимальные дальнобойные перевозки через всю Россию.",
+      description_ru: "FER – TST Дорожное соединение — это путь к одному из самых длинных непрерывных дальнобойных маршрутов в моддинге ETS2. Связывая Far East Russia с Trans-Siberian Truckway (TST), этот коннектор позволяет ехать из самого сердца Сибири до Дальнего Востока России без перерывов. Trans-Siberian Truckway охватывает легендарную систему федеральных трасс, простирающуюся через Россию с запада на восток, и этот RC подхватывает там, где заканчивается TST, продолжая путь в якутские территории FER. Соединение тщательно откалибровано для совпадения ширины дорог, текстур местности и данных высот на границе, обеспечивая плавный опыт вождения по обеим картам. Обязательно для игроков, желающих испытать максимальные дальнобойные перевозки через всю Россию.",
       requirements: [
         "Far East Russia (latest version)",
         "Trans-Siberian Truckway (latest version)",
-        "ETS2 1.57 or newer"
+        "ETS2 1.58/1.59/1.60"
       ],
       requirements_ru: [
         "Far East Russia (последняя версия)",
         "Trans-Siberian Truckway (последняя версия)",
-        "ETS2 1.57 или новее"
+        "ETS2 1.58/1.59/1.60"
       ]
     },
 
@@ -193,99 +193,27 @@ window.SITE = {
         "Far East Russia (latest version)",
         "Trans-Siberian Truckway (latest version)",
         "FER – Chukotka RC (for road connection)",
-        "ETS2 1.57 or newer"
+        "ETS2 1.58/1.59/1.60"
       ],
       requirements_ru: [
         "Far East Russia (последняя версия)",
         "Trans-Siberian Truckway (последняя версия)",
         "FER – Chukotka RC (для дорожного соединения)",
-        "ETS2 1.57 или новее"
+        "ETS2 1.58/1.59/1.60"
       ],
       stats: [
         { value: "1,100+", label: "km of driveable roads" },
         { value: "5", label: "cities & settlements" },
-        { value: "1.57+", label: "ETS2 version supported" }
+        { value: "1.58/1.59/1.60", label: "version supported" }
       ],
       stats_ru: [
         { value: "1 100+", label: "км проезжих дорог" },
         { value: "5", label: "городов и поселений" },
-        { value: "1.57+", label: "поддерживаемая версия ETS2" }
+        { value: "1.58/1.59/1.60", label: "поддерживаемая версия" }
       ]
     },
 
-    westYacutiaAddon: {
-      title: "West Yacutia Addon",
-      title_ru: "West Yacutia Addon",
-      tagline: "Explore Western Yakutia — Journey beyond the Lena River into the heart of the taiga.",
-      tagline_ru: "Исследуйте Западную Якутию — путешествие за реку Лена в сердце тайги.",
-      description: "The West Yacutia Addon expands the Far East Russia map westward, crossing the mighty Lena River into the rugged interior of Western Yakutia. This region is defined by the A-331 'Vilyuy' Federal Highway, a vital lifeline cutting through dense taiga and vast marshlands. Experience meticulously crafted settlements and industrial hubs that reflect the reality of Siberian life. From technical muddy tracks to scenic river crossings, this addon adds a new layer of challenge and immersion, built with high-fidelity reference materials to ensure every kilometer feels authentic to the Siberian wilderness.",
-      description_ru: "West Yacutia Addon расширяет карту Far East Russia на запад, пересекая могучую реку Лена и уходя в суровые недра Западной Якутии. Этот регион определяет федеральная трасса А-331 «Вилюй» — жизненно важная артерия, прорезающая плотную тайгу и обширные болота. Ощутите тщательно проработанные поселения и промышленные узлы, отражающие реальность сибирской жизни. От технических грязевых треков до живописных речных переправ — это дополнение добавляет новый уровень сложности и погружения, построенный на основе высококачественных справочных материалов, чтобы каждый километр ощущался аутентично сибирской глуши.",
-      features: [
-        { icon: "🏘️", title: "Detailed Settlements", text: "High-quality recreations of remote towns and industrial hubs." },
-        { icon: "🛣️", title: "A-331 Highway", text: "Drive the iconic Vilyuy highway with realistic geometry and terrain." },
-        { icon: "🔗", title: "Seamless Integration", text: "Full compatibility with FER and the West Yacutia RC." }
-      ],
-      features_ru: [
-        { icon: "🏘️", title: "Детализированные поселения", text: "Высококачественные реконструкции удалённых посёлков и промышленных узлов." },
-        { icon: "🛣️", title: "Трасса А-331", text: "Проедьте по знаменитой трассе «Вилюй» с реалистичной геометрией и рельефом." },
-        { icon: "🔗", title: "Бесшовная интеграция", text: "Полная совместимость с FER и West Yacutia RC." }
-      ],
-      requirements: [
-        "Far East Russia (latest version)",
-        "ETS2 1.59 or newer"
-      ],
-      requirements_ru: [
-        "Far East Russia (последняя версия)",
-        "ETS2 1.59 или новее"
-      ],
-      stats: [
-        { value: "100+", label: "km of driveable roads" },
-        { value: "2", label: "cities & settlements" },
-        { value: "1.59+", label: "ETS2 version supported" }
-      ],
-      stats_ru: [
-        { value: "100+", label: "км проезжих дорог" },
-        { value: "2", label: "городов и поселений" },
-        { value: "1.59+", label: "поддерживаемая версия ETS2" }
-      ]
-    },
 
-    sakhaAddon: {
-      title: "Sakha Addon",
-      title_ru: "Sakha Addon",
-      tagline: "Venture to Oymyakon — Experience the 'Pole of Cold' in the depths of Siberia.",
-      tagline_ru: "Отправьтесь в Оймякон — почувствуйте «Полюс холода» в глубинах Сибири.",
-      description: "The Sakha Addon brings the legendary Oymyakon region to Euro Truck Simulator 2, allowing drivers to venture into the coldest inhabited place on Earth. This expansion focuses on the extreme isolation of the Oymyakonsky District, featuring the treacherous roads that branch off the main Kolyma Highway. Navigate through permafrost valleys and remote outposts where the environment is as challenging as the cargo. With hand-placed vegetation, unique architectural assets, and terrain modeled after real-world satellite data, the Sakha Addon offers an unparalleled journey into one of the most hostile yet beautiful environments in Russia.",
-      description_ru: "Sakha Addon привносит легендарный регион Оймякон в Euro Truck Simulator 2, позволяя водителям отправиться в самое холодное обитаемое место на Земле. Это расширение сосредоточено на экстремальной изоляции Оймяконского района и включает коварные дороги, ответвляющиеся от главной трассы Колыма. Двигайтесь через долины вечной мерзлоты и удалённые аванпосты, где окружение так же сложно, как и груз. Благодаря вручную размещённой растительности, уникальным архитектурным ассетам и рельефу, смоделированному по реальным спутниковым данным, Sakha Addon предлагает беспрецедентное путешествие в одну из самых суровых и прекрасных сред России.",
-      features: [
-        { icon: "❄️", title: "Pole of Cold", text: "Explore the world-famous Oymyakon area and its surrounding wilderness." },
-        { icon: "🏔️", title: "Extreme Isolation", text: "Tackle remote routes far from the main federal highways." },
-        { icon: "🔗", title: "Map Compatibility", text: "Designed to work perfectly with the core Far East Russia map." }
-      ],
-      features_ru: [
-        { icon: "❄️", title: "Полюс холода", text: "Исследуйте всемирно известный район Оймякона и окружающую дикую природу." },
-        { icon: "🏔️", title: "Экстремальная изоляция", text: "Преодолевайте удалённые маршруты вдали от основных федеральных трасс." },
-        { icon: "🔗", title: "Совместимость карты", text: "Разработано для идеальной работы с основной картой Far East Russia." }
-      ],
-      requirements: [
-        "Far East Russia (latest version)",
-        "ETS2 1.58 or newer"
-      ],
-      requirements_ru: [
-        "Far East Russia (последняя версия)",
-        "ETS2 1.58 или новее"
-      ],
-      stats: [
-        { value: "100+", label: "km of driveable roads" },
-        { value: "5", label: "cities & settlements" },
-        { value: "1.58+", label: "ETS2 version supported" }
-      ],
-      stats_ru: [
-        { value: "100+", label: "км проезжих дорог" },
-        { value: "5", label: "городов и поселений" },
-        { value: "1.58+", label: "поддерживаемая версия ETS2" }
-      ]
-    }
   },
 
   /* ---------- Supporters ---------- */

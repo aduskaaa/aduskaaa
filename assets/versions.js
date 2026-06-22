@@ -11,7 +11,7 @@ window.RELEASES = {
       version: "V1",
       date: "2026-04-21",
       size: "65.7MB",
-      game: "ETS2 1.58/1.59",
+      game: "ETS2 1.58/1.59/1.60",
       notes: "Removed a lot of obsolete roads, Added: Deputatsky, Uolba, Uyandi, Belaya Gora, Bilibino, Anuisk, Suturuokha, Kolymskoye, Keperveyem, Added roads: 77K-003 (Anuisk -> Bilibino), 77K-004 (Bilibino -> Keperveyem), part of 77K-001 towards Pevek, Moved: 98N-002 to better position, part of river and avtodoroga indigir together with 98K-023 to better position, Expanded: 98K-023 by around 350km, 98K-006 by like 10km, P-504 more towards Nizhniy Bestiakh. Changed: properties of some Off-Road parts on 98K-006 scenery around road 98K-006 from Pobeda to Ugolnye, changed some offroads to not be that hard to pass and confusing",
       links: {
         primary: "https://modsfire.com/40IN0V42z79DryW",
@@ -122,7 +122,7 @@ window.RELEASES = {
       {
         version: "v4.1",
         date: "2026-04-21",
-        requires: ["FER V1", "ETS2 1.58/1.59", "OTGR current"],
+        requires: ["FER V1", "ETS2 1.58/1.59/1.60", "OTGR current"],
         notes: "Updated version of FER–OTGR connector.",
         links: {
           primary: "https://modsfire.com/RgZ2jWAtV5t7VTN",
@@ -170,7 +170,7 @@ window.RELEASES = {
       {
         version: "LA v1",
         date: "2026-04-21",
-        game: "ETS2 1.58/1.59",
+        game: "ETS2 1.58/1.59/1.60",
         notes: "",
         links: {
           primary: "https://modsfire.com/lkOVR745zK0XW77",
@@ -217,7 +217,7 @@ window.RELEASES = {
       {
         version: "v4",
         date: "2026-04-21",
-        requires: ["FER V1", "ETS2 1.58/1.59", "TST current"],
+        requires: ["FER V1", "ETS2 1.58/1.59/1.60", "TST current"],
         notes: "Connects Far East Russia and Trans-Siberian Truckway.",
         links: {
           primary: "https://modsfire.com/C4j04dUx4cBh3IF",
@@ -278,7 +278,7 @@ window.RELEASES = {
       {
         version: "LA v1",
         date: "2026-04-21",
-        requires: ["FER V1", "ETS2 1.58/1.59", "FER - CHKTLA RC"],
+        requires: ["FER V1", "ETS2 1.58/1.59/1.60", "FER - CHKTLA RC"],
         notes: "Addon for Chukotka region. Contains Legacy areas.",
         links: {
           primary: "https://modsfire.com/b4tt1s2p3oH25F7",
@@ -304,32 +304,6 @@ window.RELEASES = {
         notes: "Addon for Chukotka region. Contains new cities, roads, and other content.",
         links: {
           primary: "https://modsfire.com/QBJLwa7DpEC6NCN",
-          mirror1: "",
-          changelog: ""
-        }
-      }
-    ],
-    westYacutia: [
-      {
-        version: "v1",
-        date: "2026-05-02",
-        requires: ["FER v1", "ETS2 1.59", "Transsiberian Truckway", "Off The Grid Russia"],
-        notes: "Addon for West Yacutia region. Contains new cities, roads, and other content.",
-        links: {
-          primary: "https://truckymods.io/euro-truck-simulator-2/maps/western-yakutia-354564#nav-builds",
-          mirror1: "",
-          changelog: ""
-        }
-      }
-    ],
-    sakhaAddon: [
-      {
-        version: "v1",
-        date: "2026-04-06",
-        requires: ["FER Alpha 30 FIX 2 / V1", "ETS2 1.58/1.59"],
-        notes: "Addon for Sakha region. Contains new cities, roads, and other content.",
-        links: {
-          primary: "https://modsfire.com/TlKCT9gDJQq5ISb",
           mirror1: "",
           changelog: ""
         }

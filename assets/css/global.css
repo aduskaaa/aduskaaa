@@ -149,7 +149,8 @@ body::before {
     background: rgba(255, 255, 255, .06);
 }
 
-.discord-btn {
+.discord-btn,
+.vk-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -165,7 +166,8 @@ body::before {
     transition: color var(--transition), background var(--transition), border-color var(--transition);
 }
 
-.discord-btn:hover {
+.discord-btn:hover,
+.vk-btn:hover {
     background: rgba(255, 255, 255, .16) !important;
     border-color: var(--border-hover) !important;
 }
@@ -953,13 +955,21 @@ body::before {
 }
 
 /* ========== FOOTER ========== */
+body {
+    padding-bottom: 72px;
+}
+
 .footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
     border-top: 1px solid var(--border);
+    background: var(--bg);
     color: var(--muted);
-    padding: 28px 0 52px;
+    padding: 14px 0;
     font-size: 13px;
-    position: relative;
-    z-index: 1;
+    z-index: 50;
 }
 
 .footer-inner {
@@ -1364,13 +1374,15 @@ html[data-theme="light"] .nav a:hover {
     background: rgba(0, 0, 0, .06);
 }
 
-html[data-theme="light"] .discord-btn {
+html[data-theme="light"] .discord-btn,
+html[data-theme="light"] .vk-btn {
     background: #ffffff !important;
     color: #000000 !important;
     border-color: var(--border) !important;
 }
 
-html[data-theme="light"] .discord-btn:hover {
+html[data-theme="light"] .discord-btn:hover,
+html[data-theme="light"] .vk-btn:hover {
     background: #f5f5f7 !important;
 }
 

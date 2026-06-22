@@ -20,6 +20,12 @@
       "meta.title": "Far East Russia – ETS2 Map Mod",
       "meta.description":
         "Far East Russia is a high-quality ETS2 map expansion focusing on Russia's Far East. Explore vast roads, realistic cities, and challenging routes.",
+      "meta.titleAddonsRcs": "Addons & Road Connections • Far East Russia",
+      "meta.descriptionAddonsRcs":
+        "Browse all Far East Russia addons and Road Connections (RCs) that extend the map across Siberia.",
+      "addonsRcsPage.h1": "Addons & Road Connections",
+      "addonsRcsPage.lead":
+        "All extensions for Far East Russia in one place — regional addons that expand the map, and Road Connections that link FER with other major map mods.",
 
       /* nav */
       "nav.HOME": "HOME",
@@ -27,10 +33,12 @@
       "nav.MAP": "MAP",
       "nav.ADDONS": "ADDONS",
       "nav.RCS": "RCS",
+      "nav.ADDONS_RCS": "ADDONS/RCS",
       "nav.GALLERY": "GALLERY",
       "nav.VERSIONS": "VERSIONS",
       "nav.SUPPORT": "SUPPORT",
       "nav.DISCORD": "DISCORD",
+      "nav.VK": "VK",
 
       /* footer */
       "footer.Home": "Home",
@@ -50,7 +58,7 @@
       "hero.cta_support": "Support",
       "hero.badge1": "Actively Maintained",
       "hero.badge2": "Optimized",
-      "hero.badge3": "1.59 Ready",
+      "hero.badge3": "1.60 Ready",
 
       /* features */
       "features.h2": "Key Features",
@@ -213,10 +221,11 @@
         "Every kilometer of road, every city block, and every bug fix is fuelled by the community. FER is a passion project built in spare time — your support keeps the map expanding east and helps maintain quality with every update.",
       "supportPage.joinDiscord": "Join Discord",
       "supportPage.donatePaypal": "Donate via PayPal",
+      "supportPage.donatePatreon": "Support on Patreon",
       "supportPage.waysH2": "Ways to Support",
       "supportPage.way1.title": "Financial Support",
       "supportPage.way1.text":
-        "Donations help fund development time and tools. Every contribution, no matter the size, makes a real difference. Donate via <a href='https://paypal.me/aduskaaaa' target='_blank' style='color:var(--text-bright)'>PayPal</a> or scan the QR code on the PayPal page.",
+        "Donations help fund development time and tools. Every contribution, no matter the size, makes a real difference. Support via <a href='https://www.patreon.com/c/Far_East_Russia' target='_blank' style='color:var(--text-bright)'>Patreon</a> or donate via <a href='https://paypal.me/aduskaaaa' target='_blank' style='color:var(--text-bright)'>PayPal</a>.",
       "supportPage.way2.title": "Provide Reference Material",
       "supportPage.way2.text":
         "Share photos, dashcam footage, and local knowledge from Yakutia and Russia's Far East. Real-world reference data is invaluable for creating authentic cities and roads. Upload via <a href='https://discord.gg/SSWDJMauxz' target='_blank' style='color:var(--text-bright)'>Discord</a>.",
@@ -255,6 +264,12 @@
     },
 
     ru: {
+      "meta.titleAddonsRcs": "Дополнения и Дорожные соединения • Far East Russia",
+      "meta.descriptionAddonsRcs":
+        "Все дополнения и Дорожные соединения (RCs) для Far East Russia, расширяющие карту по Сибири.",
+      "addonsRcsPage.h1": "Дополнения и Дорожные соединения",
+      "addonsRcsPage.lead":
+        "Все расширения для Far East Russia в одном месте — региональные дополнения, расширяющие карту, и Дорожные соединения, связывающие FER с другими крупными модами карт.",
       "meta.title": "Far East Russia – мод карты для ETS2",
       "meta.description":
         "Far East Russia — высококачественное расширение карты для ETS2, посвящённое Дальнему Востоку России. Обширные дороги, реалистичные города и сложные маршруты.",
@@ -264,10 +279,12 @@
       "nav.MAP": "КАРТА",
       "nav.ADDONS": "ДОПОЛНЕНИЯ",
       "nav.RCS": "RCS",
+      "nav.ADDONS_RCS": "ДОПОЛНЕНИЯ/RCS",
       "nav.GALLERY": "ГАЛЕРЕЯ",
       "nav.VERSIONS": "ВЕРСИИ",
       "nav.SUPPORT": "ПОДДЕРЖКА",
       "nav.DISCORD": "DISCORD",
+      "nav.VK": "VK",
 
       "footer.Home": "Главная",
       "footer.FER": "FER",
@@ -285,7 +302,7 @@
       "hero.cta_support": "Поддержать",
       "hero.badge1": "Активно поддерживается",
       "hero.badge2": "Оптимизировано",
-      "hero.badge3": "Готов для 1.59",
+      "hero.badge3": "Готов для 1.60",
 
       "features.h2": "Ключевые особенности",
       "features.lead":
@@ -326,9 +343,9 @@
       "addons.download": "Скачать",
       "addons.downloadTrucky": "Скачать",
 
-      "rcs.h2": "Road Connections (RCs)",
+      "rcs.h2": "Дорожные соединения (RCs)",
       "rcs.lead":
-        "Road Connections связывают FER с другими модами карт, создавая непрерывные маршруты по Сибири. Выберите коннектор ниже, чтобы узнать больше и скачать.",
+        "Дорожные соединения связывают FER с другими модами карт, создавая непрерывные маршруты по Сибири. Выберите коннектор ниже, чтобы узнать больше и скачать.",
       "rcs.ferOtgr.title": "FER – OTGR",
       "rcs.ferOtgr.desc":
         "Соединяет Far East Russia с Off The Grid Russia, открывая непрерывные маршруты по обширной внутренней Сибири.",
@@ -357,7 +374,7 @@
       "faq.q1": "Где скачать основную карту FER?",
       "faq.a1":
         "Воспользуйтесь специальной <a href='fer.html'>страницей FER</a> для скачивания и руководства по установке.",
-      "faq.q2": "Обязательны ли Road Connections (RCs)?",
+      "faq.q2": "Обязательны ли Дорожные соединения (RCs)?",
       "faq.a2":
         "Нет. RCs — это опциональные коннекторы к другим картам. Устанавливайте только те, которые соответствуют картам, которые вы фактически используете.",
       "faq.q3": "Какой правильный порядок загрузки?",
@@ -384,7 +401,7 @@
       "common.downloads": "Загрузки",
       "common.aboutTheMap": "О карте",
       "common.aboutThisAddon": "Об этом дополнении",
-      "common.aboutThisRc": "Об этом Road Connection",
+      "common.aboutThisRc": "Об этом Дорожном соединении",
       "common.requirements": "Требования",
       "common.whatsIncluded": "Что включено",
       "common.installationGuide": "Руководство по установке",
@@ -436,10 +453,11 @@
         "Каждый километр дороги, каждый городской квартал и каждое исправление багов держится на сообществе. FER — это проект, созданный в свободное время с любовью, и ваша поддержка помогает карте расширяться на восток и сохранять качество с каждым обновлением.",
       "supportPage.joinDiscord": "Присоединиться к Discord",
       "supportPage.donatePaypal": "Поддержать через PayPal",
+      "supportPage.donatePatreon": "Поддержать на Patreon",
       "supportPage.waysH2": "Способы поддержки",
       "supportPage.way1.title": "Финансовая поддержка",
       "supportPage.way1.text":
-        "Пожертвования помогают финансировать время разработки и инструменты. Каждый вклад, независимо от размера, имеет значение. Поддержите через <a href='https://paypal.me/aduskaaaa' target='_blank' style='color:var(--text-bright)'>PayPal</a> или отсканируйте QR-код на странице PayPal.",
+        "Пожертвования помогают финансировать время разработки и инструменты. Каждый вклад, независимо от размера, имеет значение. Поддержите через <a href='https://www.patreon.com/c/Far_East_Russia' target='_blank' style='color:var(--text-bright)'>Patreon</a> или <a href='https://paypal.me/aduskaaaa' target='_blank' style='color:var(--text-bright)'>PayPal</a>.",
       "supportPage.way2.title": "Предоставить справочные материалы",
       "supportPage.way2.text":
         "Делитесь фотографиями, видеозаписями с регистраторов и местными знаниями о Якутии и Дальнем Востоке России. Реальные справочные данные неоценимы для создания аутентичных городов и дорог. Загружайте через <a href='https://discord.gg/SSWDJMauxz' target='_blank' style='color:var(--text-bright)'>Discord</a>.",
@@ -456,7 +474,7 @@
 
       "versionsPage.h1": "Версии",
       "versionsPage.lead":
-        "Полная история релизов FER, всех Road Connections и дополнений. Здесь перечислены все когда-либо опубликованные версии.",
+        "Полная история релизов FER, всех Дорожных соединений и дополнений. Здесь перечислены все когда-либо опубликованные версии.",
       "versionsPage.ferReleases": "Релизы FER",
       "versionsPage.addons": "Дополнения",
 
