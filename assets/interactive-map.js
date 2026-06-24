@@ -425,13 +425,24 @@
         }
     }
 
+    let headerH = 62;
+    function updateHeaderH() {
+        const hdr = document.getElementById('site-header');
+        if (hdr) {
+            const h = hdr.getBoundingClientRect().height;
+            if (h > 0) headerH = Math.round(h);
+        }
+    }
+
     function resize() {
+        updateHeaderH();
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight - 62;
+        canvas.height = window.innerHeight - headerH;
         clampView();
         requestAnimationFrame(render);
     }
     window.addEventListener('resize', resize);
+    window.addEventListener('orientationchange', () => setTimeout(resize, 100));
     resize();
 
     let isDragging = false, lastX, lastY;
@@ -456,7 +467,7 @@
         e.preventDefault();
         const factor = e.deltaY > 0 ? 0.85 : 1.15;
         const mouseX = e.clientX;
-        const mouseY = e.clientY - 62;
+        const mouseY = e.clientY - headerH;
         const worldX = (mouseX - state.viewX) / state.zoom;
         const worldY = (mouseY - state.viewY) / state.zoom;
         state.zoom *= factor;
@@ -471,7 +482,7 @@
     canvas.oncontextmenu = (e) => {
         e.preventDefault();
         const mouseX = e.clientX;
-        const mouseY = e.clientY - 62;
+        const mouseY = e.clientY - headerH;
 
         // Convert screen pixel to map Lon/Lat
         const worldX = (mouseX - state.viewX) / state.zoom;
@@ -485,6 +496,156 @@
 
         coordsDisplay.innerHTML = `Lon: ${coords.lon.toFixed(5)}<br>Lat: ${coords.lat.toFixed(5)}`;
     };
+
+    // ===== TOUCH SUPPORT (mobile) =====
+    // 1 finger = pan; 2 fingers = pinch zoom + pan; long-press = coords menu
+    let touchState = {
+        mode: 'none', // 'pan' | 'pinch'
+        lastX: 0, lastY: 0,
+        pinchDist: 0,
+        pinchMidX: 0, pinchMidY: 0,
+        startTime: 0,
+        startX: 0, startY: 0,
+        moved: false,
+        longPressTimer: null
+    };
+
+    function clearLongPress() {
+        if (touchState.longPressTimer) {
+            clearTimeout(touchState.longPressTimer);
+            touchState.longPressTimer = null;
+        }
+    }
+
+    function showCoordsAt(clientX, clientY) {
+        const mapY = clientY - headerH;
+        const worldX = (clientX - state.viewX) / state.zoom;
+        const worldY = (mapY - state.viewY) / state.zoom;
+        const coords = getCoordsFromPixel(worldX, worldY);
+        // Posun menu, ať se vejde do obrazovky
+        const menuW = 180, menuH = 110;
+        let px = Math.min(clientX, window.innerWidth - menuW - 8);
+        let py = Math.min(mapY, window.innerHeight - headerH - menuH - 8);
+        ctxMenu.style.left = px + 'px';
+        ctxMenu.style.top = py + 'px';
+        ctxMenu.style.display = 'block';
+        coordsDisplay.innerHTML = `Lon: ${coords.lon.toFixed(5)}<br>Lat: ${coords.lat.toFixed(5)}`;
+    }
+
+    canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        ctxMenu.style.display = 'none';
+        clearLongPress();
+
+        if (e.touches.length === 1) {
+            const t = e.touches[0];
+            touchState.mode = 'pan';
+            touchState.lastX = t.clientX;
+            touchState.lastY = t.clientY;
+            touchState.startX = t.clientX;
+            touchState.startY = t.clientY;
+            touchState.startTime = Date.now();
+            touchState.moved = false;
+
+            // Long-press = souřadnice
+            touchState.longPressTimer = setTimeout(() => {
+                if (!touchState.moved && touchState.mode === 'pan') {
+                    showCoordsAt(touchState.startX, touchState.startY);
+                    touchState.mode = 'none'; // odblokovat z pan po dlouhém stisku
+                    if (navigator.vibrate) navigator.vibrate(20);
+                }
+            }, 500);
+        } else if (e.touches.length === 2) {
+            clearLongPress();
+            const a = e.touches[0], b = e.touches[1];
+            touchState.mode = 'pinch';
+            touchState.pinchDist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+            touchState.pinchMidX = (a.clientX + b.clientX) / 2;
+            touchState.pinchMidY = (a.clientY + b.clientY) / 2;
+            touchState.moved = true;
+        }
+    }, { passive: false });
+
+    canvas.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+
+        if (e.touches.length === 1 && touchState.mode === 'pan') {
+            const t = e.touches[0];
+            const dx = t.clientX - touchState.lastX;
+            const dy = t.clientY - touchState.lastY;
+            if (Math.abs(t.clientX - touchState.startX) > 6 || Math.abs(t.clientY - touchState.startY) > 6) {
+                touchState.moved = true;
+                clearLongPress();
+            }
+            state.viewX += dx;
+            state.viewY += dy;
+            touchState.lastX = t.clientX;
+            touchState.lastY = t.clientY;
+            clampView();
+            requestAnimationFrame(render);
+        } else if (e.touches.length === 2 && touchState.mode === 'pinch') {
+            const a = e.touches[0], b = e.touches[1];
+            const newDist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+            const newMidX = (a.clientX + b.clientX) / 2;
+            const newMidY = (a.clientY + b.clientY) / 2;
+
+            // zoom kolem středu prstů
+            const mapMidY = newMidY - headerH;
+            const worldX = (newMidX - state.viewX) / state.zoom;
+            const worldY = (mapMidY - state.viewY) / state.zoom;
+
+            const factor = newDist / Math.max(1, touchState.pinchDist);
+            state.zoom *= factor;
+            state.zoom = Math.max(state.minZoom, Math.min(state.maxZoom, state.zoom));
+
+            state.viewX = newMidX - worldX * state.zoom;
+            state.viewY = mapMidY - worldY * state.zoom;
+
+            // Plus posun středem
+            state.viewX += newMidX - touchState.pinchMidX;
+            state.viewY += newMidY - touchState.pinchMidY;
+
+            touchState.pinchDist = newDist;
+            touchState.pinchMidX = newMidX;
+            touchState.pinchMidY = newMidY;
+
+            clampView();
+            requestAnimationFrame(render);
+        }
+    }, { passive: false });
+
+    canvas.addEventListener('touchend', (e) => {
+        clearLongPress();
+        const duration = Date.now() - touchState.startTime;
+
+        // krátký tap bez pohybu = simuluj click pro fotky/streetview
+        if (touchState.mode === 'pan' && !touchState.moved && duration < 400) {
+            const fakeEvt = {
+                clientX: touchState.startX,
+                clientY: touchState.startY
+            };
+            if (canvas.onclick) canvas.onclick(fakeEvt);
+        }
+
+        if (e.touches.length === 0) {
+            touchState.mode = 'none';
+        } else if (e.touches.length === 1) {
+            // přechod z pinch zpět do pan
+            const t = e.touches[0];
+            touchState.mode = 'pan';
+            touchState.lastX = t.clientX;
+            touchState.lastY = t.clientY;
+            touchState.startX = t.clientX;
+            touchState.startY = t.clientY;
+            touchState.startTime = Date.now();
+            touchState.moved = true; // už jsme byli v pinchu, žádný tap
+        }
+    }, { passive: false });
+
+    canvas.addEventListener('touchcancel', () => {
+        clearLongPress();
+        touchState.mode = 'none';
+    }, { passive: false });
 
     function getCoordsFromPixel(px, py) {
         const c = state.calibration;
@@ -524,7 +685,7 @@
 
     canvas.onclick = (e) => {
         const mouseX = e.clientX;
-        const mouseY = e.clientY - 62;
+        const mouseY = e.clientY - headerH;
         ctxMenu.style.display = 'none';
 
         state.layers.photos.forEach(f => {

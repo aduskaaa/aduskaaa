@@ -59,6 +59,12 @@ body {
     font-weight: 500;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 /* Subtle background texture */
@@ -79,6 +85,12 @@ body::before {
     margin: 0 auto;
     position: relative;
     z-index: 1;
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 92%;
+    }
 }
 
 /* ========== HEADER ========== */
@@ -113,6 +125,8 @@ body::before {
     color: var(--text-bright);
     text-decoration: none;
     transition: opacity var(--transition);
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .brand:hover {
@@ -124,6 +138,22 @@ body::before {
     height: 34px;
     border-radius: 8px;
     display: block;
+}
+
+/* Krátký název "FER" se zobrazí jen na mobile */
+.brand-name-short {
+    display: none;
+}
+
+@media (max-width: 720px) {
+    .brand-name-long {
+        display: none;
+    }
+    .brand-name-short {
+        display: inline;
+        font-weight: 800;
+        letter-spacing: .5px;
+    }
 }
 
 /* ========== NAV ========== */
@@ -142,6 +172,7 @@ body::before {
     padding: 8px 12px;
     border-radius: 8px;
     transition: color var(--transition), background var(--transition);
+    white-space: nowrap;
 }
 
 .nav a:hover {
@@ -695,114 +726,6 @@ body::before {
     border: 1px solid var(--border);
 }
 
-/* ========== GALLERY ========== */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-}
-
-.gallery-item {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    background: var(--panel);
-    cursor: pointer;
-    transition: border-color var(--transition), transform var(--transition);
-}
-
-.gallery-item:hover {
-    border-color: var(--border-hover);
-    transform: scale(1.02);
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    display: block;
-    transition: transform .3s ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
-}
-
-/* Lightbox */
-.lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, .92);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 1000;
-    opacity: 1;
-    transition: opacity .2s ease;
-}
-
-.lightbox[hidden] {
-    display: none;
-}
-
-.lightbox img {
-    max-width: 95vw;
-    max-height: 90vh;
-    border-radius: var(--radius);
-    display: block;
-}
-
-.lightbox-close {
-    position: absolute;
-    top: 20px;
-    right: 24px;
-    background: none;
-    border: none;
-    color: var(--text);
-    font-size: 32px;
-    cursor: pointer;
-    opacity: .6;
-    transition: opacity var(--transition);
-    z-index: 1001;
-}
-
-.lightbox-close:hover {
-    opacity: 1;
-}
-
-.lightbox-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, .08);
-    border: 1px solid rgba(255, 255, 255, .12);
-    color: var(--text);
-    font-size: 24px;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: .5;
-    transition: opacity var(--transition), background var(--transition);
-}
-
-.lightbox-nav:hover {
-    opacity: 1;
-    background: rgba(255, 255, 255, .14);
-}
-
-.lightbox-prev {
-    left: 20px;
-}
-
-.lightbox-next {
-    right: 20px;
-}
-
 /* ========== SUPPORTERS ========== */
 .supporters-grid {
     display: grid;
@@ -968,6 +891,7 @@ body {
     background: var(--bg);
     color: var(--muted);
     padding: 14px 0;
+    padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
     font-size: 13px;
     z-index: 50;
 }
@@ -983,6 +907,25 @@ body {
 .footer-links {
     display: flex;
     gap: 14px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 720px) {
+    /* Na mobilu nedrž footer fixní – krade vertikální prostor a koliduje s URL barem prohlížeče */
+    body {
+        padding-bottom: 0;
+    }
+    .footer {
+        position: static;
+    }
+    .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .footer-links {
+        gap: 10px 14px;
+    }
 }
 
 .footer a {
@@ -1041,13 +984,16 @@ main> :nth-child(7) {
     animation-delay: .30s;
 }
 
-/* Responsive visibility utilities */
-@media (max-width: 720px) {
+/* Responsive visibility utilities
+   Práh 1340px = pokrývá běžné laptopy 1366px (scrollbar a okraje sežerou ~30px).
+   Sociální ikony + lang-switch v headeru se schovají pod tento práh a
+   přesunou se do hamburger dropdown menu. */
+@media (max-width: 1340px) {
     .mobile-hide {
         display: none !important;
     }
 }
-@media (min-width: 721px) {
+@media (min-width: 1341px) {
     .desktop-hide {
         display: none !important;
     }
@@ -1070,14 +1016,26 @@ main> :nth-child(7) {
     }
 }
 
-@media (max-width: 720px) {
+/* === Overflow popup (sourozenec .container v headeru) – vždy skrytý, otevírá ho hamburger === */
+.nav-overflow {
+    display: none;
+}
+
+/* Tablet+mobil – hamburger se zobrazí dřív, ať se nav nepřekrývá.
+   `.nav` zůstává inline v headeru, ale skrývá své odkazy. Postupně se odkrývají dle šířky níže. */
+@media (max-width: 1340px) {
     .hamburger {
         display: flex;
     }
 
-    .nav {
+    /* V základu schovat všechny inline nav-link odkazy; níž je progresivně odkrýváme */
+    .nav .nav-link {
         display: none;
-        flex-direction: column;
+    }
+
+    /* Overflow popup pod headerem – dropdown s tím co se nevejde inline */
+    .nav-overflow {
+        display: none;
         position: absolute;
         top: 100%;
         left: 0;
@@ -1086,24 +1044,168 @@ main> :nth-child(7) {
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         border-bottom: 1px solid var(--border);
-        padding: 10px 16px 16px;
-        gap: 2px;
+        padding: 12px 16px 16px;
+        max-height: calc(100vh - var(--header-h, 62px));
+        overflow-y: auto;
+        z-index: 90;
     }
 
-    .nav.nav-open {
+    html[data-theme="light"] .nav-overflow {
+        background: rgba(245, 245, 247, .96);
+    }
+
+    .nav-overflow.open {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 6px;
+        align-items: stretch;
+    }
+
+    .nav-overflow a {
+        color: var(--muted);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 11px;
+        letter-spacing: .4px;
+        padding: 10px 8px;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border-radius: 6px;
+        transition: color var(--transition), background var(--transition);
+    }
+
+    .nav-overflow a:hover {
+        color: var(--text-bright);
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    html[data-theme="light"] .nav-overflow a:hover {
+        background: rgba(0, 0, 0, 0.04);
+    }
+
+    /* Discord/VK v overflow – splynou s ostatními odkazy */
+    .nav-overflow .discord-btn,
+    .nav-overflow .vk-btn {
+        background: transparent !important;
+        color: var(--muted) !important;
+        border: none;
+    }
+
+    .nav-overflow .discord-btn:hover,
+    .nav-overflow .vk-btn:hover {
+        background: rgba(255, 255, 255, 0.06) !important;
+        color: var(--text-bright) !important;
+    }
+
+    html[data-theme="light"] .nav-overflow .discord-btn:hover,
+    html[data-theme="light"] .nav-overflow .vk-btn:hover {
+        background: rgba(0, 0, 0, 0.04) !important;
+    }
+
+    /* Lang switch zabere celou šířku gridu, oddělený horní čárou */
+    .nav-overflow .lang-switch-mobile {
+        grid-column: 1 / -1;
         display: flex;
+        gap: 8px;
+        margin-top: 8px;
+        padding-top: 12px;
+        border-top: 1px solid var(--border);
     }
 
-    .nav a {
+    .nav-overflow .lang-switch-mobile button {
+        flex: 1;
         padding: 12px 14px;
+        font-size: 12px;
+        font-weight: 700;
+        background: rgba(255, 255, 255, .04);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        gap: 8px;
+        justify-content: center;
     }
 
+    .nav-overflow .lang-switch-mobile button:hover,
+    .nav-overflow .lang-switch-mobile button.active {
+        background: rgba(255, 255, 255, .1);
+        color: var(--text-bright);
+    }
+
+    .nav-overflow .lang-switch-mobile .flag {
+        width: 20px;
+        height: 14px;
+    }
+
+    html[data-theme="light"] .nav-overflow .lang-switch-mobile button {
+        background: rgba(0, 0, 0, .03);
+    }
+
+    html[data-theme="light"] .nav-overflow .lang-switch-mobile button:hover,
+    html[data-theme="light"] .nav-overflow .lang-switch-mobile button.active {
+        background: rgba(0, 0, 0, .08);
+    }
+}
+
+/* === Progressive reveal – kolik nav odkazů se vejde do headeru.
+   Do 720px je vše v popupu (0 v headeru).
+   Od 721px se rovnou ukážou 3 odkazy a postupně přibývají další.
+   Ruské popisky jsou ~30 % delší, tak mají vyšší prahy. === */
+
+/* --- English/default --- */
+@media (min-width: 721px) {
+    html:not([lang="ru"]) .nav .nav-link:nth-child(-n+3) { display: inline-flex; }
+    html:not([lang="ru"]) .nav-overflow .nav-link:nth-child(-n+3) { display: none; }
+}
+@media (min-width: 820px) {
+    html:not([lang="ru"]) .nav .nav-link:nth-child(4) { display: inline-flex; }
+    html:not([lang="ru"]) .nav-overflow .nav-link:nth-child(4) { display: none; }
+}
+@media (min-width: 920px) {
+    html:not([lang="ru"]) .nav .nav-link:nth-child(5) { display: inline-flex; }
+    html:not([lang="ru"]) .nav-overflow .nav-link:nth-child(5) { display: none; }
+}
+@media (min-width: 1020px) {
+    html:not([lang="ru"]) .nav .nav-link:nth-child(6) { display: inline-flex; }
+    html:not([lang="ru"]) .nav-overflow .nav-link:nth-child(6) { display: none; }
+}
+@media (min-width: 1120px) {
+    html:not([lang="ru"]) .nav .nav-link:nth-child(7) { display: inline-flex; }
+    html:not([lang="ru"]) .nav-overflow .nav-link:nth-child(7) { display: none; }
+}
+
+/* --- Russian --- АДДОНЫ/RCS, ВЕРСИИ, ПОДДЕРЖКА potřebují víc místa než EN */
+@media (min-width: 780px) {
+    html[lang="ru"] .nav .nav-link:nth-child(-n+3) { display: inline-flex; }
+    html[lang="ru"] .nav-overflow .nav-link:nth-child(-n+3) { display: none; }
+}
+@media (min-width: 920px) {
+    html[lang="ru"] .nav .nav-link:nth-child(4) { display: inline-flex; }
+    html[lang="ru"] .nav-overflow .nav-link:nth-child(4) { display: none; }
+}
+@media (min-width: 1040px) {
+    html[lang="ru"] .nav .nav-link:nth-child(5) { display: inline-flex; }
+    html[lang="ru"] .nav-overflow .nav-link:nth-child(5) { display: none; }
+}
+@media (min-width: 1160px) {
+    html[lang="ru"] .nav .nav-link:nth-child(6) { display: inline-flex; }
+    html[lang="ru"] .nav-overflow .nav-link:nth-child(6) { display: none; }
+}
+@media (min-width: 1260px) {
+    html[lang="ru"] .nav .nav-link:nth-child(7) { display: inline-flex; }
+    html[lang="ru"] .nav-overflow .nav-link:nth-child(7) { display: none; }
+}
+/* Nad 1340px: hamburger zmizí, overflow je nepotřebný, všechny odkazy jsou inline.
+   To už řeší původní pravidla (.hamburger display:none default, .nav display:flex default). */
+@media (min-width: 1341px) {
+    .nav .nav-link { display: inline-flex; }
+    .nav-overflow { display: none !important; }
+}
+
+@media (max-width: 720px) {
     .features {
         grid-template-columns: 1fr;
-    }
-
-    .gallery-grid {
-        grid-template-columns: 1fr 1fr;
     }
 
     .grid-3 {
@@ -1125,12 +1227,127 @@ main> :nth-child(7) {
     .hero {
         padding: 40px 0 30px;
     }
+
+    /* Zmenšit pravou stranu hlavičky, ať se vejde vedle hamburgeru */
+    .header-right {
+        gap: 4px;
+    }
+
+    .header-username {
+        display: none;
+    }
+
+    .header-inner {
+        padding: 8px 0;
+    }
+
+    /* Tabs – horizontální scroll pro úzké obrazovky */
+    .tabs-header {
+        gap: 16px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .tabs-header::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab-button {
+        font-size: 15px;
+        white-space: nowrap;
+        flex: 0 0 auto;
+    }
+
+    /* Velký donate-count v stat-card-wide zmenšit, jinak přeteče */
+    .stat-card.stat-card-wide .stat-value {
+        font-size: 42px;
+    }
+
+    /* Lang picker tlačítka pod sebe na úzkém */
+    .lang-picker-modal {
+        padding: 24px 20px;
+    }
+
+    /* Buttons – touch-friendly */
+    .button {
+        min-width: 0;
+        padding: 12px 18px;
+    }
+
+    /* Settings modal lépe využije šířku */
+    .settings-modal-content {
+        width: 94%;
+        max-height: 90vh;
+    }
+
+    .settings-modal-body {
+        padding: 16px;
+    }
 }
 
 @media (max-width: 480px) {
-    .gallery-grid {
-        grid-template-columns: 1fr;
+    .lang-picker-buttons {
+        flex-direction: column;
     }
+
+    .lang-picker-modal {
+        padding: 22px 16px;
+    }
+
+    .hero h1 {
+        font-size: clamp(24px, 8vw, 32px);
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-cta .button {
+        width: 100%;
+    }
+
+    .install-steps li {
+        padding: 12px 8px 12px 42px;
+        font-size: 13px;
+    }
+
+    .install-steps li::before {
+        left: 8px;
+    }
+
+    .feature-card,
+    .card,
+    .rc-card {
+        padding: 16px;
+    }
+
+    .stat-card {
+        padding: 14px;
+    }
+
+    .stat-card.stat-card-wide .stat-value {
+        font-size: 34px;
+    }
+
+    .comment-item,
+    .reply-item {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .comment-avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+
 }
 
 /* ========== LANGUAGE SWITCH (header) ========== */
@@ -1978,6 +2195,8 @@ html[data-theme="light"] .header-user-dropdown button:hover {
 .header-signin-btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    gap: 6px;
     background: #000000;
     color: #ffffff !important;
     border: 1px solid var(--border);
@@ -1987,11 +2206,33 @@ html[data-theme="light"] .header-user-dropdown button:hover {
     font-weight: 600;
     text-decoration: none;
     transition: background-color var(--transition), border-color var(--transition);
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .header-signin-btn:hover {
     background: rgba(255, 255, 255, 0.08);
     border-color: var(--border-hover);
+}
+
+/* Desktop: jen text, bez ikony */
+.header-signin-icon {
+    display: none;
+}
+
+@media (max-width: 720px) {
+    /* Mobile: jen ikona, kompaktní čtvercové tlačítko */
+    .header-signin-icon {
+        display: inline-block;
+    }
+    .header-signin-text {
+        display: none;
+    }
+    .header-signin-btn {
+        padding: 8px;
+        width: 36px;
+        height: 36px;
+    }
 }
 
 /* Standalone Auth Page Styles */

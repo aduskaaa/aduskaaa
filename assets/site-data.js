@@ -22,7 +22,6 @@ window.SITE = {
     { label: "FER", href: "fer.html" },
     { label: "MAP", href: "interactive-map.html" },
     { label: "ADDONS/RCS", href: "addons-rcs.html", i18nKey: "nav.ADDONS_RCS" },
-    { label: "GALLERY", href: "gallery.html" },
     { label: "VERSIONS", href: "versions.html" },
     { label: "SUPPORT", href: "support.html" }
   ],
@@ -32,7 +31,6 @@ window.SITE = {
     { label: "Home", href: "index.html" },
     { label: "FER", href: "fer.html" },
     { label: "Map", href: "interactive-map.html" },
-    { label: "Gallery", href: "gallery.html" },
     { label: "Versions", href: "versions.html" },
     { label: "Support", href: "support.html" }
   ],
