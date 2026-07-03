@@ -34,6 +34,7 @@
       "nav.ADDONS": "ADDONS",
       "nav.RCS": "RCS",
       "nav.ADDONS_RCS": "ADDONS/RCS",
+      "nav.GALLERY": "GALLERY",
       "nav.VERSIONS": "VERSIONS",
       "nav.SUPPORT": "SUPPORT",
       "nav.DISCORD": "DISCORD",
@@ -43,6 +44,7 @@
       "footer.Home": "Home",
       "footer.FER": "FER",
       "footer.Map": "Map",
+      "footer.Gallery": "Gallery",
       "footer.Versions": "Versions",
       "footer.Support": "Support",
       "footer.copy": "Far East Russia · ETS2 Map Mod",
@@ -192,6 +194,13 @@
       "common.download": "Download",
       "common.mirror": "Mirror",
 
+      /* discord widget */
+      "discord.channelName": "#latest-announcements",
+      "discord.liveFeed": "LIVE FEED",
+      "discord.connecting": "Connecting to Discord feed...",
+      "discord.join": "Join Our Discord",
+      "discord.error": "Failed to load latest updates. <br>Join our server directly on Discord to stay tuned!",
+
       /* fer.html – map coverage bullet list */
       "fer.coverage1": "7,000+ km of driveable roads across the Far Eastern Federal District",
       "fer.coverage2": "40+ detailed cities, towns, and remote settlements",
@@ -234,6 +243,11 @@
       "supportPage.whereLead":
         "<strong>Development time</strong> — More hours spent mapping means faster progress on new cities and roads.",
 
+      /* gallery page */
+      "galleryPage.h1": "Gallery",
+      "galleryPage.lead":
+        "Screenshots from testers and community drivers exploring the Far East. Click any image to view it full-size.",
+
       /* versions page */
       "versionsPage.h1": "Versions",
       "versionsPage.lead":
@@ -257,10 +271,10 @@
     },
 
     ru: {
-      "meta.titleAddonsRcs": "Аддоны и Дорожные соединения • Far East Russia",
+      "meta.titleAddonsRcs": "Дополнения и Дорожные соединения • Far East Russia",
       "meta.descriptionAddonsRcs":
         "Все дополнения и Дорожные соединения (RCs) для Far East Russia, расширяющие карту по Сибири.",
-      "addonsRcsPage.h1": "Аддоны и Дорожные соединения",
+      "addonsRcsPage.h1": "Дополнения и Дорожные соединения",
       "addonsRcsPage.lead":
         "Все расширения для Far East Russia в одном месте — региональные дополнения, расширяющие карту, и Дорожные соединения, связывающие FER с другими крупными модами карт.",
       "meta.title": "Far East Russia – мод карты для ETS2",
@@ -270,9 +284,10 @@
       "nav.HOME": "ГЛАВНАЯ",
       "nav.FER": "FER",
       "nav.MAP": "КАРТА",
-      "nav.ADDONS": "АДДОНЫ",
+      "nav.ADDONS": "ДОПОЛНЕНИЯ",
       "nav.RCS": "RCS",
-      "nav.ADDONS_RCS": "АДДОНЫ/RCS",
+      "nav.ADDONS_RCS": "ДОПОЛНЕНИЯ/RCS",
+      "nav.GALLERY": "ГАЛЕРЕЯ",
       "nav.VERSIONS": "ВЕРСИИ",
       "nav.SUPPORT": "ПОДДЕРЖКА",
       "nav.DISCORD": "DISCORD",
@@ -281,6 +296,7 @@
       "footer.Home": "Главная",
       "footer.FER": "FER",
       "footer.Map": "Карта",
+      "footer.Gallery": "Галерея",
       "footer.Versions": "Версии",
       "footer.Support": "Поддержка",
       "footer.copy": "Far East Russia · мод карты для ETS2",
@@ -317,7 +333,7 @@
       "map.stat2": "детализированных городов и поселений",
       "map.stat3": "поддерживаемая версия ETS2",
 
-      "addons.h2": "Аддоны",
+      "addons.h2": "Дополнения",
       "addons.lead":
         "Расширьте свой опыт Far East Russia дополнительным контентом и регионами.",
       "addons.chukotka.title": "Chukotka Addon",
@@ -421,6 +437,13 @@
       "common.download": "Скачать",
       "common.mirror": "Зеркало",
 
+      /* discord widget */
+      "discord.channelName": "#последние-объявления",
+      "discord.liveFeed": "НОВОСТИ",
+      "discord.connecting": "Подключение к Discord...",
+      "discord.join": "Войти в Discord",
+      "discord.error": "Не удалось загрузить обновления. <br>Присоединяйтесь к нашему серверу напрямую в Discord!",
+
       "fer.coverage1": "Более 7 000 км проезжих дорог Дальневосточного федерального округа",
       "fer.coverage2": "Более 40 детализированных городов, посёлков и удалённых поселений",
       "fer.coverage3": "Речные паромные переправы, связывающие изолированные регионы",
@@ -459,11 +482,15 @@
       "supportPage.whereLead":
         "<strong>Время разработки</strong> — больше часов на маппинг означает более быстрый прогресс с новыми городами и дорогами.",
 
+      "galleryPage.h1": "Галерея",
+      "galleryPage.lead":
+        "Скриншоты от тестеров и водителей сообщества, исследующих Дальний Восток. Кликните на изображение, чтобы открыть в полном размере.",
+
       "versionsPage.h1": "Версии",
       "versionsPage.lead":
         "Полная история релизов FER, всех Дорожных соединений и дополнений. Здесь перечислены все когда-либо опубликованные версии.",
       "versionsPage.ferReleases": "Релизы FER",
-      "versionsPage.addons": "Аддоны",
+      "versionsPage.addons": "Дополнения",
 
       "mapPage.title": "ИНТЕРАКТИВНАЯ КАРТА",
       "mapPage.subtitle": "Far East Russia • Версия карты 1",
@@ -642,7 +669,7 @@
       });
     });
 
-    document.querySelectorAll(".lang-switch button[data-lang]").forEach(function (b) {
+    document.querySelectorAll(".lang-switch button[data-lang], .lang-switch-mobile button[data-lang]").forEach(function (b) {
       b.classList.toggle("active", b.getAttribute("data-lang") === lang);
     });
 

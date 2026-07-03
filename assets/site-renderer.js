@@ -24,31 +24,27 @@
     /* ========== HEADER + NAV + LANG SWITCH ========== */
     var header = document.getElementById("site-header");
     if (header) {
-        /* Hlavní nav (inline v headeru) – odkazy se progresivně odkrývají podle šířky */
-        var navHtml = S.nav
+        var navHtmlHeader = S.nav
             .map(function (l) {
                 var key = l.i18nKey || ("nav." + l.label);
-                return '<a class="nav-link" href="' + l.href + '"' + i18nAttr(key) + '>' + l.label + "</a>";
+                return '<a href="' + l.href + '" class="nav-link"' + i18nAttr(key) + '>' + l.label + "</a>";
             })
             .join("");
 
-        /* Overflow dropdown – obsahuje stejné odkazy (CSS schová ty, co jsou již v headeru) + sociální + lang */
-        var overflowHtml = S.nav
+        var navHtmlOverflow = S.nav
             .map(function (l) {
                 var key = l.i18nKey || ("nav." + l.label);
-                return '<a class="nav-link" href="' + l.href + '"' + i18nAttr(key) + '>' + l.label + "</a>";
+                return '<a href="' + l.href + '" class="nav-link"' + i18nAttr(key) + '>' + l.label + "</a>";
             })
             .join("");
-        overflowHtml +=
+        navHtmlOverflow +=
             '<a href="' + S.discordUrl + '" target="_blank" class="discord-btn"' +
             i18nAttr("nav.DISCORD") + '>DISCORD</a>';
         if (S.vkUrl) {
-            overflowHtml +=
+            navHtmlOverflow +=
                 '<a href="' + S.vkUrl + '" target="_blank" class="vk-btn"' +
                 i18nAttr("nav.VK") + '>VK</a>';
         }
-
-        // langSwitchMobileHtml se přidá až níže, jakmile bude proměnná inicializována
 
         var socialHtml =
             '<a href="' + S.discordUrl + '" target="_blank" class="discord-btn mobile-hide"' +
@@ -60,27 +56,17 @@
         }
 
         var langSwitchHtml = "";
-        var langSwitchMobileHtml = "";
         if (window.I18N) {
             var enFlag = window.I18N.flagSvg ? window.I18N.flagSvg("en") : "";
             var ruFlag = window.I18N.flagSvg ? window.I18N.flagSvg("ru") : "";
             langSwitchHtml =
-                '<div class="lang-switch mobile-hide" role="group" aria-label="Language switch">' +
+                '<div class="lang-switch" role="group" aria-label="Language switch">' +
                 '<button type="button" data-lang="en" aria-label="English">' +
                 '<span class="flag">' + enFlag + '</span> EN</button>' +
                 '<span class="sep">|</span>' +
                 '<button type="button" data-lang="ru" aria-label="Русский">' +
                 '<span class="flag">' + ruFlag + '</span> RU</button>' +
                 '</div>';
-            /* V hamburger menu – jako další "podstránka", větší a samostatná tlačítka */
-            langSwitchMobileHtml =
-                '<div class="lang-switch lang-switch-mobile" role="group" aria-label="Language switch">' +
-                '<button type="button" data-lang="en" aria-label="English">' +
-                '<span class="flag">' + enFlag + '</span> EN</button>' +
-                '<button type="button" data-lang="ru" aria-label="Русский">' +
-                '<span class="flag">' + ruFlag + '</span> RU</button>' +
-                '</div>';
-            overflowHtml += langSwitchMobileHtml;
         }
         var token = localStorage.getItem("fer_token");
         var username = localStorage.getItem("fer_username");
@@ -97,19 +83,12 @@
                 "#ef4444", "#06b6d4", "#14b8a6", "#a855f7", "#f43f5e"
             ];
             var avatarBg = colors[Math.abs(hash) % colors.length];
-            /* Bezpečné vložení jména do HTML/atributu (lokálně uložené, ale i tak escape) */
-            var safeUsername = String(username).replace(/[&<>"']/g, function (c) {
-                return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
-            });
-            var safeInitial = String(initials).replace(/[&<>"']/g, function (c) {
-                return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
-            });
 
             var lang = (window.I18N && typeof window.I18N.getLang === "function") ? window.I18N.getLang() : "en";
             profileHtml =
                 '<div class="header-user" id="header-user">' +
-                '<div class="header-user-avatar" style="background-color: ' + avatarBg + '">' + safeInitial + '</div>' +
-                '<span class="header-username" title="' + safeUsername + '">' + safeUsername + '</span>' +
+                '<div class="header-user-avatar" style="background-color: ' + avatarBg + '">' + initials + '</div>' +
+                '<span class="header-username">' + username + '</span>' +
                 '<div class="header-user-dropdown">' +
                 '<button type="button" id="header-settings-btn">' + (lang === "ru" ? "Настройки" : "Settings") + '</button>' +
                 '<button type="button" id="header-logout-btn">' + (lang === "ru" ? "Выйти" : "Log Out") + '</button>' +
@@ -120,18 +99,12 @@
             var label = (window.I18N && typeof window.I18N.translate === "function")
                 ? window.I18N.translate("common.signInOrSignUp")
                 : "Sign In / Sign Up";
-            var userIconSvg =
-                '<svg class="header-signin-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" ' +
-                'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-                '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>' +
-                '<circle cx="12" cy="7" r="4"></circle>' +
-                '</svg>';
             profileHtml =
-                '<a href="login.html?redirect=' + currentPage + '" class="header-signin-btn" ' +
-                'aria-label="' + label + '" title="' + label + '">' +
-                userIconSvg +
-                '<span class="header-signin-text" data-i18n="common.signInOrSignUp">' + label + '</span>' +
-                '</a>';
+                '<a href="login.html?redirect=' + currentPage + '" class="header-signin-btn" data-i18n="common.signInOrSignUp">' + label + '</a>';
+
+            // Also render it inside mobile overflow dropdown
+            navHtmlOverflow +=
+                '<a href="login.html?redirect=' + currentPage + '" class="overflow-signin-btn" data-i18n="common.signInOrSignUp">' + label + '</a>';
         }
 
         var themeToggleHtml =
@@ -151,7 +124,7 @@
             '<span class="brand-name-short">FER</span>' +
             "</a>" +
             '<nav class="nav" id="nav-menu" aria-label="Primary">' +
-            navHtml +
+            navHtmlHeader +
             "</nav>" +
             '</div>' +
             '<div class="header-right">' +
@@ -164,9 +137,9 @@
             "</button>" +
             "</div>" +
             "</div>" +
-            '<div class="nav-overflow" id="nav-overflow" aria-label="More navigation">' +
-            overflowHtml +
-            "</div>";
+            '<div class="nav-overflow" id="nav-overflow">' +
+            navHtmlOverflow +
+            '</div>';
 
         /* Hamburger toggle */
         var btn = document.getElementById("hamburger");
@@ -177,7 +150,7 @@
                 btn.classList.toggle("open", open);
                 btn.setAttribute("aria-expanded", open);
             });
-            overflow.querySelectorAll("a, .lang-switch button").forEach(function (a) {
+            overflow.querySelectorAll("a").forEach(function (a) {
                 a.addEventListener("click", function () {
                     overflow.classList.remove("open");
                     btn.classList.remove("open");
