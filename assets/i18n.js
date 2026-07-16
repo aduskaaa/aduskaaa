@@ -268,9 +268,9 @@
       "mapPage.streetView": "Street View",
       "mapPage.rightClickHint": "Right-click to get coordinates",
       "mapPage.svTitle": "Far East Russia Street View",
-      "mapPage.datasetVersion": "Dataset Version",
-      "mapPage.version1": "Version 1 (Classic)",
-      "mapPage.version2": "Version 2 (New)",
+      "mapPage.datasetVersion": "Version",
+      "mapPage.version1": "V1",
+      "mapPage.version2": "V2",
       "mapPage.subtitleV1": "Far East Russia • Map Version 1",
       "mapPage.subtitleV2": "Far East Russia • Map Version 2"
     },
