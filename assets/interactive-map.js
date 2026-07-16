@@ -21,9 +21,6 @@
         sy: document.getElementById('slider-sy'),
         rot: document.getElementById('slider-rot')
     };
-    const toggles = {
-        photos: document.getElementById('toggle-photos')
-    };
 
     // State
     const state = {
@@ -32,6 +29,7 @@
         zoom: 1.0,
         minZoom: 0.01,
         maxZoom: 2000,
+        version: 'V1',
         layers: {
             mapAreas: [],
             prefabs: [],
@@ -39,13 +37,9 @@
             ferries: [],
             cities: [],
             pois: [],
-            photos: [],
-            roadNames: [],
             streetview: []
         },
         toggles: {
-            photos: true,
-            roadNames: true,
             background: true,
             streetview: true
         },
@@ -67,14 +61,90 @@
         }
     };
 
+    function loadScript(url) {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = url;
+            script.onload = () => {
+                script.remove();
+                resolve();
+            };
+            script.onerror = (err) => {
+                script.remove();
+                reject(err);
+            };
+            document.head.appendChild(script);
+        });
+    }
+
+    async function loadDataset(version) {
+        loader.style.display = 'flex';
+        state.version = version;
+
+        // Update subtitle language version
+        const subtitleEl = document.querySelector('.hud-top-left p');
+        if (subtitleEl) {
+            subtitleEl.setAttribute('data-i18n', `mapPage.subtitle${version}`);
+            if (window.I18N && window.I18N.apply) {
+                window.I18N.apply();
+            } else {
+                subtitleEl.textContent = version === 'V1' ? "Far East Russia • Map Version 1" : "Far East Russia • Map Version 2";
+            }
+        }
+
+        // Reset layer arrays
+        state.layers.mapAreas = [];
+        state.layers.prefabs = [];
+        state.layers.roads = [];
+        state.layers.ferries = [];
+        state.layers.cities = [];
+        state.layers.pois = [];
+        state.layers.streetview = [];
+        svPolylines = [];
+
+        // Clear window globals to prevent bleed-through
+        window.FER_DATA = null;
+        window.streetview_data = null;
+
+        try {
+            // 1. Load geojson script tag dynamically
+            const geojsonUrl = version === 'V1' ? 'assets/Interactive Map/Map DATA/fer-geojson.js' : 'assets/Interactive Map/Map DATA/fer-geojson_V2.js';
+            await loadScript(geojsonUrl);
+
+            // 2. Fetch and evaluate streetview data
+            const svUrl = `https://raw.githubusercontent.com/aduskaaa/fer-streetview/main/${version}/data.js`;
+            const svResponse = await fetch(svUrl);
+            if (!svResponse.ok) {
+                throw new Error(`Failed to fetch streetview data: ${svResponse.statusText}`);
+            }
+            const svText = await svResponse.text();
+            const startIndex = svText.indexOf('[');
+            const endIndex = svText.lastIndexOf(']');
+            if (startIndex !== -1 && endIndex !== -1) {
+                const jsonString = svText.substring(startIndex, endIndex + 1);
+                window.streetview_data = JSON.parse(jsonString);
+            } else {
+                throw new Error("Invalid data.js format");
+            }
+        } catch (err) {
+            console.warn("Error loading version data, falling back:", err);
+        }
+
+        // Process loaded data
+        if (window.FER_DATA && window.FER_DATA.features) {
+            processData(window.FER_DATA.features);
+        }
+        if (window.streetview_data) {
+            processStreetView();
+        }
+        initializeView();
+        
+        loader.style.display = 'none';
+        requestAnimationFrame(render);
+    }
+
     async function start() {
         if (window.FER_DATA_LOADING) await window.FER_DATA_LOADING;
-
-        if (!window.FER_DATA || !window.FER_DATA.features) {
-            console.error('Error: window.FER_DATA (from fer-geojson.js) failed to load or is empty. Map data is critical for proper functionality.');
-            setTimeout(start, 200); // Re-try loading
-            return;
-        }
 
         // Load background image
         const bgImg = new Image();
@@ -99,12 +169,8 @@
             state.background.isLoaded = false;
         };
 
-        processData(window.FER_DATA.features);
-        processMarkers();
-        processRoadNames();
-        processStreetView();
-        initializeView();
         setupToggles();
+        await loadDataset(state.version);
     }
 
     let svTypicalSpacing = 0; // typical world-pixel distance between consecutive streetview points
@@ -200,75 +266,7 @@
         return Math.min(1, (svTypicalSpacing * state.zoom) / minScreenSpacing);
     }
 
-    function processMarkers() {
-        if (window.USER_PHOTOS) {
-            window.USER_PHOTOS.forEach(photo => {
-                const feature = {
-                    type: "Feature",
-                    properties: {
-                        type: "photo",
-                        name: photo.name,
-                        desc: photo.desc,
-                        user: photo.user,
-                        photo: photo.photo
-                    },
-                    geometry: { type: "Point", coordinates: [photo.lon, photo.lat] },
-                    _bounds: { minX: photo.lon, maxX: photo.lon, minY: photo.lat, maxY: photo.lat }
-                };
-                state.layers.photos.push(feature);
-            });
-        }
-    }
-
-    const roadNameImages = {}; // Cache for road name images
-
-    function processRoadNames() {
-        if (window.ROAD_NAMES) {
-            window.ROAD_NAMES.forEach(roadName => {
-                const feature = {
-                    type: "Feature",
-                    properties: {
-                        type: "roadName",
-                        name: roadName.name,
-                        image: roadName.image || null,
-                        rotation: roadName.rotation || 0
-                    },
-                    geometry: { type: "Point", coordinates: [roadName.lon, roadName.lat] },
-                    _bounds: { minX: roadName.lon, maxX: roadName.lon, minY: roadName.lat, maxY: roadName.lat }
-                };
-                state.layers.roadNames.push(feature);
-
-                if (roadName.image && !roadNameImages[roadName.image]) {
-                    const img = new Image();
-                    img.src = roadName.image;
-                    img.onload = () => requestAnimationFrame(render);
-                    img.onerror = () => console.error(`Road Name: Failed to load image: ${roadName.image}`);
-                    roadNameImages[roadName.image] = img;
-                }
-            });
-        }
-    }
-
     function setupToggles() {
-        Object.keys(toggles).forEach(key => {
-            if (!toggles[key]) return;
-            toggles[key].onchange = (e) => {
-                state.toggles[key] = e.target.checked;
-                requestAnimationFrame(render);
-            };
-            state.toggles[key] = toggles[key].checked;
-        });
-
-        // Add the new road names toggle
-        const roadNamesToggle = document.getElementById('toggle-road-names');
-        if (roadNamesToggle) {
-            roadNamesToggle.onchange = (e) => {
-                state.toggles.roadNames = e.target.checked;
-                requestAnimationFrame(render);
-            };
-            state.toggles.roadNames = roadNamesToggle.checked;
-        }
-
         // Add the new background toggle
         const backgroundToggle = document.getElementById('toggle-background');
         if (backgroundToggle) {
@@ -291,6 +289,15 @@
             state.toggles.streetview = streetviewToggle.checked;
         } else {
             console.error('Streetview Debug: HTML element with id "toggle-streetview" not found!');
+        }
+
+        // Add the dataset version selector
+        const versionSelect = document.getElementById('map-version-select');
+        if (versionSelect) {
+            versionSelect.onchange = (e) => {
+                loadDataset(e.target.value);
+            };
+            versionSelect.value = state.version;
         }
     }
 
@@ -527,29 +534,6 @@
         const mouseY = e.clientY - 62;
         ctxMenu.style.display = 'none';
 
-        state.layers.photos.forEach(f => {
-            const p = transform(f.geometry.coordinates[0], f.geometry.coordinates[1]);
-            const sx = p.x * state.zoom + state.viewX;
-            const sy = p.y * state.zoom + state.viewY;
-            const dist = Math.sqrt((mouseX - sx) ** 2 + (mouseY - sy) ** 2);
-            if (dist < 15 && state.toggles.photos) {
-                // Open Photo Modal
-                const modal = document.getElementById('photo-modal');
-                const img = document.getElementById('modal-img');
-                const title = document.getElementById('modal-title');
-                const desc = document.getElementById('modal-desc');
-                const user = document.getElementById('modal-user');
-
-                img.src = f.properties.photo;
-                title.innerText = f.properties.name.toUpperCase();
-                desc.innerText = f.properties.desc;
-                user.innerText = `BY ${f.properties.user.toUpperCase()}`;
-
-                modal.style.display = 'flex';
-                return; // Prevent streetview modal from opening
-            }
-        });
-
         if (state.toggles.streetview) {
             // Find the streetview capture nearest to the click, measured against
             // the coverage line segments (so clicking anywhere on the line works)
@@ -645,7 +629,7 @@
             modalStreetViewImg.onload = () => {
                 modalStreetViewImg.style.opacity = 1;
             };
-            modalStreetViewImg.src = `https://raw.githubusercontent.com/aduskaaa/fer-streetview/main/V1/${currentSV.properties.file}`;
+            modalStreetViewImg.src = `https://raw.githubusercontent.com/aduskaaa/fer-streetview/main/${state.version}/${currentSV.properties.file}`;
             if (modalStreetViewImg.complete) {
                 modalStreetViewImg.onload();
             }
@@ -1095,18 +1079,6 @@
             }
         });
 
-        // 6. User Photos
-        if (state.toggles.photos) {
-            state.layers.photos.forEach(f => {
-                if (!isVisible(f._bounds)) return;
-                const p = transform(f.geometry.coordinates[0], f.geometry.coordinates[1]);
-                const size = 8 / zoom;
-                ctx.fillStyle = "#27ae60"; ctx.strokeStyle = "#fff"; ctx.lineWidth = 1.5 / zoom;
-                ctx.beginPath(); ctx.moveTo(p.x - size / 2, p.y - size / 2); ctx.lineTo(p.x + size / 2, p.y - size / 2); ctx.lineTo(p.x + size / 2, p.y + size / 2); ctx.lineTo(p.x - size / 2, p.y + size / 2); ctx.closePath(); ctx.fill(); ctx.stroke();
-                if (zoom > 1.0) { ctx.font = `bold ${9 / zoom}px sans-serif`; ctx.fillStyle = "#2ecc71"; ctx.fillText(f.properties.name, p.x, p.y + 12 / zoom); }
-            });
-        }
-
         // 7. Street View Coverage Lines
         if (state.toggles.streetview) {
             const svLod = getStreetviewLodFraction();
@@ -1136,37 +1108,6 @@
                 const p = transform(f.geometry.coordinates[0], f.geometry.coordinates[1]);
                 ctx.fillStyle = "#FFD700"; ctx.strokeStyle = "#fff"; ctx.lineWidth = 1 / zoom;
                 ctx.beginPath(); ctx.arc(p.x, p.y, 3 / zoom, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-            });
-        }
-
-        // 8. Road Names
-        if (state.toggles.roadNames) {
-            state.layers.roadNames.forEach(f => {
-                if (!isVisible(f._bounds)) return;
-                const p = transform(f.geometry.coordinates[0], f.geometry.coordinates[1]);
-
-                ctx.save();
-                ctx.translate(p.x, p.y);
-                if (f.properties.rotation) {
-                    ctx.rotate(f.properties.rotation * Math.PI / 180);
-                }
-
-                if (f.properties.image && roadNameImages[f.properties.image] && roadNameImages[f.properties.image].complete) {
-                    const img = roadNameImages[f.properties.image];
-                    const imgWidth = img.width / (zoom * 2); // Default image size
-                    const imgHeight = img.height / (zoom * 2); // Default image size
-                    ctx.drawImage(img, -imgWidth / 2, -imgHeight / 2, imgWidth, imgHeight);
-                } else if (f.properties.name) {
-                    ctx.font = `bold ${12 / zoom}px sans-serif`; // Default font size
-                    ctx.fillStyle = "#fff";
-                    ctx.strokeStyle = "#000";
-                    ctx.lineWidth = 2 / zoom;
-                    ctx.textAlign = "center";
-                    ctx.textBaseline = "middle";
-                    ctx.strokeText(f.properties.name, 0, 0);
-                    ctx.fillText(f.properties.name, 0, 0);
-                }
-                ctx.restore();
             });
         }
 

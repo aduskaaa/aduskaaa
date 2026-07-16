@@ -267,7 +267,12 @@
       "mapPage.background": "Background Image",
       "mapPage.streetView": "Street View",
       "mapPage.rightClickHint": "Right-click to get coordinates",
-      "mapPage.svTitle": "Far East Russia Street View"
+      "mapPage.svTitle": "Far East Russia Street View",
+      "mapPage.datasetVersion": "Dataset Version",
+      "mapPage.version1": "Version 1 (Classic)",
+      "mapPage.version2": "Version 2 (New)",
+      "mapPage.subtitleV1": "Far East Russia • Map Version 1",
+      "mapPage.subtitleV2": "Far East Russia • Map Version 2"
     },
 
     ru: {
@@ -503,7 +508,12 @@
       "mapPage.background": "Фоновое изображение",
       "mapPage.streetView": "Street View",
       "mapPage.rightClickHint": "ПКМ для получения координат",
-      "mapPage.svTitle": "Far East Russia Street View"
+      "mapPage.svTitle": "Far East Russia Street View",
+      "mapPage.datasetVersion": "Версия набора данных",
+      "mapPage.version1": "Версия 1 (Классическая)",
+      "mapPage.version2": "Версия 2 (Новая)",
+      "mapPage.subtitleV1": "Far East Russia • Версия карты 1",
+      "mapPage.subtitleV2": "Far East Russia • Версия карты 2"
     }
   };
 

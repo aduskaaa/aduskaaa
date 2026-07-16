@@ -132,22 +132,6 @@
         <div class="map-layers-bar"
             style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); background: rgba(14,14,14,0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); border-radius: 40px; padding: 10px 30px; display: flex; gap: 30px; align-items: center; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 500;">
             <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
-                <input type="checkbox" id="toggle-photos" checked style="accent-color: var(--accent);">
-                <span
-                    style="font-size: 11px; font-weight: 800; color: #eee; text-transform: uppercase; letter-spacing: 1px;"
-                    data-i18n="mapPage.userPhotos">User
-                    Photos</span>
-            </label>
-            <div style="width: 1px; height: 15px; background: rgba(255,255,255,0.1);"></div>
-            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
-                <input type="checkbox" id="toggle-road-names" checked style="accent-color: var(--accent);">
-                <span
-                    style="font-size: 11px; font-weight: 800; color: #eee; text-transform: uppercase; letter-spacing: 1px;"
-                    data-i18n="mapPage.roadNames">Road
-                    Names</span>
-            </label>
-            <div style="width: 1px; height: 15px; background: rgba(255,255,255,0.1);"></div>
-            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                 <input type="checkbox" id="toggle-background" checked style="accent-color: var(--accent);">
                 <span
                     style="font-size: 11px; font-weight: 800; color: #eee; text-transform: uppercase; letter-spacing: 1px;"
@@ -161,6 +145,16 @@
                     style="font-size: 11px; font-weight: 800; color: #eee; text-transform: uppercase; letter-spacing: 1px;"
                     data-i18n="mapPage.streetView">Street
                     View</span>
+            </label>
+            <div style="width: 1px; height: 15px; background: rgba(255,255,255,0.1);"></div>
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <span
+                    style="font-size: 11px; font-weight: 800; color: #eee; text-transform: uppercase; letter-spacing: 1px;"
+                    data-i18n="mapPage.datasetVersion">Dataset Version</span>
+                <select id="map-version-select" style="background: rgba(0,0,0,0.6); color: #fff; border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; padding: 4px 8px; font-size: 11px; font-weight: 800; cursor: pointer; outline: none; transition: border-color 0.3s; pointer-events: auto;">
+                    <option value="V1" data-i18n="mapPage.version1">Version 1 (Classic)</option>
+                    <option value="V2" data-i18n="mapPage.version2">Version 2 (New)</option>
+                </select>
             </label>
             <div style="width: 1px; height: 15px; background: rgba(255,255,255,0.1);"></div>
             <div style="font-size: 9px; color: var(--muted); font-weight: 700; text-transform: uppercase;"
@@ -177,25 +171,7 @@
             <input type="range" id="slider-rot" value="0">
         </div>
 
-        <!-- Photo Modal -->
-        <div id="photo-modal"
-            style="position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 40px; backdrop-filter: blur(5px);">
-            <button onclick="closeModal('photo-modal')"
-                style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: #fff; font-size: 40px; cursor: pointer; line-height: 1;">&times;</button>
-            <div
-                style="max-width: 90%; max-height: 80%; display: flex; flex-direction: column; align-items: center; gap: 20px;">
-                <img id="modal-img" src=""
-                    style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 0 50px rgba(0,0,0,0.8); border: 2px solid rgba(255,255,255,0.1);">
-                <div style="text-align: center; color: #fff; width: 100%;">
-                    <h2 id="modal-title" style="margin: 0; font-size: 20px; letter-spacing: 1px;">Photo Title</h2>
-                    <p id="modal-desc" style="color: var(--muted); margin: 8px 0; font-size: 13px; font-style: italic;">
-                        Description text here...</p>
-                    <div id="modal-user"
-                        style="font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase;">By
-                        User123</div>
-                </div>
-            </div>
-        </div>
+
 
         <!-- Streetview Modal -->
         <div id="streetview-modal"
@@ -253,11 +229,6 @@
     <script src="assets/site-data.js"></script>
     <script src="assets/i18n.js"></script>
     <script src="assets/site-renderer.js"></script>
-    <script src="assets/custom-companies.js"></script>
-    <script src="assets/user-photos.js"></script>
-    <script src="imgs/streetview/data.js"></script>
-    <script src="assets/Interactive Map/Map DATA/fer-geojson.js"></script>
-    <script src="assets/Interactive Map/Map DATA/fer-road-names.js"></script>
     <script src="assets/interactive-map.js"></script>
 
     <script>
