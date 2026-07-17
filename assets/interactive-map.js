@@ -88,7 +88,7 @@
             if (window.I18N && window.I18N.apply) {
                 window.I18N.apply();
             } else {
-                subtitleEl.textContent = version === 'V1' ? "Far East Russia • Map Version 1" : "Far East Russia • Map Version 2";
+                subtitleEl.textContent = version === 'V2' ? "Far East Russia • Map Version 2" : "Far East Russia • Map Version 1" ;
             }
         }
 
