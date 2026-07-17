@@ -108,7 +108,7 @@
 
         try {
             // 1. Load geojson script tag dynamically
-            const geojsonUrl = version === 'V1' ? 'assets/Interactive Map/Map DATA/fer-geojson.js' : 'assets/Interactive Map/Map DATA/fer-geojson_V2.js';
+            const geojsonUrl = version === 'V2' ? 'assets/Interactive Map/Map DATA/fer-geojson_V2.js' : 'assets/Interactive Map/Map DATA/fer-geojson.js';
             await loadScript(geojsonUrl);
 
             // 2. Fetch and evaluate streetview data
