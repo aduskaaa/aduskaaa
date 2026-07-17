@@ -29,7 +29,7 @@
         zoom: 1.0,
         minZoom: 0.01,
         maxZoom: 2000,
-        version: 'V1',
+        version: 'V2',
         layers: {
             mapAreas: [],
             prefabs: [],
