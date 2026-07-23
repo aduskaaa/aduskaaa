@@ -7,6 +7,18 @@
 
 window.RELEASES = {
   fer: [
+     {
+      version: "V2",
+      date: "2026-07-23",
+      size: "65.78MB",
+      game: "ETS2 1.60",
+      notes: "Added: Ur. Rosomakha, Razvilka, Elginski, Teryut, Druzhina, Chokurdakh, Topolinoe, Added roads: 98K-023 ( Uyandi -> Saygannakh ), 98K-007 ( P-504 -> Topolinoe ), Rebuilded: P-504 from Aldan port all the way up to its end on mopst parts, moved 98N-002, fixed scaling of P-504, Removed ferry from Markha to Tiksi... tiksi is now accessible by "Road". rebuilded part of Khonuu and around half of the P-504 was switched to newer assets.",
+      links: {
+        primary: "https://modsfire.com/lGvoImHt2RXi3sT",
+        mirror1: "",
+        changelog: ""
+      }
+    },
     {
       version: "V1",
       date: "2026-04-21",
@@ -119,6 +131,17 @@ window.RELEASES = {
 
   rcs: {
     otgr: [
+       {
+        version: "v5",
+        date: "2026-07-23",
+        requires: ["FER V2", "ETS2 1.60", "OTGR current"],
+        notes: "Updated version of FER–OTGR connector.",
+        links: {
+          primary: "https://modsfire.com/2KbpVx2g6RA2WM3",
+          mirror1: "",
+          changelog: ""
+        }
+      },
       {
         version: "v4.1",
         date: "2026-04-21",
@@ -167,6 +190,17 @@ window.RELEASES = {
     ],
 
     chukotka: [
+       {
+        version: "LA v2",
+        date: "2026-07-23",
+        game: "ETS2 1.60",
+        notes: "",
+        links: {
+          primary: "https://modsfire.com/bK62VAp878j4Kvd",
+          mirror1: "",
+          changelog: ""
+        }
+      },
       {
         version: "LA v1",
         date: "2026-04-21",
@@ -214,6 +248,17 @@ window.RELEASES = {
     ],
 
     tst: [
+       {
+        version: "v5",
+        date: "2026-07-23",
+        requires: ["FER V2", "ETS2 1.60", "TST current"],
+        notes: "Connects Far East Russia and Trans-Siberian Truckway.",
+        links: {
+          primary: "https://modsfire.com/77N9F8tFz20Zrop",
+          mirror1: "",
+          changelog: ""
+        }
+      },
       {
         version: "v4",
         date: "2026-04-21",
@@ -275,6 +320,17 @@ window.RELEASES = {
 
   addons: {
     chukotka: [
+       {
+        version: "LA v1 UPD1",
+        date: "2026-07-23",
+        requires: ["FER V2", "ETS2 1.60", "FER - CHKTLA RC"],
+        notes: "Addon for Chukotka region. Contains Legacy areas.",
+        links: {
+          primary: "https://modsfire.com/Q7OYMx8LT7bLXn4",
+          mirror1: "",
+          changelog: ""
+        }
+      },
       {
         version: "LA v1",
         date: "2026-04-21",
