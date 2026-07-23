@@ -12,7 +12,7 @@ window.RELEASES = {
       date: "2026-07-23",
       size: "65.78MB",
       game: "ETS2 1.60",
-      notes: "Added: Ur. Rosomakha, Razvilka, Elginski, Teryut, Druzhina, Chokurdakh, Topolinoe, Added roads: 98K-023 ( Uyandi -> Saygannakh ), 98K-007 ( P-504 -> Topolinoe ), Rebuilded: P-504 from Aldan port all the way up to its end on mopst parts, moved 98N-002, fixed scaling of P-504, Removed ferry from Markha to Tiksi... tiksi is now accessible by "Road". rebuilded part of Khonuu and around half of the P-504 was switched to newer assets.",
+      notes: "Added: Ur. Rosomakha, Razvilka, Elginski, Teryut, Druzhina, Chokurdakh, Topolinoe, Added roads: 98K-023 ( Uyandi -> Saygannakh ), 98K-007 ( P-504 -> Topolinoe ), Rebuilded: P-504 from Aldan port all the way up to its end on most parts, moved 98N-002, fixed scaling of P-504, Removed ferry from Markha to Tiksi... tiksi is now accessible by Road. rebuilded part of Khonuu and around half of the P-504 was switched to newer assets.",
       links: {
         primary: "https://modsfire.com/lGvoImHt2RXi3sT",
         mirror1: "",
