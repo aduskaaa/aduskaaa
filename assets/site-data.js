@@ -225,6 +225,7 @@ window.SITE = {
       { name: "weskergood1234", amount: "6,24 EUR"},
       { name: "Delby", amount: "3,51 EUR" },
       { name: "Xiguawangzi3399", amount: "3,48 EUR" },
+      { name: "Nachito", amount: "3,00 EUR" },
       { name: "Killermix", amount: "0.40 EUR" }
     ],
     showcase: [
