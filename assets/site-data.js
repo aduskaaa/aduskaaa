@@ -223,6 +223,7 @@ window.SITE = {
       { name: "Mr JP", amount: "13,62 EUR" },
       { name: "Artie", amount: "8,48 EUR" },
       { name: "weskergood1234", amount: "6,24 EUR"},
+      { name: "Maxi", amount: "4,50 EUR" },
       { name: "Delby", amount: "3,51 EUR" },
       { name: "Xiguawangzi3399", amount: "3,48 EUR" },
       { name: "Nachito", amount: "3,00 EUR" },
