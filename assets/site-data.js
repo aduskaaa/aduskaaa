@@ -92,12 +92,12 @@ window.SITE = {
       stats: [
         { value: "7,000+", label: "km of driveable roads" },
         { value: "40+", label: "cities & settlements" },
-        { value: "1.58/1.59/1.60", label: "version supported" }
+        { value: "1.60", label: "version supported" }
       ],
       stats_ru: [
         { value: "7 000+", label: "км проезжих дорог" },
         { value: "40+", label: "городов и поселений" },
-        { value: "1.58/1.59/1.60", label: "поддерживаемая версия" }
+        { value: "1.60", label: "поддерживаемая версия" }
       ],
       installSteps: [
         "Download the latest FER release from the download section below.",
