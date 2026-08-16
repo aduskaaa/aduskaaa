@@ -220,7 +220,7 @@ window.SITE = {
   supporters: {
     donations: [
       { name: "laur1sxd", amount: "40,42 EUR" },
-      { name: "Mr JP", amount: "13,62 EUR" },
+      { name: "Mr JP", amount: "16,12 EUR" },
       { name: "Artie", amount: "8,48 EUR" },
       { name: "weskergood1234", amount: "6,24 EUR"},
       { name: "Maxi", amount: "4,50 EUR" },
