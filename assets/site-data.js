@@ -34,7 +34,9 @@ window.SITE = {
     { label: "Map", href: "interactive-map.html" },
     { label: "Gallery", href: "gallery.html" },
     { label: "Versions", href: "versions.html" },
-    { label: "Support", href: "support.html" }
+    { label: "Support", href: "support.html" },
+    { label: "Privacy & Policy", href: "p&p.html" }
+     
   ],
 
   /* ---------- Load Order (shared across FER, RC, addon pages) ---------- */
@@ -74,20 +76,20 @@ window.SITE = {
       description: "Far East Russia is a massive, hand-crafted map mod for Euro Truck Simulator 2 that brings the raw, untamed beauty of Russia's Far Eastern Federal District to life. Spanning thousands of kilometers of driveable roads, FER takes you through some of the most remote and extreme terrain on Earth — from the permafrost-covered highways of Yakutia to the legendary 'Road of Bones' along the Kolyma route. Every city, village, and roadside stop is built from scratch using satellite imagery and real-world reference photos, ensuring an authentic representation of this vast, sparsely populated region. The roads range from well-maintained federal highways to treacherous dirt tracks that test both your driving skill and your truck's durability. River crossings via ferry, seasonal road conditions, and realistic signage all contribute to an immersive experience that captures what it truly feels like to haul freight across one of the most isolated corners of the world. FER is optimized for performance and stability, making it suitable for both single-player hauling sessions and multiplayer convoys.",
       description_ru: "Far East Russia — масштабный мод карты для Euro Truck Simulator 2, созданный вручную, который оживляет суровую, нетронутую красоту Дальневосточного федерального округа России. Простираясь на тысячи километров проезжих дорог, FER проведёт вас через одну из самых удалённых и экстремальных территорий на Земле — от шоссе Якутии, покрытых вечной мерзлотой, до легендарной «Дороги костей» вдоль Колымы. Каждый город, посёлок и придорожная стоянка построены с нуля на основе спутниковых снимков и реальных фотографий, обеспечивая аутентичное воспроизведение этого обширного и малонаселённого региона. Дороги варьируются от ухоженных федеральных трасс до коварных грунтовок, которые проверят и ваше водительское мастерство, и прочность грузовика. Речные переправы на паромах, сезонные условия дорог и реалистичные указатели создают эффект погружения, передающий ощущение перевозки грузов в одном из самых изолированных уголков мира. FER оптимизирован для производительности и стабильности, что делает его подходящим как для одиночных рейсов, так и для мультиплеерных конвоев.",
       features: [
-        { icon: "🗺️", title: "7,000+ km of Roads", text: "Federal highways, regional roads, and unnamed dirt tracks — all hand-crafted with realistic geometry and signage." },
-        { icon: "🏘️", title: "40+ Cities & Settlements", text: "From major cities like Yakutsk to tiny remote villages accessible only by unpaved roads or river ferry." },
-        { icon: "⛴️", title: "River Ferries", text: "Cross mighty Siberian rivers aboard realistic ferry services — some routes are only accessible by water." },
-        { icon: "🏔️", title: "Extreme Terrain", text: "Winter roads but in summer, mountain passes, river fords, and seasonal conditions create challenging driving experiences." },
-        { icon: "⚡", title: "Optimized Performance", text: "Carefully optimized assets and map sectors ensure smooth performance even on mid-range hardware." },
-        { icon: "🔄", title: "Regular Updates", text: "Active development with new cities, roads, and improvements added in every release." }
+        { icon: "", title: "7,000+ km of Roads", text: "Federal highways, regional roads, and unnamed dirt tracks — all hand-crafted with realistic geometry and signage." },
+        { icon: "", title: "40+ Cities & Settlements", text: "From major cities like Yakutsk to tiny remote villages accessible only by unpaved roads or river ferry." },
+        { icon: "", title: "River Ferries", text: "Cross mighty Siberian rivers aboard realistic ferry services — some routes are only accessible by water." },
+        { icon: "", title: "Extreme Terrain", text: "Winter roads but in summer, mountain passes, river fords, and seasonal conditions create challenging driving experiences." },
+        { icon: "", title: "Optimized Performance", text: "Carefully optimized assets and map sectors ensure smooth performance even on mid-range hardware." },
+        { icon: "", title: "Regular Updates", text: "Active development with new cities, roads, and improvements added in every release." }
       ],
       features_ru: [
-        { icon: "🗺️", title: "Более 7 000 км дорог", text: "Федеральные трассы, региональные дороги и безымянные грунтовки — все созданы вручную с реалистичной геометрией и указателями." },
-        { icon: "🏘️", title: "Более 40 городов и поселений", text: "От крупных городов вроде Якутска до маленьких удалённых деревень, доступных только по грунтовкам или речным паромам." },
-        { icon: "⛴️", title: "Речные паромы", text: "Пересекайте могучие сибирские реки на реалистичных паромах — некоторые маршруты доступны только по воде." },
-        { icon: "🏔️", title: "Экстремальная местность", text: "Зимники, действующие летом, горные перевалы, броды и сезонные условия создают сложный опыт вождения." },
-        { icon: "⚡", title: "Оптимизированная производительность", text: "Тщательно оптимизированные ассеты и секторы карты обеспечивают плавную работу даже на оборудовании среднего класса." },
-        { icon: "🔄", title: "Регулярные обновления", text: "Активная разработка с новыми городами, дорогами и улучшениями в каждом релизе." }
+        { icon: "", title: "Более 7 000 км дорог", text: "Федеральные трассы, региональные дороги и безымянные грунтовки — все созданы вручную с реалистичной геометрией и указателями." },
+        { icon: "", title: "Более 40 городов и поселений", text: "От крупных городов вроде Якутска до маленьких удалённых деревень, доступных только по грунтовкам или речным паромам." },
+        { icon: "", title: "Речные паромы", text: "Пересекайте могучие сибирские реки на реалистичных паромах — некоторые маршруты доступны только по воде." },
+        { icon: "", title: "Экстремальная местность", text: "Зимники, действующие летом, горные перевалы, броды и сезонные условия создают сложный опыт вождения." },
+        { icon: "", title: "Оптимизированная производительность", text: "Тщательно оптимизированные ассеты и секторы карты обеспечивают плавную работу даже на оборудовании среднего класса." },
+        { icon: "", title: "Регулярные обновления", text: "Активная разработка с новыми городами, дорогами и улучшениями в каждом релизе." }
       ],
       stats: [
         { value: "7,000+", label: "km of driveable roads" },
@@ -180,14 +182,14 @@ window.SITE = {
       description: "The Chukotka Addon is an expansive legacy map addition for Far East Russia that introduces the Chukotsky Autonomous Okrug region to your Euro Truck Simulator 2 world. Chukotka is one of the most extreme and isolated places on the planet — a land of permafrost tundra, volcanic mountains, and Arctic coastline where temperatures can plunge below -50°C. This addon brings this unique and challenging landscape to ETS2, featuring remote northern settlements, isolated outposts, and treacherous roads that will test even the most experienced virtual truckers. The region features custom environment assets and textures not found elsewhere in FER, including coastal dirt roads, frozen river crossings, and breathtaking mountain passes. Every settlement has been carefully modeled using real-world reference materials to capture the authentic, rugged character of this remote corner of Russia.",
       description_ru: "Chukotka Addon — это масштабное дополнение для Far East Russia, добавляющее регион Чукотского автономного округа в ваш мир Euro Truck Simulator 2. Чукотка — одно из самых экстремальных и изолированных мест на планете: земля вечной мерзлоты, тундры, вулканических гор и арктического побережья, где температура может опускаться ниже -50°C. Это дополнение переносит этот уникальный и сложный ландшафт в ETS2 с детализированными северными поселениями, удалёнными аванпостами и коварными дорогами, которые проверят мастерство даже самых опытных виртуальных дальнобойщиков. В регионе представлены уникальные объекты окружения и текстуры, включая грунтовые прибрежные дороги, переправы по замёрзшим рекам и узкие горные перевалы. Каждое поселение спроектировано на основе реальных справочных материалов, чтобы передать аутентичный суровый характер этого далёкого уголка России.",
       features: [
-        { icon: "🏘️", title: "Remote Settlements", text: "Drive through authentic northern towns and isolated coastal outposts." },
-        { icon: "🛣️", title: "Challenging Routes", text: "Navigate treacherous dirt roads, ice crossings, and narrow mountain passes." },
-        { icon: "🔗", title: "Seamless Integration", text: "Works with FER and the Chukotka RC for a continuous map experience." }
+        { icon: "", title: "Remote Settlements", text: "Drive through authentic northern towns and isolated coastal outposts." },
+        { icon: "", title: "Challenging Routes", text: "Navigate treacherous dirt roads, ice crossings, and narrow mountain passes." },
+        { icon: "", title: "Seamless Integration", text: "Works with FER and the Chukotka RC for a continuous map experience." }
       ],
       features_ru: [
-        { icon: "🏘️", title: "Удалённые поселения", text: "Проезжайте через аутентичные северные посёлки и изолированные прибрежные аванпосты." },
-        { icon: "🛣️", title: "Сложные маршруты", text: "Преодолевайте коварные грунтовые дороги, ледовые переправы и узкие горные перевалы." },
-        { icon: "🔗", title: "Бесшовная интеграция", text: "Работает с FER и Chukotka RC для непрерывного опыта карты." }
+        { icon: "", title: "Удалённые поселения", text: "Проезжайте через аутентичные северные посёлки и изолированные прибрежные аванпосты." },
+        { icon: "", title: "Сложные маршруты", text: "Преодолевайте коварные грунтовые дороги, ледовые переправы и узкие горные перевалы." },
+        { icon: "", title: "Бесшовная интеграция", text: "Работает с FER и Chukotka RC для непрерывного опыта карты." }
       ],
       requirements: [
         "Far East Russia (latest version)",
