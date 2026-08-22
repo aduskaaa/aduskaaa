@@ -48,6 +48,7 @@
       "footer.Versions": "Versions",
       "footer.Support": "Support",
       "footer.copy": "Far East Russia · ETS2 Map Mod",
+      "footer.Privacy & Policy": "Privacy & Policy",
 
       /* hero */
       "hero.h1": "Explore Russia's Far East in ETS2",
@@ -305,6 +306,7 @@
       "footer.Versions": "Версии",
       "footer.Support": "Поддержка",
       "footer.copy": "Far East Russia · мод карты для ETS2",
+      "footer.Privacy & Policy": "Privacy & Policy",
 
       "hero.h1": "Исследуйте Дальний Восток России в ETS2",
       "hero.p":
