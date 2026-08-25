@@ -223,9 +223,9 @@ window.SITE = {
     donations: [
       { name: "laur1sxd", amount: "40,42 EUR" },
       { name: "Mr JP", amount: "16,12 EUR" },
+      { name: "weskergood1234", amount: "10,24 EUR"},
       { name: "Artie", amount: "8,48 EUR" },
-      { name: "weskergood1234", amount: "8,24 EUR"},
-      { name: "Maxi", amount: "4,50 EUR" },
+      { name: "Maxi", amount: "8 EUR" },
       { name: "Delby", amount: "3,51 EUR" },
       { name: "Xiguawangzi3399", amount: "3,48 EUR" },
       { name: "Nachito", amount: "3,00 EUR" },
