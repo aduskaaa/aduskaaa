@@ -18,41 +18,46 @@
   <main>
     <section class="section">
       <div class="container">
+        <p class="eyebrow" data-i18n="eyebrow.fer">The core map</p>
         <h1 id="page-title"></h1>
         <p class="lead" id="page-tagline"></p>
       </div>
     </section>
 
     <section id="download" class="section">
-      <div class="container grid">
-        <div class="card">
+      <div class="container feature-split">
+        <div class="feature-intro">
           <h2 data-i18n="common.latestRelease">Latest Release</h2>
-          <div id="fer-latest" class="version-item"></div>
+          <div id="fer-latest"></div>
         </div>
-        <div class="card">
+        <div>
           <h2 data-i18n="common.quickStats">Quick Stats</h2>
-          <div id="fer-stats" class="stats-grid"></div>
+          <div id="fer-stats" class="stats-inline" style="margin-top:18px;"></div>
         </div>
       </div>
     </section>
 
     <section id="about" class="section">
-      <div class="container card">
+      <div class="container">
         <h2 data-i18n="common.aboutTheMap">About the Map</h2>
-        <p class="description-text" id="page-description"></p>
+        <p class="about-text" id="page-description"></p>
       </div>
     </section>
 
     <section id="coverage" class="section">
-      <div class="container grid">
-        <div class="map-frame">
-          <img class="map-img" src="imgs/FER_AREA.png" data-i18n-attr="alt:common.mapCoveragePreviewAlt" alt="Map coverage preview">
-        </div>
-        <div class="card">
+      <div class="container feature-split">
+        <figure class="map-figure">
+          <div class="map-frame">
+            <img class="map-img" src="imgs/FER_AREA.png" data-i18n-attr="alt:common.mapCoveragePreviewAlt"
+              alt="Map coverage preview">
+          </div>
+          <figcaption class="map-caption" data-i18n="map.caption">Coverage sketch from the latest build.</figcaption>
+        </figure>
+        <div>
           <h2 data-i18n="common.mapCoverage">Map Coverage</h2>
-          <ul>
-            <li data-i18n="fer.coverage1">7,000+ km of driveable roads across the Far Eastern Federal District</li>
-            <li data-i18n="fer.coverage2">40+ detailed cities, towns, and remote settlements</li>
+          <ul class="plain-list">
+            <li data-i18n="fer.coverage1">5,900+ km of driveable roads across the Far Eastern Federal District</li>
+            <li data-i18n="fer.coverage2">50+ detailed cities, towns, and remote settlements</li>
             <li data-i18n="fer.coverage3">River ferry crossings connecting isolated regions</li>
             <li data-i18n="fer.coverage4">Federal highways, regional roads, and unnamed dirt tracks</li>
             <li data-i18n="fer.coverage5">Continuous expansion with every release</li>
@@ -62,33 +67,62 @@
     </section>
 
     <section id="install" class="section">
-      <div class="container card">
+      <div class="container">
         <h2 data-i18n="common.installationGuide">Installation Guide</h2>
-        <ol class="install-steps" id="fer-install"></ol>
+
+        <div class="install-diagram" aria-hidden="true">
+          <div class="install-diagram-step">
+            <span class="install-diagram-num">01</span>
+            <span class="install-diagram-label">download</span>
+            <span class="install-diagram-sub">.scs / .zip</span>
+            <span class="install-diagram-arrow"></span>
+          </div>
+          <div class="install-diagram-step">
+            <span class="install-diagram-num">02</span>
+            <span class="install-diagram-label">drop file</span>
+            <span class="install-diagram-sub">Documents / ETS2 / mod</span>
+            <span class="install-diagram-arrow"></span>
+          </div>
+          <div class="install-diagram-step">
+            <span class="install-diagram-num">03</span>
+            <span class="install-diagram-label">enable</span>
+            <span class="install-diagram-sub">Mod Manager</span>
+            <span class="install-diagram-arrow"></span>
+          </div>
+          <div class="install-diagram-step">
+            <span class="install-diagram-num">04</span>
+            <span class="install-diagram-label">load order</span>
+            <span class="install-diagram-sub">RCs ↑ FER ↓</span>
+            <span class="install-diagram-arrow"></span>
+          </div>
+          <div class="install-diagram-step">
+            <span class="install-diagram-num">05</span>
+            <span class="install-diagram-label">drive east</span>
+            <span class="install-diagram-sub">mind the fuel</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="releases" class="section">
-      <div class="container card">
-        <div class="tabs-header">
-          <button class="tab-button active" data-tab="comments" data-i18n="common.discussion">Discussion</button>
-          <button class="tab-button" data-tab="loadorder" data-i18n="common.loadOrder">Load Order</button>
-          <button class="tab-button" data-tab="versions" data-i18n="common.allReleases">All Releases</button>
-        </div>
+      <div class="container">
+        <h2 data-i18n="common.discussion">Discussion</h2>
+        <div id="comments-section" data-page-id="fer"></div>
+      </div>
+    </section>
 
-        <div class="tab-content active" id="tab-comments">
-          <div id="comments-section" data-page-id="fer"></div>
-        </div>
+    <section id="loadorder" class="section">
+      <div class="container">
+        <h2 data-i18n="common.loadOrder">Load Order</h2>
+        <p style="color:var(--muted); font-size:14px; margin:0 0 16px;" data-i18n="common.loadOrderHint">Place mods in your ETS2 Mod Manager in this priority (top = highest priority):</p>
+        <div id="load-order"></div>
+      </div>
+    </section>
 
-        <div class="tab-content" id="tab-loadorder">
-          <p style="color:var(--muted); font-size:14px; margin:0 0 16px;" data-i18n="common.loadOrderHint">Place mods in your ETS2 Mod Manager in this
-            priority (top = highest priority):</p>
-          <div id="load-order"></div>
-        </div>
-
-        <div class="tab-content" id="tab-versions">
-          <div id="fer-versions" class="versions-list" aria-label="FER releases list"></div>
-        </div>
+    <section id="versions" class="section">
+      <div class="container">
+        <h2 data-i18n="common.allReleases">All Releases</h2>
+        <div id="fer-versions" class="versions-list" aria-label="FER releases list"></div>
       </div>
     </section>
   </main>
@@ -99,6 +133,7 @@
   <script src="assets/versions.js"></script>
   <script src="assets/i18n.js"></script>
   <script src="assets/site-renderer.js"></script>
+  <script src="assets/loadorder.js"></script>
   <script src="assets/comments.js"></script>
   <script>
     (function () {
@@ -125,7 +160,7 @@
           var stats = loc('stats') || [];
           stats.forEach(function (s) {
             var card = document.createElement('div');
-            card.className = 'stat-card';
+            card.className = 'stat-inline';
             card.innerHTML = '<div class="stat-value">' + s.value + '</div><div class="stat-label">' + s.label + '</div>';
             statsEl.appendChild(card);
           });
@@ -137,7 +172,7 @@
               ? 'Включая загрузки с truckymods и sharemods по состоянию на 14.06.2026'
               : 'Includes downloads from truckymods & sharemods as of 14.06.2026';
             var dlCard = document.createElement('div');
-            dlCard.className = 'stat-card stat-card-wide';
+            dlCard.className = 'stat-inline stat-wide';
             dlCard.innerHTML = '<div class="stat-value">…</div>' +
               '<div class="stat-label">' + dlLabel + '</div>' +
               '<div class="stat-note">' + dlNote + '</div>';
@@ -185,18 +220,6 @@
         releases.forEach(function (v) { list.appendChild(window.makeVersionItem(v, 'FER')); });
       }
     })();
-  </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8634469444021702"
-       crossorigin="anonymous"></script>
-  <!-- test -->
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-8634469444021702"
-       data-ad-slot="3133328743"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
 </body>
 

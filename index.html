@@ -6,235 +6,163 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title data-i18n="meta.title">Far East Russia – ETS2 Map Mod</title>
   <meta name="description" data-i18n-attr="content:meta.description"
-    content="Far East Russia is a high-quality ETS2 map expansion focusing on Russia's Far East. Explore vast roads, realistic cities, and challenging routes.">
+    content="Far East Russia is a free fan-made ETS2 map mod: 5,900+ km of roads across Yakutia and Chukotka, built by hand from real-world references.">
   <link rel="canonical" href="https://aduskaaa.github.io/aduskaaa/">
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="assets/css/global.css">
   <script src="assets/theme-init.js"></script>
-  <link rel="stylesheet" href="assets/fonts/glow_text.css">
 </head>
 
 <body>
 
-
-
-  <!--- <div id="popup" style="
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  color: #fff;
-  font-family: system-ui, sans-serif;
-">
-
-    <div style="
-    text-align: center;
-    padding: 30px;
-    border-radius: 16px;
-    background: #111;
-    box-shadow: 0 0 40px rgba(0,0,0,0.6);
-    max-width: 400px;
-    width: 90%;
-  ">
-      <h1 style="margin-bottom: 10px;">V2 release in:</h1>
-
-      <div id="countdown" style="
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      letter-spacing: 1px;
-    "></div>
-
-      <p style="opacity: 0.8; margin-bottom: 20px;">
-        Join Discord for updates
-      </p>
-
-      <a href="https://discord.gg/SSWDJMauxz" target="_blank" style="
-      display: inline-block;
-      padding: 10px 18px;
-      background: #5865F2;
-      border-radius: 8px;
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      margin-bottom: 10px;
-    ">
-        Join Discord
-      </a>
-
-      <br>
-
-      <button onclick="closePopup()" style="
-      margin-top: 10px;
-      background: transparent;
-      border: none;
-      color: #aaa;
-      cursor: pointer;
-    ">
-        close
-      </button>
-    </div>
-  </div>
-
-  <script>
-    const targetDate = new Date("2026-07-23T20:00:00+02:00"); // CEST
-
-    function updateCountdown() {
-      const now = new Date();
-      const diff = targetDate - now;
-
-      if (diff <= 0) {
-        document.getElementById("countdown").innerText = "LIVE";
-        return;
-      }
-
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const m = Math.floor((diff / (1000 * 60)) % 60);
-      const s = Math.floor((diff / 1000) % 60);
-
-      document.getElementById("countdown").innerText =
-        `${d}d ${h}h ${m}m ${s}s`;
-    }
-
-    function closePopup() {
-      document.getElementById("popup").style.display = "none";
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-  </script>
-        --->
   <header class="header" id="site-header" aria-label="Top Navigation"></header>
 
   <main>
+
+    <!-- HERO -->
     <section class="hero">
       <div class="container hero-inner">
         <div>
-          <h1 data-i18n="hero.h1">Explore Russia's Far East in ETS2</h1>
-          <p data-i18n="hero.p">Drive thousands of kilometers through rugged landscapes, frozen tundra, and remote
-            highways across Yakutia
-            and beyond. Every road, city, and settlement is hand-crafted from real-world reference data — delivering an
-            authentic Far Eastern experience built for immersion and performance.</p>
+          <p class="eyebrow" data-i18n="hero.eyebrow">Free &amp; fan-made ETS2 map mod</p>
+          <h1 data-i18n="hero.h1">Drive where the maps end.</h1>
+          <p data-i18n="hero.p">FER is a free map mod for Euro Truck Simulator 2 that covers Yakutia and the far
+            north-east with 5,900+ km of roads. I build every city and dirt track by hand from satellite images,
+            photos and dashcam footage. Fair warning: some of these roads are rough. That's kind of the point.</p>
           <div class="hero-cta">
-            <a class="button button-primary" href="fer.html" data-i18n="hero.cta_download">Download FER</a>
-            <a class="button button-secondary" href="addons-rcs.html" data-i18n="hero.cta_explore">Explore RCs</a>
-            <a class="button button-secondary" href="support.html" data-i18n="hero.cta_support">Support</a>
-          </div>
-          <div class="badges">
-            <span class="badge" data-i18n="hero.badge1">Actively Maintained</span>
-            <span class="badge" data-i18n="hero.badge2">Optimized</span>
-            <span class="badge" data-i18n="hero.badge3">1.60 Ready</span>
+            <a class="button button-primary" href="https://modsfire.com/lGvoImHt2RXi3sT" target="_blank" rel="noopener noreferrer" data-i18n="hero.cta_download">Download FER</a>
+            <a class="button button-secondary" href="interactive-map.html" data-i18n="map.open">Open Interactive Map</a>
           </div>
         </div>
 
-        <!-- Discord widget card -->
         <div class="discord-widget-card" id="discord-widget">
           <div class="discord-widget-header">
-            <div class="discord-logo-wrap">
-              <svg viewBox="0 0 127.14 96.36" class="discord-widget-logo">
-                <path
-                  d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a77.7,77.7,0,0,0,6.63-10.85,68.43,68.43,0,0,1-10.5-5c.87-.64,1.71-1.32,2.51-2a75.46,75.46,0,0,0,73.08,0c.8,2,1.64,1.38,2.51,2a68.43,68.43,0,0,1-10.5,5,77.7,77.7,0,0,0,6.63,10.85,105.73,105.73,0,0,0,31-18.83C129.87,50.21,123.69,27.42,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"
-                  fill="currentColor" />
-              </svg>
-              <span class="discord-widget-channel-name">#latest-announcements</span>
-            </div>
-            <span class="discord-live-indicator"><span class="pulse-dot"></span>LIVE FEED</span>
+            <span class="discord-widget-channel-name">#latest-announcements</span>
+            <span class="discord-live-indicator">[ • LIVE FEED ]</span>
           </div>
-
-          <div class="discord-widget-body" id="discord-widget-body">
-            <!-- Loading State -->
-            <div class="discord-widget-loading">
-              <div class="spinner"></div>
-              <span>Connecting to Discord feed...</span>
-            </div>
+          <div id="discord-widget-body" class="discord-widget-body">
+            <div class="discord-widget-loading"><div class="spinner"></div><span data-i18n="discord.connecting">Connecting...</span></div>
           </div>
-
-          <div class="discord-widget-footer">
-            <a href="https://discord.gg/SSWDJMauxz" target="_blank" class="discord-widget-join-btn">
-              <span>Join Our Discord</span>
-              <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
+          <a href="https://discord.gg/SSWDJMauxz" target="_blank" class="discord-widget-join-btn"><span data-i18n="discord.join">Join Our Discord</span> →</a>
         </div>
+      </div>
 
+      <!-- Ticker -->
+      <div class="ticker">
+        <div class="container ticker-inner">
+          <span class="ticker-item"><b>5 900+</b><span data-i18n="ticker.km">km of roads</span></span>
+          <span class="ticker-item"><b>50+</b><span data-i18n="ticker.cities">cities &amp; settlements</span></span>
+          <span class="ticker-item"><b>1.60</b><span data-i18n="ticker.ver">ETS2 ready</span></span>
+          <span class="ticker-item"><b data-i18n="ticker.price">0€</b> <span data-i18n="ticker.free">free, no paywalls</span></span>
+        </div>
       </div>
     </section>
 
+    <!-- FEATURES -->
     <section id="features" class="section">
-      <div class="container">
-        <h2 data-i18n="features.h2">Key Features</h2>
-        <p class="lead" data-i18n="features.lead">Built for immersion and stability, whether you're hauling across
-          cities or tackling remote
-          wilderness routes.</p>
-        <div class="features">
-          <article class="feature-card">
-            <span class="feature-icon">🗺️</span>
-            <h3 data-i18n="features.c1.title">Authentic Cities & Towns</h3>
-            <p data-i18n="features.c1.text">Hand-crafted locations inspired by satellite imagery and photos from the
-              region. Every city is rebuilt
-              from scratch with attention to realistic road geometry, signage, and local architecture.</p>
-          </article>
-          <article class="feature-card">
-            <span class="feature-icon">🏔️</span>
-            <h3 data-i18n="features.c2.title">Challenging Roads</h3>
-            <p data-i18n="features.c2.text">From coastal highways and river crossings to tight mountain passes and
-              frozen dirt tracks — the terrain
-              is as diverse as the real Far East.</p>
-          </article>
-          <article class="feature-card">
-            <span class="feature-icon">⚡</span>
-            <h3 data-i18n="features.c3.title">Performance Focus</h3>
-            <p data-i18n="features.c3.text">Carefully optimized map sectors and assets ensure smooth framerates even on
-              mid-range hardware. Stable in
-              both single-player and multiplayer convoys.</p>
-          </article>
+      <div class="container feature-split">
+        <div class="feature-intro">
+          <p class="eyebrow" data-i18n="features.eyebrow">The map</p>
+          <h2 data-i18n="features.h2">What's Inside</h2>
+          <p class="lead" style="margin-bottom:0;" data-i18n="features.lead">No two drives here feel the same. One day
+            you're cruising a wide federal highway, the next you're fording a river with a full trailer.</p>
         </div>
+        <ul class="feature-list">
+          <li>
+            <svg class="feature-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+              <line x1="9" y1="3" x2="9" y2="18"></line>
+              <line x1="15" y1="6" x2="15" y2="21"></line>
+            </svg>
+            <div>
+              <h3 data-i18n="features.c1.title">Real Cities, Small Towns</h3>
+              <p data-i18n="features.c1.text">Every location starts as a blank map and a pile of references: satellite
+                shots, panoramas, photos people send me from the region. Road layouts, signs, buildings — if it's there
+                in real life, I try to get it right in game.</p>
+            </div>
+          </li>
+          <li>
+            <svg class="feature-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 20L10 6l4 8 3-5 4 11H3z"></path>
+              <path d="M7.5 20l3-6"></path>
+            </svg>
+            <div>
+              <h3 data-i18n="features.c2.title">Roads With Character</h3>
+              <p data-i18n="features.c2.text">Winter roads that never melt, mountain passes, river ferries, and long
+                lonely stretches between settlements. If you want a relaxing cruise, stick to the federal highways.</p>
+            </div>
+          </li>
+          <li>
+            <svg class="feature-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            <div>
+              <h3 data-i18n="features.c3.title">It Runs Well</h3>
+              <p data-i18n="features.c3.text">I test every release on a mid-range PC before publishing. Sectors are
+                optimized, so even big convoys stay smooth, in singleplayer and multiplayer both.</p>
+            </div>
+          </li>
+        </ul>
       </div>
     </section>
 
+    <!-- MAP -->
     <section id="map" class="section">
-      <div class="container">
-        <h2 data-i18n="map.h2">Map Coverage Preview</h2>
-        <p class="lead" data-i18n="map.lead">A glimpse into the vast region covered by FER. Explore the full road
-          network in high detail.</p>
-        <div style="margin-bottom: 20px;">
-          <a class="button button-primary" href="interactive-map.html" data-i18n="map.open">Open Interactive Map</a>
+      <div class="container feature-split">
+        <div class="feature-intro">
+          <p class="eyebrow" data-i18n="map.eyebrow">Coverage</p>
+          <h2 data-i18n="map.h2">Where the Map Goes</h2>
+          <p class="lead" style="margin-bottom:26px;" data-i18n="map.lead">Rough outline of the covered area below. For
+            streets, cities and road names, open the interactive map.</p>
+          <a class="button button-secondary" href="interactive-map.html" data-i18n="map.open">Open Interactive Map</a>
+          <div class="map-stats-inline" id="index-map-stats" style="margin-top:34px;">
+            <div class="stat"><strong>7,300+</strong> <span data-i18n="map.stat1">of driveable roads</span></div>
+            <div class="stat"><strong>50+</strong> <span data-i18n="map.stat2">detailed cities and settlements</span>
+            </div>
+          </div>
         </div>
-        <div class="map-preview">
+        <figure class="map-figure">
           <div class="map-frame" aria-label="Map preview">
             <img class="map-img" src="imgs/FER_AREA.png" data-i18n-attr="alt:map.alt"
               alt="Preview of the Far East Russia map region">
           </div>
-          <div class="info" id="index-map-stats">
-            <div class="stat"><strong>7,000+ km</strong> <span data-i18n="map.stat1">of driveable roads</span></div>
-            <div class="stat"><strong>40+</strong> <span data-i18n="map.stat2">detailed cities and settlements</span>
-            </div>
-          </div>
-        </div>
+          <figcaption class="map-caption" data-i18n="map.caption">Coverage sketch from the latest build.</figcaption>
+        </figure>
       </div>
     </section>
 
+    <!-- SUPPORTERS -->
     <section id="supporters" class="section">
       <div class="container">
+        <p class="eyebrow" data-i18n="supporters.eyebrow">Credits</p>
         <h2 data-i18n="supporters.h2">Supporters</h2>
         <p class="lead" data-i18n="supporters.lead">Big thanks to everyone who keeps this project going.</p>
         <div class="supporters-grid">
           <article class="supporter-card" id="supporters-data"></article>
         </div>
         <div class="supporters-cta">
-          <a class="button button-primary" href="support.html" data-i18n="supporters.seeHow">See How to Support</a>
+          <a class="button button-secondary" href="support.html" data-i18n="supporters.seeHow">See How to Support</a>
           <a class="button button-secondary" href="https://discord.gg/SSWDJMauxz" target="_blank"
             data-i18n="supporters.joinDiscord">Join Discord</a>
         </div>
       </div>
     </section>
 
+    <!-- CTA BAND -->
+    <section class="section cta-band">
+      <div class="container">
+        <h2 class="section-title" data-i18n="cta.h2">Ready to drive east?</h2>
+        <p class="lead" data-i18n="cta.lead">Grab the latest release, set your load order, and don't forget fuel cans.
+          See you on the Kolyma.</p>
+        <div class="cta-row" style="margin-top:0;">
+          <a class="button button-primary" href="https://modsfire.com/lGvoImHt2RXi3sT" target="_blank" rel="noopener noreferrer" data-i18n="hero.cta_download">Download FER</a>
+          <a class="button button-secondary" href="https://discord.gg/SSWDJMauxz" target="_blank"
+            data-i18n="supportPage.joinDiscord">Join Discord</a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
@@ -243,16 +171,7 @@
   <script src="assets/site-data.js"></script>
   <script src="assets/i18n.js"></script>
   <script src="assets/site-renderer.js"></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8634469444021702"
-    crossorigin="anonymous"></script>
-  <!-- test -->
-  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8634469444021702" data-ad-slot="3133328743"
-    data-ad-format="auto" data-full-width-responsive="true"></ins>
-  <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-
-  <script>
+<script>
     (function () {
       var API_URL = "https://fer-api-worker.fareastrussia.workers.dev/api/latest-discord?channel=1401643418089685012";
       var bodyEl = document.getElementById("discord-widget-body");
@@ -290,6 +209,12 @@
         var div = document.createElement('div');
         div.innerText = text;
         var safeText = div.innerHTML;
+
+        // Mentions: <@id>, <@!id>, <@&roleId>, <#channelId> — the API gives us
+        // raw IDs with no names, so render them as plain @mention / #channel.
+        safeText = safeText.replace(/&lt;@!?(\d+)&gt;/g, '<span class="discord-mention">@mention</span>');
+        safeText = safeText.replace(/&lt;@&amp;(\d+)&gt;/g, '<span class="discord-mention">@NEW CONTENT</span>');
+        safeText = safeText.replace(/&lt;#(\d+)&gt;/g, '<span class="discord-mention">#channel</span>');
 
         // Bold
         safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
@@ -347,14 +272,7 @@
               avatarUrl = "https://cdn.discordapp.com/embed/avatars/" + defaultAvatarIdx + ".png";
             }
 
-            // Create author section
-            var authorHtml = '<div class="discord-msg-author">' +
-              '<img class="discord-author-avatar" src="' + avatarUrl + '" alt="Avatar">' +
-              '<div class="discord-author-meta">' +
-              '<span class="discord-author-name">' + (msg.author ? (msg.author.global_name || msg.author.username) : "Discord Bot") + '</span>' +
-              '<span class="discord-msg-time">' + formattedTime + '</span>' +
-              '</div>' +
-              '</div>';
+            var authorHtml = '<p class="discord-msg-author"><img class="discord-author-avatar" src="' + avatarUrl + '" alt=""><span class="discord-author-name">' + (msg.author ? (msg.author.global_name || msg.author.username) : "Discord Bot") + '</span> <span class="discord-msg-time">' + formattedTime + '</span></p>';
 
             // Create message body / text / attachments
             var contentHtml = "";
@@ -409,9 +327,7 @@
 
               contentHtml += '<div class="' + gridClass + '">';
               images.forEach(function (imgUrl) {
-                contentHtml += '<div class="discord-img-item" onclick="window.openDiscordLightbox(\'' + imgUrl + '\')">' +
-                  '<img src="' + imgUrl + '" alt="Attachment" loading="lazy">' +
-                  '</div>';
+                contentHtml += '<img class="discord-img-item" src="' + imgUrl + '" alt="" loading="lazy" onclick="window.openDiscordLightbox(\'' + imgUrl + '\')">';
               });
               contentHtml += '</div>';
             }

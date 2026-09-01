@@ -17,35 +17,36 @@
   <main>
     <section class="section">
       <div class="container">
+        <p class="eyebrow" data-i18n="eyebrow.addon">Regional addon</p>
         <h1 id="page-title"></h1>
         <p class="lead" id="page-tagline"></p>
       </div>
     </section>
 
     <section id="download" class="section">
-      <div class="container grid">
-        <div class="card">
+      <div class="container feature-split">
+        <div class="feature-intro">
           <h2 data-i18n="common.latestRelease">Latest Release</h2>
-          <div id="addon-latest" class="version-item"></div>
+          <div id="addon-latest"></div>
         </div>
-        <div class="card">
+        <div>
           <h2 data-i18n="common.quickStats">Quick Stats</h2>
-          <div id="addon-stats" class="stats-grid"></div>
+          <div id="addon-stats" class="stats-inline" style="margin-top:18px;"></div>
         </div>
       </div>
     </section>
 
     <section id="about" class="section">
-      <div class="container card">
+      <div class="container">
         <h2 data-i18n="common.aboutThisAddon">About This Addon</h2>
-        <p class="description-text" id="page-description"></p>
-        <h3 data-i18n="common.requirements">Requirements</h3>
+        <p class="about-text" id="page-description"></p>
+        <h3 style="margin-top:28px;" data-i18n="common.requirements">Requirements</h3>
         <div class="requirements" id="page-requirements"></div>
       </div>
     </section>
 
     <section id="releases" class="section">
-      <div class="container card">
+      <div class="container">
         <div class="tabs-header">
           <button class="tab-button active" data-tab="comments" data-i18n="common.discussion">Discussion</button>
           <button class="tab-button" data-tab="loadorder" data-i18n="common.loadOrder">Load Order</button>
@@ -68,9 +69,9 @@
     </section>
 
     <section id="notes" class="section">
-      <div class="container card">
+      <div class="container narrow">
         <h2 data-i18n="common.notes">Notes</h2>
-        <ul>
+        <ul class="plain-list">
           <li data-i18n="addonNotes.requiresFer">Requires Far East Russia to function</li>
           <li data-i18n="addonNotes.requiresChukotkaRc">Requires FER – Chukotka RC for the road connection</li>
           <li data-i18n="addonNotes.placeAbove">Place the addon above Far East Russia in the Mod Manager</li>
@@ -87,6 +88,7 @@
   <script src="assets/versions.js"></script>
   <script src="assets/i18n.js"></script>
   <script src="assets/site-renderer.js"></script>
+  <script src="assets/loadorder.js"></script>
   <script src="assets/comments.js"></script>
   <script>
     (function () {
@@ -137,7 +139,7 @@
           var stats = loc('stats') || [];
           stats.forEach(function (s) {
             var card = document.createElement('div');
-            card.className = 'stat-card';
+            card.className = 'stat-inline';
             card.innerHTML = '<div class="stat-value">' + s.value + '</div><div class="stat-label">' + s.label + '</div>';
             statsEl.appendChild(card);
           });
@@ -146,7 +148,7 @@
             var lang = (window.I18N && window.I18N.getLang && window.I18N.getLang()) || 'en';
             var dlLabel = lang === 'ru' ? 'всего загрузок' : 'total downloads';
             var dlCard = document.createElement('div');
-            dlCard.className = 'stat-card stat-card-wide';
+            dlCard.className = 'stat-inline stat-wide';
             dlCard.innerHTML = '<div class="stat-value">…</div><div class="stat-label">' + dlLabel + '</div>';
             statsEl.appendChild(dlCard);
             window.FERDownloads.sumReleases(window.RELEASES.addons.chukotka).then(function (total) {
@@ -169,18 +171,6 @@
         data.forEach(function (v) { list.appendChild(window.makeVersionItem(v, 'Chukotka Addon')); });
       }
     })();
-  </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8634469444021702"
-       crossorigin="anonymous"></script>
-  <!-- test -->
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-8634469444021702"
-       data-ad-slot="3133328743"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
 </body>
 
