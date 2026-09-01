@@ -50,13 +50,13 @@
             sy: -110.0,
             rot: 0
         },
-        background: { // New background object
+        background: { // Background covering Russia from ETS2 Global Background Map
             image: null,
             isLoaded: false,
-            centerLon: 145.5000164922681, // User provided center longitude
-            centerLat: 64.40890004210075,  // User provided center latitude
-            widthInMapUnits: 40,   // Arbitrary initial width in abstract map units, needs calibration
-            heightInMapUnits: 30,  // Arbitrary initial height in abstract map units, needs calibration
+            centerLon: 105.0, // Geographic center longitude of Russia (20°E to 190°E)
+            centerLat: 61.0,  // Geographic center latitude of Russia (40°N to 82°N)
+            widthInMapUnits: 170.0,   // 170 degrees longitude span (190°E - 20°E)
+            heightInMapUnits: 42.0,  // 42 degrees latitude span (82°N - 40°N)
             isVisible: true
         }
     };
@@ -81,15 +81,10 @@
         loader.style.display = 'flex';
         state.version = version;
 
-        // Update subtitle language version
-        const subtitleEl = document.querySelector('.hud-top-left p');
-        if (subtitleEl) {
-            subtitleEl.setAttribute('data-i18n', `mapPage.subtitle${version}`);
-            if (window.I18N && window.I18N.apply) {
-                window.I18N.apply();
-            } else {
-                subtitleEl.textContent = version === 'V2' ? "Far East Russia • Map Version 2" : "Far East Russia • Map Version 1" ;
-            }
+        // Update HUD badge title
+        const hudTitle = document.getElementById('map-hud-title');
+        if (hudTitle) {
+            hudTitle.textContent = version === 'V2' ? "WEB MAP VERSION 2" : "WEB MAP VERSION 1";
         }
 
         // Reset layer arrays
@@ -137,36 +132,73 @@
         if (window.streetview_data) {
             processStreetView();
         }
+        updateLegendCounts();
         initializeView();
         
         loader.style.display = 'none';
         requestAnimationFrame(render);
     }
 
+    function getRoadTier(f) {
+        if (!f) return 'asphalt';
+        if (f._roadTier) return f._roadTier;
+        const p = f.properties || {};
+        if (p.secret) return 'secret';
+        const lt = p.lookToken || '';
+        if (lt.includes('balt38') || lt.includes('balt39')) return 'minim_center';
+        if (lt.includes('min')) return 'minim';
+        if (lt.includes('nar')) return 'dirt_narrow_un';
+        if (lt.includes('balt43') || lt.includes('balt13') || lt.includes('blke') || p.roadType === 'divided') return 'asphalt_2lane';
+        return 'asphalt';
+    }
+
+    function updateLegendCounts() {
+        let roadsCount = 0, secretCount = 0;
+        state.layers.roads.forEach(f => {
+            if (f.properties && f.properties.secret) secretCount++;
+            else roadsCount++;
+        });
+        const setEl = (id, val) => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = val;
+        };
+        setEl('count-tier-roads', roadsCount);
+        setEl('count-tier-secret', secretCount);
+        setEl('count-tier-ferry', state.layers.ferries ? state.layers.ferries.length : 0);
+        setEl('count-tier-sv', svPolylines ? svPolylines.length : (state.layers.streetview ? state.layers.streetview.length : 0));
+    }
+
     async function start() {
         if (window.FER_DATA_LOADING) await window.FER_DATA_LOADING;
 
-        // Load background image
+        // Load background image (uses high-resolution WebP, falls back to PNG)
         const bgImg = new Image();
-        bgImg.src = 'imgs/mapbg.png';
+        bgImg.src = 'imgs/mapbg_russia.webp';
         bgImg.onload = () => {
             state.background.image = bgImg;
             state.background.isLoaded = true;
-
-            // Calculate dimensions to match original image size (1:1 pixel scale at zoom 1.0)
-            // This prevents stretching/squishing by respecting the map's projection calibration
-            if (state.calibration.sx !== 0 && state.calibration.sy !== 0) {
-                const scaleFactor = 4.4; // User requested 250% size
-                state.background.widthInMapUnits = (bgImg.width / state.calibration.sx) * scaleFactor;
-                state.background.heightInMapUnits = (bgImg.height / Math.abs(state.calibration.sy)) * scaleFactor;
-            }
-
-            console.log(`Background Debug: Image loaded. Dimensions set to ${state.background.widthInMapUnits.toFixed(4)} x ${state.background.heightInMapUnits.toFixed(4)} map units.`);
-            requestAnimationFrame(render); // Request a re-render once image loads
+            state.background.centerLon = 105.0;
+            state.background.centerLat = 61.0;
+            state.background.widthInMapUnits = 170.0;
+            state.background.heightInMapUnits = 42.0;
+            requestAnimationFrame(render);
         };
         bgImg.onerror = () => {
-            console.error('Background Debug: Failed to load background image: imgs/mapbg.png');
-            state.background.isLoaded = false;
+            const fallbackImg = new Image();
+            fallbackImg.src = 'imgs/mapbg.png';
+            fallbackImg.onload = () => {
+                state.background.image = fallbackImg;
+                state.background.isLoaded = true;
+                state.background.centerLon = 105.0;
+                state.background.centerLat = 61.0;
+                state.background.widthInMapUnits = 170.0;
+                state.background.heightInMapUnits = 42.0;
+                requestAnimationFrame(render);
+            };
+            fallbackImg.onerror = () => {
+                console.error('Background Debug: Failed to load background image: imgs/mapbg.png');
+                state.background.isLoaded = false;
+            };
         };
 
         setupToggles();
@@ -299,6 +331,47 @@
             };
             versionSelect.value = state.version;
         }
+
+        // Zoom In button
+        const zoomInBtn = document.getElementById('btn-zoom-in');
+        if (zoomInBtn) {
+            zoomInBtn.onclick = () => {
+                const factor = 1.35;
+                const mouseX = canvas.width / 2, mouseY = canvas.height / 2;
+                const worldX = (mouseX - state.viewX) / state.zoom;
+                const worldY = (mouseY - state.viewY) / state.zoom;
+                state.zoom = Math.min(state.maxZoom, state.zoom * factor);
+                state.viewX = mouseX - worldX * state.zoom;
+                state.viewY = mouseY - worldY * state.zoom;
+                clampView();
+                requestAnimationFrame(render);
+            };
+        }
+
+        // Zoom Out button
+        const zoomOutBtn = document.getElementById('btn-zoom-out');
+        if (zoomOutBtn) {
+            zoomOutBtn.onclick = () => {
+                const factor = 0.74;
+                const mouseX = canvas.width / 2, mouseY = canvas.height / 2;
+                const worldX = (mouseX - state.viewX) / state.zoom;
+                const worldY = (mouseY - state.viewY) / state.zoom;
+                state.zoom = Math.max(state.minZoom, state.zoom * factor);
+                state.viewX = mouseX - worldX * state.zoom;
+                state.viewY = mouseY - worldY * state.zoom;
+                clampView();
+                requestAnimationFrame(render);
+            };
+        }
+
+        // Fit / Reset button
+        const zoomFitBtn = document.getElementById('btn-zoom-fit');
+        if (zoomFitBtn) {
+            zoomFitBtn.onclick = () => {
+                initializeView();
+                requestAnimationFrame(render);
+            };
+        }
     }
 
     function processData(features) {
@@ -317,6 +390,99 @@
                 state.layers[layerKey].push(feature);
             }
         });
+
+        // Automatically resolve invisible / prefab roads to match their connected road tier
+        propagateInvisibleRoadTiers(state.layers.roads);
+    }
+
+    function propagateInvisibleRoadTiers(roads) {
+        // Step 1: Assign explicit tiers
+        roads.forEach(r => {
+            const p = r.properties || {};
+            if (p.secret) {
+                r._roadTier = 'secret';
+            } else if (p.lookToken) {
+                const lt = p.lookToken;
+                if (lt.includes('balt38') || lt.includes('balt39')) r._roadTier = 'minim_center';
+                else if (lt.includes('min')) r._roadTier = 'minim';
+                else if (lt.includes('nar')) r._roadTier = 'dirt_narrow_un';
+                else if (lt.includes('balt43') || lt.includes('balt13') || lt.includes('blke') || p.roadType === 'divided') r._roadTier = 'asphalt_2lane';
+                else r._roadTier = 'asphalt';
+            } else {
+                r._roadTier = null; // Invisible road: will inherit from connected road
+            }
+        });
+
+        // Step 2: Build node UID graph
+        const nodeMap = new Map();
+        roads.forEach(r => {
+            const s = r.properties && r.properties.startNodeUid;
+            const e = r.properties && r.properties.endNodeUid;
+            if (s) {
+                if (!nodeMap.has(s)) nodeMap.set(s, []);
+                nodeMap.get(s).push(r);
+            }
+            if (e) {
+                if (!nodeMap.has(e)) nodeMap.set(e, []);
+                nodeMap.get(e).push(r);
+            }
+        });
+
+        // Step 3: Multi-pass BFS propagation across connected nodes
+        let changed = true;
+        let passes = 0;
+        while (changed && passes < 15) {
+            changed = false;
+            passes++;
+            roads.forEach(r => {
+                if (!r._roadTier) {
+                    const s = r.properties && r.properties.startNodeUid;
+                    const e = r.properties && r.properties.endNodeUid;
+                    const neighbors = [];
+                    if (s && nodeMap.has(s)) neighbors.push(...nodeMap.get(s));
+                    if (e && nodeMap.has(e)) neighbors.push(...nodeMap.get(e));
+                    for (let i = 0; i < neighbors.length; i++) {
+                        if (neighbors[i]._roadTier) {
+                            r._roadTier = neighbors[i]._roadTier;
+                            changed = true;
+                            break;
+                        }
+                    }
+                }
+            });
+        }
+
+        // Step 4: Proximity fallback for any orphaned connector segments
+        const unassigned = roads.filter(r => !r._roadTier);
+        const assigned = roads.filter(r => !!r._roadTier);
+        if (unassigned.length > 0 && assigned.length > 0) {
+            unassigned.forEach(r => {
+                const pts = r.geometry && r.geometry.coordinates;
+                if (!pts || pts.length === 0) {
+                    r._roadTier = 'asphalt';
+                    return;
+                }
+                const p1 = pts[0], p2 = pts[pts.length - 1];
+                let bestDist = 0.08;
+                let bestTier = 'asphalt';
+                assigned.forEach(a => {
+                    const apts = a.geometry && a.geometry.coordinates;
+                    if (!apts || apts.length === 0) return;
+                    const a1 = apts[0], a2 = apts[apts.length - 1];
+                    const d = Math.min(
+                        Math.hypot(p1[0] - a1[0], p1[1] - a1[1]),
+                        Math.hypot(p1[0] - a2[0], p1[1] - a2[1]),
+                        Math.hypot(p2[0] - a1[0], p2[1] - a1[1]),
+                        Math.hypot(p2[0] - a2[0], p2[1] - a2[1])
+                    );
+                    if (d < bestDist) {
+                        bestDist = d;
+                        bestTier = a._roadTier;
+                    }
+                });
+                r._roadTier = bestTier;
+            });
+        }
     }
 
     function getBounds(geometry) {
@@ -332,6 +498,53 @@
         }
         traverse(geometry.coordinates);
         return { minX, minY, maxX, maxY };
+    }
+
+    function precomputeGeometry(geom) {
+        if (!geom || !geom.coordinates) return null;
+        const type = geom.type;
+        if (type === 'Point') {
+            const p = transform(geom.coordinates[0], geom.coordinates[1]);
+            return { type, p, wBounds: { minX: p.x, maxX: p.x, minY: p.y, maxY: p.y } };
+        }
+        if (type === 'LineString') {
+            const pts = [];
+            let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+            const coords = geom.coordinates;
+            for (let i = 0; i < coords.length; i++) {
+                const p = transform(coords[i][0], coords[i][1]);
+                pts.push(p);
+                if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x;
+                if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y;
+            }
+            return { type, pts, wBounds: { minX, maxX, minY, maxY } };
+        }
+        if (type === 'Polygon' || type === 'MultiLineString') {
+            const rings = [];
+            let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+            const coords = geom.coordinates;
+            for (let r = 0; r < coords.length; r++) {
+                const ring = coords[r];
+                const pts = [];
+                for (let i = 0; i < ring.length; i++) {
+                    const p = transform(ring[i][0], ring[i][1]);
+                    pts.push(p);
+                    if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x;
+                    if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y;
+                }
+                rings.push(pts);
+            }
+            return { type, rings, wBounds: { minX, maxX, minY, maxY } };
+        }
+        return null;
+    }
+
+    function precomputeAllGeometries() {
+        Object.values(state.layers).forEach(layer => {
+            layer.forEach(f => {
+                if (f.geometry) f._geom = precomputeGeometry(f.geometry);
+            });
+        });
     }
 
     function initializeView() {
@@ -362,6 +575,9 @@
             const cy = (totalMinY + totalMaxY) / 2;
             state.calibration.ox = -cx;
             state.calibration.oy = -cy;
+
+            // Precompute transformed fast points for all loaded features with calibration
+            precomputeAllGeometries();
 
             const widthPx = (totalMaxX - totalMinX) * state.calibration.sx;
             const heightPx = (totalMaxY - totalMinY) * Math.abs(state.calibration.sy);
@@ -433,13 +649,26 @@
     }
 
     function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight - 62;
+        const frame = document.getElementById('map-viewport-frame') || canvas.parentElement;
+        const width = frame ? frame.clientWidth : window.innerWidth;
+        const height = frame ? frame.clientHeight : (window.innerHeight - 62);
+        if (canvas.width !== width || canvas.height !== height) {
+            canvas.width = width;
+            canvas.height = height;
+        }
         clampView();
         requestAnimationFrame(render);
     }
     window.addEventListener('resize', resize);
     resize();
+
+    function getCanvasPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top
+        };
+    }
 
     let isDragging = false, lastX, lastY;
     canvas.onmousedown = (e) => {
@@ -462,35 +691,37 @@
     canvas.onwheel = (e) => {
         e.preventDefault();
         const factor = e.deltaY > 0 ? 0.85 : 1.15;
-        const mouseX = e.clientX;
-        const mouseY = e.clientY - 62;
-        const worldX = (mouseX - state.viewX) / state.zoom;
-        const worldY = (mouseY - state.viewY) / state.zoom;
+        const pos = getCanvasPos(e);
+        const worldX = (pos.x - state.viewX) / state.zoom;
+        const worldY = (pos.y - state.viewY) / state.zoom;
         state.zoom *= factor;
         state.zoom = Math.max(state.minZoom, Math.min(state.maxZoom, state.zoom));
-        state.viewX = mouseX - worldX * state.zoom;
-        state.viewY = mouseY - worldY * state.zoom;
+        state.viewX = pos.x - worldX * state.zoom;
+        state.viewY = pos.y - worldY * state.zoom;
         clampView();
         requestAnimationFrame(render);
     };
 
-    // Right Click for Coordinates
+    // Right Click for Coordinates (Google Maps format)
     canvas.oncontextmenu = (e) => {
         e.preventDefault();
-        const mouseX = e.clientX;
-        const mouseY = e.clientY - 62;
+        const pos = getCanvasPos(e);
 
         // Convert screen pixel to map Lon/Lat
-        const worldX = (mouseX - state.viewX) / state.zoom;
-        const worldY = (mouseY - state.viewY) / state.zoom;
+        const worldX = (pos.x - state.viewX) / state.zoom;
+        const worldY = (pos.y - state.viewY) / state.zoom;
 
         const coords = getCoordsFromPixel(worldX, worldY);
 
-        ctxMenu.style.left = mouseX + 'px';
-        ctxMenu.style.top = mouseY + 'px';
+        // Position popup inside canvas bounds
+        const menuX = Math.min(pos.x, canvas.width - 210);
+        const menuY = Math.min(pos.y, canvas.height - 110);
+        ctxMenu.style.left = menuX + 'px';
+        ctxMenu.style.top = menuY + 'px';
         ctxMenu.style.display = 'block';
 
-        coordsDisplay.innerHTML = `Lon: ${coords.lon.toFixed(5)}<br>Lat: ${coords.lat.toFixed(5)}`;
+        // Google Maps standard format: Latitude, Longitude (e.g. 62.033889, 129.733056)
+        coordsDisplay.textContent = `${coords.lat.toFixed(6)}, ${coords.lon.toFixed(6)}`;
     };
 
     function getCoordsFromPixel(px, py) {
@@ -508,10 +739,17 @@
             ty = rx * sin + ry * cos;
         }
 
-        // Invert Translation
+        // Invert Translation to get base game map Lon/Lat
+        const geoLon = tx - c.ox;
+        const geoLat = ty - c.oy;
+
+        // Real-world WGS84 Google Maps calibration (corrects ETS2 projection datum offset)
+        const realLat = 1.893515 + (0.985746 * geoLat) + (-0.005087 * geoLon);
+        const realLon = 0.325871 + (-0.011218 * geoLat) + (1.006070 * geoLon);
+
         return {
-            lon: tx - c.ox,
-            lat: ty - c.oy
+            lon: realLon,
+            lat: realLat
         };
     }
 
@@ -530,8 +768,9 @@
     }
 
     canvas.onclick = (e) => {
-        const mouseX = e.clientX;
-        const mouseY = e.clientY - 62;
+        const pos = getCanvasPos(e);
+        const mouseX = pos.x;
+        const mouseY = pos.y;
         ctxMenu.style.display = 'none';
 
         if (state.toggles.streetview) {
@@ -1002,19 +1241,49 @@
         return !(fMaxX < 0 || fMinX > canvas.width || fMaxY < 0 || fMinY > canvas.height);
     }
 
+    function updateScaleBar() {
+        const scaleLine = document.getElementById('map-scale-line');
+        const scaleLabel = document.getElementById('map-scale-label');
+        if (!scaleLine || !scaleLabel) return;
+
+        // 1 degree longitude at ~62°N is approx 52.2 km.
+        // Screen width for 1 degree lon is (45.0 * state.zoom) pixels.
+        const kmPerPx = 52.2 / (45.0 * state.zoom);
+        const niceSteps = [2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000];
+        let chosenKm = niceSteps[0];
+        for (let step of niceSteps) {
+            if (step / kmPerPx >= 60) {
+                chosenKm = step;
+                break;
+            }
+        }
+        const barWidth = Math.max(30, Math.min(220, Math.round(chosenKm / kmPerPx)));
+        scaleLine.style.width = barWidth + 'px';
+        scaleLabel.textContent = chosenKm >= 1000 ? `${chosenKm / 1000} 000 km` : `${chosenKm} km`;
+    }
+
     function render() {
-        ctx.fillStyle = "#080808"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#0c131d"; ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.save(); ctx.translate(state.viewX, state.viewY); ctx.scale(state.zoom, state.zoom);
         const zoom = state.zoom;
         const detailLevel = zoom > 1.5 ? 2 : (zoom > 0.5 ? 1 : 0);
 
-        // 0. Background Image
+        // Fast world bounding box culling
+        const wViewLeft = -state.viewX / zoom - 30;
+        const wViewRight = (canvas.width - state.viewX) / zoom + 30;
+        const wViewTop = -state.viewY / zoom - 30;
+        const wViewBottom = (canvas.height - state.viewY) / zoom + 30;
+
+        function isVisibleFast(wb) {
+            if (!wb) return true;
+            return !(wb.maxX < wViewLeft || wb.minX > wViewRight || wb.maxY < wViewTop || wb.minY > wViewBottom);
+        }
+
+        // 0. Background Terrain Image
         if (state.toggles.background && state.background.isLoaded && state.background.image) {
             const bg = state.background;
             const p = transform(bg.centerLon, bg.centerLat);
-            // Calculate dimensions in world pixels
             const width = bg.widthInMapUnits * state.calibration.sx;
-            // Use absolute value for height scaling as sy is negative
             const height = bg.heightInMapUnits * Math.abs(state.calibration.sy);
 
             ctx.drawImage(
@@ -1024,121 +1293,233 @@
                 width,
                 height
             );
+        } else {
+            // Draw subtle cartographic grid when background is disabled
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+            ctx.lineWidth = 1 / zoom;
+            ctx.beginPath();
+            for (let lat = 40; lat <= 80; lat += 5) {
+                const p1 = transform(20, lat), p2 = transform(190, lat);
+                ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
+            }
+            for (let lon = 20; lon <= 190; lon += 10) {
+                const p1 = transform(lon, 40), p2 = transform(lon, 82);
+                ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
+            }
+            ctx.stroke();
         }
 
-        // 1. Map Areas
-        const areaColors = { 0: "#1a1a1a", 1: "#1e272e", 2: "#2d3436", 3: "#000000", 4: "#218c74" };
-        state.layers.mapAreas.sort((a, b) => (a.properties.zIndex || 0) - (b.properties.zIndex || 0));
-        state.layers.mapAreas.forEach(f => {
-            if (!isVisible(f._bounds)) return;
-            ctx.fillStyle = areaColors[f.properties.color] || areaColors[0];
-            ctx.strokeStyle = "#222"; ctx.lineWidth = 0.5 / zoom;
-            ctx.beginPath(); drawGeometry(f.geometry); ctx.fill(); ctx.stroke();
-        });
+        // Helper functions for batched path drawing
+        function drawFastLines(list) {
+            for (let i = 0; i < list.length; i++) {
+                const pts = list[i].pts;
+                if (pts && pts.length > 0) {
+                    ctx.moveTo(pts[0].x, pts[0].y);
+                    for (let j = 1; j < pts.length; j++) {
+                        ctx.lineTo(pts[j].x, pts[j].y);
+                    }
+                }
+            }
+        }
 
-        // 2. Prefabs
-        const prefabColors = { 0: "#2c3e50", 1: "#34495e", 2: "#57606f", 3: "#a4b0be", 4: "#e67e22" };
-        state.layers.prefabs.sort((a, b) => (a.properties.zIndex || 0) - (b.properties.zIndex || 0));
-        state.layers.prefabs.forEach(f => {
-            if (!isVisible(f._bounds)) return;
-            const isHouse = f.properties.color === 2 || f.properties.color === 3;
-            ctx.fillStyle = prefabColors[f.properties.color] || prefabColors[1];
-            ctx.strokeStyle = isHouse ? "#2f3542" : "#333"; ctx.lineWidth = (isHouse ? 1.2 : 0.8) / zoom;
-            ctx.beginPath(); drawGeometry(f.geometry); ctx.fill(); ctx.stroke();
-            if (isHouse && zoom > 0.5) { ctx.strokeStyle = "rgba(255,255,255,0.1)"; ctx.lineWidth = 0.5 / zoom; ctx.stroke(); }
-        });
+        function drawFastRings(g) {
+            if (g && g.rings) {
+                for (let r = 0; r < g.rings.length; r++) {
+                    const pts = g.rings[r];
+                    if (pts && pts.length > 0) {
+                        ctx.moveTo(pts[0].x, pts[0].y);
+                        for (let j = 1; j < pts.length; j++) ctx.lineTo(pts[j].x, pts[j].y);
+                        ctx.closePath();
+                    }
+                }
+            }
+        }
 
-        // 3. Roads
-        const drawRoadBatch = (isSecret, color, width) => {
+        // 1. Map Areas (Batched by Color)
+        const areaColors = { 0: "#18181b", 1: "#1e293b", 2: "#27272a", 3: "#09090b", 4: "#064e3b" };
+        const areasByColor = {};
+        for (let i = 0; i < state.layers.mapAreas.length; i++) {
+            const f = state.layers.mapAreas[i];
+            const g = f._geom;
+            if (!g || !isVisibleFast(g.wBounds)) continue;
+            const c = f.properties.color || 0;
+            if (!areasByColor[c]) areasByColor[c] = [];
+            areasByColor[c].push(g);
+        }
+        ctx.strokeStyle = "rgba(0,0,0,0.5)"; ctx.lineWidth = 0.6 / zoom;
+        for (let c in areasByColor) {
+            ctx.fillStyle = areaColors[c] || areaColors[0];
             ctx.beginPath();
-            state.layers.roads.forEach(f => {
-                if (f.properties.secret !== isSecret) return;
-                if (detailLevel === 0 && f.properties.roadType === 'local') return;
-                if (!isVisible(f._bounds)) return;
-                drawGeometry(f.geometry);
-            });
-            ctx.strokeStyle = color; ctx.lineWidth = width / zoom; ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.stroke();
-        };
-        drawRoadBatch(false, "#e1b12c", detailLevel === 0 ? 3 : 1.5);
-        drawRoadBatch(true, "#ffffff", detailLevel === 0 ? 4 : 2);
+            areasByColor[c].forEach(g => drawFastRings(g));
+            ctx.fill(); ctx.stroke();
+        }
+
+        // 2. Prefabs (Batched by Color)
+        const prefabColors = { 0: "#27272a", 1: "#3f3f46", 2: "#1e293b", 3: "#334155", 4: "#d97706" };
+        const prefabsByColor = {};
+        for (let i = 0; i < state.layers.prefabs.length; i++) {
+            const f = state.layers.prefabs[i];
+            const g = f._geom;
+            if (!g || !isVisibleFast(g.wBounds)) continue;
+            const c = f.properties.color || 1;
+            if (!prefabsByColor[c]) prefabsByColor[c] = [];
+            prefabsByColor[c].push(g);
+        }
+        for (let c in prefabsByColor) {
+            const isHouse = (c == 2 || c == 3);
+            ctx.fillStyle = prefabColors[c] || prefabColors[1];
+            ctx.strokeStyle = isHouse ? "#1e293b" : "#18181b";
+            ctx.lineWidth = (isHouse ? 1.0 : 0.6) / zoom;
+            ctx.beginPath();
+            prefabsByColor[c].forEach(g => drawFastRings(g));
+            ctx.fill(); ctx.stroke();
+        }
+
+        // 3. Roads (Single Batched Draw Calls per Layer)
+        ctx.lineCap = "round"; ctx.lineJoin = "round";
+        const regularRoads = [];
+        const secretRoads = [];
+        for (let i = 0; i < state.layers.roads.length; i++) {
+            const f = state.layers.roads[i];
+            const g = f._geom;
+            if (g && isVisibleFast(g.wBounds)) {
+                if (f.properties && f.properties.secret) secretRoads.push(g);
+                else regularRoads.push(g);
+            }
+        }
+
+        // Pass A: Road Casings
+        // 1. Secret Road Outer Dark Border + Tan Base
+        if (secretRoads.length > 0) {
+            ctx.beginPath(); drawFastLines(secretRoads);
+            ctx.strokeStyle = "#090a0f"; ctx.lineWidth = (detailLevel === 0 ? 7.2 : 5.0) / zoom; ctx.stroke();
+
+            ctx.beginPath(); drawFastLines(secretRoads);
+            ctx.strokeStyle = "#d4a373"; ctx.lineWidth = (detailLevel === 0 ? 5.4 : 3.8) / zoom; ctx.stroke();
+        }
+
+        // 2. Regular Roads Orange Outline
+        if (regularRoads.length > 0) {
+            ctx.beginPath(); drawFastLines(regularRoads);
+            ctx.strokeStyle = "#ea580c"; ctx.lineWidth = (detailLevel === 0 ? 7.2 : 5.0) / zoom; ctx.stroke();
+        }
+
+        // Pass B: Road Fills
+        // 1. Regular Roads Yellow Core
+        if (regularRoads.length > 0) {
+            ctx.beginPath(); drawFastLines(regularRoads);
+            ctx.strokeStyle = "#facc15"; ctx.lineWidth = (detailLevel === 0 ? 4.8 : 3.2) / zoom; ctx.stroke();
+        }
+
+        // 2. Secret Roads Brown Dashes
+        if (secretRoads.length > 0) {
+            ctx.beginPath(); drawFastLines(secretRoads);
+            ctx.strokeStyle = "#5c3a21"; ctx.lineWidth = (detailLevel === 0 ? 3.2 : 2.2) / zoom;
+            ctx.setLineDash([7 / zoom, 4.5 / zoom]); ctx.stroke(); ctx.setLineDash([]);
+        }
 
         // 4. Ferries
-        ctx.beginPath();
-        state.layers.ferries.forEach(f => { if (!isVisible(f._bounds)) return; drawGeometry(f.geometry); });
-        ctx.strokeStyle = "#4aa3df"; ctx.lineWidth = (detailLevel === 0 ? 4 : 2) / zoom;
-        ctx.setLineDash([8 / zoom, 4 / zoom]); ctx.stroke(); ctx.setLineDash([]);
+        const visibleFerries = [];
+        for (let i = 0; i < state.layers.ferries.length; i++) {
+            const f = state.layers.ferries[i];
+            const g = f._geom;
+            if (g && isVisibleFast(g.wBounds)) visibleFerries.push(g);
+        }
+        if (visibleFerries.length > 0) {
+            ctx.beginPath(); drawFastLines(visibleFerries);
+            ctx.strokeStyle = "#0284c7"; ctx.lineWidth = (detailLevel === 0 ? 4.2 : 2.8) / zoom;
+            ctx.setLineDash([8 / zoom, 5 / zoom]); ctx.stroke(); ctx.setLineDash([]);
+        }
 
         // 5. POIs (Ferry Ports)
-        state.layers.pois.forEach(f => {
-            if (!isVisible(f._bounds)) return;
-            const p = transform(f.geometry.coordinates[0], f.geometry.coordinates[1]);
+        for (let i = 0; i < state.layers.pois.length; i++) {
+            const f = state.layers.pois[i];
+            const g = f._geom;
+            if (!g || !isVisibleFast(g.wBounds)) continue;
+            const p = g.p;
             if (f.properties.poiType === 'ferry') {
-                const size = 7 / zoom; ctx.fillStyle = "#3498db"; ctx.strokeStyle = "#2980b9"; ctx.lineWidth = 2 / zoom;
+                const size = 9 / zoom;
+                ctx.fillStyle = "#0284c7"; ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 1.8 / zoom;
                 ctx.beginPath(); ctx.arc(p.x, p.y, size / 2, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-                if (zoom > 0.5) { ctx.font = `italic bold ${10 / zoom}px sans-serif`; ctx.fillStyle = "#3498db"; ctx.fillText("FERRY: " + (f.properties.poiName || ""), p.x, p.y + 12 / zoom); }
+                if (zoom > 0.5) {
+                    ctx.font = `700 ${10 / zoom}px 'JetBrains Mono', monospace`;
+                    ctx.fillStyle = "#38bdf8"; ctx.strokeStyle = "#000"; ctx.lineWidth = 3 / zoom;
+                    ctx.strokeText(f.properties.poiName || "", p.x, p.y + 12 / zoom);
+                    ctx.fillText(f.properties.poiName || "", p.x, p.y + 12 / zoom);
+                }
             }
-        });
+        }
 
         // 7. Street View Coverage Lines
         if (state.toggles.streetview) {
             const svLod = getStreetviewLodFraction();
             const lonePoints = [];
+
+            // Outer Glow Casing
             ctx.beginPath();
-            svPolylines.forEach(line => {
-                if (!isVisible(line._bounds)) return;
+            for (let l = 0; l < svPolylines.length; l++) {
+                const line = svPolylines[l];
                 const pts = line.points;
-                if (pts.length === 1) { lonePoints.push(pts[0]); return; }
+                if (pts.length === 1) {
+                    const g = pts[0]._geom;
+                    if (g && isVisibleFast(g.wBounds)) lonePoints.push(g.p);
+                    continue;
+                }
                 let started = false;
                 for (let i = 0; i < pts.length; i++) {
                     const f = pts[i];
-                    // LOD: simplify the line when zoomed out, but keep endpoints
                     if (i !== 0 && i !== pts.length - 1 && f.properties.lodPriority >= svLod) continue;
-                    const p = transform(f.geometry.coordinates[0], f.geometry.coordinates[1]);
+                    const g = f._geom;
+                    if (!g) continue;
+                    const p = g.p;
                     if (!started) { ctx.moveTo(p.x, p.y); started = true; }
                     else ctx.lineTo(p.x, p.y);
                 }
-            });
-            ctx.strokeStyle = "#FFD700";
-            ctx.lineWidth = 3 / zoom;
+            }
+            ctx.strokeStyle = "rgba(0, 229, 255, 0.45)";
+            ctx.lineWidth = (detailLevel === 0 ? 8.5 : 6.0) / zoom;
             ctx.lineCap = "round"; ctx.lineJoin = "round";
             ctx.stroke();
 
-            // Isolated captures with no neighbours still show as dots
-            lonePoints.forEach(f => {
-                const p = transform(f.geometry.coordinates[0], f.geometry.coordinates[1]);
-                ctx.fillStyle = "#FFD700"; ctx.strokeStyle = "#fff"; ctx.lineWidth = 1 / zoom;
-                ctx.beginPath(); ctx.arc(p.x, p.y, 3 / zoom, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-            });
+            // Inner Bright Cyan Line
+            ctx.strokeStyle = "#00e5ff";
+            ctx.lineWidth = (detailLevel === 0 ? 4.0 : 2.8) / zoom;
+            ctx.stroke();
+
+            // Isolated Captures
+            for (let i = 0; i < lonePoints.length; i++) {
+                const p = lonePoints[i];
+                ctx.fillStyle = "#00e5ff"; ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 1.8 / zoom;
+                ctx.beginPath(); ctx.arc(p.x, p.y, 4 / zoom, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+            }
         }
 
-        // 9. Cities
+        // 9. Cities & Settlements
         ctx.textAlign = "center"; ctx.textBaseline = "middle";
-        state.layers.cities.forEach(f => {
-            if (!isVisible(f._bounds)) return;
-            const p = transform(f.geometry.coordinates[0], f.geometry.coordinates[1]);
-            ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(p.x, p.y, 4 / zoom, 0, Math.PI * 2); ctx.fill();
+        for (let i = 0; i < state.layers.cities.length; i++) {
+            const f = state.layers.cities[i];
+            const g = f._geom;
+            if (!g || !isVisibleFast(g.wBounds)) continue;
+            const p = g.p;
+
+            // City Marker: Outer White Ring + Red Center Bullseye
+            ctx.fillStyle = "#ffffff"; ctx.strokeStyle = "#000000"; ctx.lineWidth = 1.5 / zoom;
+            ctx.beginPath(); ctx.arc(p.x, p.y, 4.5 / zoom, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+            ctx.fillStyle = "#ef4444"; ctx.beginPath(); ctx.arc(p.x, p.y, 2.2 / zoom, 0, Math.PI * 2); ctx.fill();
+
+            // City Label with Heavy Dark Halo
             if (zoom > 0.05) {
-                ctx.save(); ctx.font = `bold ${13 / zoom}px sans-serif`; ctx.fillStyle = "#fff"; ctx.strokeStyle = "#000"; ctx.lineWidth = 4 / zoom;
-                ctx.strokeText(f.properties.name.toUpperCase(), p.x, p.y - 12 / zoom); ctx.fillText(f.properties.name.toUpperCase(), p.x, p.y - 12 / zoom); ctx.restore();
+                ctx.save();
+                ctx.font = `700 ${12 / zoom}px 'JetBrains Mono', ui-monospace, sans-serif`;
+                ctx.fillStyle = "#ffffff"; ctx.strokeStyle = "rgba(0, 0, 0, 0.95)"; ctx.lineWidth = 4 / zoom;
+                ctx.strokeText(f.properties.name.toUpperCase(), p.x, p.y - 12 / zoom);
+                ctx.fillText(f.properties.name.toUpperCase(), p.x, p.y - 12 / zoom);
+                ctx.restore();
             }
-        });
+        }
 
         ctx.restore();
-    }
-
-    function drawGeometry(geom) {
-        if (geom.type === 'Point') return;
-        const coords = geom.coordinates;
-        if (geom.type === 'LineString') drawLine(coords);
-        else if (geom.type === 'Polygon') coords.forEach(ring => drawLine(ring, true));
-        else if (geom.type === 'MultiPolygon') coords.forEach(poly => poly.forEach(ring => drawLine(ring, true)));
-    }
-
-    function drawLine(points, closed = false) {
-        if (points.length < 2) return;
-        const p0 = transform(points[0][0], points[0][1]); ctx.moveTo(p0.x, p0.y);
-        for (let i = 1; i < points.length; i++) { const p = transform(points[i][0], points[i][1]); ctx.lineTo(p.x, p.y); }
-        if (closed) ctx.closePath();
+        updateScaleBar();
     }
 
     start();

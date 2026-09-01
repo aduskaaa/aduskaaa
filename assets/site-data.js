@@ -24,6 +24,7 @@ window.SITE = {
     { label: "ADDONS/RCS", href: "addons-rcs.html", i18nKey: "nav.ADDONS_RCS" },
     { label: "GALLERY", href: "gallery.html" },
     { label: "VERSIONS", href: "versions.html" },
+    { label: "LOAD ORDER", href: "loadorder.html", i18nKey: "nav.LOADORDER" },
     { label: "SUPPORT", href: "support.html" }
   ],
 
@@ -34,35 +35,9 @@ window.SITE = {
     { label: "Map", href: "interactive-map.html" },
     { label: "Gallery", href: "gallery.html" },
     { label: "Versions", href: "versions.html" },
+    { label: "Load Order", href: "loadorder.html" },
     { label: "Support", href: "support.html" },
     { label: "Privacy & Policy", href: "p&p.html" }
-     
-  ],
-
-  /* ---------- Load Order (shared across FER, RC, addon pages) ---------- */
-  loadOrder: [
-    "Background map (recommended)",
-    "FER – Chukotka RC",
-    "FER – OTGR RC",
-    "FER – TST RC",
-    "Sakha Addon",
-    "West Yacutia Addon",
-    "Chukotka Addon Legacy Areas",
-    "Far East Russia",
-    "Trans-Siberian Truckway",
-    "Off The Grid Russia"
-  ],
-  loadOrder_ru: [
-    "Фоновая карта (рекомендуется)",
-    "FER – Chukotka RC",
-    "FER – OTGR RC",
-    "FER – TST RC",
-    "Sakha Addon",
-    "West Yacutia Addon",
-    "Chukotka Addon Legacy Areas",
-    "Far East Russia",
-    "Trans-Siberian Truckway",
-    "Off The Grid Russia"
   ],
 
   /* ---------- Page content ---------- */
@@ -71,59 +46,59 @@ window.SITE = {
     fer: {
       title: "Far East Russia (FER)",
       title_ru: "Far East Russia (FER)",
-      tagline: "The core ETS2 map expansion covering Russia's Far Eastern Federal District — from the frozen tundra of Yakutia to the Kolyma Highway.",
-      tagline_ru: "Основное расширение карты для ETS2, охватывающее Дальневосточный федеральный округ России — от замёрзшей тундры Якутии до трассы Колыма.",
-      description: "Far East Russia is a massive, hand-crafted map mod for Euro Truck Simulator 2 that brings the raw, untamed beauty of Russia's Far Eastern Federal District to life. Spanning thousands of kilometers of driveable roads, FER takes you through some of the most remote and extreme terrain on Earth — from the permafrost-covered highways of Yakutia to the legendary 'Road of Bones' along the Kolyma route. Every city, village, and roadside stop is built from scratch using satellite imagery and real-world reference photos, ensuring an authentic representation of this vast, sparsely populated region. The roads range from well-maintained federal highways to treacherous dirt tracks that test both your driving skill and your truck's durability. River crossings via ferry, seasonal road conditions, and realistic signage all contribute to an immersive experience that captures what it truly feels like to haul freight across one of the most isolated corners of the world. FER is optimized for performance and stability, making it suitable for both single-player hauling sessions and multiplayer convoys.",
-      description_ru: "Far East Russia — масштабный мод карты для Euro Truck Simulator 2, созданный вручную, который оживляет суровую, нетронутую красоту Дальневосточного федерального округа России. Простираясь на тысячи километров проезжих дорог, FER проведёт вас через одну из самых удалённых и экстремальных территорий на Земле — от шоссе Якутии, покрытых вечной мерзлотой, до легендарной «Дороги костей» вдоль Колымы. Каждый город, посёлок и придорожная стоянка построены с нуля на основе спутниковых снимков и реальных фотографий, обеспечивая аутентичное воспроизведение этого обширного и малонаселённого региона. Дороги варьируются от ухоженных федеральных трасс до коварных грунтовок, которые проверят и ваше водительское мастерство, и прочность грузовика. Речные переправы на паромах, сезонные условия дорог и реалистичные указатели создают эффект погружения, передающий ощущение перевозки грузов в одном из самых изолированных уголков мира. FER оптимизирован для производительности и стабильности, что делает его подходящим как для одиночных рейсов, так и для мультиплеерных конвоев.",
+      tagline: "The main map: Yakutia, the Kolyma Highway and everything in between. Built by one person, driven by thousands.",
+      tagline_ru: "Главная карта: Якутия, трасса Колыма и всё между ними. Построена одним человеком, проехана тысячами.",
+      description: "I started FER because I wanted to drive the Russian Far East in ETS2, and nobody had built it yet. What began as a couple of roads around Yakutsk has grown into a map with more than 5,900 km of drivable routes: federal highways like the R-504 Kolyma, regional roads, winter roads, and plenty of unnamed dirt tracks that will shake your truck apart if you rush them. There are 50+ cities and settlements, from Yakutsk down to villages you can only reach by ferry or a gravel road. Almost everything is modeled from real references, so the geometry and signage match reality as closely as I can get them. A few honest warnings: distances here are huge, fuel stations are rare, and the terrain does not care about your schedule. If that sounds like your kind of trucking, grab the latest release below and drive east. If you get stuck, the Discord server is the fastest way to reach me.",
+      description_ru: "Я начал FER, потому что хотел прокатиться по Дальнему Востоку России в ETS2, а никто его ещё не построил. То, что начиналось с пары дорог вокруг Якутска, выросло в карту с более чем 5 900 км проезжаемых маршрутов: федеральные трассы вроде Р-504 «Колыма», региональные дороги, зимники и куча безымянных грунтовок, которые разнесут вашу машину по деталям, если торопиться. Здесь больше 50 городов и посёлков — от Якутска до деревень, куда можно добраться только паромом или по гравийке. Почти всё смоделировано по реальным материалам, так что геометрия дорог и знаки максимально близки к настоящим. Пара честных предупреждений: дистанции здесь огромные, заправки редкие, а местности плевать на ваш график. Если звучит как ваше — качайте последний релиз ниже и езжайте на восток. Застряли? Discord — самый быстрый способ меня достать.",
       features: [
-        { icon: "", title: "7,000+ km of Roads", text: "Federal highways, regional roads, and unnamed dirt tracks — all hand-crafted with realistic geometry and signage." },
-        { icon: "", title: "40+ Cities & Settlements", text: "From major cities like Yakutsk to tiny remote villages accessible only by unpaved roads or river ferry." },
-        { icon: "", title: "River Ferries", text: "Cross mighty Siberian rivers aboard realistic ferry services — some routes are only accessible by water." },
-        { icon: "", title: "Extreme Terrain", text: "Winter roads but in summer, mountain passes, river fords, and seasonal conditions create challenging driving experiences." },
-        { icon: "", title: "Optimized Performance", text: "Carefully optimized assets and map sectors ensure smooth performance even on mid-range hardware." },
-        { icon: "", title: "Regular Updates", text: "Active development with new cities, roads, and improvements added in every release." }
+        { icon: "", title: "5,900+ km of Roads", text: "Federal highways, regional roads and unnamed dirt tracks, all drawn by hand with real geometry and signage." },
+        { icon: "", title: "50+ Cities & Settlements", text: "From Yakutsk down to villages you can only reach by gravel road or river ferry." },
+        { icon: "", title: "River Ferries", text: "Cross the big Siberian rivers by ferry. Some places here are only reachable by water." },
+        { icon: "", title: "Extreme Terrain", text: "Winter roads that never melt, mountain passes, fords. The map will test your patience, in a good way." },
+        { icon: "", title: "Runs on Anything", text: "Optimized sectors keep things smooth even on mid-range hardware." },
+        { icon: "", title: "Regular Updates", text: "New roads, cities and fixes land every few weeks. The map keeps creeping east." }
       ],
       features_ru: [
-        { icon: "", title: "Более 7 000 км дорог", text: "Федеральные трассы, региональные дороги и безымянные грунтовки — все созданы вручную с реалистичной геометрией и указателями." },
-        { icon: "", title: "Более 40 городов и поселений", text: "От крупных городов вроде Якутска до маленьких удалённых деревень, доступных только по грунтовкам или речным паромам." },
-        { icon: "", title: "Речные паромы", text: "Пересекайте могучие сибирские реки на реалистичных паромах — некоторые маршруты доступны только по воде." },
-        { icon: "", title: "Экстремальная местность", text: "Зимники, действующие летом, горные перевалы, броды и сезонные условия создают сложный опыт вождения." },
-        { icon: "", title: "Оптимизированная производительность", text: "Тщательно оптимизированные ассеты и секторы карты обеспечивают плавную работу даже на оборудовании среднего класса." },
-        { icon: "", title: "Регулярные обновления", text: "Активная разработка с новыми городами, дорогами и улучшениями в каждом релизе." }
+        { icon: "", title: "Более 5 900 км дорог", text: "Федеральные трассы, региональные дороги и безымянные грунтовки — все нарисованы вручную с реальной геометрией и знаками." },
+        { icon: "", title: "Более 50 городов и поселений", text: "От Якутска до деревень, куда можно добраться только по гравийке или речным паромом." },
+        { icon: "", title: "Речные паромы", text: "Переправляйтесь через большие сибирские реки паромом. Некоторые места доступны только по воде." },
+        { icon: "", title: "Экстремальная местность", text: "Зимники, которые не тают, горные перевалы, броды. Карта проверит ваше терпение, но по-хорошему." },
+        { icon: "", title: "Идёт на всём", text: "Оптимизированные секторы держат плавность даже на среднем железе." },
+        { icon: "", title: "Регулярные обновления", text: "Новые дороги, города и фиксы выходят каждые несколько недель. Карта продолжает ползти на восток." }
       ],
       stats: [
-        { value: "7,000+", label: "km of driveable roads" },
-        { value: "40+", label: "cities & settlements" },
+        { value: "5,900+", label: "km of driveable roads" },
+        { value: "50+", label: "cities & settlements" },
         { value: "1.60", label: "version supported" }
       ],
       stats_ru: [
-        { value: "7 000+", label: "км проезжих дорог" },
-        { value: "40+", label: "городов и поселений" },
+        { value: "5 900+", label: "км проезжих дорог" },
+        { value: "50+", label: "городов и поселений" },
         { value: "1.60", label: "поддерживаемая версия" }
       ],
       installSteps: [
-        "Download the latest FER release from the download section below.",
-        "Place the <code>.scs</code> file in your ETS2 mod folder (<code>Documents/Euro Truck Simulator 2/mod</code>).",
-        "Enable the mod in ETS2's Mod Manager.",
-        "Follow the load order shown below — place FER and any RCs/addons in the correct priority.",
-        "Start a new profile or load an existing one and drive east!"
+        "Grab the latest release below.",
+        "Drop the <code>.scs</code> / <code>.zip</code> file into your mod folder (<code>Documents/Euro Truck Simulator 2/mod</code>).",
+        "Turn the mod on in ETS2's Mod Manager.",
+        "Set the load order like shown below. RCs and addons go above FER.",
+        "Load a profile and drive east. Mind the fuel."
       ],
       installSteps_ru: [
-        "Скачайте последний релиз FER в разделе загрузки ниже.",
-        "Поместите файл <code>.scs</code> в папку модов ETS2 (<code>Documents/Euro Truck Simulator 2/mod</code>).",
+        "Скачайте последний релиз ниже.",
+        "Закиньте файл <code>.scs</code> / <code>.zip</code> в папку модов (<code>Documents/Euro Truck Simulator 2/mod</code>).",
         "Включите мод в Mod Manager ETS2.",
-        "Следуйте порядку загрузки, показанному ниже — расставьте FER и все RCs/дополнения в правильном приоритете.",
-        "Создайте новый профиль или загрузите существующий и поезжайте на восток!"
+        "Расставьте порядок загрузки, как показано ниже. RCs и дополнения ставятся выше FER.",
+        "Загрузите профиль и езжайте на восток. Следите за топливом."
       ]
     },
 
     ferOtgr: {
       title: "FER – OTGR Road Connection",
       title_ru: "FER – OTGR Дорожное соединение",
-      tagline: "Seamlessly connect Far East Russia with Off The Grid Russia and unlock vast new routes across Siberia.",
-      tagline_ru: "Бесшовное соединение Far East Russia с Off The Grid Russia, открывающее новые маршруты по Сибири.",
-      description: "The FER – OTGR Road Connection is an essential bridge mod that links two of the most ambitious Russian map projects for Euro Truck Simulator 2: Far East Russia (FER) and Off The Grid Russia (OTGR). Without this connector, the two maps exist as separate islands — with it, you gain access to continuous routes stretching thousands of kilometers across Siberia's remote interior. The road connection carefully aligns terrain, road geometry, and map sectors between both mods, ensuring seamless transitions without visual glitches or terrain gaps. Whether you're planning a cross-Siberian convoy or just want to haul freight between Yakutia and the OTGR region, this RC makes it possible. The connector is lightweight, adds minimal file size, and is updated alongside major FER releases to maintain compatibility.",
-      description_ru: "FER – OTGR Дорожное соединение — это важный мост-мод, связывающий два самых амбициозных русских мода карт для Euro Truck Simulator 2: Far East Russia (FER) и Off The Grid Russia (OTGR). Без этого коннектора обе карты существуют как отдельные острова — с ним вы получаете непрерывные маршруты длиной в тысячи километров по удалённой внутренней Сибири. Дорожное соединение аккуратно выравнивает местность, геометрию дорог и секторы карты между обоими модами, обеспечивая плавные переходы без визуальных глюков и разрывов рельефа. Планируете ли вы транссибирский конвой или просто хотите перевозить грузы между Якутией и регионом OTGR — этот RC делает это возможным. Коннектор лёгкий, добавляет минимум объёма и обновляется одновременно с крупными релизами FER для сохранения совместимости.",
+      tagline: "Connects Far East Russia with Off The Grid Russia. One border, endless route.",
+      tagline_ru: "Соединяет Far East Russia с Off The Grid Russia. Одна граница, бесконечный маршрут.",
+      description: "OTGR is a great map, but on its own it stops right where FER begins, and the other way around. This road connection fixes that. It aligns the terrain, roads and sectors of both maps at the border, so you can haul freight from Yakutia deep into OTGR territory without gaps or visual glitches. The connector is small, it doesn't hurt performance, and I update it together with major FER releases so compatibility stays intact. Install it above both main maps in the Mod Manager, and only if you actually play both.",
+      description_ru: "OTGR — отличная карта, но сама по себе она обрывается ровно там, где начинается FER, и наоборот. Это Дорожное соединение это чинит. Оно сводит рельеф, дороги и секторы обеих карт на границе, так что можно везти груз из Якутии в глубь территорий OTGR без дыр и визуальных глюков. Коннектор маленький, на производительность не влияет, и я обновляю его вместе с крупными релизами FER, чтобы совместимость не отваливалась. Ставится выше обеих основных карт в Mod Manager, и только если вы реально играете в обе.",
       requirements: [
         "Far East Russia (latest version)",
         "Off The Grid Russia (latest version)",
@@ -139,10 +114,10 @@ window.SITE = {
     ferChukotka: {
       title: "FER – Chukotka Road Connection",
       title_ru: "FER – Chukotka Дорожное соединение",
-      tagline: "Bridge Far East Russia and the Chukotka region for uninterrupted eastern exploration.",
-      tagline_ru: "Соедините Far East Russia с регионом Чукотки для непрерывного исследования востока.",
-      description: "The FER – Chukotka Road Connection links the Far East Russia core map with the Chukotka addon region, creating a continuous road network that extends deep into Russia's northeastern frontier. The Chukotka peninsula — famous for being the easternmost point of the Eurasian continent — is one of the most remote and least populated areas on Earth. This connector ensures that the transition between FER's Yakutian roads and Chukotka's frozen highways is smooth and geographically accurate. Road alignments, terrain elevation, and vegetation zones all blend naturally across the connection point. Install this RC alongside both FER and the Chukotka Addon to unlock the full eastern expansion.",
-      description_ru: "FER – Chukotka Дорожное соединение связывает основную карту Far East Russia с регионом дополнения Chukotka, создавая непрерывную дорожную сеть, уходящую глубоко в северо-восточные рубежи России. Полуостров Чукотка — известный как самая восточная точка Евразийского континента — один из самых удалённых и малонаселённых районов на Земле. Этот коннектор обеспечивает плавный и географически точный переход между якутскими дорогами FER и замёрзшими шоссе Чукотки. Выравнивание дорог, рельеф и зоны растительности естественно сливаются в точке соединения. Установите этот RC вместе с FER и Chukotka Addon, чтобы открыть полное восточное расширение.",
+      tagline: "The last leg east. Connect FER to Chukotka and keep driving until the road runs out.",
+      tagline_ru: "Последний рывок на восток. Соедините FER с Чукоткой и езжайте, пока не кончится дорога.",
+      description: "Chukotka is the eastern edge of the continent, and getting there should feel like it. This connector joins the FER core map with the Chukotka addon region, blending terrain elevation, road alignment and vegetation zones across the border so it feels like one continuous world rather than two mods glued together. You'll need both FER and the Chukotka Addon installed, with this RC placed above them in the load order. Once it's set up, you can drive from central Yakutia all the way to the Arctic coast.",
+      description_ru: "Чукотка — восточный край континента, и дорога туда должна это ощущаться. Этот коннектор стыкует основную карту FER с регионом дополнения Chukotka, сводя рельеф, трассировку дорог и зоны растительности через границу так, что это ощущается как один непрерывный мир, а не два мода на клею. Нужны установленные FER и Chukotka Addon, а этот RC ставится выше них в порядке загрузки. Когда всё настроено, можно проехать из центральной Якутии прямо до арктического побережья.",
       requirements: [
         "Far East Russia (latest version)",
         "Chukotka Addon (latest version)",
@@ -158,10 +133,10 @@ window.SITE = {
     ferTst: {
       title: "FER – TST Road Connection",
       title_ru: "FER – TST Дорожное соединение",
-      tagline: "Connect Far East Russia with the Trans-Siberian Truckway for the ultimate cross-Russia route.",
-      tagline_ru: "Соедините Far East Russia с Trans-Siberian Truckway для лучшего трансроссийского маршрута.",
-      description: "The FER – TST Road Connection is the gateway to one of the longest continuous trucking routes in ETS2 modding. By linking Far East Russia with the Trans-Siberian Truckway (TST), this connector lets you drive from the heart of Siberia all the way to the Russian Far East without interruption. The Trans-Siberian Truckway covers the legendary federal highway system that spans Russia from west to east, and this RC picks up where TST ends, continuing the journey into FER's Yakutian territory. The connection is carefully calibrated to match road widths, terrain textures, and elevation data at the boundary, providing a seamless driving experience across both maps. This is a must-have for players who want the ultimate long-haul experience across Russia.",
-      description_ru: "FER – TST Дорожное соединение — это путь к одному из самых длинных непрерывных дальнобойных маршрутов в моддинге ETS2. Связывая Far East Russia с Trans-Siberian Truckway (TST), этот коннектор позволяет ехать из самого сердца Сибири до Дальнего Востока России без перерывов. Trans-Siberian Truckway охватывает легендарную систему федеральных трасс, простирающуюся через Россию с запада на восток, и этот RC подхватывает там, где заканчивается TST, продолжая путь в якутские территории FER. Соединение тщательно откалибровано для совпадения ширины дорог, текстур местности и данных высот на границе, обеспечивая плавный опыт вождения по обеим картам. Обязательно для игроков, желающих испытать максимальные дальнобойные перевозки через всю Россию.",
+      tagline: "Hook FER up to the Trans-Siberian Truckway and cross half a continent in one run.",
+      tagline_ru: "Подключите FER к Trans-Siberian Truckway и проедьте полконтинента за один заход.",
+      description: "Pairing TST with FER gives you one of the longest continuous routes available in ETS2 modding: from western Russia all the way to Yakutia, no teleporting, no profile switching. The connection point is calibrated so road widths, textures and elevation match on both sides of the border. If long-haul is your thing, start this one in the west and don't look back. Requires both maps installed, with this RC above them in the load order.",
+      description_ru: "Связка TST и FER — один из самых длинных непрерывных маршрутов в моддинге ETS2: из западной России прямо до Якутии, без телепортов и смены профилей. Точка соединения откалибрована так, что ширина дорог, текстуры и высоты совпадают по обе стороны границы. Если дальнобой — ваше, стартуйте на западе и не оглядывайтесь. Нужны обе карты, а этот RC ставится выше них в порядке загрузки.",
       requirements: [
         "Far East Russia (latest version)",
         "Trans-Siberian Truckway (latest version)",
@@ -177,19 +152,19 @@ window.SITE = {
     chukotkaAddon: {
       title: "Chukotka Addon Legacy Areas",
       title_ru: "Chukotka Addon Legacy Areas",
-      tagline: "Explore the Chukotsky Autonomous Okrug — the easternmost edge of Russia and the entire Eurasian continent.",
-      tagline_ru: "Исследуйте Чукотский автономный округ — самую восточную окраину России и всего Евразийского континента.",
-      description: "The Chukotka Addon is an expansive legacy map addition for Far East Russia that introduces the Chukotsky Autonomous Okrug region to your Euro Truck Simulator 2 world. Chukotka is one of the most extreme and isolated places on the planet — a land of permafrost tundra, volcanic mountains, and Arctic coastline where temperatures can plunge below -50°C. This addon brings this unique and challenging landscape to ETS2, featuring remote northern settlements, isolated outposts, and treacherous roads that will test even the most experienced virtual truckers. The region features custom environment assets and textures not found elsewhere in FER, including coastal dirt roads, frozen river crossings, and breathtaking mountain passes. Every settlement has been carefully modeled using real-world reference materials to capture the authentic, rugged character of this remote corner of Russia.",
-      description_ru: "Chukotka Addon — это масштабное дополнение для Far East Russia, добавляющее регион Чукотского автономного округа в ваш мир Euro Truck Simulator 2. Чукотка — одно из самых экстремальных и изолированных мест на планете: земля вечной мерзлоты, тундры, вулканических гор и арктического побережья, где температура может опускаться ниже -50°C. Это дополнение переносит этот уникальный и сложный ландшафт в ETS2 с детализированными северными поселениями, удалёнными аванпостами и коварными дорогами, которые проверят мастерство даже самых опытных виртуальных дальнобойщиков. В регионе представлены уникальные объекты окружения и текстуры, включая грунтовые прибрежные дороги, переправы по замёрзшим рекам и узкие горные перевалы. Каждое поселение спроектировано на основе реальных справочных материалов, чтобы передать аутентичный суровый характер этого далёкого уголка России.",
+      tagline: "The far north-east of Russia: permafrost, Arctic coastline and settlements you won't find on many maps.",
+      tagline_ru: "Дальний северо-восток России: вечная мерзлота, арктическое побережье и посёлки, которые есть не на каждой карте.",
+      description: "Chukotka is about as remote as it gets: temperatures below -50°C, towns cut off from the road network for most of the year, and landscapes that look like another planet. This addon brings that region into FER with its own custom assets: coastal dirt roads, frozen river crossings and a handful of isolated settlements modeled from real reference materials. Don't expect dense traffic or quick deliveries out here. Do expect the longest, loneliest stretches of road in the entire mod. Requires FER, and works best together with the FER – Chukotka RC.",
+      description_ru: "Чукотка — это почти предел удалённости: температуры ниже -50°C, посёлки, отрезанные от дорожной сети на большую часть года, и пейзажи как с другой планеты. Это дополнение приносит регион в FER со своими уникальными ассетами: прибрежные грунтовки, переправы по замёрзшим рекам и горстка изолированных поселений, смоделированных по реальным материалам. Не ждите здесь плотного трафика и быстрых доставок. Ждите самые длинные и одинокие перегоны во всём моде. Требуется FER, а лучше всего работает вместе с FER – Chukotka RC.",
       features: [
-        { icon: "", title: "Remote Settlements", text: "Drive through authentic northern towns and isolated coastal outposts." },
-        { icon: "", title: "Challenging Routes", text: "Navigate treacherous dirt roads, ice crossings, and narrow mountain passes." },
-        { icon: "", title: "Seamless Integration", text: "Works with FER and the Chukotka RC for a continuous map experience." }
+        { icon: "", title: "Remote Settlements", text: "Northern towns and lonely coastal outposts, built from photos people actually took there." },
+        { icon: "", title: "Nasty Routes", text: "Dirt roads, ice crossings and narrow passes. Your suspension will remember them." },
+        { icon: "", title: "Plays Nice With FER", text: "Add the Chukotka RC on top and it all becomes one continuous map." }
       ],
       features_ru: [
-        { icon: "", title: "Удалённые поселения", text: "Проезжайте через аутентичные северные посёлки и изолированные прибрежные аванпосты." },
-        { icon: "", title: "Сложные маршруты", text: "Преодолевайте коварные грунтовые дороги, ледовые переправы и узкие горные перевалы." },
-        { icon: "", title: "Бесшовная интеграция", text: "Работает с FER и Chukotka RC для непрерывного опыта карты." }
+        { icon: "", title: "Удалённые поселения", text: "Северные посёлки и одинокие прибрежные аванпосты по фото реальных людей." },
+        { icon: "", title: "Вредные маршруты", text: "Грунтовки, ледовые переправы и узкие перевалы. Подвеска их запомнит." },
+        { icon: "", title: "Дружит с FER", text: "Добавьте сверху Chukotka RC — и всё это станет одной непрерывной картой." }
       ],
       requirements: [
         "Far East Russia (latest version)",
@@ -221,20 +196,21 @@ window.SITE = {
   /* ---------- Supporters ---------- */
   supporters: {
     donations: [
-      { name: "laur1sxd", amount: "40,42 EUR" },
-      { name: "Mr JP", amount: "16,12 EUR" },
-      { name: "weskergood1234", amount: "10,24 EUR"},
-      { name: "Artie", amount: "8,48 EUR" },
-      { name: "Maxi", amount: "8 EUR" },
-      { name: "Delby", amount: "3,51 EUR" },
-      { name: "Xiguawangzi3399", amount: "3,48 EUR" },
-      { name: "Nachito", amount: "3,00 EUR" },
-      { name: "Killermix", amount: "0.40 EUR" }
+      { name: "laur1sxd", amount: "40,42 EUR", amount_ru: "4 042,00 ₽" },
+      { name: "Mr JP", amount: "16,12 EUR", amount_ru: "1 612,00 ₽" },
+      { name: "Artie", amount: "8,48 EUR", amount_ru: "848,00 ₽" },
+      { name: "weskergood1234", amount: "10,24 EUR", amount_ru: "1 024,00 ₽"},
+      { name: "Maxi", amount: "4,50 EUR", amount_ru: "450,00 ₽" },
+      { name: "Delby", amount: "3,51 EUR", amount_ru: "351,00 ₽" },
+      { name: "Xiguawangzi3399", amount: "3,48 EUR", amount_ru: "348,00 ₽" },
+      { name: "Nachito", amount: "3,00 EUR", amount_ru: "300,00 ₽" },
+      { name: "Killermix", amount: "0.40 EUR", amount_ru: "40,00 ₽" }
     ],
     showcase: [
       { name: "Bogdac", text: "Created many awesome videos from this map & included it in combos", i18nKey: "supporters.showcase.bogdac" },
       { name: "GMC Community", text: "Sharing news from Far East Russia on their Discord and featuring it in map combos", i18nKey: "supporters.showcase.gmc" },
-      { name: "Semir Gaming", text: "Streams from far east russia", i18nKey: "supporters.showcase.semir" }
+      { name: "Semir Gaming", text: "Streams from far east russia", i18nKey: "supporters.showcase.semir" },
+      { name: "Vikingo", text: "Made V2 showcase", i18nKey: "supporters.showcase.vikingo" }
     ]
   }
 };

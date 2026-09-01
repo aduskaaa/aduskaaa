@@ -19,23 +19,25 @@
       /* meta */
       "meta.title": "Far East Russia – ETS2 Map Mod",
       "meta.description":
-        "Far East Russia is a high-quality ETS2 map expansion focusing on Russia's Far East. Explore vast roads, realistic cities, and challenging routes.",
+        "Far East Russia is a free fan-made ETS2 map mod: 5,900+ km of roads across Yakutia and Chukotka, built by hand from real-world references.",
       "meta.titleAddonsRcs": "Addons & Road Connections • Far East Russia",
       "meta.descriptionAddonsRcs":
-        "Browse all Far East Russia addons and Road Connections (RCs) that extend the map across Siberia.",
+        "All addons and Road Connections (RCs) for Far East Russia in one place. Extend the map across Siberia.",
       "addonsRcsPage.h1": "Addons & Road Connections",
       "addonsRcsPage.lead":
-        "All extensions for Far East Russia in one place — regional addons that expand the map, and Road Connections that link FER with other major map mods.",
+        "Everything that extends FER lives here: regional addons that grow the map, and Road Connections that plug it into other big map mods.",
 
       /* nav */
       "nav.HOME": "HOME",
       "nav.FER": "FER",
       "nav.MAP": "MAP",
+      "nav.COMBOMAP": "COMBO MAP",
       "nav.ADDONS": "ADDONS",
       "nav.RCS": "RCS",
       "nav.ADDONS_RCS": "ADDONS/RCS",
       "nav.GALLERY": "GALLERY",
       "nav.VERSIONS": "VERSIONS",
+      "nav.LOADORDER": "LOAD ORDER",
       "nav.SUPPORT": "SUPPORT",
       "nav.DISCORD": "DISCORD",
       "nav.VK": "VK",
@@ -46,41 +48,72 @@
       "footer.Map": "Map",
       "footer.Gallery": "Gallery",
       "footer.Versions": "Versions",
+      "footer.Load Order": "Load Order",
       "footer.Support": "Support",
       "footer.copy": "Far East Russia · ETS2 Map Mod",
+      "footer.made": "Built by aduskaaa & the community",
       "footer.Privacy & Policy": "Privacy & Policy",
 
+      /* closing cta (index) */
+      "cta.h2": "Ready to drive east?",
+      "cta.lead": "Grab the latest release, set your load order, and don't forget fuel cans. See you on the Kolyma.",
+
+      /* page eyebrows */
+      "eyebrow.fer": "The core map",
+      "eyebrow.rc": "Road connection",
+      "eyebrow.addon": "Regional addon",
+      "eyebrow.extensions": "Extensions",
+      "eyebrow.changelog": "Changelog",
+      "eyebrow.support": "Keep it alive",
+
       /* hero */
-      "hero.h1": "Explore Russia's Far East in ETS2",
+      "hero.eyebrow": "Free & fan-made ETS2 map mod",
+      "hero.h1": "Drive where the maps end.",
       "hero.p":
-        "Drive thousands of kilometers through rugged landscapes, frozen tundra, and remote highways across Yakutia and beyond. Every road, city, and settlement is hand-crafted from real-world reference data — delivering an authentic Far Eastern experience built for immersion and performance.",
+        "FER is a free map mod for Euro Truck Simulator 2 that covers Yakutia and the far north-east with 5,900+ km of roads. I build every city and dirt track by hand from satellite images, photos and dashcam footage. Fair warning: some of these roads are rough. That's kind of the point.",
       "hero.cta_download": "Download FER",
       "hero.cta_explore": "Explore RCs",
       "hero.cta_support": "Support",
-      "hero.badge1": "Actively Maintained",
-      "hero.badge2": "Optimized",
-      "hero.badge3": "1.60 Ready",
+
+      /* ticker */
+      "ticker.km": "km of roads",
+      "ticker.cities": "cities & settlements",
+      "ticker.ver": "ETS2 ready",
+      "ticker.price": "0€",
+      "ticker.free": "free, no paywalls",
+      "hero.badge1": "Still growing",
+      "hero.badge2": "Runs on mid-range PCs",
+      "hero.badge3": "ETS2 1.60 ready",
 
       /* features */
-      "features.h2": "Key Features",
+      "features.eyebrow": "The map",
+      "features.h2": "What's Inside",
       "features.lead":
-        "Built for immersion and stability, whether you're hauling across cities or tackling remote wilderness routes.",
-      "features.c1.title": "Authentic Cities & Towns",
+        "No two drives here feel the same. One day you're cruising a wide federal highway, the next you're fording a river with a full trailer.",
+      "features.c1.title": "Real Cities, Small Towns",
       "features.c1.text":
-        "Hand-crafted locations inspired by satellite imagery and photos from the region. Every city is rebuilt from scratch with attention to realistic road geometry, signage, and local architecture.",
-      "features.c2.title": "Challenging Roads",
+        "Every location starts as a blank map and a pile of references: satellite shots, panoramas, photos people send me from the region. Road layouts, signs, buildings — if it's there in real life, I try to get it right in game.",
+      "features.c2.title": "Roads With Character",
       "features.c2.text":
-        "From coastal highways and river crossings to tight mountain passes and frozen dirt tracks — the terrain is as diverse as the real Far East.",
-      "features.c3.title": "Performance Focus",
+        "Winter roads that never melt, mountain passes, river ferries, and long lonely stretches between settlements. If you want a relaxing cruise, stick to the federal highways.",
+      "features.c3.title": "It Runs Well",
       "features.c3.text":
-        "Carefully optimized map sectors and assets ensure smooth framerates even on mid-range hardware. Stable in both single-player and multiplayer convoys.",
+        "I test every release on a mid-range PC before publishing. Sectors are optimized, so even big convoys stay smooth, in singleplayer and multiplayer both.",
+
+      /* author note (index) */
+      "about.eyebrow": "From the author",
+      "about.h2": "A Few Words From the Author",
+      "about.text":
+        "Hi, I'm aduskaaa, the person behind FER. This started because I got tired of hauling freight through crowded European highways and wanted to drive somewhere properly empty instead. Now the map covers most of Yakutia and is creeping toward Chukotka, and the list of things I still want to add keeps getting longer. Everything here is free. If you enjoy the map, or something breaks, come say hi on Discord. I read everything.",
 
       /* map */
-      "map.h2": "Map Coverage Preview",
+      "map.eyebrow": "Coverage",
+      "map.h2": "Where the Map Goes",
       "map.lead":
-        "A glimpse into the vast region covered by FER. Explore the full road network in high detail.",
+        "Rough outline of the covered area below. For streets, cities and road names, open the interactive map.",
       "map.open": "Open Interactive Map",
       "map.alt": "Preview of the Far East Russia map region",
+      "map.caption": "Coverage sketch from the latest build.",
       "map.stat1": "of driveable roads",
       "map.stat2": "detailed cities and settlements",
       "map.stat3": "ETS2 version supported",
@@ -106,7 +139,7 @@
       /* rcs */
       "rcs.h2": "Road Connections (RCs)",
       "rcs.lead":
-        "Road Connections link FER with other map mods, creating continuous routes across Siberia. Choose a connector below to learn more and download.",
+        "RCs link FER with other map mods so routes stay continuous instead of dead-ending at the border. Only install the ones for maps you actually use.",
       "rcs.ferOtgr.title": "FER – OTGR",
       "rcs.ferOtgr.desc":
         "Connects Far East Russia with Off The Grid Russia, unlocking continuous routes across Siberia's vast interior.",
@@ -120,6 +153,7 @@
       "rcs.download": "Download",
 
       /* supporters */
+      "supporters.eyebrow": "Credits",
       "supporters.h2": "Supporters",
       "supporters.lead": "Big thanks to everyone who keeps this project going.",
       "supporters.donations": "Donations:",
@@ -131,6 +165,7 @@
       "supporters.showcase.gmc":
         "Sharing news from Far East Russia on their Discord and featuring it in map combos",
       "supporters.showcase.semir": "Streams from Far East Russia",
+      "supporters.showcase.vikingo": "Made V2 showcase",
 
       /* faq */
       "faq.h2": "FAQ",
@@ -145,10 +180,10 @@
         "Place RCs above the main maps, with FER below them. Check the Load Order section on any download page for the exact order.",
       "faq.q4": "Is FER compatible with ProMods or other map mods?",
       "faq.a4":
-        "FER is designed for standalone use or with its official RCs (OTGR, TST, Chukotka). Compatibility with other major map mods is not guaranteed.",
+        "FER is meant to run standalone or with its official RCs (OTGR, TST, Chukotka). Mixing it with other big map mods usually ends in tears, so I can't promise it'll work.",
       "faq.q5": "How often is FER updated?",
       "faq.a5":
-        "FER receives regular updates — typically every few weeks — adding new roads, cities, and bug fixes.",
+        "Every few weeks or so, whenever a chunk of work is done. Sometimes it's bug fixes, sometimes a whole new area.",
       "faq.q6": "I found a bug or visual glitch. How do I report it?",
       "faq.a6":
         "Join the <a href='https://discord.gg/SSWDJMauxz' target='_blank'>Discord server</a> and report it in the bug reports channel.",
@@ -171,6 +206,7 @@
       "common.whatsIncluded": "What's Included",
       "common.installationGuide": "Installation Guide",
       "common.loadOrder": "Load Order",
+      "common.officialLink": "Official Link",
       "common.loadOrderHint":
         "Place mods in your ETS2 Mod Manager in this priority (top = highest priority):",
       "common.loadOrderHintShort":
@@ -203,8 +239,8 @@
       "discord.error": "Failed to load latest updates. <br>Join our server directly on Discord to stay tuned!",
 
       /* fer.html – map coverage bullet list */
-      "fer.coverage1": "7,000+ km of driveable roads across the Far Eastern Federal District",
-      "fer.coverage2": "40+ detailed cities, towns, and remote settlements",
+      "fer.coverage1": "5,900+ km of driveable roads across the Far Eastern Federal District",
+      "fer.coverage2": "50+ detailed cities, towns, and remote settlements",
       "fer.coverage3": "River ferry crossings connecting isolated regions",
       "fer.coverage4": "Federal highways, regional roads, and unnamed dirt tracks",
       "fer.coverage5": "Continuous expansion with every release",
@@ -224,25 +260,26 @@
       "rcNotes.report": "Report issues via",
 
       /* support page */
-      "supportPage.h1": "Support the Far East Russia Project",
+      "supportPage.h1": "Support FER",
       "supportPage.lead":
-        "Every kilometer of road, every city block, and every bug fix is fuelled by the community. FER is a passion project built in spare time — your support keeps the map expanding east and helps maintain quality with every update.",
+        "FER is free and will stay free. It's one person building roads in the hours left over after work, and a community keeping it alive with feedback, photos and donations. Here's how you can help.",
       "supportPage.joinDiscord": "Join Discord",
       "supportPage.donatePaypal": "Donate via PayPal",
       "supportPage.donatePatreon": "Support on Patreon",
       "supportPage.waysH2": "Ways to Support",
-      "supportPage.way1.title": "Financial Support",
+      "supportPage.waysLead": "Pick whatever suits you. Or don't, and just drive.",
+      "supportPage.way1.title": "Chip In Financially",
       "supportPage.way1.text":
-        "Donations help fund development time and tools. Every contribution, no matter the size, makes a real difference. Support via <a href='https://www.patreon.com/c/Far_East_Russia' target='_blank' style='color:var(--text-bright)'>Patreon</a> or donate via <a href='https://paypal.me/aduskaaaa' target='_blank' style='color:var(--text-bright)'>PayPal</a>.",
-      "supportPage.way2.title": "Provide Reference Material",
+        "Mapping takes time, and time is the one thing this project runs out of fastest. Donations literally buy hours of development. Patreon or PayPal, whichever you prefer. And if you can't chip in, that's fine too. Playing and reporting bugs helps just as much. Find me on <a href='https://www.patreon.com/c/Far_East_Russia' target='_blank' style='color:var(--text-bright)'>Patreon</a> or <a href='https://paypal.me/aduskaaaa' target='_blank' style='color:var(--text-bright)'>PayPal</a>.",
+      "supportPage.way2.title": "Send Reference Material",
       "supportPage.way2.text":
-        "Share photos, dashcam footage, and local knowledge from Yakutia and Russia's Far East. Real-world reference data is invaluable for creating authentic cities and roads. Upload via <a href='https://discord.gg/SSWDJMauxz' target='_blank' style='color:var(--text-bright)'>Discord</a>.",
+        "Live in Yakutia or somewhere out east? Your photos and dashcam clips are gold. Real streets, real signs, real bus stops, that's what makes cities here recognizable. Drop them in the <a href='https://discord.gg/SSWDJMauxz' target='_blank' style='color:var(--text-bright)'>Discord</a>.",
       "supportPage.way3.title": "Spread the Word",
       "supportPage.way3.text":
-        "Stream your hauls, make YouTube videos, post on mod forums, or recommend FER to friends. More visibility means more testers, more feedback, and a better map for everyone.",
+        "Stream a convoy, post screenshots, make a video, tell a friend. Word of mouth is the only marketing this map has ever had, and it works.",
       "supportPage.whereH2": "Where Your Support Goes",
       "supportPage.whereLead":
-        "<strong>Development time</strong> — More hours spent mapping means faster progress on new cities and roads.",
+        "<strong>Development time.</strong> More hours at the editor means new cities and roads sooner. Simple as that.",
 
       /* gallery page */
       "galleryPage.h1": "Gallery",
@@ -252,15 +289,28 @@
       /* versions page */
       "versionsPage.h1": "Versions",
       "versionsPage.lead":
-        "Complete release history for FER, all Road Connections, and Addons. Every version ever published is listed here.",
+        "Every public release of FER, the RCs and the addons, newest first. Handy if you're after a changelog or an older build.",
       "versionsPage.ferReleases": "FER Releases",
       "versionsPage.addons": "Addons",
 
+      "loadorderPage.title": "Load Order • Far East Russia",
+      "loadorderPage.metaDesc": "Correct load order for Far East Russia, RCs and addons in ETS2 Mod Manager.",
+      "loadorderPage.eyebrow": "Setup",
+      "loadorderPage.h1": "Load Order",
+      "loadorderPage.lead": "Place mods in your ETS2 Mod Manager in this priority — top = highest priority. Higher entries override lower ones.",
+      "loadorderPage.tip": "Tip: If you don't use a map, skip its RC. Only enable RCs for maps you actually have.",
+
       /* interactive map */
+      "mapPage.pageTitle": "Interactive Map • Far East Russia",
+      "mapPage.metaDesc": "High-precision interactive map viewer for the Far East Russia ETS2 map mod.",
+      "mapPage.eyebrow": "Explore",
+      "mapPage.h1": "Interactive Map",
+      "mapPage.lead": "High-precision map viewer for Far East Russia. Pan, zoom, inspect road sectors, toggle terrain background, and view community street view captures.",
       "mapPage.title": "INTERACTIVE MAP",
       "mapPage.subtitle": "Far East Russia • Map Version 1",
       "mapPage.loading": "SYNCHRONIZING MAP SECTORS...",
       "mapPage.coords": "Map Coordinates",
+      "mapPage.approxDisclaimer": "Approximate location",
       "mapPage.copy": "Copy to Clipboard",
       "mapPage.copied": "COPIED!",
       "mapPage.userPhotos": "User Photos",
@@ -270,31 +320,47 @@
       "mapPage.rightClickHint": "Right-click to get coordinates",
       "mapPage.svTitle": "Far East Russia Street View",
       "mapPage.datasetVersion": "Version",
-      "mapPage.version1": "V1",
-      "mapPage.version2": "V2",
+      "mapPage.version1": "Web Map Version 1",
+      "mapPage.version2": "Web Map Version 2",
       "mapPage.subtitleV1": "Far East Russia • Map Version 1",
-      "mapPage.subtitleV2": "Far East Russia • Map Version 2"
+      "mapPage.subtitleV2": "Far East Russia • Map Version 2",
+      "mapPage.fullscreen": "Fullscreen",
+      "mapPage.exitFullscreen": "Exit Fullscreen",
+      "mapPage.aboutTitle": "About the Map Viewer",
+      "mapPage.aboutText": "This interactive map is generated directly from in-game ETS2 map sectors and calibrated against real-world WGS84 coordinates. It includes the official ETS2 Global Background Map terrain layer, road sectors, prefab intersections, city hubs, and community Street View captures.",
+      "mapPage.controlsTitle": "Controls & Shortcuts",
+      "mapPage.ctrlPan": "Left-click + drag to pan around the map",
+      "mapPage.ctrlZoom": "Mouse wheel or trackpad pinch to zoom in and out",
+      "mapPage.ctrlCoords": "Right-click anywhere to inspect and copy precise coordinates",
+      "mapPage.ctrlSv": "Click any blue Street View line to launch high-res road photos",
+      "mapPage.legendTitle": "Legend",
+      "mapPage.tierRoads": "Roads",
+      "mapPage.tierSecret": "Secret Tracks",
+      "mapPage.tierFerry": "Ferry Crossing",
+      "mapPage.tierStreetview": "Street View"
     },
 
     ru: {
       "meta.titleAddonsRcs": "Дополнения и Дорожные соединения • Far East Russia",
       "meta.descriptionAddonsRcs":
-        "Все дополнения и Дорожные соединения (RCs) для Far East Russia, расширяющие карту по Сибири.",
+        "Все дополнения и Дорожные соединения (RCs) для Far East Russia в одном месте. Расширьте карту по Сибири.",
       "addonsRcsPage.h1": "Дополнения и Дорожные соединения",
       "addonsRcsPage.lead":
-        "Все расширения для Far East Russia в одном месте — региональные дополнения, расширяющие карту, и Дорожные соединения, связывающие FER с другими крупными модами карт.",
+        "Здесь живёт всё, что расширяет FER: региональные дополнения, которые растят карту, и Дорожные соединения, которые подключают её к другим крупным модам.",
       "meta.title": "Far East Russia – мод карты для ETS2",
       "meta.description":
-        "Far East Russia — высококачественное расширение карты для ETS2, посвящённое Дальнему Востоку России. Обширные дороги, реалистичные города и сложные маршруты.",
+        "Far East Russia — бесплатный фанатский мод карты для ETS2: более 5 900 км дорог по Якутии и Чукотке, построенных вручную по реальным данным.",
 
       "nav.HOME": "ГЛАВНАЯ",
       "nav.FER": "FER",
       "nav.MAP": "КАРТА",
+      "nav.COMBOMAP": "КАРТА КОМБО",
       "nav.ADDONS": "ДОПОЛНЕНИЯ",
       "nav.RCS": "RCS",
       "nav.ADDONS_RCS": "ДОПОЛНЕНИЯ/RCS",
       "nav.GALLERY": "ГАЛЕРЕЯ",
       "nav.VERSIONS": "ВЕРСИИ",
+      "nav.LOADORDER": "ПОРЯДОК ЗАГРУЗКИ",
       "nav.SUPPORT": "ПОДДЕРЖКА",
       "nav.DISCORD": "DISCORD",
       "nav.VK": "VK",
@@ -304,38 +370,52 @@
       "footer.Map": "Карта",
       "footer.Gallery": "Галерея",
       "footer.Versions": "Версии",
+      "footer.Load Order": "Порядок загрузки",
       "footer.Support": "Поддержка",
       "footer.copy": "Far East Russia · мод карты для ETS2",
+      "footer.made": "Сделано aduskaaa и сообществом",
       "footer.Privacy & Policy": "Privacy & Policy",
 
-      "hero.h1": "Исследуйте Дальний Восток России в ETS2",
+      "hero.eyebrow": "Бесплатный фанатский мод карты для ETS2",
+      "hero.h1": "Езжайте туда, где заканчиваются карты.",
       "hero.p":
-        "Проедьте тысячи километров по суровым ландшафтам, замёрзшей тундре и удалённым шоссе через Якутию и за её пределы. Каждая дорога, город и поселение созданы вручную на основе реальных данных — обеспечивая аутентичный опыт Дальнего Востока с упором на погружение и производительность.",
+        "FER — бесплатный мод карты для Euro Truck Simulator 2, покрывающий Якутию и северо-восток более чем 5 900 км дорог. Каждый город и каждую грунтовку я строю вручную по спутниковым снимкам, фотографиям и видео с регистраторов. Честно предупреждаю: часть дорог здесь тяжёлая. В этом и смысл.",
       "hero.cta_download": "Скачать FER",
       "hero.cta_explore": "Изучить RCs",
       "hero.cta_support": "Поддержать",
-      "hero.badge1": "Активно поддерживается",
-      "hero.badge2": "Оптимизировано",
-      "hero.badge3": "Готов для 1.60",
 
-      "features.h2": "Ключевые особенности",
+      "ticker.km": "км дорог",
+      "ticker.cities": "городов и посёлков",
+      "ticker.ver": "готов к ETS2",
+      "ticker.price": "0₽",
+      "ticker.free": "бесплатно, без пейволлов",
+
+      "features.eyebrow": "Карта",
+      "features.h2": "Что внутри",
       "features.lead":
-        "Создано для погружения и стабильности — будь то перевозки между городами или удалённые маршруты в дикой природе.",
-      "features.c1.title": "Аутентичные города и посёлки",
+        "Здесь не бывает двух одинаковых поездок. Сегодня ты летишь по широкой федеральной трассе, а завтра лезешь через брод с полным прицепом.",
+      "features.c1.title": "Настоящие города и посёлки",
       "features.c1.text":
-        "Локации, созданные вручную на основе спутниковых снимков и фотографий региона. Каждый город построен с нуля с вниманием к реалистичной геометрии дорог, указателям и местной архитектуре.",
-      "features.c2.title": "Сложные дороги",
+        "Каждая локация начинается с чистой карты и стопки референсов: спутниковые снимки, панорамы, фото, которые присылают люди из региона. Геометрия дорог, указатели, здания — если это есть в реальности, я стараюсь перенести это в игру.",
+      "features.c2.title": "Дороги с характером",
       "features.c2.text":
-        "От прибрежных шоссе и речных переправ до узких горных перевалов и замёрзших грунтовок — местность так же разнообразна, как и настоящий Дальний Восток.",
-      "features.c3.title": "Упор на производительность",
+        "Зимники, которые не тают даже летом, горные перевалы, речные паромы и долгие перегоны без единого населённого пункта. Хотите спокойную езду — держитесь федеральных трасс.",
+      "features.c3.title": "Работает быстро",
       "features.c3.text":
-        "Тщательно оптимизированные секторы карты и ассеты обеспечивают плавную частоту кадров даже на оборудовании среднего класса. Стабильно как в одиночной игре, так и в мультиплеерных конвоях.",
+        "Перед публикацией я тестирую каждый релиз на среднем ПК. Секторы оптимизированы, так что даже большие конвои идут плавно. И в одиночной игре, и в мультиплеере.",
 
-      "map.h2": "Обзор охвата карты",
+      "about.eyebrow": "От автора",
+      "about.h2": "Пара слов от автора",
+      "about.text":
+        "Привет! Я aduskaaa, человек за FER. Всё началось с того, что мне надоело возить грузы по забитым европейским трассам, и захотелось ехать туда, где по-настоящему пусто. Сейчас карта покрывает почти всю Якутию и потихоньку ползёт к Чукотке, а список того, что хочется добавить, только растёт. Всё здесь бесплатно. Если карта нравится или что-то сломалось — заходите в Discord, я читаю всё.",
+
+      "map.eyebrow": "Охват",
+      "map.h2": "Куда идёт карта",
       "map.lead":
-        "Взгляд на огромный регион, охваченный FER. Изучите полную дорожную сеть в высокой детализации.",
+        "Ниже примерный охват региона. Улицы, города и названия дорог смотрите на интерактивной карте.",
       "map.open": "Открыть интерактивную карту",
       "map.alt": "Превью региона карты Far East Russia",
+      "map.caption": "Схема охвата из последней сборки.",
       "map.stat1": "проезжих дорог",
       "map.stat2": "детализированных городов и поселений",
       "map.stat3": "поддерживаемая версия ETS2",
@@ -359,7 +439,7 @@
 
       "rcs.h2": "Дорожные соединения (RCs)",
       "rcs.lead":
-        "Дорожные соединения связывают FER с другими модами карт, создавая непрерывные маршруты по Сибири. Выберите коннектор ниже, чтобы узнать больше и скачать.",
+        "RCs связывают FER с другими модами карт, чтобы маршруты не обрывались на границе. Устанавливайте только те, что нужны для карт, в которых вы реально играете.",
       "rcs.ferOtgr.title": "FER – OTGR",
       "rcs.ferOtgr.desc":
         "Соединяет Far East Russia с Off The Grid Russia, открывая непрерывные маршруты по обширной внутренней Сибири.",
@@ -372,6 +452,7 @@
       "rcs.openPage": "Открыть страницу",
       "rcs.download": "Скачать",
 
+      "supporters.eyebrow": "Благодарности",
       "supporters.h2": "Поддержавшие",
       "supporters.lead": "Огромная благодарность всем, кто поддерживает этот проект.",
       "supporters.donations": "Пожертвования:",
@@ -383,6 +464,7 @@
       "supporters.showcase.gmc":
         "Делятся новостями о Far East Russia в своём Discord и включают её в комбо карт",
       "supporters.showcase.semir": "Стримы по Far East Russia",
+      "supporters.showcase.vikingo": "Сделал шоукейс версии V2",
 
       "faq.h2": "FAQ",
       "faq.q1": "Где скачать основную карту FER?",
@@ -396,10 +478,10 @@
         "Размещайте RCs выше основных карт, а FER ниже них. Точный порядок смотрите в разделе Load Order на любой странице загрузки.",
       "faq.q4": "Совместим ли FER с ProMods или другими модами карт?",
       "faq.a4":
-        "FER создан для самостоятельного использования или с официальными RCs (OTGR, TST, Chukotka). Совместимость с другими крупными модами карт не гарантируется.",
+        "FER рассчитан на самостоятельную игру или официальные RCs (OTGR, TST, Chukotka). Смешивать его с другими крупными картами обычно заканчивается слёзками, так что работать это не обещаю.",
       "faq.q5": "Как часто обновляется FER?",
       "faq.a5":
-        "FER получает регулярные обновления — обычно каждые несколько недель — добавляющие новые дороги, города и исправления ошибок.",
+        "Раз в несколько недель, примерно, когда готов очередной кусок работы. Иногда это фиксы, иногда целый новый район.",
       "faq.q6": "Я нашёл баг или визуальный глюк. Как сообщить?",
       "faq.a6":
         "Присоединяйтесь к <a href='https://discord.gg/SSWDJMauxz' target='_blank'>серверу Discord</a> и сообщите об этом в канале для отчётов о багах.",
@@ -420,6 +502,7 @@
       "common.whatsIncluded": "Что включено",
       "common.installationGuide": "Руководство по установке",
       "common.loadOrder": "Порядок загрузки",
+      "common.officialLink": "Официальная ссылка",
       "common.loadOrderHint":
         "Размещайте моды в Mod Manager ETS2 в этом приоритете (верх = высший приоритет):",
       "common.loadOrderHintShort":
@@ -451,8 +534,8 @@
       "discord.join": "Войти в Discord",
       "discord.error": "Не удалось загрузить обновления. <br>Присоединяйтесь к нашему серверу напрямую в Discord!",
 
-      "fer.coverage1": "Более 7 000 км проезжих дорог Дальневосточного федерального округа",
-      "fer.coverage2": "Более 40 детализированных городов, посёлков и удалённых поселений",
+      "fer.coverage1": "Более 5 900 км проезжих дорог Дальневосточного федерального округа",
+      "fer.coverage2": "Более 50 детализированных городов, посёлков и удалённых поселений",
       "fer.coverage3": "Речные паромные переправы, связывающие изолированные регионы",
       "fer.coverage4": "Федеральные трассы, региональные дороги и безымянные грунтовки",
       "fer.coverage5": "Постоянное расширение с каждым релизом",
@@ -469,25 +552,36 @@
       "rcNotes.syncedReleases": "Обновляется синхронно с крупными релизами FER",
       "rcNotes.report": "Сообщайте о проблемах через",
 
-      "supportPage.h1": "Поддержите проект Far East Russia",
+      "cta.h2": "Готовы поехать на восток?",
+      "cta.lead": "Забирайте последний релиз, расставьте порядок загрузки и не забудьте канистры. Увидимся на Колыме.",
+
+      "eyebrow.fer": "Основная карта",
+      "eyebrow.rc": "Дорожное соединение",
+      "eyebrow.addon": "Региональное дополнение",
+      "eyebrow.extensions": "Расширения",
+      "eyebrow.changelog": "История версий",
+      "eyebrow.support": "Поддержите жизнь проекта",
+
+      "supportPage.h1": "Поддержать FER",
       "supportPage.lead":
-        "Каждый километр дороги, каждый городской квартал и каждое исправление багов держится на сообществе. FER — это проект, созданный в свободное время с любовью, и ваша поддержка помогает карте расширяться на восток и сохранять качество с каждым обновлением.",
+        "FER бесплатный и таким останется. Это один человек, который строит дороги в часы, оставшиеся после работы, и сообщество, которое кормит проект фидбеком, фото и донатами. Вот как можно помочь.",
       "supportPage.joinDiscord": "Присоединиться к Discord",
       "supportPage.donatePaypal": "Поддержать через PayPal",
       "supportPage.donatePatreon": "Поддержать на Patreon",
       "supportPage.waysH2": "Способы поддержки",
-      "supportPage.way1.title": "Финансовая поддержка",
+      "supportPage.waysLead": "Выбирайте, что ближе. Или не выбирайте и просто катайтесь.",
+      "supportPage.way1.title": "Подкинуть деньжат",
       "supportPage.way1.text":
-        "Пожертвования помогают финансировать время разработки и инструменты. Каждый вклад, независимо от размера, имеет значение. Поддержите через <a href='https://www.patreon.com/c/Far_East_Russia' target='_blank' style='color:var(--text-bright)'>Patreon</a> или <a href='https://paypal.me/aduskaaaa' target='_blank' style='color:var(--text-bright)'>PayPal</a>.",
-      "supportPage.way2.title": "Предоставить справочные материалы",
+        "Маппинг отнимает время, а времени этому проекту не хватает больше всего. Донаты буквально покупают часы разработки. Patreon или PayPal, как вам удобнее. Если не получается — ничего страшного. Играть и сообщать о багах не менее полезно. Я на <a href='https://www.patreon.com/c/Far_East_Russia' target='_blank' style='color:var(--text-bright)'>Patreon</a> и <a href='https://paypal.me/aduskaaaa' target='_blank' style='color:var(--text-bright)'>PayPal</a>.",
+      "supportPage.way2.title": "Прислать референсы",
       "supportPage.way2.text":
-        "Делитесь фотографиями, видеозаписями с регистраторов и местными знаниями о Якутии и Дальнем Востоке России. Реальные справочные данные неоценимы для создания аутентичных городов и дорог. Загружайте через <a href='https://discord.gg/SSWDJMauxz' target='_blank' style='color:var(--text-bright)'>Discord</a>.",
-      "supportPage.way3.title": "Расскажите о проекте",
+        "Живёте в Якутии или где-то на востоке? Ваши фото и видео с регистраторов — золото. Настоящие улицы, настоящие знаки, настоящие остановки — именно это делает города узнаваемыми. Кидайте в <a href='https://discord.gg/SSWDJMauxz' target='_blank' style='color:var(--text-bright)'>Discord</a>.",
+      "supportPage.way3.title": "Рассказать о проекте",
       "supportPage.way3.text":
-        "Стримьте свои поездки, снимайте видео на YouTube, пишите на форумах модов или рекомендуйте FER друзьям. Больше внимания означает больше тестеров, больше отзывов и лучшую карту для всех.",
+        "Стримьте конвой, постите скриншоты, снимите видео, расскажите другу. Сарафанное радио — единственный маркетинг, который у этой карты когда-либо был. И он работает.",
       "supportPage.whereH2": "Куда идёт ваша поддержка",
       "supportPage.whereLead":
-        "<strong>Время разработки</strong> — больше часов на маппинг означает более быстрый прогресс с новыми городами и дорогами.",
+        "<strong>Время разработки.</strong> Больше часов в редакторе — быстрее новые города и дороги. Всё просто.",
 
       "galleryPage.h1": "Галерея",
       "galleryPage.lead":
@@ -495,14 +589,27 @@
 
       "versionsPage.h1": "Версии",
       "versionsPage.lead":
-        "Полная история релизов FER, всех Дорожных соединений и дополнений. Здесь перечислены все когда-либо опубликованные версии.",
+        "Все публичные релизы FER, RCs и дополнений, от новых к старым. Пригодится, если ищете changelog или старую сборку.",
       "versionsPage.ferReleases": "Релизы FER",
       "versionsPage.addons": "Дополнения",
 
+      "loadorderPage.title": "Порядок загрузки • Far East Russia",
+      "loadorderPage.metaDesc": "Правильный порядок загрузки для Far East Russia, RC и аддонов в Mod Manager ETS2.",
+      "loadorderPage.eyebrow": "Установка",
+      "loadorderPage.h1": "Порядок загрузки",
+      "loadorderPage.lead": "Разместите моды в Mod Manager ETS2 в этом приоритете — сверху = высший приоритет. Верхние записи перекрывают нижние.",
+      "loadorderPage.tip": "Совет: Если не используете карту — пропустите её RC. Включайте только RC для карт, которые у вас есть.",
+
+      "mapPage.pageTitle": "Интерактивная карта • Far East Russia",
+      "mapPage.metaDesc": "Высокоточная интерактивная карта для модификации Far East Russia ETS2.",
+      "mapPage.eyebrow": "Просмотр",
+      "mapPage.h1": "Интерактивная карта",
+      "mapPage.lead": "Высокоточная интерактивная карта Far East Russia. Масштабируйте, изучайте сектора дорог, переключайте фон рельефа и открывайте панорамы Street View.",
       "mapPage.title": "ИНТЕРАКТИВНАЯ КАРТА",
       "mapPage.subtitle": "Far East Russia • Версия карты 1",
       "mapPage.loading": "СИНХРОНИЗАЦИЯ СЕКТОРОВ КАРТЫ...",
       "mapPage.coords": "Координаты карты",
+      "mapPage.approxDisclaimer": "Приблизительное местоположение",
       "mapPage.copy": "Скопировать в буфер",
       "mapPage.copied": "СКОПИРОВАНО!",
       "mapPage.userPhotos": "Фото пользователей",
@@ -512,10 +619,24 @@
       "mapPage.rightClickHint": "ПКМ для получения координат",
       "mapPage.svTitle": "Far East Russia Street View",
       "mapPage.datasetVersion": "Версия набора данных",
-      "mapPage.version1": "Версия 1 (Классическая)",
-      "mapPage.version2": "Версия 2 (Новая)",
+      "mapPage.version1": "Web Map Версия 1",
+      "mapPage.version2": "Web Map Версия 2",
       "mapPage.subtitleV1": "Far East Russia • Версия карты 1",
-      "mapPage.subtitleV2": "Far East Russia • Версия карты 2"
+      "mapPage.subtitleV2": "Far East Russia • Версия карты 2",
+      "mapPage.fullscreen": "На весь экран",
+      "mapPage.exitFullscreen": "Свернуть",
+      "mapPage.aboutTitle": "О карте",
+      "mapPage.aboutText": "Интерактивная карта построена на основе игровых секторов ETS2 и откалибрована по реальным координатам WGS84. Включает официальный рельеф ETS2 Global Background Map, дорожные сектора, развязки, населённые пункты и панорамы Street View сообщества.",
+      "mapPage.controlsTitle": "Управление и подсказки",
+      "mapPage.ctrlPan": "ЛКМ + перетаскивание для перемещения по карте",
+      "mapPage.ctrlZoom": "Колесо мыши или жест на тачпаде для приближения и отдаления",
+      "mapPage.ctrlCoords": "ПКМ в любой точке для просмотра и копирования точных координат",
+      "mapPage.ctrlSv": "Клик по синей линии Street View открывает дорожные панорамы",
+      "mapPage.legendTitle": "Легенда",
+      "mapPage.tierRoads": "Дороги",
+      "mapPage.tierSecret": "Секретные дороги",
+      "mapPage.tierFerry": "Паромная переправа",
+      "mapPage.tierStreetview": "Street View"
     }
   };
 

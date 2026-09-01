@@ -120,8 +120,8 @@
             '<div class="header-left">' +
             '<a href="index.html" class="brand" aria-label="Far East Russia home">' +
             '<img src="imgs/FER-ICON.png" alt="FER logo">' +
-            '<span class="brand-name-long">Far East Russia</span>' +
-            '<span class="brand-name-short">FER</span>' +
+            '<span class="brand-name-long brand-word">Far East <em>Russia</em></span>' +
+            '<span class="brand-name-short brand-word">FER<em>&nbsp;</em></span>' +
             "</a>" +
             '<nav class="nav" id="nav-menu" aria-label="Primary">' +
             navHtmlHeader +
@@ -549,72 +549,74 @@
                 return '<a href="' + l.href + '"' + i18nAttr(key) + '>' + l.label + "</a>";
             })
             .join("");
-        footer.innerHTML =
+footer.innerHTML =
             '<div class="container footer-inner">' +
-            "<div>&copy; " + new Date().getFullYear() + " " +
-            '<span' + i18nAttr("footer.copy") + ">Far East Russia &middot; ETS2 Map Mod</span>" +
+            '<div class="footer-brand">Far East <span>Russia</span>' +
+            '<div class="footer-made"' + i18nAttr("footer.made") + ">Built by aduskaaa & the community</div>" +
             "</div>" +
-            '<div class="footer-links">' + linksHtml + "</div>" +
+            '<nav class="footer-links" aria-label="Footer">' + linksHtml + "</nav>" +
+            '<div><span' + i18nAttr("footer.copy") + ">&copy; " + new Date().getFullYear() +
+            " Far East Russia &middot; ETS2 Map Mod</span></div>" +
             "</div>";
     }
 
     /* ========== LOAD ORDER ========== */
-    var loEl = document.getElementById("load-order");
-    if (loEl && S.loadOrder) {
-        function renderLoadOrder() {
-            loEl.innerHTML = "";
-            var arr = (window.I18N && window.I18N.localize)
-                ? window.I18N.localize(S, "loadOrder")
-                : S.loadOrder;
-            var ol = document.createElement("ol");
-            ol.className = "load-order-list";
-            arr.forEach(function (item) {
-                var li = document.createElement("li");
-                li.textContent = item;
-                ol.appendChild(li);
-            });
-            loEl.appendChild(ol);
-        }
-        renderLoadOrder();
-        if (window.I18N && window.I18N.onChange) window.I18N.onChange(renderLoadOrder);
+    // Powered directly by assets/loadorder.js (single source of truth)
+    if (document.getElementById("load-order") && typeof window.renderLoadOrder === "function") {
+        window.renderLoadOrder();
     }
 
     /* ========== SUPPORTERS (index page) ========== */
     var supEl = document.getElementById("supporters-data");
     if (supEl && S.supporters) {
-        var html = "";
-        var tierClass = function (i) {
-            return i === 0 ? 'gold-text' : i === 1 ? 'silver-text' : i === 2 ? 'bronze-text' : 'white-text';
-        };
-        if (S.supporters.donations && S.supporters.donations.length) {
-            html += "<strong" + i18nAttr("supporters.donations") + ">Donations:</strong>";
-            var donationPill = function (d, i) {
-                return '<span class="supporter-name-wrap ' + tierClass(i) + '">' +
-                    d.name +
-                    '<span class="amount">' + d.amount + ' &lt;3</span>' +
-                    '</span>';
+        function renderSupporters() {
+            var lang = (window.I18N && typeof window.I18N.getLang === "function") ? window.I18N.getLang() : null;
+            var isRu = lang === "ru";
+            var html = "";
+            var tierClass = function (i) {
+                return i === 0 ? 'gold-text' : i === 1 ? 'silver-text' : i === 2 ? 'bronze-text' : 'white-text';
             };
-            /* three pills per row, left-aligned, natural widths */
-            for (var di = 0; di < S.supporters.donations.length; di += 3) {
-                html += '<div class="supporter-row supporter-row-group">';
-                S.supporters.donations.slice(di, di + 3).forEach(function (d, j) {
-                    html += donationPill(d, di + j);
+            if (S.supporters.donations && S.supporters.donations.length) {
+                html += "<strong" + i18nAttr("supporters.donations") + ">Donations:</strong>";
+                var donationPill = function (d, i) {
+                    var amt = (isRu && d.amount_ru) ? d.amount_ru : d.amount;
+                    return '<span class="supporter-name-wrap ' + tierClass(i) + '">' +
+                        d.name +
+                        '<span class="amount">' + amt + ' &lt;3</span>' +
+                        '</span>';
+                };
+                var sortedDonations = S.supporters.donations.slice().sort(function (a, b) {
+                    function parseAmount(s) {
+                        var m = String(s.amount).match(/[\d,\.]+/);
+                        if (!m) return 0;
+                        return parseFloat(m[0].replace(',', '.')) || 0;
+                    }
+                    return parseAmount(b) - parseAmount(a);
                 });
-                html += '</div>';
+                /* three pills per row, left-aligned, natural widths */
+                for (var di = 0; di < sortedDonations.length; di += 3) {
+                    html += '<div class="supporter-row supporter-row-group">';
+                    sortedDonations.slice(di, di + 3).forEach(function (d, j) {
+                        html += donationPill(d, di + j);
+                    });
+                    html += '</div>';
+                }
             }
+            if (S.supporters.showcase && S.supporters.showcase.length) {
+                html += "<strong" + i18nAttr("supporters.showcase") + ">Showcase:</strong>";
+                S.supporters.showcase.forEach(function (s) {
+                    var textAttr = s.i18nKey ? i18nAttr(s.i18nKey) : "";
+                    html +=
+                        '<div class="supporter-row">' +
+                        '<span class="supporter-name-wrap white-text">' + s.name + '</span>' +
+                        "<span" + textAttr + ">" + s.text + " &lt;3</span>" +
+                        "</div>";
+                });
+            }
+            supEl.innerHTML = html;
         }
-        if (S.supporters.showcase && S.supporters.showcase.length) {
-            html += "<strong" + i18nAttr("supporters.showcase") + ">Showcase:</strong>";
-            S.supporters.showcase.forEach(function (s) {
-                var textAttr = s.i18nKey ? i18nAttr(s.i18nKey) : "";
-                html +=
-                    '<div class="supporter-row">' +
-                    '<span class="supporter-name-wrap white-text">' + s.name + '</span>' +
-                    "<span" + textAttr + ">" + s.text + " &lt;3</span>" +
-                    "</div>";
-            });
-        }
-        supEl.innerHTML = html;
+        renderSupporters();
+        if (window.I18N && window.I18N.onChange) window.I18N.onChange(renderSupporters);
     }
 
     /* ========== FAQ ========== */
@@ -736,6 +738,8 @@
             var dl = document.createElement("a");
             dl.className = "button button-primary";
             dl.href = v.links.primary;
+            dl.target = "_blank";
+            dl.rel = "noopener noreferrer";
             dl.textContent = "Download";
             actions.appendChild(dl);
         }
@@ -743,6 +747,8 @@
             var m1 = document.createElement("a");
             m1.className = "button button-secondary";
             m1.href = v.links.mirror1;
+            m1.target = "_blank";
+            m1.rel = "noopener noreferrer";
             m1.textContent = "Mirror";
             actions.appendChild(m1);
         }
@@ -752,6 +758,18 @@
         div.appendChild(actions);
         return div;
     };
+
+    /* Ensure CTA buttons point directly to latest release */
+    if (window.RELEASES && window.RELEASES.fer && window.RELEASES.fer.length) {
+        var latestFer = window.RELEASES.fer[0];
+        if (latestFer && latestFer.links && latestFer.links.primary) {
+            document.querySelectorAll('a[data-i18n="hero.cta_download"]').forEach(function (el) {
+                el.href = latestFer.links.primary;
+                el.target = "_blank";
+                el.rel = "noopener noreferrer";
+            });
+        }
+    }
 
     /* ========== Re-apply translations after rendering ========== */
     if (window.I18N && typeof window.I18N.apply === "function") {
