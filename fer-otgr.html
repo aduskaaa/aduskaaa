@@ -49,17 +49,11 @@
       <div class="container">
         <div class="tabs-header">
           <button class="tab-button active" data-tab="comments" data-i18n="common.discussion">Discussion</button>
-          <button class="tab-button" data-tab="loadorder" data-i18n="common.loadOrder">Load Order</button>
           <button class="tab-button" data-tab="versions" data-i18n="common.allReleases">All Releases</button>
         </div>
 
         <div class="tab-content active" id="tab-comments">
           <div id="comments-section" data-page-id="fer-otgr"></div>
-        </div>
-
-        <div class="tab-content" id="tab-loadorder">
-          <p style="color:var(--muted); font-size:14px; margin:0 0 16px;" data-i18n="common.loadOrderHintShort">Place mods in this priority (top = highest):</p>
-          <div id="load-order"></div>
         </div>
 
         <div class="tab-content" id="tab-versions">
@@ -88,7 +82,6 @@
   <script src="assets/versions.js"></script>
   <script src="assets/i18n.js"></script>
   <script src="assets/site-renderer.js"></script>
-  <script src="assets/loadorder.js"></script>
   <script src="assets/comments.js"></script>
   <script>
     (function () {

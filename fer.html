@@ -106,15 +106,18 @@
 
     <section id="releases" class="section">
       <div class="container">
-        <h2 data-i18n="common.discussion">Discussion</h2>
-        <div id="comments-section" data-page-id="fer"></div>
-      </div>
-    </section>
+        <div class="tabs-header">
+          <button class="tab-button active" data-tab="comments" data-i18n="common.discussion">Discussion</button>
+          <button class="tab-button" data-tab="versions" data-i18n="common.allReleases">All Releases</button>
+        </div>
 
-    <section id="versions" class="section">
-      <div class="container">
-        <h2 data-i18n="common.allReleases">All Releases</h2>
-        <div id="fer-versions" class="versions-list" aria-label="FER releases list"></div>
+        <div class="tab-content active" id="tab-comments">
+          <div id="comments-section" data-page-id="fer"></div>
+        </div>
+
+        <div class="tab-content" id="tab-versions">
+          <div id="fer-versions" class="versions-list" aria-label="FER releases list"></div>
+        </div>
       </div>
     </section>
   </main>
@@ -125,7 +128,6 @@
   <script src="assets/versions.js"></script>
   <script src="assets/i18n.js"></script>
   <script src="assets/site-renderer.js"></script>
-  <script src="assets/loadorder.js"></script>
   <script src="assets/comments.js"></script>
   <script>
     (function () {
