@@ -200,7 +200,7 @@ window.SITE = {
       { name: "Mr JP", amount: "16,12 EUR", amount_ru: "1 612,00 ₽" },
       { name: "Artie", amount: "8,48 EUR", amount_ru: "848,00 ₽" },
       { name: "weskergood1234", amount: "10,24 EUR", amount_ru: "1 024,00 ₽"},
-      { name: "Maxi", amount: "4,50 EUR", amount_ru: "450,00 ₽" },
+      { name: "Maxi", amount: "8,00 EUR", amount_ru: "800,00 ₽" },
       { name: "Delby", amount: "3,51 EUR", amount_ru: "351,00 ₽" },
       { name: "Xiguawangzi3399", amount: "3,48 EUR", amount_ru: "348,00 ₽" },
       { name: "Nachito", amount: "3,00 EUR", amount_ru: "300,00 ₽" },
