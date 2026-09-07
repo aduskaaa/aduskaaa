@@ -142,7 +142,7 @@
             var dlLabel = lang === 'ru' ? 'всего загрузок' : 'total downloads';
             var dlCard = document.createElement('div');
             dlCard.className = 'stat-inline stat-wide';
-            dlCard.innerHTML = '<div class="stat-value">…</div><div class="stat-label">' + dlLabel + '</div>';
+            dlCard.innerHTML = '<div class="stat-value"><span class="skeleton-shimmer" style="display:inline-block;width:70px;height:22px;border-radius:3px;vertical-align:middle;"></span></div><div class="stat-label">' + dlLabel + '</div>';
             statsEl.appendChild(dlCard);
             window.FERDownloads.sumReleases(window.RELEASES.addons.chukotka).then(function (total) {
               dlCard.querySelector('.stat-value').textContent = total.toLocaleString();

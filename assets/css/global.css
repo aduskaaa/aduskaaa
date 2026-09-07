@@ -238,6 +238,258 @@ h2,
     margin-top: 24px;
 }
 
+/* ========== SUPPORT GOAL BAR (UNDER HEADER) ========== */
+body.page-support .top-bar {
+    display: none !important;
+}
+
+.top-bar {
+    background: var(--bg-raised);
+    border-top: 1px solid var(--line);
+    font-size: 11.5px;
+    letter-spacing: 0.02em;
+}
+
+.top-bar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 16px;
+    min-height: 30px;
+}
+
+.top-bar-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.15s ease;
+    font-weight: 500;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.top-bar-link:hover {
+    color: var(--ink-bright);
+}
+
+.top-bar-badge {
+    text-transform: uppercase;
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.04em;
+    color: var(--muted);
+}
+
+html[data-theme="light"] .top-bar-badge {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.top-bar-highlight {
+    font-weight: 700;
+    color: var(--ink-bright);
+}
+
+.top-bar-progress-wrap {
+    display: inline-flex;
+    align-items: center;
+    width: 64px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+html[data-theme="light"] .top-bar-progress-wrap {
+    background: rgba(0, 0, 0, 0.12);
+}
+
+.top-bar-progress-bar {
+    height: 100%;
+    background: var(--ink-bright);
+    border-radius: 999px;
+    transition: width 0.4s var(--ease);
+}
+
+.top-bar-pct {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-bright);
+}
+
+.top-bar-sep {
+    color: var(--muted);
+    font-size: 10px;
+    opacity: 0.6;
+}
+
+.top-bar-desc {
+    color: var(--muted);
+}
+
+.top-bar-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--ink-bright);
+    font-weight: 700;
+}
+
+.top-bar-arrow {
+    font-size: 11px;
+    transition: transform 0.15s var(--ease);
+    display: inline-block;
+}
+
+.top-bar-link:hover .top-bar-arrow {
+    transform: translateX(3px);
+}
+
+/* Support page goal card with progress bar */
+.support-goal-card {
+    margin: 0;
+    padding: 22px 24px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--bg-raised);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.support-goal-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.support-goal-badge {
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin-bottom: 4px;
+}
+
+.support-goal-val {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--ink-bright);
+    line-height: 1.1;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.support-goal-target {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.support-goal-period {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.support-goal-pct-pill {
+    font-size: 13px;
+    font-weight: 800;
+    padding: 3px 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink-bright);
+    white-space: nowrap;
+}
+
+html[data-theme="light"] .support-goal-pct-pill {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.support-progress-track {
+    width: 100%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+}
+
+html[data-theme="light"] .support-progress-track {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.support-progress-fill {
+    height: 100%;
+    background: var(--ink-bright);
+    border-radius: 999px;
+    transition: width 0.5s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.support-goal-footer {
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+    margin-top: 2px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+.support-goal-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 8px;
+    margin-left: 3px;
+    font-size: 11.5px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    color: var(--ink-bright);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    vertical-align: baseline;
+    cursor: pointer;
+}
+
+html[data-theme="light"] .support-goal-btn {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.support-goal-btn:hover {
+    background: var(--ink-bright);
+    color: var(--bg);
+    border-color: var(--ink-bright);
+    text-decoration: none;
+}
+
+#monthly-goal,
+#where-support-goes {
+    scroll-margin-top: 80px;
+}
+
+@media (max-width: 600px) {
+    .top-bar-desc,
+    .top-bar-sep {
+        display: none;
+    }
+}
+
 /* ========== HEADER ========== */
 .header {
     position: sticky;
@@ -1220,8 +1472,30 @@ html[data-theme="light"] .theme-icon-moon {
     overflow: hidden;
     border: 1px solid var(--line);
     background: var(--bg-raised);
-    min-height: 260px;
+    min-height: 240px;
     position: relative;
+    aspect-ratio: 16 / 9;
+}
+
+.map-frame:not(.is-loaded) {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.03) 25%,
+        rgba(255, 255, 255, 0.09) 50%,
+        rgba(255, 255, 255, 0.03) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.8s infinite ease-in-out;
+}
+
+html[data-theme="light"] .map-frame:not(.is-loaded) {
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.03) 25%,
+        rgba(0, 0, 0, 0.09) 50%,
+        rgba(0, 0, 0, 0.03) 75%
+    );
+    background-size: 200% 100%;
 }
 
 .map-img {
@@ -1229,6 +1503,13 @@ html[data-theme="light"] .theme-icon-moon {
     height: 100%;
     object-fit: cover;
     display: block;
+    opacity: 0;
+    transition: opacity .35s ease;
+}
+
+.map-frame.is-loaded .map-img,
+.map-img.is-loaded {
+    opacity: 1;
 }
 
 .info {
@@ -1601,6 +1882,29 @@ html[data-theme="light"] .bronze-text {
     background: var(--bg-raised);
     cursor: pointer;
     transition: border-color .15s var(--ease);
+    aspect-ratio: 16 / 9;
+    position: relative;
+}
+
+.gallery-item:not(.is-loaded) {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.03) 25%,
+        rgba(255, 255, 255, 0.09) 50%,
+        rgba(255, 255, 255, 0.03) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.8s infinite ease-in-out;
+}
+
+html[data-theme="light"] .gallery-item:not(.is-loaded) {
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.03) 25%,
+        rgba(0, 0, 0, 0.09) 50%,
+        rgba(0, 0, 0, 0.03) 75%
+    );
+    background-size: 200% 100%;
 }
 
 .gallery-item:hover {
@@ -1609,7 +1913,16 @@ html[data-theme="light"] .bronze-text {
 
 .gallery-item img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
+    opacity: 0;
+    transition: opacity .35s ease;
+}
+
+.gallery-item.is-loaded img,
+.gallery-item img.is-loaded {
+    opacity: 1;
 }
 
 /* Lightbox */
@@ -1912,6 +2225,106 @@ html[data-theme="light"] .bronze-text {
     to {
         transform: rotate(360deg);
     }
+}
+
+/* ========== GHOST / SKELETON LOADING SYSTEM ========== */
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.skeleton-shimmer,
+.skeleton-box,
+.skeleton-line,
+.skeleton-circle {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.04) 25%,
+        rgba(255, 255, 255, 0.12) 50%,
+        rgba(255, 255, 255, 0.04) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite ease-in-out;
+    border-radius: var(--radius-sm);
+}
+
+html[data-theme="light"] .skeleton-shimmer,
+html[data-theme="light"] .skeleton-box,
+html[data-theme="light"] .skeleton-line,
+html[data-theme="light"] .skeleton-circle {
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.04) 25%,
+        rgba(0, 0, 0, 0.11) 50%,
+        rgba(0, 0, 0, 0.04) 75%
+    );
+    background-size: 200% 100%;
+}
+
+.skeleton-circle {
+    border-radius: 50% !important;
+    flex-shrink: 0;
+}
+
+.skeleton-line {
+    height: 12px;
+    margin-bottom: 8px;
+}
+
+.skeleton-line:last-child {
+    margin-bottom: 0;
+}
+
+/* Discord Ghost Card */
+.discord-ghost-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 10px 0;
+}
+
+.discord-ghost-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.discord-ghost-author-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.discord-ghost-body {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 2px;
+}
+
+/* Comments Ghost List */
+.comments-ghost-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 8px 0;
+}
+
+.comment-ghost-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.comment-ghost-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .discord-msg-author {
@@ -3433,6 +3846,257 @@ body.map-page-body {
         gap: 10px;
     }
 }
+
+/* ========== CRYPTO WALLETS ========== */
+.crypto-section-header {
+    margin-bottom: 28px;
+}
+
+.crypto-section-header .lead {
+    max-width: 62ch;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+.crypto-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--bg-raised);
+    overflow: hidden;
+}
+
+.crypto-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 11px 18px;
+    border-bottom: 1px solid var(--line);
+    transition: background-color .15s var(--ease);
+    position: relative;
+}
+
+.crypto-row:last-child {
+    border-bottom: none;
+}
+
+.crypto-row:hover {
+    background: var(--crypto-bg, rgba(255, 255, 255, 0.04));
+}
+
+.crypto-row.is-copied {
+    background: var(--crypto-bg, rgba(255, 255, 255, 0.08));
+}
+
+.crypto-row-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.crypto-icon-box {
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--crypto-bg);
+    color: var(--crypto-color);
+    border: 1px solid var(--crypto-border);
+    flex-shrink: 0;
+}
+
+.crypto-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.crypto-badge {
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: var(--crypto-bg);
+    color: var(--crypto-color);
+    border: 1px solid var(--crypto-border);
+    flex-shrink: 0;
+}
+
+.crypto-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink-bright);
+    white-space: nowrap;
+}
+
+.crypto-network {
+    font-size: 11.5px;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.crypto-address-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 5px 8px 5px 14px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: border-color .15s var(--ease), background-color .15s var(--ease);
+    flex: 1;
+    max-width: 580px;
+    justify-content: space-between;
+}
+
+.crypto-address-wrapper:hover {
+    border-color: var(--crypto-hover-border, var(--line-strong));
+}
+
+.crypto-row.is-copied .crypto-address-wrapper {
+    border-color: var(--crypto-color);
+    background: var(--crypto-bg);
+}
+
+.crypto-address {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-bright);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    user-select: all;
+    line-height: 1.4;
+}
+
+.crypto-copy-btn {
+    appearance: none;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    transition: all .15s var(--ease);
+}
+
+.crypto-copy-btn:hover {
+    border-color: var(--crypto-color);
+    color: var(--crypto-color);
+    background: var(--crypto-bg);
+}
+
+.crypto-copy-btn.is-copied {
+    background: var(--crypto-color);
+    border-color: var(--crypto-color);
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Coin specific accent styling */
+/* ETH (Green) */
+.crypto-card-eth {
+    --crypto-color: #10b981;
+    --crypto-bg: rgba(16, 185, 129, 0.1);
+    --crypto-border: rgba(16, 185, 129, 0.3);
+    --crypto-hover-border: rgba(16, 185, 129, 0.7);
+}
+html[data-theme="light"] .crypto-card-eth {
+    --crypto-color: #059669;
+    --crypto-bg: rgba(5, 150, 105, 0.08);
+    --crypto-border: rgba(5, 150, 105, 0.35);
+    --crypto-hover-border: rgba(5, 150, 105, 0.8);
+}
+
+/* BTC (Yellow) */
+.crypto-card-btc {
+    --crypto-color: #f59e0b;
+    --crypto-bg: rgba(245, 158, 11, 0.1);
+    --crypto-border: rgba(245, 158, 11, 0.3);
+    --crypto-hover-border: rgba(245, 158, 11, 0.7);
+}
+html[data-theme="light"] .crypto-card-btc {
+    --crypto-color: #d97706;
+    --crypto-bg: rgba(217, 119, 6, 0.08);
+    --crypto-border: rgba(217, 119, 6, 0.35);
+    --crypto-hover-border: rgba(217, 119, 6, 0.8);
+}
+
+/* LTC (Silver) */
+.crypto-card-ltc {
+    --crypto-color: #cbd5e1;
+    --crypto-bg: rgba(203, 213, 225, 0.1);
+    --crypto-border: rgba(203, 213, 225, 0.3);
+    --crypto-hover-border: rgba(203, 213, 225, 0.7);
+}
+html[data-theme="light"] .crypto-card-ltc {
+    --crypto-color: #475569;
+    --crypto-bg: rgba(71, 85, 105, 0.08);
+    --crypto-border: rgba(71, 85, 105, 0.35);
+    --crypto-hover-border: rgba(71, 85, 105, 0.8);
+}
+
+/* USDT TRON (Azure) */
+.crypto-card-usdt {
+    --crypto-color: #00b4d8;
+    --crypto-bg: rgba(0, 180, 216, 0.1);
+    --crypto-border: rgba(0, 180, 216, 0.3);
+    --crypto-hover-border: rgba(0, 180, 216, 0.7);
+}
+html[data-theme="light"] .crypto-card-usdt {
+    --crypto-color: #0284c7;
+    --crypto-bg: rgba(2, 132, 199, 0.08);
+    --crypto-border: rgba(2, 132, 199, 0.35);
+    --crypto-hover-border: rgba(2, 132, 199, 0.8);
+}
+
+/* TRX (Red) */
+.crypto-card-trx {
+    --crypto-color: #ef4444;
+    --crypto-bg: rgba(239, 68, 68, 0.1);
+    --crypto-border: rgba(239, 68, 68, 0.3);
+    --crypto-hover-border: rgba(239, 68, 68, 0.7);
+}
+html[data-theme="light"] .crypto-card-trx {
+    --crypto-color: #dc2626;
+    --crypto-bg: rgba(220, 38, 38, 0.08);
+    --crypto-border: rgba(220, 38, 38, 0.35);
+    --crypto-hover-border: rgba(220, 38, 38, 0.8);
+}
+
+@media (max-width: 900px) {
+    .crypto-network {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .crypto-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 10px 12px;
+    }
+    .crypto-address-wrapper {
+        max-width: 100%;
+    }
+}
+
+
 
 
 

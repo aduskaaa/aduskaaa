@@ -12,24 +12,46 @@
   <script src="assets/theme-init.js"></script>
 </head>
 
-<body>
+<body class="page-support">
   <header class="header" id="site-header" aria-label="Top Navigation"></header>
 
   <main>
     <section class="section">
-      <div class="container">
-        <p class="eyebrow" data-i18n="eyebrow.support">Keep it alive</p>
-        <h1 data-i18n="supportPage.h1">Support FER</h1>
-        <p class="lead" data-i18n="supportPage.lead">FER is free and will stay free. It's one person building roads in
-          the hours left over after work, and a community keeping it alive with feedback, photos and donations. Here's
-          how you can help.</p>
-        <div class="cta-row">
-          <a class="button button-primary" href="https://discord.gg/SSWDJMauxz" target="_blank" rel="noopener" data-i18n="supportPage.joinDiscord">Join
-            Discord</a>
-          <a class="button button-secondary" href="https://paypal.me/aduskaaaa" target="_blank" rel="noopener" data-i18n="supportPage.donatePaypal">Donate
-            via PayPal</a>
-          <a class="button button-secondary" href="https://www.patreon.com/c/Far_East_Russia" target="_blank" rel="noopener" data-i18n="supportPage.donatePatreon">Support
-            on Patreon</a>
+      <div class="container hero-inner">
+        <div>
+          <p class="eyebrow" data-i18n="eyebrow.support">Keep it alive</p>
+          <h1 data-i18n="supportPage.h1">Support FER</h1>
+          <p class="lead" data-i18n="supportPage.lead">FER is free and will stay free. It's one person building roads in
+            the hours left over after work, and a community keeping it alive with feedback, photos and donations. Here's
+            how you can help.</p>
+          <div class="cta-row">
+            <a class="button button-primary" href="https://discord.gg/SSWDJMauxz" target="_blank" rel="noopener" data-i18n="supportPage.joinDiscord">Join
+              Discord</a>
+            <a class="button button-secondary" href="https://paypal.me/aduskaaaa" target="_blank" rel="noopener" data-i18n="supportPage.donatePaypal">Donate
+              via PayPal</a>
+            <a class="button button-secondary" href="https://www.patreon.com/c/Far_East_Russia" target="_blank" rel="noopener" data-i18n="supportPage.donatePatreon">Support
+              on Patreon</a>
+            <a class="button button-secondary" href="#crypto-wallets" data-i18n="supportPage.donateCrypto">Crypto Wallets</a>
+          </div>
+        </div>
+
+        <div class="support-goal-card" id="monthly-goal">
+          <div class="support-goal-top">
+            <div>
+              <div class="support-goal-badge" data-i18n="topBar.badge">Monthly Support Goal</div>
+              <div class="support-goal-val">
+                <span id="goal-current-val">€0</span>
+                <span class="support-goal-target">/ €25</span>
+              </div>
+            </div>
+            <div class="support-goal-pct-pill" id="goal-pct-pill">0%</div>
+          </div>
+          <div class="support-progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            <div class="support-progress-fill" id="goal-progress-fill" style="width: 0%;"></div>
+          </div>
+          <div class="support-goal-footer">
+            <span data-i18n-html="supportPage.whereLink">Want to know where your support goes? Check out <a href="#where-support-goes" class="support-goal-btn">here</a></span>
+          </div>
         </div>
       </div>
     </section>
@@ -90,10 +112,147 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="crypto-wallets">
+      <div class="container">
+        <div class="crypto-section-header">
+          <p class="eyebrow" data-i18n="crypto.eyebrow">Direct &amp; Decentralized</p>
+          <h2 data-i18n="crypto.h2">Cryptocurrency Wallets</h2>
+          <p class="lead" data-i18n="crypto.lead">Prefer crypto? You can send direct contributions to any of the addresses below. Click any address or button to copy.</p>
+        </div>
+
+        <div class="crypto-list">
+          <!-- BTC (yellow) -->
+          <div class="crypto-row crypto-card-btc" data-crypto="btc">
+            <div class="crypto-row-brand">
+              <div class="crypto-icon-box" aria-hidden="true">
+                <svg class="crypto-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.05-1.244 15.525.362 9.105 1.962 2.67 8.475-1.243 14.9.358c6.43 1.605 10.342 8.115 8.738 14.548v-.002zm-6.35-4.613c.24-1.59-.974-2.45-2.64-3.03l.54-2.153-1.315-.33-.525 2.107c-.345-.087-.705-.167-1.064-.25l.526-2.127-1.32-.33-.54 2.165c-.285-.067-.565-.132-.84-.2l-1.815-.45-.35 1.407s.975.225.955.236c.535.136.63.486.615.766l-1.477 5.92c-.075.166-.24.406-.614.314.015.02-.96-.24-.96-.24l-.66 1.51 1.71.426.93.242-.54 2.19 1.32.327.54-2.17c.36.1.705.19 1.05.273l-.51 2.154 1.32.33.545-2.19c2.24.427 3.93.257 4.64-1.774.57-1.637-.03-2.58-1.217-3.196.854-.193 1.5-.76 1.68-1.93h.01zm-3.01 4.22c-.404 1.64-3.157.75-4.05.53l.72-2.9c.896.23 3.757.67 3.33 2.37zm.41-4.24c-.37 1.49-2.662.735-3.405.55l.654-2.64c.744.18 3.137.524 2.75 2.084v.006z"/>
+                </svg>
+              </div>
+              <span class="crypto-badge">BTC</span>
+              <span class="crypto-name" data-i18n="crypto.btc">Bitcoin</span>
+              <span class="crypto-network" data-i18n="crypto.btcNet">Bitcoin Network • Native SegWit</span>
+            </div>
+            <div class="crypto-address-wrapper" title="Click to copy address">
+              <code class="crypto-address">bc1qnwmd0kp369hk32sxjanu40p0l5vl2s0mktmk6j</code>
+              <button type="button" class="crypto-copy-btn" data-copy="bc1qnwmd0kp369hk32sxjanu40p0l5vl2s0mktmk6j" aria-label="Copy Bitcoin address">
+                <svg class="crypto-copy-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span class="crypto-copy-text" data-i18n="crypto.copy">Copy</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- ETH (green) -->
+          <div class="crypto-row crypto-card-eth" data-crypto="eth">
+            <div class="crypto-row-brand">
+              <div class="crypto-icon-box" aria-hidden="true">
+                <svg class="crypto-icon" viewBox="0 0 256 417" width="16" height="16" fill="currentColor">
+                  <path fill="currentColor" fill-opacity="0.75" d="M127.961 0l-2.795 9.5v275.668l2.795 2.79 127.962-75.638z"/>
+                  <path fill="currentColor" d="M127.962 0L0 212.32l127.962 75.639V154.158z"/>
+                  <path fill="currentColor" fill-opacity="0.5" d="M127.961 312.187l-1.575 1.92v98.199l1.575 4.601 128.038-180.32z"/>
+                  <path fill="currentColor" fill-opacity="0.85" d="M127.962 416.905v-104.72L0 236.585z"/>
+                  <path fill="currentColor" fill-opacity="0.9" d="M127.961 287.958l127.96-75.637-127.96-58.162z"/>
+                  <path fill="currentColor" fill-opacity="0.6" d="M0 212.32l127.96 75.638v-133.8z"/>
+                </svg>
+              </div>
+              <span class="crypto-badge">ETH</span>
+              <span class="crypto-name" data-i18n="crypto.eth">Ethereum</span>
+              <span class="crypto-network" data-i18n="crypto.ethNet">Ethereum Network • ERC-20</span>
+            </div>
+            <div class="crypto-address-wrapper" title="Click to copy address">
+              <code class="crypto-address">0x06a250B7021e391B6ba19F4704FbD3D30020F219</code>
+              <button type="button" class="crypto-copy-btn" data-copy="0x06a250B7021e391B6ba19F4704FbD3D30020F219" aria-label="Copy Ethereum address">
+                <svg class="crypto-copy-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span class="crypto-copy-text" data-i18n="crypto.copy">Copy</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- LTC (silver) -->
+          <div class="crypto-row crypto-card-ltc" data-crypto="ltc">
+            <div class="crypto-row-brand">
+              <div class="crypto-icon-box" aria-hidden="true">
+                <svg class="crypto-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M12 0a12 12 0 1012 12A12 12 0 0012 0zm-.2617 3.6777h2.584a.3425.3425 0 01.33.4356l-2.0312 6.918 1.9062-.582-.4082 1.3847-1.9238.5605-1.248 4.213h6.6757a.3425.3425 0 01.3282.4374l-.582 2a.4586.4586 0 01-.4395.3301H6.7324l1.7227-5.8223-1.9063.5801.42-1.3613 1.9101-.58 2.4219-8.1798a.4557.4557 0 01.4375-.334Z"/>
+                </svg>
+              </div>
+              <span class="crypto-badge">LTC</span>
+              <span class="crypto-name" data-i18n="crypto.ltc">Litecoin</span>
+              <span class="crypto-network" data-i18n="crypto.ltcNet">Litecoin Network</span>
+            </div>
+            <div class="crypto-address-wrapper" title="Click to copy address">
+              <code class="crypto-address">LaiGrwX3Wk6vHPJeU4uhtvfBzs2ZkeVo2p</code>
+              <button type="button" class="crypto-copy-btn" data-copy="LaiGrwX3Wk6vHPJeU4uhtvfBzs2ZkeVo2p" aria-label="Copy Litecoin address">
+                <svg class="crypto-copy-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span class="crypto-copy-text" data-i18n="crypto.copy">Copy</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- USDT TRON (azure) -->
+          <div class="crypto-row crypto-card-usdt" data-crypto="usdt">
+            <div class="crypto-row-brand">
+              <div class="crypto-icon-box" aria-hidden="true">
+                <svg class="crypto-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M18.7538 10.5176c0 .6251-2.2379 1.1483-5.2381 1.2812l.0028.0007c-.0848.0064-.5233.0325-1.5012.0325-.7778 0-1.33-.0233-1.5237-.0325-3.0059-.1322-5.2495-.6555-5.2495-1.2819s2.2436-1.149 5.2495-1.2834v2.0442c.1965.0142.7594.0474 1.5372.0474.9334 0 1.4008-.0389 1.4849-.0466V9.2356c2.9994.1337 5.2381.657 5.2381 1.282zm5.19.5466L12.1248 22.389a.1803.1803 0 0 1-.2496 0L.0562 11.0635a.1781.1781 0 0 1-.0382-.2079l4.3762-9.1921a.1767.1767 0 0 1 .1626-.1026h14.8878a.1768.1768 0 0 1 .1612.1032l4.3762 9.1922a.1782.1782 0 0 1-.0382.2079zm-4.478-.4038c0-.8068-2.5515-1.4799-5.9473-1.6369V7.195h4.186V4.4055H6.3076V7.195h4.1852v1.8286c-3.4018.1562-5.9601.83-5.9601 1.6376 0 .8075 2.5583 1.4806 5.9601 1.6376v5.8618h3.025v-5.8639c3.394-.1563 5.948-.8295 5.948-1.6363z"/>
+                </svg>
+              </div>
+              <span class="crypto-badge">USDT</span>
+              <span class="crypto-name" data-i18n="crypto.usdt">Tether (USDT)</span>
+              <span class="crypto-network" data-i18n="crypto.usdtNet">TRON Network • TRC-20</span>
+            </div>
+            <div class="crypto-address-wrapper" title="Click to copy address">
+              <code class="crypto-address">TM7Yrnkz3nqtjDWQyiUMgsoYcKMrErTznS</code>
+              <button type="button" class="crypto-copy-btn" data-copy="TM7Yrnkz3nqtjDWQyiUMgsoYcKMrErTznS" aria-label="Copy USDT TRON address">
+                <svg class="crypto-copy-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span class="crypto-copy-text" data-i18n="crypto.copy">Copy</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- TRX (red) -->
+          <div class="crypto-row crypto-card-trx" data-crypto="trx">
+            <div class="crypto-row-brand">
+              <div class="crypto-icon-box" aria-hidden="true">
+                <svg class="crypto-icon" viewBox="0 0 64 64" width="16" height="16" fill="currentColor">
+                  <path d="M61.55 19.28c-3-2.77-7.15-7-10.53-10l-.2-.14a3.82 3.82 0 0 0-1.11-.62l0 0C41.56 7 3.63-.09 2.89 0a1.4 1.4 0 0 0-.58.22L2.12.37a2.23 2.23 0 0 0-.52.84l-.05.13v.71l0 .11C5.82 14.05 22.68 53 26 62.14c.2.62.58 1.8 1.29 1.86h.16c.38 0 2-2.14 2-2.14S58.41 26.74 61.34 23a9.46 9.46 0 0 0 1-1.48 2.41 2.41 0 0 0-.79-2.24ZM36.88 23.37 49.24 13.12l7.25 6.68Zm-4.8-.67L10.8 5.26l34.43 6.35ZM34 27.27l21.78-3.51-24.9 30ZM7.91 7 30.3 26 27.06 53.78Z"/>
+                </svg>
+              </div>
+              <span class="crypto-badge">TRX</span>
+              <span class="crypto-name" data-i18n="crypto.trx">TRON</span>
+              <span class="crypto-network" data-i18n="crypto.trxNet">TRON Network</span>
+            </div>
+            <div class="crypto-address-wrapper" title="Click to copy address">
+              <code class="crypto-address">TM7Yrnkz3nqtjDWQyiUMgsoYcKMrErTznS</code>
+              <button type="button" class="crypto-copy-btn" data-copy="TM7Yrnkz3nqtjDWQyiUMgsoYcKMrErTznS" aria-label="Copy TRON address">
+                <svg class="crypto-copy-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span class="crypto-copy-text" data-i18n="crypto.copy">Copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="where-support-goes">
       <div class="container">
         <h2 data-i18n="supportPage.whereH2">Where Your Support Goes</h2>
-        <p class="about-text" data-i18n-html="supportPage.whereLead"><strong>Development time.</strong> More hours at the editor means new cities and roads sooner. Simple as that.</p>
+        <p class="about-text" data-i18n="supportPage.whereLead">Pay to mappers, Motivation to develop the map, for Web domain, and much more stuff</p>
       </div>
     </section>
   </main>

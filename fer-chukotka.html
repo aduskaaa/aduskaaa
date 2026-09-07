@@ -136,7 +136,7 @@
           : 'Includes downloads from truckymods & sharemods as of 14.06.2026';
         var dlCard = document.createElement('div');
         dlCard.className = 'stat-inline stat-wide';
-        dlCard.innerHTML = '<div class="stat-value">…</div>' +
+        dlCard.innerHTML = '<div class="stat-value"><span class="skeleton-shimmer" style="display:inline-block;width:70px;height:22px;border-radius:3px;vertical-align:middle;"></span></div>' +
           '<div class="stat-label">' + dlLabel + '</div>' +
           '<div class="stat-note">' + dlNote + '</div>';
         statsEl.appendChild(dlCard);

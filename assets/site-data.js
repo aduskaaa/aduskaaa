@@ -16,6 +16,52 @@ window.SITE = {
   vkUrl: "https://vk.ru/far_east_russia",
   paypalUrl: "https://paypal.me/aduskaaaa",
 
+  /* ---------- Support Goal ---------- */
+  supportGoal: {
+    target: 25,
+    current: 0,
+    currency: "EUR"
+  },
+
+  /* ---------- Crypto Wallets ---------- */
+  wallets: {
+    btc: {
+      name: "Bitcoin",
+      symbol: "BTC",
+      network: "Native SegWit",
+      color: "yellow",
+      address: "bc1qnwmd0kp369hk32sxjanu40p0l5vl2s0mktmk6j"
+    },
+    eth: {
+      name: "Ethereum",
+      symbol: "ETH",
+      network: "ERC-20",
+      color: "green",
+      address: "0x06a250B7021e391B6ba19F4704FbD3D30020F219"
+    },
+    ltc: {
+      name: "Litecoin",
+      symbol: "LTC",
+      network: "Litecoin",
+      color: "silver",
+      address: "LaiGrwX3Wk6vHPJeU4uhtvfBzs2ZkeVo2p"
+    },
+    usdt: {
+      name: "Tether (USDT)",
+      symbol: "USDT",
+      network: "TRON (TRC-20)",
+      color: "azure",
+      address: "TM7Yrnkz3nqtjDWQyiUMgsoYcKMrErTznS"
+    },
+    trx: {
+      name: "TRON",
+      symbol: "TRX",
+      network: "TRON Network",
+      color: "red",
+      address: "TM7Yrnkz3nqtjDWQyiUMgsoYcKMrErTznS"
+    }
+  },
+
   /* ---------- Navigation ---------- */
   nav: [
     { label: "HOME", href: "index.html" },
@@ -200,7 +246,7 @@ window.SITE = {
       { name: "Mr JP", amount: "16,12 EUR", amount_ru: "1 612,00 ₽" },
       { name: "Artie", amount: "8,48 EUR", amount_ru: "848,00 ₽" },
       { name: "weskergood1234", amount: "10,24 EUR", amount_ru: "1 024,00 ₽"},
-      { name: "Maxi", amount: "8,00 EUR", amount_ru: "800,00 ₽" },
+      { name: "Maxi", amount: "4,50 EUR", amount_ru: "450,00 ₽" },
       { name: "Delby", amount: "3,51 EUR", amount_ru: "351,00 ₽" },
       { name: "Xiguawangzi3399", amount: "3,48 EUR", amount_ru: "348,00 ₽" },
       { name: "Nachito", amount: "3,00 EUR", amount_ru: "300,00 ₽" },

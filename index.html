@@ -29,7 +29,7 @@
             north-east with 5,900+ km of roads. I build every city and dirt track by hand from satellite images,
             photos and dashcam footage. Fair warning: some of these roads are rough. That's kind of the point.</p>
           <div class="hero-cta">
-            <a class="button button-primary" href="https://modsfire.com/lGvoImHt2RXi3sT" target="_blank" rel="noopener noreferrer" data-i18n="hero.cta_download">Download FER</a>
+            <a class="button button-primary" href="fer.html" target="_blank" rel="noopener noreferrer" data-i18n="hero.cta_download">Download FER</a>
             <a class="button button-secondary" href="interactive-map.html" data-i18n="map.open">Open Interactive Map</a>
           </div>
         </div>
@@ -40,7 +40,21 @@
             <span class="discord-live-indicator">[ • LIVE FEED ]</span>
           </div>
           <div id="discord-widget-body" class="discord-widget-body">
-            <div class="discord-widget-loading"><div class="spinner"></div><span data-i18n="discord.connecting">Connecting...</span></div>
+            <div class="discord-ghost-card" aria-label="Loading announcements..." aria-busy="true">
+              <div class="discord-ghost-author">
+                <div class="skeleton-circle" style="width: 30px; height: 30px;"></div>
+                <div class="discord-ghost-author-lines">
+                  <div class="skeleton-line" style="width: 85px; height: 11px;"></div>
+                  <div class="skeleton-line" style="width: 50px; height: 9px;"></div>
+                </div>
+              </div>
+              <div class="discord-ghost-body">
+                <div class="skeleton-line" style="width: 100%; height: 12px;"></div>
+                <div class="skeleton-line" style="width: 85%; height: 12px;"></div>
+                <div class="skeleton-line" style="width: 60%; height: 12px;"></div>
+              </div>
+              <div class="skeleton-box" style="width: 100%; height: 80px; margin-top: 4px; border-radius: var(--radius-sm);"></div>
+            </div>
           </div>
           <a href="https://discord.gg/SSWDJMauxz" target="_blank" class="discord-widget-join-btn"><span data-i18n="discord.join">Join Our Discord</span> →</a>
         </div>
@@ -118,15 +132,15 @@
             streets, cities and road names, open the interactive map.</p>
           <a class="button button-secondary" href="interactive-map.html" data-i18n="map.open">Open Interactive Map</a>
           <div class="map-stats-inline" id="index-map-stats" style="margin-top:34px;">
-            <div class="stat"><strong>7,300+</strong> <span data-i18n="map.stat1">of driveable roads</span></div>
+            <div class="stat"><strong>5,900+</strong> <span data-i18n="map.stat1">of driveable roads</span></div>
             <div class="stat"><strong>50+</strong> <span data-i18n="map.stat2">detailed cities and settlements</span>
             </div>
           </div>
         </div>
         <figure class="map-figure">
-          <div class="map-frame" aria-label="Map preview">
-            <img class="map-img" src="imgs/FER_AREA.png" data-i18n-attr="alt:map.alt"
-              alt="Preview of the Far East Russia map region">
+          <div class="map-frame img-ghost-container" aria-label="Map preview">
+            <img class="map-img lazy-fade" src="imgs/FER_AREA.png" data-i18n-attr="alt:map.alt"
+              alt="Preview of the Far East Russia map region" loading="lazy" decoding="async" width="800" height="450">
           </div>
           <figcaption class="map-caption" data-i18n="map.caption">Coverage sketch from the latest build.</figcaption>
         </figure>
@@ -157,7 +171,7 @@
         <p class="lead" data-i18n="cta.lead">Grab the latest release, set your load order, and don't forget fuel cans.
           See you on the Kolyma.</p>
         <div class="cta-row" style="margin-top:0;">
-          <a class="button button-primary" href="https://modsfire.com/lGvoImHt2RXi3sT" target="_blank" rel="noopener noreferrer" data-i18n="hero.cta_download">Download FER</a>
+          <a class="button button-primary" href="fer.html" target="_blank" rel="noopener noreferrer" data-i18n="hero.cta_download">Download FER</a>
           <a class="button button-secondary" href="https://discord.gg/SSWDJMauxz" target="_blank"
             data-i18n="supportPage.joinDiscord">Join Discord</a>
         </div>
@@ -272,7 +286,7 @@
               avatarUrl = "https://cdn.discordapp.com/embed/avatars/" + defaultAvatarIdx + ".png";
             }
 
-            var authorHtml = '<p class="discord-msg-author"><img class="discord-author-avatar" src="' + avatarUrl + '" alt=""><span class="discord-author-name">' + (msg.author ? (msg.author.global_name || msg.author.username) : "Discord Bot") + '</span> <span class="discord-msg-time">' + formattedTime + '</span></p>';
+            var authorHtml = '<p class="discord-msg-author"><img class="discord-author-avatar" src="' + avatarUrl + '" alt="" width="30" height="30" decoding="async"><span class="discord-author-name">' + (msg.author ? (msg.author.global_name || msg.author.username) : "Discord Bot") + '</span> <span class="discord-msg-time">' + formattedTime + '</span></p>';
 
             // Create message body / text / attachments
             var contentHtml = "";
@@ -327,7 +341,7 @@
 
               contentHtml += '<div class="' + gridClass + '">';
               images.forEach(function (imgUrl) {
-                contentHtml += '<img class="discord-img-item" src="' + imgUrl + '" alt="" loading="lazy" onclick="window.openDiscordLightbox(\'' + imgUrl + '\')">';
+                contentHtml += '<img class="discord-img-item" src="' + imgUrl + '" alt="" loading="lazy" decoding="async" onclick="window.openDiscordLightbox(\'' + imgUrl + '\')">';
               });
               contentHtml += '</div>';
             }

@@ -102,12 +102,31 @@
     const t = msgs[lang];
     container.innerHTML = `
       <div class="comments-widget">
-        <h3 class="comments-heading">${t.title} (<span id="comments-count">0</span>)</h3>
+        <h3 class="comments-heading">${t.title} (<span id="comments-count">…</span>)</h3>
         
         <div id="auth-panel" class="auth-panel"></div>
         
         <div id="comments-list-wrapper" class="comments-list-wrapper">
-          <div id="comments-list" class="comments-list"></div>
+          <div id="comments-list" class="comments-list">
+            <div class="comments-ghost-list" aria-label="Loading comments..." aria-busy="true">
+              <div class="comment-ghost-item">
+                <div class="skeleton-circle" style="width: 36px; height: 36px;"></div>
+                <div class="comment-ghost-content">
+                  <div class="skeleton-line" style="width: 130px; height: 13px;"></div>
+                  <div class="skeleton-line" style="width: 95%; height: 12px;"></div>
+                  <div class="skeleton-line" style="width: 70%; height: 12px;"></div>
+                </div>
+              </div>
+              <div class="comment-ghost-item">
+                <div class="skeleton-circle" style="width: 36px; height: 36px;"></div>
+                <div class="comment-ghost-content">
+                  <div class="skeleton-line" style="width: 100px; height: 13px;"></div>
+                  <div class="skeleton-line" style="width: 90%; height: 12px;"></div>
+                  <div class="skeleton-line" style="width: 55%; height: 12px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     `;
@@ -468,7 +487,7 @@
     const tabName = clickedBtn.getAttribute("data-tab");
     if (!tabName) return;
 
-    const container = clickedBtn.closest(".card");
+    const container = clickedBtn.closest("section, .container, body");
     if (!container) return;
 
     container.querySelectorAll(".tab-button").forEach((btn) => {

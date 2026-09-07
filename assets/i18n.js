@@ -42,6 +42,12 @@
       "nav.DISCORD": "DISCORD",
       "nav.VK": "VK",
 
+      /* top bar */
+      "topBar.badge": "Monthly Support Goal",
+      "topBar.amount": "25 EUR",
+      "topBar.desc": "Help keep the project alive",
+      "topBar.action": "Support FER",
+
       /* footer */
       "footer.Home": "Home",
       "footer.FER": "FER",
@@ -266,11 +272,12 @@
       "supportPage.joinDiscord": "Join Discord",
       "supportPage.donatePaypal": "Donate via PayPal",
       "supportPage.donatePatreon": "Support on Patreon",
+      "supportPage.donateCrypto": "Crypto Wallets",
       "supportPage.waysH2": "Ways to Support",
       "supportPage.waysLead": "Pick whatever suits you. Or don't, and just drive.",
       "supportPage.way1.title": "Chip In Financially",
       "supportPage.way1.text":
-        "Mapping takes time, and time is the one thing this project runs out of fastest. Donations literally buy hours of development. Patreon or PayPal, whichever you prefer. And if you can't chip in, that's fine too. Playing and reporting bugs helps just as much. Find me on <a href='https://www.patreon.com/c/Far_East_Russia' target='_blank' style='color:var(--text-bright)'>Patreon</a> or <a href='https://paypal.me/aduskaaaa' target='_blank' style='color:var(--text-bright)'>PayPal</a>.",
+        "Mapping takes time, and time is the one thing this project runs out of fastest. Donations literally buy hours of development. Patreon, PayPal, or crypto — whichever you prefer. And if you can't chip in, that's fine too. Playing and reporting bugs helps just as much. Find me on <a href='https://www.patreon.com/c/Far_East_Russia' target='_blank' style='color:var(--text-bright)'>Patreon</a>, <a href='https://paypal.me/aduskaaaa' target='_blank' style='color:var(--text-bright)'>PayPal</a>, or use the <a href='#crypto-wallets' style='color:var(--text-bright)'>crypto wallets</a> below.",
       "supportPage.way2.title": "Send Reference Material",
       "supportPage.way2.text":
         "Live in Yakutia or somewhere out east? Your photos and dashcam clips are gold. Real streets, real signs, real bus stops, that's what makes cities here recognizable. Drop them in the <a href='https://discord.gg/SSWDJMauxz' target='_blank' style='color:var(--text-bright)'>Discord</a>.",
@@ -279,7 +286,28 @@
         "Stream a convoy, post screenshots, make a video, tell a friend. Word of mouth is the only marketing this map has ever had, and it works.",
       "supportPage.whereH2": "Where Your Support Goes",
       "supportPage.whereLead":
-        "<strong>Development time.</strong> More hours at the editor means new cities and roads sooner. Simple as that.",
+        "Pay to mappers, Motivation to develop the map, for Web domain, and much more stuff",
+      "supportPage.whereLink":
+        "Want to know where your support goes? Check out <a href='#where-support-goes' class='support-goal-btn'>here</a>",
+
+      /* crypto */
+      "crypto.eyebrow": "Direct & Decentralized",
+      "crypto.h2": "Cryptocurrency Wallets",
+      "crypto.lead":
+        "Prefer crypto? You can send direct contributions to any of the addresses below. Click any address or button to copy.",
+      "crypto.addressLabel": "Wallet Address",
+      "crypto.copy": "Copy",
+      "crypto.copied": "Copied!",
+      "crypto.eth": "Ethereum",
+      "crypto.btc": "Bitcoin",
+      "crypto.ltc": "Litecoin",
+      "crypto.usdt": "Tether (USDT)",
+      "crypto.trx": "TRON",
+      "crypto.ethNet": "Ethereum Network • ERC-20",
+      "crypto.btcNet": "Bitcoin Network • Native SegWit",
+      "crypto.ltcNet": "Litecoin Network",
+      "crypto.usdtNet": "TRON Network • TRC-20",
+      "crypto.trxNet": "TRON Network",
 
       /* gallery page */
       "galleryPage.h1": "Gallery",
@@ -364,6 +392,12 @@
       "nav.SUPPORT": "ПОДДЕРЖКА",
       "nav.DISCORD": "DISCORD",
       "nav.VK": "VK",
+
+      /* top bar */
+      "topBar.badge": "Ежемесячная цель поддержки",
+      "topBar.amount": "25 EUR",
+      "topBar.desc": "Помогите проекту оставаться на плаву",
+      "topBar.action": "Поддержать FER",
 
       "footer.Home": "Главная",
       "footer.FER": "FER",
@@ -568,11 +602,12 @@
       "supportPage.joinDiscord": "Присоединиться к Discord",
       "supportPage.donatePaypal": "Поддержать через PayPal",
       "supportPage.donatePatreon": "Поддержать на Patreon",
+      "supportPage.donateCrypto": "Криптовалюта",
       "supportPage.waysH2": "Способы поддержки",
       "supportPage.waysLead": "Выбирайте, что ближе. Или не выбирайте и просто катайтесь.",
       "supportPage.way1.title": "Подкинуть деньжат",
       "supportPage.way1.text":
-        "Маппинг отнимает время, а времени этому проекту не хватает больше всего. Донаты буквально покупают часы разработки. Patreon или PayPal, как вам удобнее. Если не получается — ничего страшного. Играть и сообщать о багах не менее полезно. Я на <a href='https://www.patreon.com/c/Far_East_Russia' target='_blank' style='color:var(--text-bright)'>Patreon</a> и <a href='https://paypal.me/aduskaaaa' target='_blank' style='color:var(--text-bright)'>PayPal</a>.",
+        "Маппинг отнимает время, а времени этому проекту не хватает больше всего. Донаты буквально покупают часы разработки: Patreon, PayPal или крипта — как вам удобнее. Если не получается — ничего страшного. Играть и сообщать о багах не менее полезно. Я на <a href='https://www.patreon.com/c/Far_East_Russia' target='_blank' style='color:var(--text-bright)'>Patreon</a>, в <a href='https://paypal.me/aduskaaaa' target='_blank' style='color:var(--text-bright)'>PayPal</a>, а адреса кошельков для криптовалюты указаны <a href='#crypto-wallets' style='color:var(--text-bright)'>ниже</a>.",
       "supportPage.way2.title": "Прислать референсы",
       "supportPage.way2.text":
         "Живёте в Якутии или где-то на востоке? Ваши фото и видео с регистраторов — золото. Настоящие улицы, настоящие знаки, настоящие остановки — именно это делает города узнаваемыми. Кидайте в <a href='https://discord.gg/SSWDJMauxz' target='_blank' style='color:var(--text-bright)'>Discord</a>.",
@@ -581,7 +616,28 @@
         "Стримьте конвой, постите скриншоты, снимите видео, расскажите другу. Сарафанное радио — единственный маркетинг, который у этой карты когда-либо был. И он работает.",
       "supportPage.whereH2": "Куда идёт ваша поддержка",
       "supportPage.whereLead":
-        "<strong>Время разработки.</strong> Больше часов в редакторе — быстрее новые города и дороги. Всё просто.",
+        "Оплата картоделам, мотивация развивать карту, веб-домен и многое другое",
+      "supportPage.whereLink":
+        "Хотите узнать, куда идёт поддержка? Посмотрите <a href='#where-support-goes' class='support-goal-btn'>здесь</a>",
+
+      /* crypto */
+      "crypto.eyebrow": "Прямой перевод",
+      "crypto.h2": "Криптовалютные кошельки",
+      "crypto.lead":
+        "Предпочитаете крипту? Вы можете поддержать проект напрямую на любой из кошельков ниже. Нажмите на адрес или кнопку, чтобы скопировать.",
+      "crypto.addressLabel": "Адрес кошелька",
+      "crypto.copy": "Копировать",
+      "crypto.copied": "Скопировано!",
+      "crypto.eth": "Ethereum",
+      "crypto.btc": "Bitcoin",
+      "crypto.ltc": "Litecoin",
+      "crypto.usdt": "Tether (USDT)",
+      "crypto.trx": "TRON",
+      "crypto.ethNet": "Сеть Ethereum • ERC-20",
+      "crypto.btcNet": "Сеть Bitcoin • Native SegWit",
+      "crypto.ltcNet": "Сеть Litecoin",
+      "crypto.usdtNet": "Сеть TRON • TRC-20",
+      "crypto.trxNet": "Сеть TRON",
 
       "galleryPage.h1": "Галерея",
       "galleryPage.lead":

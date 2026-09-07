@@ -115,11 +115,39 @@
             '</span>' +
             '</button>';
 
+        var isSupportPage = (window.location.pathname.split("/").pop() || "index.html").toLowerCase().indexOf("support") !== -1;
+        var topBarHtml = "";
+        if (!isSupportPage) {
+            var goal = S.supportGoal || { target: 25, current: 0, currency: "EUR" };
+            var goalCurrent = typeof goal.current === "number" ? goal.current : 0;
+            var goalTarget = typeof goal.target === "number" ? goal.target : 25;
+            var goalPct = Math.min(100, Math.max(0, Math.round((goalCurrent / goalTarget) * 100)));
+            var goalCur = goal.currency || "EUR";
+            var goalSym = goalCur === "USD" ? "$" : (goalCur === "EUR" ? "€" : goalCur + " ");
+
+            topBarHtml =
+                '<div class="top-bar">' +
+                '<div class="container top-bar-inner">' +
+                '<a href="support.html#monthly-goal" class="top-bar-link" aria-label="Monthly Support Goal: ' + goalSym + goalCurrent + ' of ' + goalSym + goalTarget + ' ' + goalCur + '">' +
+                '<span class="top-bar-badge"' + i18nAttr("topBar.badge") + '>Monthly Support Goal</span>' +
+                '<span class="top-bar-highlight">' + goalSym + goalCurrent + ' / ' + goalSym + goalTarget + ' ' + goalCur + '</span>' +
+                '<span class="top-bar-progress-wrap" aria-hidden="true">' +
+                '<span class="top-bar-progress-bar" style="width:' + goalPct + '%;"></span>' +
+                '</span>' +
+                '<span class="top-bar-pct">' + goalPct + '%</span>' +
+                '<span class="top-bar-sep">•</span>' +
+                '<span class="top-bar-desc"' + i18nAttr("topBar.desc") + '>Help keep the project alive</span>' +
+                '<span class="top-bar-action"><span' + i18nAttr("topBar.action") + '>Support FER</span> <span class="top-bar-arrow" aria-hidden="true">→</span></span>' +
+                '</a>' +
+                '</div>' +
+                '</div>';
+        }
+
         header.innerHTML =
             '<div class="container header-inner">' +
             '<div class="header-left">' +
             '<a href="index.html" class="brand" aria-label="Far East Russia home">' +
-            '<img src="imgs/FER-ICON.png" alt="FER logo">' +
+            '<img src="imgs/FER-ICON.png" alt="FER logo" width="32" height="32" decoding="async">' +
             '<span class="brand-name-long brand-word">Far East <em>Russia</em></span>' +
             '<span class="brand-name-short brand-word">FER<em>&nbsp;</em></span>' +
             "</a>" +
@@ -137,6 +165,7 @@
             "</button>" +
             "</div>" +
             "</div>" +
+            topBarHtml +
             '<div class="nav-overflow" id="nav-overflow">' +
             navHtmlOverflow +
             '</div>';
@@ -702,7 +731,7 @@ footer.innerHTML =
         var sep = document.createTextNode(metaEl.textContent ? " • " : "");
         var span = document.createElement("span");
         span.className = "download-count";
-        span.textContent = "↓ …";
+        span.innerHTML = '↓ <span class="skeleton-shimmer" style="display:inline-block;width:34px;height:10px;border-radius:2px;vertical-align:middle;margin-left:3px;"></span>';
         metaEl.appendChild(sep);
         metaEl.appendChild(span);
         fetchDownloadCount(slug).then(function (n) {
@@ -1004,10 +1033,152 @@ footer.innerHTML =
         });
     }
 
+    /* ========== Global Tab Switcher ========== */
+    function initGlobalTabs() {
+        document.querySelectorAll(".tab-button").forEach(function (btn) {
+            btn.onclick = function (e) {
+                e.preventDefault();
+                var tabName = this.getAttribute("data-tab");
+                if (!tabName) return;
+                var container = this.closest("section, .container, body");
+                if (!container) return;
+
+                container.querySelectorAll(".tab-button").forEach(function (b) {
+                    b.classList.remove("active");
+                });
+                this.classList.add("active");
+
+                container.querySelectorAll(".tab-content").forEach(function (c) {
+                    c.classList.remove("active");
+                });
+
+                var target = container.querySelector("#tab-" + tabName);
+                if (target) {
+                    target.classList.add("active");
+                }
+            };
+        });
+    }
+
+    /* ========== Progressive Image Loading & Skeleton Controller ========== */
+    function initProgressiveImages() {
+        document.querySelectorAll('img').forEach(function (img) {
+            if (img.complete && img.naturalWidth > 0) {
+                img.classList.add('is-loaded');
+                if (img.parentElement) img.parentElement.classList.add('is-loaded');
+            } else {
+                img.addEventListener('load', function () {
+                    img.classList.add('is-loaded');
+                    if (img.parentElement) img.parentElement.classList.add('is-loaded');
+                });
+                img.addEventListener('error', function () {
+                    if (img.parentElement) img.parentElement.classList.add('is-loaded');
+                });
+            }
+        });
+    }
+
+    /* ========== Support Goal Page Binder ========== */
+    function initSupportGoal() {
+        var goalCard = document.getElementById("monthly-goal");
+        if (!goalCard || !S || !S.supportGoal) return;
+        var goal = S.supportGoal;
+        var goalCurrent = typeof goal.current === "number" ? goal.current : 0;
+        var goalTarget = typeof goal.target === "number" ? goal.target : 25;
+        var goalPct = Math.min(100, Math.max(0, Math.round((goalCurrent / goalTarget) * 100)));
+        var goalCur = goal.currency || "EUR";
+        var goalSym = goalCur === "USD" ? "$" : (goalCur === "EUR" ? "€" : goalCur + " ");
+
+        var currEl = document.getElementById("goal-current-val");
+        var targetEl = goalCard.querySelector(".support-goal-target");
+        var pillEl = document.getElementById("goal-pct-pill");
+        var fillEl = document.getElementById("goal-progress-fill");
+        var trackEl = goalCard.querySelector(".support-progress-track");
+
+        if (currEl) currEl.textContent = goalSym + goalCurrent;
+        if (targetEl) targetEl.textContent = "/ " + goalSym + goalTarget;
+        if (pillEl) pillEl.textContent = goalPct + "%";
+        if (fillEl) fillEl.style.width = goalPct + "%";
+        if (trackEl) trackEl.setAttribute("aria-valuenow", goalPct);
+    }
+
+    /* ========== Crypto Copy-to-Clipboard ========== */
+    function initCryptoCopy() {
+        var wrappers = document.querySelectorAll(".crypto-address-wrapper");
+        if (!wrappers.length) return;
+
+        wrappers.forEach(function (wrapper) {
+            wrapper.addEventListener("click", function (e) {
+                var card = wrapper.closest(".crypto-row, .crypto-card");
+                if (!card) return;
+                var addressEl = card.querySelector(".crypto-address");
+                var actionBtn = card.querySelector(".crypto-copy-btn");
+                var textSpan = card.querySelector(".crypto-copy-text");
+                var addressText = (actionBtn && actionBtn.getAttribute("data-copy")) || (addressEl ? addressEl.textContent : "");
+                addressText = addressText.trim();
+                if (!addressText) return;
+
+                function setCopiedState() {
+                    if (actionBtn) actionBtn.classList.add("is-copied");
+                    if (textSpan) {
+                        var copiedStr = (window.I18N && window.I18N.t) ? window.I18N.t("crypto.copied") : "Copied!";
+                        textSpan.textContent = copiedStr;
+                    }
+                    card.classList.add("is-copied");
+
+                    setTimeout(function () {
+                        if (actionBtn) actionBtn.classList.remove("is-copied");
+                        if (textSpan) {
+                            var copyStr = (window.I18N && window.I18N.t) ? window.I18N.t("crypto.copy") : "Copy";
+                            textSpan.textContent = copyStr;
+                        }
+                        card.classList.remove("is-copied");
+                    }, 2200);
+                }
+
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(addressText).then(setCopiedState).catch(function () {
+                        fallbackCopy(addressText, setCopiedState);
+                    });
+                } else {
+                    fallbackCopy(addressText, setCopiedState);
+                }
+            });
+        });
+
+        function fallbackCopy(text, cb) {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.setAttribute("readonly", "");
+            ta.style.position = "absolute";
+            ta.style.left = "-9999px";
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+                document.execCommand("copy");
+                if (cb) cb();
+            } catch (err) {
+                console.error("Copy failed", err);
+            }
+            document.body.removeChild(ta);
+        }
+    }
+
     // Initialize on load
     if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initRatings);
+        document.addEventListener("DOMContentLoaded", function () {
+            initRatings();
+            initGlobalTabs();
+            initProgressiveImages();
+            initSupportGoal();
+            initCryptoCopy();
+        });
     } else {
         initRatings();
+        initGlobalTabs();
+        initProgressiveImages();
+        initSupportGoal();
+        initCryptoCopy();
     }
 })();
+

@@ -47,9 +47,9 @@
     <section id="coverage" class="section">
       <div class="container feature-split">
         <figure class="map-figure">
-          <div class="map-frame">
-            <img class="map-img" src="imgs/FER_AREA.png" data-i18n-attr="alt:common.mapCoveragePreviewAlt"
-              alt="Map coverage preview">
+          <div class="map-frame img-ghost-container">
+            <img class="map-img lazy-fade" src="imgs/FER_AREA.png" data-i18n-attr="alt:common.mapCoveragePreviewAlt"
+              alt="Map coverage preview" loading="lazy" decoding="async" width="800" height="450">
           </div>
           <figcaption class="map-caption" data-i18n="map.caption">Coverage sketch from the latest build.</figcaption>
         </figure>
@@ -167,7 +167,7 @@
               : 'Includes downloads from truckymods & sharemods as of 14.06.2026';
             var dlCard = document.createElement('div');
             dlCard.className = 'stat-inline stat-wide';
-            dlCard.innerHTML = '<div class="stat-value">…</div>' +
+            dlCard.innerHTML = '<div class="stat-value"><span class="skeleton-shimmer" style="display:inline-block;width:70px;height:22px;border-radius:3px;vertical-align:middle;"></span></div>' +
               '<div class="stat-label">' + dlLabel + '</div>' +
               '<div class="stat-note">' + dlNote + '</div>';
             statsEl.appendChild(dlCard);
