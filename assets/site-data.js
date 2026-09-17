@@ -242,16 +242,17 @@ window.SITE = {
   /* ---------- Supporters ---------- */
   supporters: {
     donations: [
-      { name: "laur1sxd", amount: "40,42 EUR", amount_ru: "4 042,00 ₽" },
-      { name: "Mr JP", amount: "18,12 EUR", amount_ru: "1 812,00 ₽" },
-      { name: "weskergood1234", amount: "12,24 EUR", amount_ru: "1 224,00 ₽"},
-      { name: "Xes Xand", amount: "10,00 EUR", amount_ru: "1 000,00 ₽"},
-      { name: "Artie", amount: "8,48 EUR", amount_ru: "848,00 ₽" },
-      { name: "Maxi", amount: "8,00 EUR", amount_ru: "800,00 ₽" },
-      { name: "Delby", amount: "3,51 EUR", amount_ru: "351,00 ₽" },
-      { name: "Xiguawangzi3399", amount: "3,48 EUR", amount_ru: "348,00 ₽" },
-      { name: "Nachito", amount: "3,00 EUR", amount_ru: "300,00 ₽" },
-      { name: "Killermix", amount: "0.40 EUR", amount_ru: "40,00 ₽" }
+      { name: "laur1sxd", amount: "40,42 EUR", amount_ru: "~4 042,00 ₽" },
+      { name: "Modsfire Ltd", amount: "20,00 EUR", amount_ru: "~2 000,00 ₽" },
+      { name: "Mr JP", amount: "18,12 EUR", amount_ru: "~1 812,00 ₽" },
+      { name: "weskergood1234", amount: "12,24 EUR", amount_ru: "~1 224,00 ₽"},
+      { name: "Xes Xand", amount: "10,00 EUR", amount_ru: "~1 000,00 ₽"},
+      { name: "Artie", amount: "8,48 EUR", amount_ru: "~848,00 ₽" },
+      { name: "Maxi", amount: "8,00 EUR", amount_ru: "~800,00 ₽" },
+      { name: "Delby", amount: "3,51 EUR", amount_ru: "~351,00 ₽" },
+      { name: "Xiguawangzi3399", amount: "3,48 EUR", amount_ru: "~348,00 ₽" },
+      { name: "Nachito", amount: "3,00 EUR", amount_ru: "~300,00 ₽" },
+      { name: "Killermix", amount: "0.40 EUR", amount_ru: "~40,00 ₽" }
     ],
     showcase: [
       { name: "Bogdac", text: "Created many awesome videos from this map & included it in combos", i18nKey: "supporters.showcase.bogdac" },
