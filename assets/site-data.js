@@ -115,12 +115,12 @@ window.SITE = {
       stats: [
         { value: "5,900+", label: "km of driveable roads" },
         { value: "50+", label: "cities & settlements" },
-        { value: "1.60", label: "version supported" }
+        { value: "1.61", label: "version supported" }
       ],
       stats_ru: [
         { value: "5 900+", label: "км проезжих дорог" },
         { value: "50+", label: "городов и поселений" },
-        { value: "1.60", label: "поддерживаемая версия" }
+        { value: "1.61", label: "поддерживаемая версия" }
       ],
       installSteps: [
         "Grab the latest release below.",
@@ -148,12 +148,12 @@ window.SITE = {
       requirements: [
         "Far East Russia (latest version)",
         "Off The Grid Russia (latest version)",
-        "ETS2 1.58/1.59/1.60"
+        "ETS2 1.60/1.61"
       ],
       requirements_ru: [
         "Far East Russia (последняя версия)",
         "Off The Grid Russia (последняя версия)",
-        "ETS2 1.58/1.59/1.60"
+        "ETS2 1.60/1.61"
       ]
     },
 
@@ -167,12 +167,12 @@ window.SITE = {
       requirements: [
         "Far East Russia (latest version)",
         "Chukotka Addon (latest version)",
-        "ETS2 1.58/1.59/1.60"
+        "ETS2 1.60/1.61"
       ],
       requirements_ru: [
         "Far East Russia (последняя версия)",
         "Chukotka Addon (последняя версия)",
-        "ETS2 1.58/1.59/1.60"
+        "ETS2 1.60/1.61"
       ]
     },
 
@@ -186,12 +186,12 @@ window.SITE = {
       requirements: [
         "Far East Russia (latest version)",
         "Trans-Siberian Truckway (latest version)",
-        "ETS2 1.58/1.59/1.60"
+        "ETS2 1.60/1.61"
       ],
       requirements_ru: [
         "Far East Russia (последняя версия)",
         "Trans-Siberian Truckway (последняя версия)",
-        "ETS2 1.58/1.59/1.60"
+        "ETS2 1.60/1.61"
       ]
     },
 
@@ -216,23 +216,23 @@ window.SITE = {
         "Far East Russia (latest version)",
         "Trans-Siberian Truckway (latest version)",
         "FER – Chukotka RC (for road connection)",
-        "ETS2 1.58/1.59/1.60"
+        "ETS2 1.60/1.61"
       ],
       requirements_ru: [
         "Far East Russia (последняя версия)",
         "Trans-Siberian Truckway (последняя версия)",
         "FER – Chukotka RC (для дорожного соединения)",
-        "ETS2 1.58/1.59/1.60"
+        "ETS2 1.60/1.61"
       ],
       stats: [
         { value: "1,100+", label: "km of driveable roads" },
         { value: "5", label: "cities & settlements" },
-        { value: "1.58/1.59/1.60", label: "version supported" }
+        { value: "1.60/1.61", label: "version supported" }
       ],
       stats_ru: [
         { value: "1 100+", label: "км проезжих дорог" },
         { value: "5", label: "городов и поселений" },
-        { value: "1.58/1.59/1.60", label: "поддерживаемая версия" }
+        { value: "1.60/1.61", label: "поддерживаемая версия" }
       ]
     },
 
