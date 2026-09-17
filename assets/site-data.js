@@ -19,7 +19,7 @@ window.SITE = {
   /* ---------- Support Goal ---------- */
   supportGoal: {
     target: 25,
-    current: 10,
+    current: 14,
     currency: "EUR"
   },
 
