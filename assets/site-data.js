@@ -243,8 +243,8 @@ window.SITE = {
   supporters: {
     donations: [
       { name: "laur1sxd", amount: "40,42 EUR", amount_ru: "~4 042,00 ₽" },
-      { name: "Modsfire Ltd", amount: "20,00 EUR", amount_ru: "~2 000,00 ₽" },
       { name: "Mr JP", amount: "18,12 EUR", amount_ru: "~1 812,00 ₽" },
+      { name: "Modsfire Ltd", amount: "17,41 EUR", amount_ru: "~1 741,00 ₽" },
       { name: "weskergood1234", amount: "12,24 EUR", amount_ru: "~1 224,00 ₽"},
       { name: "Xes Xand", amount: "10,00 EUR", amount_ru: "~1 000,00 ₽"},
       { name: "Artie", amount: "8,48 EUR", amount_ru: "~848,00 ₽" },
