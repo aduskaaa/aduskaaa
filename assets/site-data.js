@@ -19,7 +19,7 @@ window.SITE = {
   /* ---------- Support Goal ---------- */
   supportGoal: {
     target: 25,
-    current: 27.06,
+    current: 31.06,
     currency: "EUR"
   },
 
@@ -246,9 +246,9 @@ window.SITE = {
       { name: "Modsfire Ltd", amount: "30,47 EUR", amount_ru: "~3 047,00 ₽" },
       { name: "Mr JP", amount: "18,12 EUR", amount_ru: "~1 812,00 ₽" },
       { name: "weskergood1234", amount: "12,24 EUR", amount_ru: "~1 224,00 ₽"},
+      { name: "Maxi", amount: "12,00 EUR", amount_ru: "~1 200,00 ₽" },
       { name: "Xes Xand", amount: "10,00 EUR", amount_ru: "~1 000,00 ₽"},
       { name: "Artie", amount: "8,48 EUR", amount_ru: "~848,00 ₽" },
-      { name: "Maxi", amount: "8,00 EUR", amount_ru: "~800,00 ₽" },
       { name: "Delby", amount: "3,51 EUR", amount_ru: "~351,00 ₽" },
       { name: "Xiguawangzi3399", amount: "3,48 EUR", amount_ru: "~348,00 ₽" },
       { name: "Nachito", amount: "3,00 EUR", amount_ru: "~300,00 ₽" },
