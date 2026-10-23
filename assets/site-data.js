@@ -19,7 +19,7 @@ window.SITE = {
   /* ---------- Support Goal ---------- */
   supportGoal: {
     target: 25,
-    current: 0,
+    current: 8,
     currency: "EUR"
   },
 
@@ -244,9 +244,9 @@ window.SITE = {
     donations: [
       { name: "laur1sxd", amount: "40,42 EUR", amount_ru: "~4 042,00 ₽" },
       { name: "Modsfire Ltd", amount: "30,47 EUR", amount_ru: "~3 047,00 ₽" },
-      { name: "Mr JP", amount: "18,12 EUR", amount_ru: "~1 812,00 ₽" },
-      { name: "weskergood1234", amount: "12,24 EUR", amount_ru: "~1 224,00 ₽"},
-      { name: "Maxi", amount: "12,00 EUR", amount_ru: "~1 200,00 ₽" },
+      { name: "Mr JP", amount: "20,12 EUR", amount_ru: "~2 012,00 ₽" },
+      { name: "Maxi", amount: "16,00 EUR", amount_ru: "~1 600,00 ₽" },
+      { name: "weskergood1234", amount: "14,24 EUR", amount_ru: "~1 424,00 ₽"},
       { name: "Xes Xand", amount: "10,00 EUR", amount_ru: "~1 000,00 ₽"},
       { name: "Artie", amount: "8,48 EUR", amount_ru: "~848,00 ₽" },
       { name: "Delby", amount: "3,51 EUR", amount_ru: "~351,00 ₽" },
